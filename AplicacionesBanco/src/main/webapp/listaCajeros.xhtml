@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head> 
+<h:body> 
+<h1>Lista Cajero</h1>
+<h:form>
+<h:commandButton action="inicioAdmin" value="Inicio"  />
+<a></a>
+<h:commandButton action="listaClientes" value="Cliente"  />
+<a></a>
+<h:commandButton action="listaCajeros" value="Cajero"  />
+<a></a>
+<h:commandButton action="login" value="Salir"  />
+</h:form>
+<h:form id="table">
+
+<h:dataTable value="#{administradorMB.listarCajero()}" var="p" >
+								
+								<h:column>
+								<f:facet name="header">Cedula</f:facet>
+								#{p.cedula}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Nombre</f:facet>
+								#{p.nombre}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Direccion</f:facet>
+								#{p.direccion}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Correo</f:facet>
+								#{p.correo}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Clave</f:facet>
+								#{p.clave}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Tipo</f:facet>
+								#{p.tipo}
+								</h:column>
+								<h:column>
+								    <f:facet name="header">Acciones</f:facet>
+									<h:commandButton action="#{administradorMB.editarAjaxCajero(p.cedula)}" value="Editar"> 
+									<f:ajax render="editar" />
+									</h:commandButton>
+									<a></a>
+									<h:commandButton action="#{administradorMB.eliminarCajero(p.cedula)}" value="Eliminar"> 
+									<f:ajax render="table" />
+									</h:commandButton>
+									</h:column>
+								</h:dataTable>
+
+
+</h:form>
+<h:form id="editar">
+<h:panelGrid columns="2" id="p2">
+Cedula:
+<h:inputText value="#{administradorMB.cajero.cedula}" />
+Nombre:
+<h:inputText  value="#{administradorMB.cajero.nombre}" />
+Dirrecion:
+<h:inputText value="#{administradorMB.cajero.direccion}" />
+Correo:
+<h:inputText value="#{administradorMB.cajero.correo}" />
+Clave:
+<h:inputText value="#{administradorMB.cajero.clave}" />
+Tipo:
+<h:inputText value="#{administradorMB.cajero.tipo}" />
+<h:commandButton action="#{administradorMB.ediatrCajero()}" value="Aceptar"  />
+</h:panelGrid>
+
+</h:form>
+</h:body> 
+</html>

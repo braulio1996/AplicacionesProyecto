@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<h:body> 
+<h1>Bienvenido  Pagina Principal</h1>
+<h:form>
+<h:commandButton action="listaClientes" value="Cliente"  />
+<a></a>
+<h:commandButton action="listaCajeros" value="Cajero"  />
+<a></a>
+<h:commandButton action="listaCreditos" value="Jefe de Credito"  />
+<a></a>
+<h:commandButton action="login" value="Salir"  />
+</h:form>
+
+<h2>Crear Cliente</h2>
+<h:form>
+<h:panelGrid columns="2" id="p1">
+Cedula:
+<h:inputText value="#{administradorMB.cliente.cedula}" />
+Nombre:
+<h:inputText  value="#{administradorMB.cliente.nombre}" />
+Dirrecion:
+<h:inputText value="#{administradorMB.cliente.direccion}" />
+Correo:
+<h:inputText value="#{administradorMB.cliente.correo}" />
+Clave:
+<h:inputText value="#{administradorMB.cliente.clave}" />
+Tipo:
+<h:inputText value="#{administradorMB.cliente.tipo}" />
+<h:commandButton action="#{administradorMB.guardarCliente()}" value="Aceptar"  />
+</h:panelGrid>
+
+<br />
+
+<h2>Crear Cajero</h2>
+
+<h:panelGrid columns="2" id="p2">
+Cedula:
+<h:inputText value="#{administradorMB.cajero.cedula}" />
+Nombre:
+<h:inputText  value="#{administradorMB.cajero.nombre}" />
+Dirrecion:
+<h:inputText value="#{administradorMB.cajero.direccion}" />
+Correo:
+<h:inputText value="#{administradorMB.cajero.correo}" />
+Clave:
+<h:inputText value="#{administradorMB.cajero.clave}" />
+Tipo:
+<h:inputText value="#{administradorMB.cajero.tipo}" />
+<h:commandButton action="#{administradorMB.guardarCajero()}" value="Aceptar"  />
+</h:panelGrid>
+<br />
+
+<h2>Crear Jefe de Credito</h2>
+
+<h:panelGrid columns="2" id="p3">
+Cedula:
+<h:inputText value="#{administradorMB.credito.cedula}" />
+Nombre:
+<h:inputText  value="#{administradorMB.credito.nombre}" />
+Dirrecion:
+<h:inputText value="#{administradorMB.credito.direccion}" />
+Correo:
+<h:inputText value="#{administradorMB.credito.correo}" />
+Clave:
+<h:inputText value="#{administradorMB.credito.clave}" />
+Tipo:
+<h:inputText value="#{administradorMB.credito.tipo}" />
+<h:commandButton action="#{administradorMB.guardarCredito()}" value="Aceptar"  />
+</h:panelGrid>
+</h:form>
+</h:body> 
+</html>
