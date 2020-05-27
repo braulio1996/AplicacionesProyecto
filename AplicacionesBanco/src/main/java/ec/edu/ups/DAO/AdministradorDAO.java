@@ -12,10 +12,6 @@ import javax.persistence.Query;
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Administrador;
 
-
-
-
-
 @Stateless
 public class AdministradorDAO {
 	@PersistenceContext(name="AplacacionesBancoPersistenceUnit")
@@ -40,7 +36,6 @@ public class AdministradorDAO {
 		query.setParameter("correo", correo);
 		query.setParameter("clave", clave);
 		Administrador admin = (Administrador) query.getSingleResult();
-		System.out.println("------------------------------------"+clave+"   "+correo);
 		return admin;
     
 }catch(Exception e) {
