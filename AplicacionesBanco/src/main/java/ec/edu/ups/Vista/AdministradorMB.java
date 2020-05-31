@@ -25,13 +25,13 @@ import ec.edu.ups.ON.CreditoON;
 public class AdministradorMB {
 	@Inject
 	private AdministradorON adminON;
-	
+
 	@Inject
 	private ClienteON clieOn;
-	
+
 	@Inject
 	private CreditoON crediON;
-	
+
 	@Inject
 	private CajeroON cajeON;
 
@@ -39,28 +39,27 @@ public class AdministradorMB {
 	private Cliente cliente;
 	private Credito credito;
 	private Cajero cajero;
-	private List<Cajero>cajeros;
-	private List<Cliente>clientes;
-	private List<Credito>creditos;
+	private List<Cajero> cajeros;
+	private List<Cliente> clientes;
+	private List<Credito> creditos;
 	private String correo;
 	private String clave;
 	private Cuenta cuenta;
-	
 
 	@PostConstruct
 	public void init() {
-	administrador= new Administrador();
-	cliente=new Cliente();
-	credito = new Credito();
-	cajero = new Cajero();
-	cuenta=new Cuenta();
-	clientes= new ArrayList<>();
-	cajeros = new ArrayList<>();
-	creditos= new ArrayList<>();
-	correo="";
-	clave="";
+		administrador = new Administrador();
+		cliente = new Cliente();
+		credito = new Credito();
+		cajero = new Cajero();
+		cuenta = new Cuenta();
+		clientes = new ArrayList<>();
+		cajeros = new ArrayList<>();
+		creditos = new ArrayList<>();
+		correo = "";
+		clave = "";
 	}
-	
+
 	public Cuenta getCuenta() {
 		return cuenta;
 	}
@@ -147,7 +146,7 @@ public class AdministradorMB {
 
 	public String registrar() {
 		try {
-			
+
 			adminON.registrar(administrador);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,22 +156,22 @@ public class AdministradorMB {
 
 	public String login() {
 		try {
-			if(adminON.loginC(correo, clave)!=null) {
-				administrador=adminON.loginC(administrador.getCorreo(), administrador.getClave());
+			if (adminON.loginC(correo, clave) != null) {
+				administrador = adminON.loginC(administrador.getCorreo(), administrador.getClave());
 				System.out.println(administrador.getNombre());
 				return "inicioAdmin";
-			}else if(clieOn.loginC(correo, clave)!=null) {
-				cliente=clieOn.loginC(cliente.getCorreo(), cliente.getClave());
+			} else if (clieOn.loginC(correo, clave) != null) {
+				cliente = clieOn.loginC(cliente.getCorreo(), cliente.getClave());
 				return "inicioCliente";
-			}else if(crediON.loginC(correo, clave)!=null) {
-				credito=crediON.loginC(credito.getCorreo(), credito.getClave());
+			} else if (crediON.loginC(correo, clave) != null) {
+				credito = crediON.loginC(credito.getCorreo(), credito.getClave());
 				return "inicioCredito";
-						
-			}else if(cajeON.loginC(correo, clave).getTipo().equalsIgnoreCase("cajero")) {
-				cajero=cajeON.loginC(cajero.getCorreo(), cajero.getClave());
+
+			} else if (cajeON.loginC(correo, clave).getTipo().equalsIgnoreCase("cajero")) {
+				cajero = cajeON.loginC(cajero.getCorreo(), cajero.getClave());
 				return "inicioCajero";
 			}
-	
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -186,36 +185,36 @@ public class AdministradorMB {
 		cliente.setTipo("Cliente");
 		cuenta.setSaldo(0.0);
 		cuenta.setCliente(cliente);
-	    clientes.add(cliente);
-	    cliente.setCuenta(cuenta);
-	    administrador.setClientes(clientes);
+		clientes.add(cliente);
+		cliente.setCuenta(cuenta);
+		administrador.setClientes(clientes);
 		adminON.update(administrador);
-		cliente=new Cliente();
+		cliente = new Cliente();
 		clientes.clear();
 		return "listaClientes";
-		
+
 	}
 
 	public String guardarCajero() throws Exception {
 		cajero.setTipo("Cajero");
 		cajeros.add(cajero);
-	    administrador.setCajeros(cajeros);
+		administrador.setCajeros(cajeros);
 		adminON.update(administrador);
-		cajero=new Cajero();
+		cajero = new Cajero();
 		cajeros.clear();
-		
+
 		return "listaCajeros";
-		
+
 	}
 
 	public String guardarCredito() throws Exception {
 		credito.setTipo("Credito");
 		creditos.add(credito);
-	    administrador.setCreditos(creditos);
+		administrador.setCreditos(creditos);
 		adminON.update(administrador);
-		credito=new Credito();
+		credito = new Credito();
 		creditos.clear();
-		
+
 		return "listaCreditos";
 	}
 
@@ -230,60 +229,69 @@ public class AdministradorMB {
 	public List<Cajero> listarCajero() throws Exception {
 		return cajeON.listar();
 	}
+
 	public String editarAjaxCliente(String cedula) {
 		System.out.println(cedula);
 		try {
-			cliente=clieOn.buscar(cedula);
+			cliente = clieOn.buscar(cedula);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
+
 	public String editarAjaxCajero(String cedula) {
 		System.out.println(cedula);
 		try {
-			cajero=cajeON.buscar(cedula);
+			cajero = cajeON.buscar(cedula);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
+
 	public String editarAjaxCredito(String cedula) {
 		System.out.println(cedula);
 		try {
-			credito=crediON.buscar(cedula);
+			credito = crediON.buscar(cedula);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
+
 	public String ediatrCliente() throws Exception {
 		clieOn.editar(cliente);
 		return null;
 	}
+
 	public String ediatrCajero() throws Exception {
 		cajeON.editar(cajero);
 		return null;
 	}
+
 	public String ediatrCredito() throws Exception {
 		crediON.editar(credito);
 		return null;
 	}
+
 	public String eliminarCliente(String cedula) throws Exception {
-		System.out.println("=======================  "+cedula);
+		System.out.println("=======================  " + cedula);
 		clieOn.eliminar(cedula);
 		return null;
 	}
+
 	public String eliminarCredito(String cedula) throws Exception {
-		System.out.println("=======================  "+cedula);
+		System.out.println("=======================  " + cedula);
 		crediON.eliminar(cedula);
 		return null;
 	}
+
 	public String eliminarCajero(String cedula) throws Exception {
-		System.out.println("=======================  "+cedula);
+		System.out.println("=======================  " + cedula);
 		cajeON.eliminar(cedula);
 		return null;
 	}
