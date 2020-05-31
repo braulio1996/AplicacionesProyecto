@@ -61,6 +61,11 @@ public class Persona {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	@Override
+	public String toString() {
+		return "Persona [codigo=" + codigo + ", cedula=" + cedula + ", nombre=" + nombre + ", direccion=" + direccion
+				+ ", correo=" + correo + ", clave=" + clave + ", tipo=" + tipo + "]";
+	}
 	
 	
 }

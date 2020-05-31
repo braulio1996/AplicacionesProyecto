@@ -25,6 +25,10 @@ public class AdministradorON {
 		pdao.registrar(administrador);
 		
 	}
+	public void update(Administrador administrador) throws Exception {
+		pdao.update(administrador);
+		
+	}
 
 	public Administrador loginC(String correo,String clave) throws Exception{
 		

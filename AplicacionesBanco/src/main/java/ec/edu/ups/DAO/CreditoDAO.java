@@ -46,8 +46,9 @@ public class CreditoDAO {
 		return cre;
     
 }catch(Exception e) {
-	throw new Exception(e.toString());
+	//throw new Exception(e.toString());
 }
+		return null;
 
 	}
 

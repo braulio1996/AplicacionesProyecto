@@ -5,7 +5,12 @@
       xmlns:h="http://java.sun.com/jsf/html">
 
 	<h1>Inicio Cliente</h1>
+	<h:head></h:head> 
+	<h:body> 
 		<h:form>
+		<h2>Bienvenido #{administradorMB.cliente.nombre}</h2>
 <h:commandButton action="login" value="Salir"  />
+<h:commandButton action="transferencia" value="Trasferencia"  />
 </h:form>
+</h:body> 
 </html>

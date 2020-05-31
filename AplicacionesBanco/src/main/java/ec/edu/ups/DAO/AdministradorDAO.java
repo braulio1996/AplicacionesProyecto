@@ -18,9 +18,8 @@ public class AdministradorDAO {
 	private EntityManager em;
 
 	public void registrar(Administrador administrador) throws Exception {
-		
         try {  
-        	administrador.setTipo("admin");
+        	administrador.setTipo("Administrador");
         	em.persist(administrador);
         	
         } catch (Exception e) {
@@ -28,7 +27,6 @@ public class AdministradorDAO {
         	
         } 	
 	}
-	
 	public Administrador login(String correo,String clave) throws Exception {
 		try {
 		String jpql = "SELECT a FROM Administrador a WHERE a.correo = :correo and a.clave=:clave";
@@ -39,10 +37,21 @@ public class AdministradorDAO {
 		return admin;
     
 }catch(Exception e) {
-	throw new Exception(e.toString());
+	//throw new Exception(e.toString());
 }
+		return null;
 
 	}
+	public Administrador read(int id) {
+		return em.find(Administrador.class, id);
+	}
+public void update(Administrador administrador) {
+		
+		em.merge(administrador);
+	}
+
+
+	
 
 		
 }

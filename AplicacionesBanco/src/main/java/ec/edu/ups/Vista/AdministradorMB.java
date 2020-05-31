@@ -1,23 +1,27 @@
 package ec.edu.ups.Vista;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Credito;
+import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
 
 @ManagedBean
-@ViewScoped
+@ApplicationScoped
 public class AdministradorMB {
 	@Inject
 	private AdministradorON adminON;
@@ -31,11 +35,79 @@ public class AdministradorMB {
 	@Inject
 	private CajeroON cajeON;
 
-	private Administrador administrador = new Administrador();
-	private Cliente cliente = new Cliente();
-	private Credito credito = new Credito();
-	private Cajero cajero = new Cajero();
+	private Administrador administrador;
+	private Cliente cliente;
+	private Credito credito;
+	private Cajero cajero;
+	private List<Cajero>cajeros;
+	private List<Cliente>clientes;
+	private List<Credito>creditos;
+	private String correo;
+	private String clave;
+	private Cuenta cuenta;
+	
 
+	@PostConstruct
+	public void init() {
+	administrador= new Administrador();
+	cliente=new Cliente();
+	credito = new Credito();
+	cajero = new Cajero();
+	cuenta=new Cuenta();
+	clientes= new ArrayList<>();
+	cajeros = new ArrayList<>();
+	creditos= new ArrayList<>();
+	correo="";
+	clave="";
+	}
+	
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+
+	public List<Cajero> getCajeros() {
+		return cajeros;
+	}
+
+	public void setCajeros(List<Cajero> cajeros) {
+		this.cajeros = cajeros;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public List<Credito> getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(List<Credito> creditos) {
+		this.creditos = creditos;
+	}
 
 	public Administrador getAdministrador() {
 		return administrador;
@@ -75,6 +147,7 @@ public class AdministradorMB {
 
 	public String registrar() {
 		try {
+			
 			adminON.registrar(administrador);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,20 +157,22 @@ public class AdministradorMB {
 
 	public String login() {
 		try {
-			if(administrador.getTipo().equalsIgnoreCase("admin")) {
-				adminON.loginC(administrador.getCorreo(), administrador.getClave());
-				return "inicioAdmin";	
-			}if(administrador.getTipo().equalsIgnoreCase("cliente")) {
-				clieOn.loginC(administrador.getCorreo(), administrador.getClave());
+			if(adminON.loginC(correo, clave)!=null) {
+				administrador=adminON.loginC(administrador.getCorreo(), administrador.getClave());
+				System.out.println(administrador.getNombre());
+				return "inicioAdmin";
+			}else if(clieOn.loginC(correo, clave)!=null) {
+				cliente=clieOn.loginC(cliente.getCorreo(), cliente.getClave());
 				return "inicioCliente";
-			}if(administrador.getTipo().equalsIgnoreCase("credito")) {
-				crediON.loginC(administrador.getCorreo(), administrador.getClave());
+			}else if(crediON.loginC(correo, clave)!=null) {
+				credito=crediON.loginC(credito.getCorreo(), credito.getClave());
 				return "inicioCredito";
-			}if(administrador.getTipo().equalsIgnoreCase("cajero")){
-				cajeON.loginC(administrador.getCorreo(), administrador.getClave());
+						
+			}else if(cajeON.loginC(correo, clave).getTipo().equalsIgnoreCase("cajero")) {
+				cajero=cajeON.loginC(cajero.getCorreo(), cajero.getClave());
 				return "inicioCajero";
 			}
-			
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,21 +181,40 @@ public class AdministradorMB {
 	}
 
 	public String guardarCliente() throws Exception {
-		clieOn.guardar(cliente);
+		System.out.println(cliente.toString());
+		System.out.println(administrador.getNombre());
+		cliente.setTipo("Cliente");
+		cuenta.setSaldo(0.0);
+		cuenta.setCliente(cliente);
+	    clientes.add(cliente);
+	    cliente.setCuenta(cuenta);
+	    administrador.setClientes(clientes);
+		adminON.update(administrador);
+		cliente=new Cliente();
+		clientes.clear();
 		return "listaClientes";
 		
 	}
 
 	public String guardarCajero() throws Exception {
-		cajeON.guardar(cajero);
+		cajero.setTipo("Cajero");
+		cajeros.add(cajero);
+	    administrador.setCajeros(cajeros);
+		adminON.update(administrador);
+		cajero=new Cajero();
+		cajeros.clear();
 		
 		return "listaCajeros";
 		
 	}
 
 	public String guardarCredito() throws Exception {
-		
-		crediON.guardar(credito);
+		credito.setTipo("Credito");
+		creditos.add(credito);
+	    administrador.setCreditos(creditos);
+		adminON.update(administrador);
+		credito=new Credito();
+		creditos.clear();
 		
 		return "listaCreditos";
 	}

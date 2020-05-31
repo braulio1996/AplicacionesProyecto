@@ -1,5 +1,6 @@
 package ec.edu.ups.Modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -7,13 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 @Entity
 public class Administrador extends Persona {
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(cascade= CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Cajero>cajeros;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(cascade= CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Credito>creditos;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(cascade= CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Cliente>clientes;
 	public List<Cajero> getCajeros() {
 		return cajeros;
@@ -33,6 +35,10 @@ public class Administrador extends Persona {
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
+	
+	
+	
+
 	
 	
 }

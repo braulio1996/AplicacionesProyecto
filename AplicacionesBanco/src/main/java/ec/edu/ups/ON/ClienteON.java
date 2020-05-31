@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import ec.edu.ups.DAO.ClienteDAO;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
+import ec.edu.ups.Modelo.Cuenta;
+import ec.edu.ups.Modelo.Transferencia;
 
 
 @Stateless
@@ -18,6 +20,9 @@ public class ClienteON {
 	
 	@Inject
 	private ClienteDAO pdao;
+	
+	private Transferencia trasferencia;
+	private List<Transferencia>trasferencias;
 	
 	
 	
@@ -49,5 +54,24 @@ public class ClienteON {
 	public void eliminar(String cedula) throws Exception {
 		pdao.eliminar(cedula);
 		
+	}
+	public Cuenta buscarCuenta(String numero) throws Exception {
+		return pdao.buscarCuenta(numero);
+	}
+	public Transferencia trasferencia(Cliente cliente ,String cuentaDestino,Double monto) throws Exception {
+		trasferencia= new Transferencia();
+	
+		Cuenta cuentaD=pdao.buscarCuenta(cuentaDestino);
+		Cuenta cuentaO=cliente.getCuenta();
+		Double saldoDestino= cuentaD.getSaldo()+monto;
+		Double salgoOrigen=cuentaO.getSaldo()-monto;
+		trasferencia.setMonto(monto);
+		trasferencia.setNumeroCuenta(cuentaDestino);
+		cuentaD.setSaldo(saldoDestino);
+		pdao.editarCuenta(cuentaD);
+		pdao.editarCuenta(cuentaO);
+		
+		
+	return trasferencia;	
 	}
 }

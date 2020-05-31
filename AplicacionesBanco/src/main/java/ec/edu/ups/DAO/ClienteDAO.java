@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
+import ec.edu.ups.Modelo.Cuenta;
 
 
 
@@ -45,8 +46,9 @@ public class ClienteDAO {
 		return clie;
     
 }catch(Exception e) {
-	throw new Exception(e.toString());
+	//throw new Exception(e.toString());
 }
+		return null;
 
 	}
 public List<Cliente>listar() throws Exception {
@@ -65,6 +67,16 @@ public void editar(Cliente cliente) throws Exception {
 	
     try {  
     	em.merge(cliente);
+    	
+    } catch (Exception e) {
+    	throw new Exception(e.toString());
+    	
+    } 	
+}
+public void editarCuenta(Cuenta cuenta) throws Exception {
+	
+    try {  
+    	em.merge(cuenta);
     	
     } catch (Exception e) {
     	throw new Exception(e.toString());
@@ -90,5 +102,17 @@ public Cliente read(String cedula) {
 public void eliminar(String cedula) throws Exception {
 	Cliente c = buscar(cedula);
 	em.remove(c);
+}
+public Cuenta buscarCuenta(String numero) throws Exception {
+	try {
+	String jpql = "SELECT a FROM Cuenta a WHERE a.numero = :numero";
+	Query query = em.createQuery(jpql, Cuenta.class);
+	query.setParameter("numero", numero);
+	Cuenta c = (Cuenta) query.getSingleResult();
+	return c;
+
+}catch(Exception e) {
+throw new Exception(e.toString());
+}	
 }
 }

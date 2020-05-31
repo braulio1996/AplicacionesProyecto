@@ -41,8 +41,9 @@ public class CajeroDAO {
 		return cre;
     
 }catch(Exception e) {
-	throw new Exception(e.toString());
+	//throw new Exception(e.toString());
 }
+		return null;
 
 	}
 public List<Cajero>listar() throws Exception {
