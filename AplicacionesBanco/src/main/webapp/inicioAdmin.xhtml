@@ -5,8 +5,9 @@
       xmlns:h="http://java.sun.com/jsf/html"> 
 
 <h:head></h:head> 
+<h1>Pagina Principal </h1>
 <h:body> 
-<h1>Bienvenido  Pagina Principal</h1>
+<h2>Bienvenido #{administradorMB.administrador.nombre}</h2>
 <h:form>
 <h:commandButton action="listaClientes" value="Cliente"  />
 <a></a>
@@ -30,8 +31,10 @@ Correo:
 <h:inputText value="#{administradorMB.cliente.correo}" />
 Clave:
 <h:inputText value="#{administradorMB.cliente.clave}" />
-Tipo:
-<h:inputText value="#{administradorMB.cliente.tipo}" />
+
+Cuenta:
+<h:inputText value="#{administradorMB.cuenta.numero}" />
+
 <h:commandButton action="#{administradorMB.guardarCliente()}" value="Aceptar"  />
 </h:panelGrid>
 
@@ -50,8 +53,7 @@ Correo:
 <h:inputText value="#{administradorMB.cajero.correo}" />
 Clave:
 <h:inputText value="#{administradorMB.cajero.clave}" />
-Tipo:
-<h:inputText value="#{administradorMB.cajero.tipo}" />
+
 <h:commandButton action="#{administradorMB.guardarCajero()}" value="Aceptar"  />
 </h:panelGrid>
 <br />
@@ -69,8 +71,7 @@ Correo:
 <h:inputText value="#{administradorMB.credito.correo}" />
 Clave:
 <h:inputText value="#{administradorMB.credito.clave}" />
-Tipo:
-<h:inputText value="#{administradorMB.credito.tipo}" />
+
 <h:commandButton action="#{administradorMB.guardarCredito()}" value="Aceptar"  />
 </h:panelGrid>
 </h:form>

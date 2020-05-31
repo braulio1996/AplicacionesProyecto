@@ -1,6 +1,5 @@
 package ec.edu.ups.ON;
 
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,43 +10,120 @@ import javax.inject.Inject;
 import ec.edu.ups.DAO.ClienteDAO;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
+import ec.edu.ups.Modelo.Cuenta;
+import ec.edu.ups.Modelo.Transferencia;
 
-
+/**
+ * Esta Clase define los metodos de Objetos de Negocio
+ * @version: 31/05/2020
+ * @author Braulio Castro
+ *
+ */
 @Stateless
 public class ClienteON {
-	
+
 	@Inject
 	private ClienteDAO pdao;
-	
-	
-	
-	
+
+	private Transferencia trasferencia;
+	private List<Transferencia> trasferencias;
+
+	/**
+	 * @param cliente
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean guardar(Cliente cliente) throws Exception {
 		return pdao.guardar(cliente);
-		
+
 	}
 
-	public Cliente loginC(String correo,String clave) throws Exception{
-		
-		return pdao.login(correo,clave);
+	/**
+	 * Metodo de login, valida crdenciales de cliente
+	 * @param correo
+	 * @param clave
+	 * @return Cliente que cumpla con las credenciales
+	 * @throws Exception control de Excepciones
+	 */
+	public Cliente loginC(String correo, String clave) throws Exception {
+
+		return pdao.login(correo, clave);
 	}
-	
-	public List<Cliente>listar() throws Exception{
+
+	/**
+	 * Metodo para listar Clientes
+	 * @return Lista de clientes
+	 * @throws Exception Control de excepciones
+	 */
+	public List<Cliente> listar() throws Exception {
 		return pdao.listar();
-	
-}
+
+	}
+
 	public void editar(Cliente cliente) throws Exception {
 		pdao.editar(cliente);
 	}
-	
+
+	/**
+	 * Metodo que busca un cliente por su cedula
+	 * @param cedula del cliente o ruc
+	 * @return un objeto persona de tipo cliente
+	 * @throws Exception control de excepciones
+	 */
+
 	public Cliente buscar(String cedula) throws Exception {
 		return pdao.buscar(cedula);
 	}
-	public Cliente read(String cedula) {
-		return pdao.read(cedula);
+
+	/** Metod que busca un cliente por su codigo o Id
+	 * @param id o codigo de cliente
+	 * @return un objeto persona de tipo cliente
+	 */
+	public Cliente read(int id) {
+		return pdao.read(id);
 	}
+
+	/**
+	 * Meto de Elimina una persona por su cedula
+	 * @param cedula o ruc de la persona a eliminar
+	 * @throws Exception
+	 */
 	public void eliminar(String cedula) throws Exception {
 		pdao.eliminar(cedula);
-		
+
+	}
+
+	/**
+	 * Metodo que busca una cuenta bancaria
+	 * @param numero de cuenta 
+	 * @return Objeto de tipo cuenta
+	 * @throws Exception
+	 */
+	public Cuenta buscarCuenta(String numero) throws Exception {
+		return pdao.buscarCuenta(numero);
+	}
+
+	/**
+	 * Este metodo realiza una trasferencia 
+	 * @param cliente de session oh duenio de la cuenta
+	 * @param cuentaDestino numero de cuenta del beneficiario
+	 * @param monto de la operacion doalres
+	 * @return un objeto Trasferencia con los parametros anteriores
+	 * @throws Exception control de excepciones
+	 */
+	public Transferencia trasferencia(Cliente cliente, String cuentaDestino, Double monto) throws Exception {
+		trasferencia = new Transferencia();
+
+		Cuenta cuentaD = pdao.buscarCuenta(cuentaDestino);
+		Cuenta cuentaO = cliente.getCuenta();
+		Double saldoDestino = cuentaD.getSaldo() + monto;
+		Double salgoOrigen = cuentaO.getSaldo() - monto;
+		trasferencia.setMonto(monto);
+		trasferencia.setNumeroCuenta(cuentaDestino);
+		cuentaD.setSaldo(saldoDestino);
+		pdao.editarCuenta(cuentaD);
+		pdao.editarCuenta(cuentaO);
+
+		return trasferencia;
 	}
 }

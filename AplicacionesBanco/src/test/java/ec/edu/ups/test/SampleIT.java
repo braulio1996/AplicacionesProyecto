@@ -12,43 +12,45 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Sample integration test: demonstrates how to create the WAR file using the ShrinkWrap API.
+ * Sample integration test: demonstrates how to create the WAR file using the
+ * ShrinkWrap API.
  * 
  * Delete this file if no integration test is required.
  */
 @RunWith(Arquillian.class)
 public class SampleIT {
 
-    /**
-     * Creates the WAR file that is deployed to the server.
-     * 
-     * @return WAR archive
-     */
-    @Deployment
-    public static Archive<?> getEarArchive() {
-        // Import the web archive that was created by Maven:
-        File f = new File("./target/AplacacionesBanco.war");
-        if (f.exists() == false) {
-            throw new RuntimeException("File " + f.getAbsolutePath() + " does not exist.");
-        }
-        WebArchive war = ShrinkWrap.create(ZipImporter.class, "AplacacionesBanco.war").importFrom(f).as(WebArchive.class);
-        
-        // Add the package containing the test classes:
-        war.addPackage("ec.edu.ups.test");
+	/**
+	 * Creates the WAR file that is deployed to the server.
+	 * 
+	 * @return WAR archive
+	 */
+	@Deployment
+	public static Archive<?> getEarArchive() {
+		// Import the web archive that was created by Maven:
+		File f = new File("./target/AplacacionesBanco.war");
+		if (f.exists() == false) {
+			throw new RuntimeException("File " + f.getAbsolutePath() + " does not exist.");
+		}
+		WebArchive war = ShrinkWrap.create(ZipImporter.class, "AplacacionesBanco.war").importFrom(f)
+				.as(WebArchive.class);
 
-        // Export the WAR file to examine it in case of problems:
-        // war.as(ZipExporter.class).exportTo(new File("c:\\temp\\test.war"), true);
+		// Add the package containing the test classes:
+		war.addPackage("ec.edu.ups.test");
 
-        return war;
-    }
+		// Export the WAR file to examine it in case of problems:
+		// war.as(ZipExporter.class).exportTo(new File("c:\\temp\\test.war"), true);
 
-    /**
-     * A sample test...
-     * 
-     */
-    @Test
-    public void test() {
-        // This line will be written on the server console.
-        System.out.println("Test is invoked...");
-    }
+		return war;
+	}
+
+	/**
+	 * A sample test...
+	 * 
+	 */
+	@Test
+	public void test() {
+		// This line will be written on the server console.
+		System.out.println("Test is invoked...");
+	}
 }

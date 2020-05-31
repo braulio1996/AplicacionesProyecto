@@ -51,6 +51,10 @@
 								#{p.tipo}
 								</h:column>
 								<h:column>
+								<f:facet name="header">Cuenta</f:facet>
+								#{p.cuenta.numero}
+								</h:column>
+								<h:column>
 								    <f:facet name="header">Acciones</f:facet>
 									<h:commandButton action="#{administradorMB.editarAjaxCliente(p.cedula)}" value="Editar"> 
 									<f:ajax render="editar" />
