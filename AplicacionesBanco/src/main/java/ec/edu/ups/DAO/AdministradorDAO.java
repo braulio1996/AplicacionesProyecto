@@ -55,7 +55,7 @@ public class AdministradorDAO {
 			return admin;
 
 		} catch (Exception e) {
-			// throw new Exception(e.toString());
+			//throw new Exception(e.toString());
 		}
 		return null;
 
