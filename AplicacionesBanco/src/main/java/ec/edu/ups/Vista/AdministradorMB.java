@@ -1,13 +1,13 @@
 package ec.edu.ups.Vista;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
 import ec.edu.ups.Modelo.Administrador;
@@ -45,6 +45,7 @@ public class AdministradorMB {
 	private String correo;
 	private String clave;
 	private Cuenta cuenta;
+	Date myDate = new Date();
 
 	@PostConstruct
 	public void init() {
@@ -154,31 +155,6 @@ public class AdministradorMB {
 		return "login";
 	}
 
-//	public String login() {
-//		try {
-//			if (adminON.loginC(correo, clave) != null) {
-//				administrador = adminON.loginC(administrador.getCorreo(), administrador.getClave());
-//				System.out.println(administrador.getNombre());
-//				return "inicioAdmin";
-//			} else if (clieOn.loginC(correo, clave) != null) {
-//				cliente = clieOn.loginC(cliente.getCorreo(), cliente.getClave());
-//				return "inicioCliente";
-//			} else if (crediON.loginC(correo, clave) != null) {
-//				credito = crediON.loginC(credito.getCorreo(), credito.getClave());
-//				return "inicioCredito";
-//
-//			} else if (cajeON.loginC(correo, clave).getTipo().equalsIgnoreCase("cajero")) {
-//				cajero = cajeON.loginC(cajero.getCorreo(), cajero.getClave());
-//				return "inicioCajero";
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return null;
-//	}
-
 	public String guardarCliente() throws Exception {
 		System.out.println(cliente.toString());
 		System.out.println(administrador.getNombre());
@@ -189,6 +165,8 @@ public class AdministradorMB {
 		cliente.setCuenta(cuenta);
 		administrador.setClientes(clientes);
 		adminON.update(administrador);
+		String mensaje="Bienvenid@ a la Cooperativa Kawill "+cliente.getNombre()+" \n"+"Su correo es = "+cliente.getCorreo()+" \n"+"Su clave es = "+cliente.getClave()+" \n"+"Su numero de cuenta es = "+cuenta.getNumero()+"\n ";
+		clieOn.enviarCorreo(cliente.getCorreo(),"Cuenta Cliente Creada", mensaje+" Creado el "+new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
 		cliente = new Cliente();
 		clientes.clear();
 		return "listaClientes";
@@ -235,7 +213,6 @@ public class AdministradorMB {
 		try {
 			cliente = clieOn.buscar(cedula);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -246,7 +223,6 @@ public class AdministradorMB {
 		try {
 			cajero = cajeON.buscar(cedula);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -257,7 +233,6 @@ public class AdministradorMB {
 		try {
 			credito = crediON.buscar(cedula);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

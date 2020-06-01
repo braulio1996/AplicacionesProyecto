@@ -114,4 +114,18 @@ public class ClienteDAO {
 			throw new Exception(e.toString());
 		}
 	}
+	
+	public boolean buscarCorreo(String correo) {
+		String jpql = "SELECT c FROM Cliente c WHERE c.correo = :correo";
+		Query query = em.createQuery(jpql, Cuenta.class);
+		query.setParameter("correo", correo);
+		Cliente c = (Cliente) query.getSingleResult();
+		
+		if (c !=null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 }

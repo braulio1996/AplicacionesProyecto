@@ -18,8 +18,12 @@ public class CreditoDAO {
 	@PersistenceContext(name = "AplacacionesBancoPersistenceUnit")
 	private EntityManager em;
 
+	/**
+	 * @param credito define el credito del usuario
+	 * @return el objeto credito
+	 * @throws Exception
+	 */
 	public boolean guardar(Credito credito) throws Exception {
-
 		try {
 			em.persist(credito);
 
@@ -30,6 +34,15 @@ public class CreditoDAO {
 		return true;
 	}
 
+	/**
+	 * Este metodo valida las credenciales de usuario
+	 * 
+	 * @param correo define el email del cajero
+	 * @param clave  define la contrase o clave de acceso
+	 * @return credito, retorna un Objeto de tipo Credito que con la identificacion
+	 *         de usuario
+	 * @throws Exception
+	 */
 	public Credito login(String correo, String clave) throws Exception {
 		try {
 			String jpql = "SELECT a FROM Credito a WHERE a.correo = :correo and a.clave=:clave";
@@ -46,6 +59,12 @@ public class CreditoDAO {
 
 	}
 
+	/**
+	 * *Listas los creditos de los usuarios
+	 * 
+	 * @return retorna un objeto de tipo credito
+	 * @throws Exception
+	 */
 	public List<Credito> listar() throws Exception {
 
 		try {
@@ -59,6 +78,10 @@ public class CreditoDAO {
 
 	}
 
+	/**Editar creditos  usario
+	 * @param credito 
+	 * @throws Exception
+	 */
 	public void editar(Credito credito) throws Exception {
 
 		try {
@@ -70,6 +93,12 @@ public class CreditoDAO {
 		}
 	}
 
+	/**
+	 * Este metodo busca mediante la cedula al usuario
+	 * @param cedula identificaicion del usuario
+	 * @return credito retorna el objeto de tipo Credito 
+	 * @throws Exception
+	 */
 	public Credito buscar(String cedula) throws Exception {
 		try {
 			String jpql = "SELECT a FROM Credito a WHERE a.cedula = :cedula";
@@ -83,10 +112,20 @@ public class CreditoDAO {
 		}
 	}
 
+	/**
+	 * Este metodo define la busqueda de un Objeto Persona tipo cliente mediante la cedula 
+	 * @param cedula es un id principal para la busqueda del usuario
+	 * @return cedula si esta existe 
+	 */
 	public Credito read(String cedula) {
 		return em.find(Credito.class, cedula);
 	}
 
+	/**
+	 * Objeto credito que se requiere eliminar
+	 * @param cedula
+	 * @throws Exception
+	 */
 	public void eliminar(String cedula) throws Exception {
 		Credito c = buscar(cedula);
 		em.remove(c);

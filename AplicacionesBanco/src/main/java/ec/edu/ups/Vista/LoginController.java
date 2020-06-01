@@ -156,24 +156,36 @@ public class LoginController {
 	}
 	
 	public String login() {
+		System.out.println("Entro metodo Login");
 		boolean client=false;
-		
-		System.out.println("Correo: "+correo+" Clave: "+clave);
+		boolean mail = false;
 		
 		try {
+			mail =  clieOn.buscarCorreo(this.correo);
+			if(mail == true) {
+				System.out.println("Entro xq existe correo");
+				if (clieOn.loginC(this.correo, this.clave) != null) {
+					client = true;
+					cliente = clieOn.loginC(getCorreo(), getClave());
+					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
+					setNombreUsuario(cliente.getNombre());
+					
+					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
+					return "inicioCliente";
+				}else{
+					System.out.println("Existe el correo pero no la clave");
+					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Su intento ha sido fallido, con contraseña: "+this.clave);
+				}
+			}else {
+				System.out.println("No existe la cuenta");
+			}
+			
 			if (adminON.loginC(this.correo, this.clave) != null) {
 				client = true;
 				administrador = adminON.loginC(getCorreo(), getClave());
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 				setNombreUsuario(administrador.getNombre());
 				return "inicioAdmin";
-			}
-			if (clieOn.loginC(this.correo, this.clave) != null) {
-				client = true;
-				cliente = clieOn.loginC(getCorreo(), getClave());
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-				setNombreUsuario(cliente.getNombre());
-				return "inicioCliente";
 			}
 			if (crediON.loginC(this.correo, this.clave) != null) {
 				client = true;
@@ -189,10 +201,8 @@ public class LoginController {
 				setNombreUsuario(cajero.getNombre());
 				return "inicioCajero";
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Valor nulo");
 		}
 
 		return null;
