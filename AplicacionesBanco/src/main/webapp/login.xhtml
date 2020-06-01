@@ -11,12 +11,12 @@
 <h:panelGrid columns="2" id="p1">
 
 Correo:
-<h:inputText value="#{administradorMB.correo}" />
+<h:inputText value="#{login.correo}" />
 Clave:
-<h:inputText value="#{administradorMB.clave}" />
+<h:inputText value="#{login.clave}" />
 </h:panelGrid>
 <h:panelGrid columns="2" id="p2">
-<h:commandButton action="#{administradorMB.login()}" value="Login" />
+<h:commandButton action="#{login.login()}" value="Login" />
 <h:commandButton action="registro" value="registro" />
 </h:panelGrid>
 

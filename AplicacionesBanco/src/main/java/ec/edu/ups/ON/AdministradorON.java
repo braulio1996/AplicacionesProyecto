@@ -27,7 +27,7 @@ public class AdministradorON {
 	}
 
 	public Administrador loginC(String correo, String clave) throws Exception {
-
+		
 		return pdao.login(correo, clave);
 	}
 

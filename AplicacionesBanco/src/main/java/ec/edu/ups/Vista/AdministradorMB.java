@@ -154,30 +154,30 @@ public class AdministradorMB {
 		return "login";
 	}
 
-	public String login() {
-		try {
-			if (adminON.loginC(correo, clave) != null) {
-				administrador = adminON.loginC(administrador.getCorreo(), administrador.getClave());
-				System.out.println(administrador.getNombre());
-				return "inicioAdmin";
-			} else if (clieOn.loginC(correo, clave) != null) {
-				cliente = clieOn.loginC(cliente.getCorreo(), cliente.getClave());
-				return "inicioCliente";
-			} else if (crediON.loginC(correo, clave) != null) {
-				credito = crediON.loginC(credito.getCorreo(), credito.getClave());
-				return "inicioCredito";
-
-			} else if (cajeON.loginC(correo, clave).getTipo().equalsIgnoreCase("cajero")) {
-				cajero = cajeON.loginC(cajero.getCorreo(), cajero.getClave());
-				return "inicioCajero";
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return null;
-	}
+//	public String login() {
+//		try {
+//			if (adminON.loginC(correo, clave) != null) {
+//				administrador = adminON.loginC(administrador.getCorreo(), administrador.getClave());
+//				System.out.println(administrador.getNombre());
+//				return "inicioAdmin";
+//			} else if (clieOn.loginC(correo, clave) != null) {
+//				cliente = clieOn.loginC(cliente.getCorreo(), cliente.getClave());
+//				return "inicioCliente";
+//			} else if (crediON.loginC(correo, clave) != null) {
+//				credito = crediON.loginC(credito.getCorreo(), credito.getClave());
+//				return "inicioCredito";
+//
+//			} else if (cajeON.loginC(correo, clave).getTipo().equalsIgnoreCase("cajero")) {
+//				cajero = cajeON.loginC(cajero.getCorreo(), cajero.getClave());
+//				return "inicioCajero";
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return null;
+//	}
 
 	public String guardarCliente() throws Exception {
 		System.out.println(cliente.toString());
