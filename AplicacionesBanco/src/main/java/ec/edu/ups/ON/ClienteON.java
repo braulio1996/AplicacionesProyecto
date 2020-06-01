@@ -135,7 +135,7 @@ public class ClienteON {
 		return trasferencia;
 	}
 	
-	public boolean buscarCorreo(String correo) {
+	public Cliente buscarCorreo(String correo) {
 		return pdao.buscarCorreo(correo);
 	}
 	

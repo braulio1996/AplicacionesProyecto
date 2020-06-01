@@ -155,14 +155,11 @@ public class LoginController {
 		this.nombreUsuario = nombreUsuario;
 	}
 	
-	public String login() {
-		System.out.println("Entro metodo Login");
+	public String login() throws Exception {
 		boolean client=false;
-		boolean mail = false;
 		
 		try {
-			mail =  clieOn.buscarCorreo(this.correo);
-			if(mail == true) {
+			if(clieOn.buscarCorreo(this.correo) != null) {
 				System.out.println("Entro xq existe correo");
 				if (clieOn.loginC(this.correo, this.clave) != null) {
 					client = true;
@@ -173,13 +170,10 @@ public class LoginController {
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
 					return "inicioCliente";
 				}else{
-					System.out.println("Existe el correo pero no la clave");
+					System.out.println("ERROR. Usuario Incorrecto");
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Su intento ha sido fallido, con contraseña: "+this.clave);
 				}
-			}else {
-				System.out.println("No existe la cuenta");
 			}
-			
 			if (adminON.loginC(this.correo, this.clave) != null) {
 				client = true;
 				administrador = adminON.loginC(getCorreo(), getClave());
@@ -193,7 +187,7 @@ public class LoginController {
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 				setNombreUsuario(credito.getNombre());
 				return "inicioCredito";
-			} 
+			}
 			if (cajeON.loginC(this.correo, this.clave).getTipo().equalsIgnoreCase("cajero")) {
 				client = true;
 				cajero = cajeON.loginC(getCorreo(), getClave());
@@ -203,6 +197,7 @@ public class LoginController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("ERROR. Usuario Incorrecto");
 		}
 
 		return null;
