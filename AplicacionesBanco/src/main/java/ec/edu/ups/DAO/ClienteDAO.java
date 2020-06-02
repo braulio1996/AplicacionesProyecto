@@ -124,4 +124,10 @@ public class ClienteDAO {
 		return c;
 		
 	}
+	
+	public void controlAccesos(String correo) {
+		Cliente c = buscarCorreo(correo);
+		
+		
+	}
 }

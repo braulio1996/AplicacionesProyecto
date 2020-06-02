@@ -147,7 +147,10 @@ public class AdministradorMB {
 
 	public String registrar() {
 		try {
-
+			cuenta.setSaldo(0.00);
+			cuenta.setCliente(cliente);
+			
+			cliente.setCuenta(cuenta);
 			adminON.registrar(administrador);
 		} catch (Exception e) {
 			e.printStackTrace();

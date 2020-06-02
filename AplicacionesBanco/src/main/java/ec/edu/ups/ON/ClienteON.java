@@ -172,4 +172,8 @@ public class ClienteON {
             System.out.println(ex);
         }
 	}
+	
+	public void controlAccesos() {
+		
+	}
 }

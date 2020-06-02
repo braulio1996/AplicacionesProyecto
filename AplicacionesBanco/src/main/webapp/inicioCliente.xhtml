@@ -8,7 +8,7 @@
 	<h:head></h:head> 
 	<h:body> 
 		<h:form>
-		<h2>Bienvenido #{login.nombreUsuario}</h2>
+		<h2>Bienvenido #{login.cliente.getNombre()}</h2>
 <h:commandButton action="login" value="Salir"  />
 <h:commandButton action="transferencia" value="Trasferencia"  />
 </h:form>

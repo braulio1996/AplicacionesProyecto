@@ -19,7 +19,6 @@ import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
 
-
 @ManagedBean(name = "login")
 @SessionScoped
 public class LoginController {
@@ -156,16 +155,16 @@ public class LoginController {
 	}
 	
 	public String login() throws Exception {
+	
 		boolean client=false;
 		
 		try {
 			if(clieOn.buscarCorreo(this.correo) != null) {
-				System.out.println("Entro xq existe correo");
 				if (clieOn.loginC(this.correo, this.clave) != null) {
 					client = true;
 					cliente = clieOn.loginC(getCorreo(), getClave());
 					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-					setNombreUsuario(cliente.getNombre());
+					setCliente(cliente);
 					
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
 					return "inicioCliente";
@@ -178,21 +177,21 @@ public class LoginController {
 				client = true;
 				administrador = adminON.loginC(getCorreo(), getClave());
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-				setNombreUsuario(administrador.getNombre());
+				setAdministrador(administrador);
 				return "inicioAdmin";
 			}
 			if (crediON.loginC(this.correo, this.clave) != null) {
 				client = true;
 				credito = crediON.loginC(getCorreo(), getClave());
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-				setNombreUsuario(credito.getNombre());
+				setCredito(credito);
 				return "inicioCredito";
 			}
 			if (cajeON.loginC(this.correo, this.clave).getTipo().equalsIgnoreCase("cajero")) {
 				client = true;
 				cajero = cajeON.loginC(getCorreo(), getClave());
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-				setNombreUsuario(cajero.getNombre());
+				setCajero(cajero);
 				return "inicioCajero";
 			}
 		} catch (Exception e) {

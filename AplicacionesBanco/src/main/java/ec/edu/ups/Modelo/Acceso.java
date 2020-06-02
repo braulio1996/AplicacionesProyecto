@@ -3,6 +3,8 @@ package ec.edu.ups.Modelo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Acceso {
@@ -12,7 +14,7 @@ public class Acceso {
 	private String estado;
 	private String clave;
 	private String fecha;
-
+	
 	public int getCodigo() {
 		return codigo;
 	}

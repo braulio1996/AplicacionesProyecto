@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 
 import ec.edu.ups.Modelo.Cliente;
@@ -27,14 +28,23 @@ public class ClienteMB {
 	private List<Transferencia> transferencias;
 	private String cuentaDestino;
 	private Double monto;
-
+	private Cuenta cuenta;
+	
 	@PostConstruct
 	public void init() {
-
 		cliente = new Cliente();
 		t = new Transferencia();
 		transferencias = new ArrayList<>();
 	}
+
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+
 
 	public Cliente getCliente() {
 		return cliente;
@@ -75,7 +85,7 @@ public class ClienteMB {
 	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
-
+	
 	public String trasferencia() {
 		try {
 			t = cON.trasferencia(cliente, cuentaDestino, monto);
@@ -88,7 +98,12 @@ public class ClienteMB {
 		}
 
 		return null;
-
 	}
-
+	
+	public void generarCuenta() {
+		Date d = new Date();
+		String numero = d.getDate()+""+d.getHours()+d.getSeconds()+System.currentTimeMillis();
+		cuenta.setNumero(numero);
+	}
+	
 }
