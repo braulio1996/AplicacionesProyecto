@@ -114,11 +114,10 @@
 					<div class="form-group text-center mt-3">
 						<center>
 							<div class="col-md-4">
-								<a class="btn btn-project btn-lg btn-block text-uppercase" data-toggle="modal" data-target="#myModal"
-									
+								<a class="btn btn-project btn-lg btn-block text-uppercase"
+									data-toggle="modal" data-target="#myModal"
 									style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000;">
-									Modificar
-									</a>
+									Modificar </a>
 							</div>
 						</center>
 					</div>
@@ -127,7 +126,99 @@
 			</div>
 		</div>
 
+		<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 400px;">
+				<h:form class="form-horizontal form-material">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color: #37B0A9;">
+							<h4 class="modal-title" id="myModalLabel" style="color: #000000;">Modificar</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">×</button>
+						</div>
+						<div class="modal-body" style="color: #000000;">
 
+							<div class="form-group mt-3">
+								<div class="col-xs-12">
+									<h:panelGrid columns="2">
+										<label for="cedula"
+											style="display: inline-block; width: 100px;">Cédula:
+										</label>
+										<h:inputText style="width: 300px;" id="cedula"
+											value="#{login.cliente.cedula}"
+											class="form-control text-holder-proj" type="text" required="" />
+
+									</h:panelGrid>
+
+									<h:panelGrid columns="2">
+										<label for="nombre"
+											style="display: inline-block; width: 100px;">Nombre:
+										</label>
+										<h:inputText style="width: 300px;" id="nombre"
+											value="#{login.cliente.nombre}"
+											class="form-control text-holder-proj" type="text" required="" />
+
+									</h:panelGrid>
+
+									<h:panelGrid columns="2">
+										<label for="telefono"
+											style="display: inline-block; width: 100px;">Teléfono:
+										</label>
+										<h:inputText style="width: 300px;" id="telefono"
+											value="#{login.cliente.telefono}"
+											class="form-control text-holder-proj" type="text" required="" />
+
+									</h:panelGrid>
+
+									<h:panelGrid columns="2">
+										<label for="direccion"
+											style="display: inline-block; width: 100px;">Dirección:
+										</label>
+										<h:inputText style="width: 300px;" id="direccion"
+											value="#{login.cliente.direccion}"
+											class="form-control text-holder-proj" type="text" required="" />
+									</h:panelGrid>
+
+									<h:panelGrid columns="2">
+										<label for="correo"
+											style="display: inline-block; width: 100px;">Correo:
+										</label>
+										<h:inputText style="width: 300px;" id="correo"
+											value="#{login.cliente.correo}"
+											class="form-control text-holder-proj" type="text" required="" />
+
+									</h:panelGrid>
+
+									<h:panelGrid columns="2">
+										<label for="contraseña"
+											style="display: inline-block; width: 100px;">Contraseña:
+										</label>
+										<h:inputText style="width: 300px;" id="contraseña"
+											value="#{login.cliente.clave}"
+											class="form-control text-holder-proj" type="text" required="" />
+
+									</h:panelGrid>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+
+							<div class="form-group text-center mt-3">
+								<h:commandButton class="btn" type="submit" value="Aceptar"
+									action="#{login.updCliente()}"
+									style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000; margin-right: 140px;" />
+							</div>
+
+						</div>
+
+					</div>
+					<!-- /.modal-content -->
+				</h:form>
+			</div>
+
+			<!-- /.modal-dialog -->
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

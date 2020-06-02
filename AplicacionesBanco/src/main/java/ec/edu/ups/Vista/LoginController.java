@@ -155,7 +155,6 @@ public class LoginController {
 	}
 
 	public String login() throws Exception {
-		System.out.println("Entro al metodo");
 		boolean client = false;
 
 		try {
@@ -209,4 +208,17 @@ public class LoginController {
 
 		return null;
 	}
+	
+	public String updCliente() {
+		try {
+			clieOn.editar(this.cliente);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("No se pudo modificar");
+			return null;
+			
+		}
+	}
+	
 }

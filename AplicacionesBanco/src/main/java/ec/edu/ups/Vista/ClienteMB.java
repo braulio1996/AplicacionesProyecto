@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 
+import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.Transferencia;
@@ -29,12 +30,21 @@ public class ClienteMB {
 	private String cuentaDestino;
 	private Double monto;
 	private Cuenta cuenta;
-	
+	private String correo;
+
 	@PostConstruct
 	public void init() {
 		cliente = new Cliente();
 		t = new Transferencia();
 		transferencias = new ArrayList<>();
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 	public Cuenta getCuenta() {
@@ -44,7 +54,6 @@ public class ClienteMB {
 	public void setCuenta(Cuenta cuenta) {
 		this.cuenta = cuenta;
 	}
-
 
 	public Cliente getCliente() {
 		return cliente;
@@ -85,7 +94,7 @@ public class ClienteMB {
 	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
-	
+
 	public String trasferencia() {
 		try {
 			t = cON.trasferencia(cliente, cuentaDestino, monto);
@@ -99,11 +108,47 @@ public class ClienteMB {
 
 		return null;
 	}
-	
+
 	public void generarCuenta() {
 		Date d = new Date();
-		String numero = d.getDate()+""+d.getHours()+d.getSeconds()+System.currentTimeMillis();
+		String numero = d.getDate() + "" + d.getHours() + d.getSeconds() + System.currentTimeMillis();
 		cuenta.setNumero(numero);
 	}
+
 	
+	
+	public String generarContraseña() {
+		cliente = cON.buscarCorreo(this.correo);
+		if (cliente != null) {
+			try {
+				String NUMEROS = "0123456789";
+				String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
+
+				String pswd = "";
+
+				String key = NUMEROS + MAYUSCULAS + MINUSCULAS;
+
+				for (int i = 0; i < 12; i++) {
+					pswd += (key.charAt((int) (Math.random() * key.length())));
+				}
+
+				System.out.println(this.correo);
+				this.cliente.setCorreo(this.correo);
+
+				cON.enviarCorreo(this.correo, "Cambio de Contraseña", "Su nueva contraseña es: " + pswd);
+				
+				cliente.setClave(pswd);
+				cON.editar(cliente);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		} else {
+			System.out.println("No existe el correo");
+			return null;
+		}
+
+	}
 }
