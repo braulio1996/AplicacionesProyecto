@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
-import ec.edu.ups.Modelo.Credito;
+import ec.edu.ups.Modelo.JefeCredito;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
@@ -37,11 +37,11 @@ public class AdministradorMB {
 
 	private Administrador administrador;
 	private Cliente cliente;
-	private Credito credito;
+	private JefeCredito credito;
 	private Cajero cajero;
 	private List<Cajero> cajeros;
 	private List<Cliente> clientes;
-	private List<Credito> creditos;
+	private List<JefeCredito> creditos;
 	private String correo;
 	private String clave;
 	private Cuenta cuenta;
@@ -51,7 +51,7 @@ public class AdministradorMB {
 	public void init() {
 		administrador = new Administrador();
 		cliente = new Cliente();
-		credito = new Credito();
+		credito = new JefeCredito();
 		cajero = new Cajero();
 		cuenta = new Cuenta();
 		clientes = new ArrayList<>();
@@ -101,11 +101,11 @@ public class AdministradorMB {
 		this.clientes = clientes;
 	}
 
-	public List<Credito> getCreditos() {
+	public List<JefeCredito> getCreditos() {
 		return creditos;
 	}
 
-	public void setCreditos(List<Credito> creditos) {
+	public void setCreditos(List<JefeCredito> creditos) {
 		this.creditos = creditos;
 	}
 
@@ -129,11 +129,11 @@ public class AdministradorMB {
 		this.cliente = cliente;
 	}
 
-	public Credito getCredito() {
+	public JefeCredito getCredito() {
 		return credito;
 	}
 
-	public void setCredito(Credito credito) {
+	public void setCredito(JefeCredito credito) {
 		this.credito = credito;
 	}
 
@@ -185,7 +185,7 @@ public class AdministradorMB {
 		creditos.add(credito);
 		administrador.setCreditos(creditos);
 		adminON.update(administrador);
-		credito = new Credito();
+		credito = new JefeCredito();
 		creditos.clear();
 
 		return "listaCreditos";
@@ -195,7 +195,7 @@ public class AdministradorMB {
 		return clieOn.listar();
 	}
 
-	public List<Credito> listarCredito() throws Exception {
+	public List<JefeCredito> listarCredito() throws Exception {
 		return crediON.listar();
 	}
 

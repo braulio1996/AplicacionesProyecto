@@ -7,40 +7,40 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import ec.edu.ups.DAO.CreditoDAO;
+import ec.edu.ups.DAO.JefeCreditoDAO;
 import ec.edu.ups.Modelo.Cajero;
-import ec.edu.ups.Modelo.Credito;
+import ec.edu.ups.Modelo.JefeCredito;
 
 @Stateless
 public class CreditoON {
 
 	@Inject
-	private CreditoDAO pdao;
+	private JefeCreditoDAO pdao;
 
-	public boolean guardar(Credito credito) throws Exception {
+	public boolean guardar(JefeCredito credito) throws Exception {
 		return pdao.guardar(credito);
 
 	}
 
-	public Credito loginC(String correo, String clave) throws Exception {
+	public JefeCredito loginC(String correo, String clave) throws Exception {
 
 		return pdao.login(correo, clave);
 	}
 
-	public List<Credito> listar() throws Exception {
+	public List<JefeCredito> listar() throws Exception {
 		return pdao.listar();
 
 	}
 
-	public void editar(Credito credito) throws Exception {
+	public void editar(JefeCredito credito) throws Exception {
 		pdao.editar(credito);
 	}
 
-	public Credito buscar(String cedula) throws Exception {
+	public JefeCredito buscar(String cedula) throws Exception {
 		return pdao.buscar(cedula);
 	}
 
-	public Credito read(String cedula) {
+	public JefeCredito read(String cedula) {
 		return pdao.read(cedula);
 	}
 

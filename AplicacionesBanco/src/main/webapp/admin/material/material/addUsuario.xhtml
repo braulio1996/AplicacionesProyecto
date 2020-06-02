@@ -5,65 +5,34 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <ui:composition template="index2.xhtml">
-	<ui:define name="title">Mi Perfil</ui:define>
+	<ui:define name="title">Administrador</ui:define>
 
 	<ui:define name="profile">
 		<div class="profile-text">
-
-			<a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown"
-				role="button" aria-haspopup="true" aria-expanded="true">
-				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.cliente.getNombre()}</p>
-				<p style="font-size: 8px; color: #474646;">Cliente</p>
+			<a>
+				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.administrador.getNombre()}</p>
+				<p style="font-size: 8px; color: #474646;">Administrador</p>
 			</a>
-
-			<div class="dropdown-menu animated flipInY">
-				<a href="miPerfil.xhtml" class="dropdown-item" data-toggle="modal"
-					data-target="#myModal"> <img
-					src="../assets/images/menu/perfil16.png" alt="" /> Mi Perfil
-				</a>
-
-				<div class="dropdown-divider"></div>
-				<a href="login-2.xhtml" class="dropdown-item"><i
-					class="fa fa-power-off"></i> Cerrar Sesión</a>
-			</div>
 		</div>
 	</ui:define>
 
 	<ui:define name="sidebar">
-		<li class="active"><a class="waves-effect waves-dark" href="inicioCliente.xhtml"
+		<li><a class="waves-effect waves-dark" href="inicioAdmin.xhtml"
 			aria-expanded="false"> <img style="padding-right: 10px;"
 				src="../assets/images/menu/inicio16.png" alt="" /> <span
 				class="hide-menu">Inicio </span>
 		</a></li>
-		<li><a class="waves-effect waves-dark" href="#"
-			aria-expanded="false"> <img style="padding-right: 10px;"
+		<li class="active"><a class="waves-effect waves-dark"
+			href="addUsuario.xhtml" aria-expanded="false"> <img
+				style="padding-right: 10px;"
 				src="../assets/images/menu/ahorros16.png" alt="" /> <span
-				class="hide-menu">Cuenta de Ahorros</span>
+				class="hide-menu">Usuarios</span>
 		</a></li>
 		<li><a class="waves-effect waves-dark" href="#"
 			aria-expanded="false"> <img style="padding-right: 10px;"
 				src="../assets/images/menu/caprob16.png" alt="" /><span
-				class="hide-menu">CreditosAprobados</span>
+				class="hide-menu">Clientes</span>
 		</a></li>
-		<li><a class="waves-effect waves-dark" href="#"
-			aria-expanded="false"> <img style="padding-right: 10px;"
-				src="../assets/images/menu/solicitud16.png" alt="" /> <span
-				class="hide-menu">Solicitudes</span>
-		</a></li>
-		<li><a class="waves-effect waves-dark" href="#"
-			aria-expanded="false"> <img style="padding-right: 10px;"
-				src="../assets/images/menu/acceso16.png" alt="" /> <span
-				class="hide-menu">Accesos</span>
-		</a></li>
-		<li><a class="has-arrow waves-effect waves-dark" href="#"
-			aria-expanded="false"> <img style="padding-right: 10px;"
-				src="../assets/images/menu/transferir16.png" alt="" /> <span
-				class="hide-menu">Transferencias</span>
-		</a>
-			<ul aria-expanded="false" class="collapse">
-				<li><a href="#">Internas</a></li>
-				<li><a href="#">Externas</a></li>
-			</ul></li>
 	</ui:define>
 
 	<ui:define name="dashboard">
@@ -71,19 +40,18 @@
 			<div class="col-md-5 col-12 align-self-center">
 				<h3 class="text-themecolor">Dashboard</h3>
 				<ol class="breadcrumb">
-					<a>Inicio > Mi Perfil</a>
+					<a>Inicio</a>
 				</ol>
 			</div>
 
 		</div>
 	</ui:define>
-
 	<ui:define name="body">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="card-title mb-0">Mi Perfil</h4>
+						<h4 class="card-title mb-0">Resumen cuenta de ahorros</h4>
 					</div>
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
@@ -92,47 +60,48 @@
 									<tr>
 										<th>Cédula</th>
 										<th>Nombre</th>
-										<th>Teléfono</th>
 										<th>Dirección</th>
+										<th>Rol</th>
 										<th>Correo</th>
+										<th style="text-align: center;">Acción</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td>#{login.cliente.getCedula()}</td>
-										<td>#{login.cliente.getNombre()}</td>
-										<td>#{login.cliente.getTelefono()}</td>
-										<td>#{login.cliente.getDireccion()}</td>
-										<td>#{login.cliente.getCorreo()}</td>
+										<td>123456789</td>
+										<td>Christian Pillaga</td>
+										<td>Miraflores</td>
+										<td>Cajero</td>
+										<td>cpillaga@gmail.com</td>
+										<td align="center"><a href=""> <img
+												src="../assets/images/menu/editar.png" />
+										</a> <a style="padding-right: 5px;"></a> <a href=""> <img
+												src="../assets/images/menu/eliminar.png" />
+										</a></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<br /> <br /> <br />
-
-					<div class="form-group text-center mt-3">
-						<center>
-							<div class="col-md-4">
-								<a class="btn btn-project btn-lg btn-block text-uppercase"
-									data-toggle="modal" data-target="#myModal"
-									style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000;">
-									Modificar </a>
-							</div>
-						</center>
-					</div>
-
 				</div>
 			</div>
 		</div>
 
-		<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+		<a
+			class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-block btn-sm pull-right ml-2"
+			data-toggle="modal" data-target="#addModal"> <i
+			class="mdi mdi-plus text-white" style="width: 12px; height: 12px;"></i>
+		</a>
+
+
+		<div id="addModal" class="modal fade" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog" style="width: 400px;">
+			<div class="modal-dialog modal-lg" style="width: 400px;">
 				<h:form class="form-horizontal form-material">
 					<div class="modal-content">
 						<div class="modal-header" style="background-color: #37B0A9;">
-							<h4 class="modal-title" id="myModalLabel" style="color: #000000;">Modificar</h4>
+							<h4 class="modal-title" id="myModalLabel" style="color: #000000;">Control
+								Usuarios</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">×</button>
 						</div>
@@ -140,14 +109,14 @@
 
 							<div class="form-group mt-3">
 								<div class="col-xs-12">
+
 									<h:panelGrid columns="2">
 										<label for="cedula"
 											style="display: inline-block; width: 100px;">Cédula:
 										</label>
 										<h:inputText style="width: 300px;" id="cedula"
-											value="#{login.cliente.cedula}"
+											value="#{operativo.cedula}"
 											class="form-control text-holder-proj" type="text" required="" />
-
 									</h:panelGrid>
 
 									<h:panelGrid columns="2">
@@ -155,48 +124,45 @@
 											style="display: inline-block; width: 100px;">Nombre:
 										</label>
 										<h:inputText style="width: 300px;" id="nombre"
-											value="#{login.cliente.nombre}"
+											value="#{operativo.nombre}"
 											class="form-control text-holder-proj" type="text" required="" />
-
 									</h:panelGrid>
-
+									
 									<h:panelGrid columns="2">
-										<label for="telefono"
-											style="display: inline-block; width: 100px;">Teléfono:
+										<label for="rol" style="display: inline-block; width: 100px;">Rol:
 										</label>
-										<h:inputText style="width: 300px;" id="telefono"
-											value="#{login.cliente.telefono}"
-											class="form-control text-holder-proj" type="text" required="" />
-
+										<select class="form-control" value="#{operativo.rol}" style="width: 260px;" id="rol">
+											<option>Seleccionar</option>
+											<option>Cajero</option>
+											<option>Jefe Crédito</option>
+										</select>
 									</h:panelGrid>
-
+									
+									<h:panelGrid columns="2">
+										<label for="clave"
+											style="display: inline-block; width: 100px;">Contraseña:
+										</label>
+										<h:inputSecret style="width: 300px;" id="clave"
+											value="#{operativo.clave}"
+											class="form-control text-holder-proj" required="" />
+									</h:panelGrid>
+									
 									<h:panelGrid columns="2">
 										<label for="direccion"
 											style="display: inline-block; width: 100px;">Dirección:
 										</label>
 										<h:inputText style="width: 300px;" id="direccion"
-											value="#{login.cliente.direccion}"
+											value="#{operativo.direccion}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
-
+									
 									<h:panelGrid columns="2">
 										<label for="correo"
 											style="display: inline-block; width: 100px;">Correo:
 										</label>
 										<h:inputText style="width: 300px;" id="correo"
-											value="#{login.cliente.correo}"
+											value="#{operativo.correo}"
 											class="form-control text-holder-proj" type="text" required="" />
-
-									</h:panelGrid>
-
-									<h:panelGrid columns="2">
-										<label for="contraseña"
-											style="display: inline-block; width: 100px;">Contraseña:
-										</label>
-										<h:inputText style="width: 300px;" id="contraseña"
-											value="#{login.cliente.clave}"
-											class="form-control text-holder-proj" type="text" required="" />
-
 									</h:panelGrid>
 								</div>
 							</div>
@@ -206,7 +172,7 @@
 
 							<div class="form-group text-center mt-3">
 								<h:commandButton class="btn" type="submit" value="Aceptar"
-									action="#{login.updCliente()}"
+									action="#{operativo.registrarUsuario()}"
 									style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000; margin-right: 140px;" />
 							</div>
 
@@ -220,5 +186,8 @@
 			<!-- /.modal-dialog -->
 		</div>
 	</ui:define>
+
+
+
 </ui:composition>
 </html>

@@ -1,30 +1,161 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head> 
-<h1>Pagina Principal </h1>
-<h:body> 
-<h2>Bienvenido #{login.administrador.getNombre()}</h2>
-<h:form>
-<h:commandButton action="listaClientes" value="Cliente"  />
-<a></a>
-<h:commandButton action="listaCajeros" value="Cajero"  />
-<a></a>
-<h:commandButton action="listaCreditos" value="Jefe de Credito"  />
-<a></a>
-<h:commandButton action="login" value="Salir"  />
-</h:form>
+<ui:composition template="index2.xhtml">
+	<ui:define name="title">Administrador</ui:define>
 
-<h2>Crear Cliente</h2>
-<h:form>
-<h:panelGrid columns="2" id="p1">
+	<ui:define name="profile">
+		<div class="profile-text">
+			<a>
+				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.administrador.getNombre()}</p>
+				<p style="font-size: 8px; color: #474646;">Administrador</p>
+			</a>
+		</div>
+	</ui:define>
+
+	<ui:define name="sidebar">
+		<li class="active"><a class="waves-effect waves-dark"
+			href="inicioAdmin.xhtml" aria-expanded="false"> <img
+				style="padding-right: 10px;"
+				src="../assets/images/menu/inicio16.png" alt="" /> <span
+				class="hide-menu">Inicio </span>
+		</a></li>
+		<li><a class="waves-effect waves-dark" href="addUsuario.xhtml"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+				src="../assets/images/menu/ahorros16.png" alt="" /> <span
+				class="hide-menu">Usuarios</span>
+		</a></li>
+		<li><a class="waves-effect waves-dark" href="#"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+				src="../assets/images/menu/caprob16.png" alt="" /><span
+				class="hide-menu">Clientes</span>
+		</a></li>
+	</ui:define>
+
+	<ui:define name="dashboard">
+		<div class="row page-titles">
+			<div class="col-md-5 col-12 align-self-center">
+				<h3 class="text-themecolor">Dashboard</h3>
+				<ol class="breadcrumb">
+					<a>Inicio</a>
+				</ol>
+			</div>
+
+		</div>
+	</ui:define>
+
+	<ui:define name="body">
+		<div class="row">
+			<!-- Column -->
+			
+			<div class="col-lg-1 col-md-6"></div>
+			<div class="col-lg-5 col-md-6">
+				<div class="card" style="background-color: #73DCD6;">
+					<div class="card-body">
+						<div class="d-flex flex-row" >
+								<img src="../assets/images/menu/usuario126.png" alt="" />
+							
+							<div class="ml-2 align-self-center">
+								<h1>USUARIOS</h1>
+								<h3>$3249</h3>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Column -->
+			<!-- Column -->
+			<div class="col-lg-5 col-md-6">
+				<div class="card" style="background-color: #73DCD6;">
+					<div class="card-body">
+						<div class="d-flex flex-row" >
+								<img src="../assets/images/menu/cliente126.png" alt="" />
+							
+							<div class="ml-2 align-self-center">
+								<h1>CLIENTES</h1>
+								<h3 class="mb-0 font-weight-light">$3249</h3>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-2 col-md-6"></div>
+		</div>
+
+		<div class="row">
+			<!-- Column -->
+			
+			<div class="col-lg-1 col-md-6"></div>
+			<div class="col-lg-5 col-md-6">
+				<div class="card" style="background-color: #73DCD6;">
+					<div class="card-body">
+						<div class="d-flex flex-row" >
+								<img src="../assets/images/menu/creditos126.png" alt="" />
+							
+							<div class="ml-2 align-self-center">
+								<h1>CRÉDITOS</h1>
+								<h3 class="mb-0 font-weight-light">$3249</h3>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Column -->
+			<!-- Column -->
+			<div class="col-lg-5 col-md-6">
+				<div class="card" style="background-color: #73DCD6;">
+					<div class="card-body">
+						<div class="d-flex flex-row" >
+								<img src="../assets/images/menu/solicitud126.png" alt="" />
+							
+							<div class="ml-2 align-self-center">
+								<h1>SOLICITUDES</h1>
+								<h3 class="mb-0 font-weight-light">$3249</h3>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-2 col-md-6"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+
+
+
+
+
+
+<h:head></h:head>
+<h1>Pagina Principal</h1>
+<h:body>
+	<h2>Bienvenido #{login.administrador.getNombre()}</h2>
+	<h:form>
+		<h:commandButton action="listaClientes" value="Cliente" />
+		<a></a>
+		<h:commandButton action="listaCajeros" value="Cajero" />
+		<a></a>
+		<h:commandButton action="listaCreditos" value="Jefe de Credito" />
+		<a></a>
+		<h:commandButton action="login" value="Salir" />
+	</h:form>
+
+	<h2>Crear Cliente</h2>
+	<h:form>
+		<h:panelGrid columns="2" id="p1">
 Cedula:
 <h:inputText value="#{administradorMB.cliente.cedula}" />
 Nombre:
-<h:inputText  value="#{administradorMB.cliente.nombre}" />
+<h:inputText value="#{administradorMB.cliente.nombre}" />
 Dirrecion:
 <h:inputText value="#{administradorMB.cliente.direccion}" />
 Correo:
@@ -35,18 +166,19 @@ Clave:
 Cuenta:
 <h:inputText value="#{administradorMB.cuenta.numero}" />
 
-<h:commandButton action="#{administradorMB.guardarCliente()}" value="Aceptar"  />
-</h:panelGrid>
+			<h:commandButton action="#{administradorMB.guardarCliente()}"
+				value="Aceptar" />
+		</h:panelGrid>
 
-<br />
+		<br />
 
-<h2>Crear Cajero</h2>
+		<h2>Crear Cajero</h2>
 
-<h:panelGrid columns="2" id="p2">
+		<h:panelGrid columns="2" id="p2">
 Cedula:
 <h:inputText value="#{administradorMB.cajero.cedula}" />
 Nombre:
-<h:inputText  value="#{administradorMB.cajero.nombre}" />
+<h:inputText value="#{administradorMB.cajero.nombre}" />
 Dirrecion:
 <h:inputText value="#{administradorMB.cajero.direccion}" />
 Correo:
@@ -54,17 +186,18 @@ Correo:
 Clave:
 <h:inputText value="#{administradorMB.cajero.clave}" />
 
-<h:commandButton action="#{administradorMB.guardarCajero()}" value="Aceptar"  />
-</h:panelGrid>
-<br />
+			<h:commandButton action="#{administradorMB.guardarCajero()}"
+				value="Aceptar" />
+		</h:panelGrid>
+		<br />
 
-<h2>Crear Jefe de Credito</h2>
+		<h2>Crear Jefe de Credito</h2>
 
-<h:panelGrid columns="2" id="p3">
+		<h:panelGrid columns="2" id="p3">
 Cedula:
 <h:inputText value="#{administradorMB.credito.cedula}" />
 Nombre:
-<h:inputText  value="#{administradorMB.credito.nombre}" />
+<h:inputText value="#{administradorMB.credito.nombre}" />
 Dirrecion:
 <h:inputText value="#{administradorMB.credito.direccion}" />
 Correo:
@@ -72,8 +205,9 @@ Correo:
 Clave:
 <h:inputText value="#{administradorMB.credito.clave}" />
 
-<h:commandButton action="#{administradorMB.guardarCredito()}" value="Aceptar"  />
-</h:panelGrid>
-</h:form>
-</h:body> 
+			<h:commandButton action="#{administradorMB.guardarCredito()}"
+				value="Aceptar" />
+		</h:panelGrid>
+	</h:form>
+</h:body>
 </html>

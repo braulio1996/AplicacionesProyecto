@@ -14,7 +14,7 @@ public class Administrador extends Persona {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Cajero> cajeros;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Credito> creditos;
+	private List<JefeCredito> creditos;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Cliente> clientes;
 
@@ -26,11 +26,11 @@ public class Administrador extends Persona {
 		this.cajeros = cajeros;
 	}
 
-	public List<Credito> getCreditos() {
+	public List<JefeCredito> getCreditos() {
 		return creditos;
 	}
 
-	public void setCreditos(List<Credito> creditos) {
+	public void setCreditos(List<JefeCredito> creditos) {
 		this.creditos = creditos;
 	}
 

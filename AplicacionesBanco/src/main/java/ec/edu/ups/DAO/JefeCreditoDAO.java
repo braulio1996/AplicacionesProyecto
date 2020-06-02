@@ -10,11 +10,11 @@ import javax.persistence.Query;
 
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
-import ec.edu.ups.Modelo.Credito;
-import ec.edu.ups.Modelo.Credito;
+import ec.edu.ups.Modelo.JefeCredito;
+import ec.edu.ups.Modelo.JefeCredito;
 
 @Stateless
-public class CreditoDAO {
+public class JefeCreditoDAO {
 	@PersistenceContext(name = "AplacacionesBancoPersistenceUnit")
 	private EntityManager em;
 
@@ -23,7 +23,7 @@ public class CreditoDAO {
 	 * @return el objeto credito
 	 * @throws Exception
 	 */
-	public boolean guardar(Credito credito) throws Exception {
+	public boolean guardar(JefeCredito credito) throws Exception {
 		try {
 			em.persist(credito);
 
@@ -43,13 +43,13 @@ public class CreditoDAO {
 	 *         de usuario
 	 * @throws Exception
 	 */
-	public Credito login(String correo, String clave) throws Exception {
+	public JefeCredito login(String correo, String clave) throws Exception {
 		try {
 			String jpql = "SELECT a FROM Credito a WHERE a.correo = :correo and a.clave=:clave";
-			Query query = em.createQuery(jpql, Credito.class);
+			Query query = em.createQuery(jpql, JefeCredito.class);
 			query.setParameter("correo", correo);
 			query.setParameter("clave", clave);
-			Credito cre = (Credito) query.getSingleResult();
+			JefeCredito cre = (JefeCredito) query.getSingleResult();
 			return cre;
 
 		} catch (Exception e) {
@@ -65,12 +65,12 @@ public class CreditoDAO {
 	 * @return retorna un objeto de tipo credito
 	 * @throws Exception
 	 */
-	public List<Credito> listar() throws Exception {
+	public List<JefeCredito> listar() throws Exception {
 
 		try {
 			String jpql = "SELECT l FROM Credito l";
-			Query query = em.createQuery(jpql, Credito.class);
-			List<Credito> creditoz = query.getResultList();
+			Query query = em.createQuery(jpql, JefeCredito.class);
+			List<JefeCredito> creditoz = query.getResultList();
 			return creditoz;
 		} catch (Exception e) {
 			throw new Exception(e.toString());
@@ -82,7 +82,7 @@ public class CreditoDAO {
 	 * @param credito 
 	 * @throws Exception
 	 */
-	public void editar(Credito credito) throws Exception {
+	public void editar(JefeCredito credito) throws Exception {
 
 		try {
 			em.merge(credito);
@@ -99,12 +99,12 @@ public class CreditoDAO {
 	 * @return credito retorna el objeto de tipo Credito 
 	 * @throws Exception
 	 */
-	public Credito buscar(String cedula) throws Exception {
+	public JefeCredito buscar(String cedula) throws Exception {
 		try {
 			String jpql = "SELECT a FROM Credito a WHERE a.cedula = :cedula";
-			Query query = em.createQuery(jpql, Credito.class);
+			Query query = em.createQuery(jpql, JefeCredito.class);
 			query.setParameter("cedula", cedula);
-			Credito c = (Credito) query.getSingleResult();
+			JefeCredito c = (JefeCredito) query.getSingleResult();
 			return c;
 
 		} catch (Exception e) {
@@ -117,8 +117,8 @@ public class CreditoDAO {
 	 * @param cedula es un id principal para la busqueda del usuario
 	 * @return cedula si esta existe 
 	 */
-	public Credito read(String cedula) {
-		return em.find(Credito.class, cedula);
+	public JefeCredito read(String cedula) {
+		return em.find(JefeCredito.class, cedula);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class CreditoDAO {
 	 * @throws Exception
 	 */
 	public void eliminar(String cedula) throws Exception {
-		Credito c = buscar(cedula);
+		JefeCredito c = buscar(cedula);
 		em.remove(c);
 	}
 }
