@@ -1,6 +1,8 @@
 package ec.edu.ups.Vista;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -45,6 +47,7 @@ public class AdministradorMB {
 	private String correo;
 	private String clave;
 	private Cuenta cuenta;
+	Date myDate = new Date();
 
 	@PostConstruct
 	public void init() {
@@ -158,7 +161,7 @@ public class AdministradorMB {
 		try {
 			if (adminON.loginC(correo, clave) != null) {
 				administrador = adminON.loginC(administrador.getCorreo(), administrador.getClave());
-				System.out.println(administrador.getNombre());
+				adminON.enviarCorreo(correo,"Logueo", "Ingreso a su ceunta Administrador "+new SimpleDateFormat("dd-MM-yyyy").format(myDate));
 				return "inicioAdmin";
 			} else if (clieOn.loginC(correo, clave) != null) {
 				cliente = clieOn.loginC(cliente.getCorreo(), cliente.getClave());
@@ -167,7 +170,7 @@ public class AdministradorMB {
 				credito = crediON.loginC(credito.getCorreo(), credito.getClave());
 				return "inicioCredito";
 
-			} else if (cajeON.loginC(correo, clave).getTipo().equalsIgnoreCase("cajero")) {
+			} else if (cajeON.loginC(correo, clave).getTipo()!= null) {
 				cajero = cajeON.loginC(cajero.getCorreo(), cajero.getClave());
 				return "inicioCajero";
 			}
@@ -189,6 +192,8 @@ public class AdministradorMB {
 		cliente.setCuenta(cuenta);
 		administrador.setClientes(clientes);
 		adminON.update(administrador);
+		String mensaje="Bienvenid@ a la Cooperativa Kawill "+cliente.getNombre()+" \n"+"Su correo es = "+cliente.getCorreo()+" \n"+"Su clave es = "+cliente.getClave()+" \n"+"Su numero de cuenta es = "+cuenta.getNumero()+"\n ";
+		adminON.enviarCorreo(cliente.getCorreo(),"Cuenta Cliente Creada", mensaje+" Creado el "+new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
 		cliente = new Cliente();
 		clientes.clear();
 		return "listaClientes";
