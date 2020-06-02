@@ -45,7 +45,7 @@ public class JefeCreditoDAO {
 	 */
 	public JefeCredito login(String correo, String clave) throws Exception {
 		try {
-			String jpql = "SELECT a FROM Credito a WHERE a.correo = :correo and a.clave=:clave";
+			String jpql = "SELECT a FROM JefeCredito a WHERE a.correo = :correo and a.clave=:clave";
 			Query query = em.createQuery(jpql, JefeCredito.class);
 			query.setParameter("correo", correo);
 			query.setParameter("clave", clave);
@@ -53,7 +53,7 @@ public class JefeCreditoDAO {
 			return cre;
 
 		} catch (Exception e) {
-			// throw new Exception(e.toString());
+			e.printStackTrace();
 		}
 		return null;
 
@@ -68,7 +68,7 @@ public class JefeCreditoDAO {
 	public List<JefeCredito> listar() throws Exception {
 
 		try {
-			String jpql = "SELECT l FROM Credito l";
+			String jpql = "SELECT l FROM JefeCredito l";
 			Query query = em.createQuery(jpql, JefeCredito.class);
 			List<JefeCredito> creditoz = query.getResultList();
 			return creditoz;
@@ -129,5 +129,14 @@ public class JefeCreditoDAO {
 	public void eliminar(String cedula) throws Exception {
 		JefeCredito c = buscar(cedula);
 		em.remove(c);
+	}
+	
+	public long contar() {
+		String jpql = "SELECT COUNT(jc) FROM JefeCredito jc";
+		Query query = em.createQuery(jpql, Long.class);		
+		
+		long c = (Long) query.getSingleResult();
+		return c;
+
 	}
 }

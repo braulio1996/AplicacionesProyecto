@@ -145,11 +145,6 @@ public class AdministradorMB {
 		this.cajero = cajero;
 	}
 
-	public String registrar() {
-		System.out.println("Entro a este metodo");
-		return "login-2?faces-redirect=true";
-	}
-
 	public String guardarCliente() throws Exception {
 		System.out.println(cliente.toString());
 		System.out.println(administrador.getNombre());
@@ -160,7 +155,7 @@ public class AdministradorMB {
 		cliente.setCuenta(cuenta);
 		administrador.setClientes(clientes);
 		adminON.update(administrador);
-		String mensaje="Bienvenid@ a la Cooperativa Kawill "+cliente.getNombre()+" \n"+"Su correo es = "+cliente.getCorreo()+" \n"+"Su clave es = "+cliente.getClave()+" \n"+"Su numero de cuenta es = "+cuenta.getNumero()+"\n ";
+		String mensaje="Bienvenid@ a nuestro sistema "+cliente.getNombre()+" \n"+"Su correo es = "+cliente.getCorreo()+" \n"+"Su clave es = "+cliente.getClave()+" \n"+"Su numero de cuenta es = "+cuenta.getNumero()+"\n ";
 		clieOn.enviarCorreo(cliente.getCorreo(),"Cuenta Cliente Creada", mensaje+" Creado el "+new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
 		cliente = new Cliente();
 		clientes.clear();
@@ -202,7 +197,7 @@ public class AdministradorMB {
 	public List<Cajero> listarCajero() throws Exception {
 		return cajeON.listar();
 	}
-
+	
 	public String editarAjaxCliente(String cedula) {
 		System.out.println(cedula);
 		try {
@@ -264,5 +259,11 @@ public class AdministradorMB {
 		System.out.println("=======================  " + cedula);
 		cajeON.eliminar(cedula);
 		return null;
+	}
+	
+	public long contarUser() {
+		long c = cajeON.contar() + crediON.contar();
+		
+		return c;
 	}
 }

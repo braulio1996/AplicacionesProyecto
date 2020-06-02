@@ -19,7 +19,6 @@ public class CreditoON {
 
 	public boolean guardar(JefeCredito credito) throws Exception {
 		return pdao.guardar(credito);
-
 	}
 
 	public JefeCredito loginC(String correo, String clave) throws Exception {
@@ -48,4 +47,9 @@ public class CreditoON {
 		pdao.eliminar(cedula);
 
 	}
+	
+	public long contar() {
+		return pdao.contar();
+	}
+	
 }

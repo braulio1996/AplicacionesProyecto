@@ -51,42 +51,99 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="card-title mb-0">Resumen cuenta de ahorros</h4>
+						<h4 class="card-title mb-0">Lista jefes de crédito</h4>
 					</div>
+					<h:form >
+					
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<table class="table product-overview">
-								<thead>
-									<tr>
-										<th>Cédula</th>
-										<th>Nombre</th>
-										<th>Dirección</th>
-										<th>Rol</th>
-										<th>Correo</th>
-										<th style="text-align: center;">Acción</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>123456789</td>
-										<td>Christian Pillaga</td>
-										<td>Miraflores</td>
-										<td>Cajero</td>
-										<td>cpillaga@gmail.com</td>
-										<td align="center"><a href=""> <img
-												src="../assets/images/menu/editar.png" />
-										</a> <a style="padding-right: 5px;"></a> <a href=""> <img
-												src="../assets/images/menu/eliminar.png" />
-										</a></td>
-									</tr>
-								</tbody>
-							</table>
+							<h:dataTable class="table" value="#{administradorMB.listarCredito()}" var="cred">
+								<h:column>
+									<f:facet name="header">Cédula</f:facet>
+									#{cred.cedula}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Nombre</f:facet>
+									#{cred.nombre}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Dirección</f:facet>
+									#{cred.direccion}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Correo</f:facet>
+									#{cred.correo}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Acciones</f:facet>
+									<a>
+										<img src="../assets/images/menu/editar.png" />
+									</a>
+									<a style="padding-right: 8px;"></a>
+									<a>
+										<img src="../assets/images/menu/eliminar.png" />
+									</a>
+								</h:column>
+							</h:dataTable>
 						</div>
 					</div>
+					</h:form>
 				</div>
 			</div>
 		</div>
 
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title mb-0">Lista cajeros</h4>
+					</div>
+					<h:form>
+					
+					<div class="card-body collapse show">
+						<div class="table-responsive no-wrap">
+							<h:dataTable class="table" value="#{administradorMB.listarCajero()}" var="caje">
+								<h:column>
+									<f:facet name="header">Cédula</f:facet>
+									#{caje.cedula}
+								</h:column>
+								<h:column>
+									<f:facet name="header">nombre</f:facet>
+									#{caje.nombre}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Dirección</f:facet>
+									#{caje.direccion}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Correo</f:facet>
+									#{caje.correo}
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">Acciones</f:facet>
+									#{caje.correo}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Acciones</f:facet>
+									<a>
+										<img src="../assets/images/menu/editar.png" />
+									</a>
+									<a style="padding-right: 8px;"></a>
+									<a>
+										<img src="../assets/images/menu/eliminar.png" />
+									</a>
+								</h:column>
+							</h:dataTable>
+						</div>
+					</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		
+		
 		<a
 			class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-block btn-sm pull-right ml-2"
 			data-toggle="modal" data-target="#addModal"> <i
@@ -131,20 +188,15 @@
 									<h:panelGrid columns="2">
 										<label for="rol" style="display: inline-block; width: 100px;">Rol:
 										</label>
-										<select class="form-control" value="#{operativo.rol}" style="width: 260px;" id="rol">
-											<option>Seleccionar</option>
-											<option>Cajero</option>
-											<option>Jefe Crédito</option>
-										</select>
-									</h:panelGrid>
-									
-									<h:panelGrid columns="2">
-										<label for="clave"
-											style="display: inline-block; width: 100px;">Contraseña:
-										</label>
-										<h:inputSecret style="width: 300px;" id="clave"
-											value="#{operativo.clave}"
-											class="form-control text-holder-proj" required="" />
+										<h:selectOneMenu value="#{operativo.rol}"
+											styleClass="form-control text-holder-proj custom-select" style="width: 300px;">
+											<f:selectItem itemValue=""
+												itemLabel="Seleccionar" />
+											<f:selectItem itemValue="Cajero"
+												itemLabel="Cajero" />
+											<f:selectItem itemValue="Jefe Credito"
+												itemLabel="Jefe Credito" />
+										</h:selectOneMenu>
 									</h:panelGrid>
 									
 									<h:panelGrid columns="2">

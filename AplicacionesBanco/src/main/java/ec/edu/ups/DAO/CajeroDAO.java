@@ -133,5 +133,14 @@ public class CajeroDAO {
 		Cajero c = buscar(cedula);
 		em.remove(c);
 	}
+	
+	public long contar() {
+		String jpql = "SELECT COUNT(a) FROM Cajero a";
+		Query query = em.createQuery(jpql, Long.class);		
+		
+		long c = (Long) query.getSingleResult();
+		return c;
+
+	}
 
 }

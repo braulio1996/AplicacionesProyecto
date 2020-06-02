@@ -42,6 +42,4 @@ public class AdministradorON {
 		return pdao.login(correo, clave);
 	}
 	
-	
-
 }

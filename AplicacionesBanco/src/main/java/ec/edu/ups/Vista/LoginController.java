@@ -155,26 +155,28 @@ public class LoginController {
 	}//Fin metodo setnombreusuario
 
 	public String login() throws Exception {
+		System.out.println("Entro al metodo");
+		
 		boolean client = false;
-
+		
 		try {
-
-			if (adminON.loginC(this.correo, this.clave) != null) {
+			if (adminON.loginC(this.correo, this.clave)!=null) {
 				client = true;
 				administrador = adminON.loginC(getCorreo(), getClave());
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 				setAdministrador(administrador);
 
 				return "inicioAdmin?faces-redirect=true";
-			}//Fin if (adminON.loginC(this.correo, this.clave) != null)
-
-			if (crediON.loginC(this.correo, this.clave) != null) {
+			}
+			
+			if (crediON.loginC(this.correo, this.clave)!=null) {
 				client = true;
 				credito = crediON.loginC(getCorreo(), getClave());
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 				setCredito(credito);
 				return "inicioCredito?faces-redirect=true";
-			}//Fin (crediON.loginC(this.correo, this.clave) != null)
+			}
+			
 			if (cajeON.loginC(this.correo, this.clave).getTipo().equalsIgnoreCase("cajero")) {
 				client = true;
 				cajero = cajeON.loginC(getCorreo(), getClave());
@@ -183,7 +185,6 @@ public class LoginController {
 				return "inicioCajero?faces-redirect=true";
 			}//Fin if (cajeON.loginC(this.correo, this.clave).getTipo().equalsIgnoreCase("cajero"))
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("ERROR. Usuario Incorrecto 1");
@@ -202,6 +203,8 @@ public class LoginController {
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta",
 							"Su intento ha sido fallido, con contraseña: " + this.clave);
 				}//Fin if (clieOn.loginC(this.correo, this.clave) != null)
+			}else {
+				System.out.println("Error");
 			}//Fin if (clieOn.buscarCorreo(this.correo) != null)
 		}//FIn try-catch
 
