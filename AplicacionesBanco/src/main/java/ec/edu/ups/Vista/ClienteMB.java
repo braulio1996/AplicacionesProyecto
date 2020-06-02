@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 
+import ec.edu.ups.Modelo.Acceso;
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;

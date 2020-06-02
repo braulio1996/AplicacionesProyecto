@@ -1,6 +1,8 @@
 package ec.edu.ups.Vista;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import ec.edu.ups.Modelo.Acceso;
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
@@ -24,6 +27,7 @@ import ec.edu.ups.ON.CreditoON;
 public class LoginController {
 	private String nombreUsuario;
 	private FacesMessages facesMsg;
+	private Acceso acceso;
 
 	@Inject
 	private AdministradorON adminON;
@@ -47,9 +51,12 @@ public class LoginController {
 	private String correo;
 	private String clave;
 	private Cuenta cuenta;
+	Date myDate = new Date();
+	private List<Acceso>accesos;
 
 	@PostConstruct
 	public void init() {
+		acceso= new Acceso();
 		administrador = new Administrador();
 		cliente = new Cliente();
 		credito = new JefeCredito();
@@ -58,6 +65,7 @@ public class LoginController {
 		clientes = new ArrayList<>();
 		cajeros = new ArrayList<>();
 		creditos = new ArrayList<>();
+		accesos = new ArrayList<>();
 		correo = "";
 		clave = "";
 	}
@@ -196,11 +204,24 @@ public class LoginController {
 					setCliente(cliente);
 
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
+					acceso.setClave(clave);
+					acceso.setEstado("Acceso correcto a la cuenta");
+					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
+					accesos.add(acceso);
+					cliente.setAccesos(accesos);
+					clieOn.editar(cliente);
 					return "inicioCliente?faces-redirect=true";
 				} else {
 					System.out.println("ERROR. Usuario Incorrecto");
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta",
 							"Su intento ha sido fallido, con contraseña: " + this.clave);
+			
+					acceso.setClave(clave);
+					acceso.setEstado("Acceso fallido a la cuenta");
+					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
+					accesos.add(acceso);
+					cliente.setAccesos(accesos);
+					clieOn.editar(cliente);
 				}//Fin if (clieOn.loginC(this.correo, this.clave) != null)
 			}//Fin if (clieOn.buscarCorreo(this.correo) != null)
 		}//FIn try-catch

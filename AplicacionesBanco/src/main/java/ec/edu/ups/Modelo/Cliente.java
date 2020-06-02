@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -16,7 +17,7 @@ public class Cliente extends Persona {
 	private Cuenta cuenta;
 	@OneToMany
 	private List<Acceso> accesos;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<SolicitudCredito> solicitudesCredito;
 
 	
