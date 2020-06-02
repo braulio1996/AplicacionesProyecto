@@ -122,7 +122,6 @@ public class ClienteDAO {
 		Cliente c = (Cliente) query.getSingleResult();
 		
 		return c;
-		
 	}
 	
 	public void controlAccesos(String correo) {

@@ -10,12 +10,23 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Cliente extends Persona {
+	private String telefono;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Cuenta cuenta;
 	@OneToMany
 	private List<Acceso> accesos;
 	@OneToMany
 	private List<SolicitudCredito> solicitudesCredito;
+
+	
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 
 	public Cuenta getCuenta() {
 		return cuenta;

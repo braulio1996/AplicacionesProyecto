@@ -24,7 +24,7 @@ import ec.edu.ups.ON.CreditoON;
 public class LoginController {
 	private String nombreUsuario;
 	private FacesMessages facesMsg;
-	
+
 	@Inject
 	private AdministradorON adminON;
 
@@ -36,7 +36,7 @@ public class LoginController {
 
 	@Inject
 	private CajeroON cajeON;
-	
+
 	private Administrador administrador;
 	private Cliente cliente;
 	private Credito credito;
@@ -47,7 +47,7 @@ public class LoginController {
 	private String correo;
 	private String clave;
 	private Cuenta cuenta;
-	
+
 	@PostConstruct
 	public void init() {
 		administrador = new Administrador();
@@ -153,50 +153,58 @@ public class LoginController {
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
-	
+
 	public String login() throws Exception {
-	
-		boolean client=false;
-		
+		System.out.println("Entro al metodo");
+		boolean client = false;
+
 		try {
-			if(clieOn.buscarCorreo(this.correo) != null) {
-				if (clieOn.loginC(this.correo, this.clave) != null) {
-					client = true;
-					cliente = clieOn.loginC(getCorreo(), getClave());
-					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-					setCliente(cliente);
-					
-					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
-					return "inicioCliente";
-				}else{
-					System.out.println("ERROR. Usuario Incorrecto");
-					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Su intento ha sido fallido, con contraseña: "+this.clave);
-				}
-			}
+
 			if (adminON.loginC(this.correo, this.clave) != null) {
 				client = true;
 				administrador = adminON.loginC(getCorreo(), getClave());
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 				setAdministrador(administrador);
-				return "inicioAdmin";
+
+				return "inicioAdmin?faces-redirect=true";
 			}
+
 			if (crediON.loginC(this.correo, this.clave) != null) {
 				client = true;
 				credito = crediON.loginC(getCorreo(), getClave());
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 				setCredito(credito);
-				return "inicioCredito";
+				return "inicioCredito?faces-redirect=true";
 			}
 			if (cajeON.loginC(this.correo, this.clave).getTipo().equalsIgnoreCase("cajero")) {
 				client = true;
 				cajero = cajeON.loginC(getCorreo(), getClave());
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 				setCajero(cajero);
-				return "inicioCajero";
+				return "inicioCajero?faces-redirect=true";
 			}
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("ERROR. Usuario Incorrecto");
+			System.out.println("ERROR. Usuario Incorrecto 1");
+			
+			if (clieOn.buscarCorreo(this.correo) != null) {
+				if (clieOn.loginC(this.correo, this.clave) != null) {
+					client = true;
+					cliente = clieOn.loginC(getCorreo(), getClave());
+					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
+					setCliente(cliente);
+
+					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
+					return "inicioCliente?faces-redirect=true";
+				} else {
+					System.out.println("ERROR. Usuario Incorrecto");
+					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta",
+							"Su intento ha sido fallido, con contraseña: " + this.clave);
+				}
+			}
+			
 		}
 
 		return null;

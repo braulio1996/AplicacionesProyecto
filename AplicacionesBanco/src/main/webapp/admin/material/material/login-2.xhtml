@@ -42,33 +42,24 @@
     <!-- ============================================================== -->
     <section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/background/login-register.png);">
         <div class="login-box card">
-            <div class="card-body">
+            <div class="card-body" style="background-color: #C4C4C4;">
                 <h:form class="form-horizontal form-material">
                     <a href="javascript:void(0)" class="text-center d-block"><img src="../assets/images/logo-icon.png" alt="Home" /><br/></a>
                     <div class="form-group mt-4">
                         <div class="col-xs-12">
-<<<<<<< HEAD
-                            <h:inputText value="#{login.correo}"  class="form-control" type="text" required="" placeholder="Correo Electronico"/>
-=======
-                            <h:inputText value="#{administradorMB.correo}"  class="form-control" type="text" required="" p:placeholder="Correo Electronico"/>
->>>>>>> master
+
+                            <h:inputText value="#{login.correo}"  class="form-control" type="text" required="" p:placeholder="Correo Electronico"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-<<<<<<< HEAD
-                            <h:inputText value="#{login.clave}" class="form-control" type="password" required="" placeholder="Contraseña"/>
-=======
-                            <h:inputSecret value="#{administradorMB.clave}" class="form-control" type="password" required="" p:placeholder="Contraseña"/>
->>>>>>> master
+
+                            <h:inputText value="#{login.clave}" class="form-control" type="password" required="" p:placeholder="Contraseña"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="d-flex no-block align-items-center">
-                            <div class="checkbox checkbox-primary pt-0">
-                                <h:inputText id="checkbox-signup" type="checkbox"/>
-                                <label for="checkbox-signup"> Recordarme </label>
-                            </div>
+                           
                             <div class="ml-auto">
                                 <a href="javascript:void(0)" id="to-recover" class="text-muted"><i class="fa fa-lock mr-1"></i> Olvide mi Contraseña?</a> 
                             </div>
@@ -76,7 +67,7 @@
                     </div>
                     <div class="form-group text-center mt-3">
                         <div class="col-xs-12">
-                            <h:commandButton action="#{login.login()}" value="Iniciar Secion"  class="btn btn-project btn-lg btn-block text-uppercase waves-effect waves-light" type="submit"/>
+                            <h:commandButton action="#{login.login()}" value="Iniciar Secion"  class="btn btn-project btn-lg btn-block text-uppercase" type="submit" style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000;"/>
                         </div>
                     </div>
                    
