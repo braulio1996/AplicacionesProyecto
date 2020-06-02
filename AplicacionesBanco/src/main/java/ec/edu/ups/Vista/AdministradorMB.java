@@ -154,7 +154,7 @@ public class AdministradorMB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "login";
+		return "login-2";
 	}
 
 	public String login() {
