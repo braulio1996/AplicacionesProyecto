@@ -86,28 +86,34 @@
 					</div>
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<table class="table product-overview">
-								<thead>
-									<tr>
-										<th>#Cuenta</th>
-										<th>Propietario</th>
-										<th>Fecha-Transacción</th>
-										<th>Saldo</th>
-										<th style="text-align: center;">Acción</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>123456789</td>
-										<td>Christian Pillaga</td>
-										<td>10-07-2020</td>
-										<td>1000.00</td>
-										<td align="center"><a href=""> <img
-												src="../assets/images/menu/ver16.png" />
-										</a></td>
-									</tr>
-								</tbody>
-							</table>
+							<h:dataTable class="table" value="#{administradorMB.listarCliente()}" var="c">
+								<h:column>
+									<f:facet name="header">#Cuenta</f:facet>
+									#{c.cuenta.numero}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Propietario</f:facet>
+									#{cred.nombre}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Fecha-Transacción</f:facet>
+									#{cred.direccion}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Saldo</f:facet>
+									#{cred.correo}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Acciones</f:facet>
+									<a>
+										<img src="../assets/images/menu/editar.png" />
+									</a>
+									<a style="padding-right: 8px;"></a>
+									<a>
+										<img src="../assets/images/menu/eliminar.png" />
+									</a>
+								</h:column>
+							</h:dataTable>
 						</div>
 					</div>
 				</div>

@@ -15,10 +15,11 @@ public class Cliente extends Persona {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Cuenta cuenta;
-	@OneToMany
-	private List<Acceso> accesos;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Acceso> accesos;
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<SolicitudCredito> solicitudesCredito;
+	
 
 	
 	public String getTelefono() {
@@ -52,5 +53,7 @@ public class Cliente extends Persona {
 	public void setSolicitudesCredito(List<SolicitudCredito> solicitudesCredito) {
 		this.solicitudesCredito = solicitudesCredito;
 	}
+
+	
 
 }

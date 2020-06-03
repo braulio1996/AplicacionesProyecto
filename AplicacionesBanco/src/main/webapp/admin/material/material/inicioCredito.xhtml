@@ -1,12 +1,137 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-	<h1>Inicio Credito</h1>
-=<h:form>
-<h2>Bienvenido #{login.credito.getNombre()}</h2>
-<h:commandButton action="login" value="Salir"  />
+
+<ui:composition template="index2.xhtml">
+	<ui:define name="title">Jefe Crédito</ui:define>
+
+	<ui:define name="profile">
+		<div class="profile-text">
+			<a>
+				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.credito.getNombre()}</p>
+				<p style="font-size: 8px; color: #474646;">Jefe Crédito</p>
+			</a>
+		</div>
+	</ui:define>
+
+	<ui:define name="sidebar">
+		<li class="active"><a class="waves-effect waves-dark"
+			href="inicioCredito.xhtml" aria-expanded="false"> <img
+				style="padding-right: 10px;"
+				src="../assets/images/menu/inicio16.png" alt="" /> <span
+				class="hide-menu">Inicio </span>
+		</a></li>
+	</ui:define>
+
+	<ui:define name="dashboard">
+		<div class="row page-titles">
+			<div class="col-md-5 col-12 align-self-center">
+				<h3 class="text-themecolor">Dashboard</h3>
+				<ol class="breadcrumb">
+					<a>Inicio</a>
+				</ol>
+			</div>
+		</div>
+	</ui:define>
+
+	<ui:define name="body">
+		<div class="row">
+			<div class="col-lg-8 col-md-12">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="d-flex no-block">
+								<h4 class="card-title">Lista Solicitudes</h4>
+								<div class="ml-auto" style="width: 250px; float: right;">
+									Buscar:
+									<select class="custom-select " style="width: 150px; ">
+										<option selected="">Todos</option>
+										<option value="1">Aprobadas</option>
+										<option value="2">Negadas</option>
+									</select>
+									
+								</div>
+							</div>
+						</div>
+						<div class="card-body collapse show">
+							<div class="table-responsive no-wrap">
+								<table class="table product-overview">
+									<thead>
+										<tr>
+											<th>Customer</th>
+											<th>Photo</th>
+											<th>Quantity</th>
+											<th>Date</th>
+											<th>Status</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Steave Jobs</td>
+											<td><img src="../assets/images/gallery/chair.jpg"
+												alt="iMac" width="80" /></td>
+											<td>20</td>
+											<td>10-7-2020</td>
+											<td><span
+												class="px-2 py-1 badge badge-success font-weight-100">Paid</span>
+											</td>
+											<td><a href="javascript:void(0)"
+												class="text-inverse pr-2" data-toggle="tooltip" title=""
+												data-original-title="Edit"> <i class="ti-marker-alt"></i>
+											</a> <a href="javascript:void(0)" class="text-inverse" title=""
+												data-toggle="tooltip" data-original-title="Delete"> <i
+													class="ti-trash"></i>
+											</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-12">
+				<!-- Column -->
+				<div class="card earning-widget">
+					<div class="card-header" style="background-color: #37B0A9;">
+						<h4 class="card-title mb-0" style="color: #000000;">Solicitudes</h4>
+						<h6 class="card-title mb-0" style="color: #ffffff;">Pendientes</h6>
+					</div>
+					<div
+						class="card-body border-top collapse show table-responsive no-wrap">
+						<table class="table v-middle table-borderless">
+							<tbody>
+								<tr>
+									<td style="width: 40px"><img
+										src="../assets/images/users/1.jpg" width="50"
+										class="rounded-circle" alt="logo" /></td>
+									<td>Andrew</td>
+									<td align="right"><span
+										class="badge px-2 py-1 label-light-info">$2300</span></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Column -->
+	</ui:define>
+</ui:composition>
+
+
+
+<h1>Inicio Credito</h1>
+
+<h:form>
+	<h2>Bienvenido #{login.credito.getNombre()}</h2>
+	<h:commandButton action="login" value="Salir" />
 </h:form>
 </html>

@@ -53,7 +53,7 @@ public class JefeCreditoDAO {
 			return cre;
 
 		} catch (Exception e) {
-			// throw new Exception(e.toString());
+			e.printStackTrace();
 		}
 		return null;
 
@@ -129,5 +129,14 @@ public class JefeCreditoDAO {
 	public void eliminar(String cedula) throws Exception {
 		JefeCredito c = buscar(cedula);
 		em.remove(c);
+	}
+	
+	public long contar() {
+		String jpql = "SELECT COUNT(jc) FROM JefeCredito jc";
+		Query query = em.createQuery(jpql, Long.class);		
+		
+		long c = (Long) query.getSingleResult();
+		return c;
+
 	}
 }

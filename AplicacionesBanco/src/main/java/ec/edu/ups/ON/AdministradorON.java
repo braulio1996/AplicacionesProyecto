@@ -42,6 +42,36 @@ public class AdministradorON {
 		return pdao.login(correo, clave);
 	}
 	
-	
+	public String generarContraseña() {
+		
+		String NUMEROS = "0123456789";
+		String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
 
+		String pswd = "";
+
+		String key = NUMEROS + MAYUSCULAS + MINUSCULAS;
+
+		for (int i = 0; i < 12; i++) {
+			pswd += (key.charAt((int) (Math.random() * key.length())));
+		}
+		
+		return pswd;
+	}
+	
+	public String generarCuenta() {
+		
+		String NUMEROS = "0123456789";
+		
+
+		String pswd = "";
+
+		String key = NUMEROS;
+
+		for (int i = 0; i < 10; i++) {
+			pswd += (key.charAt((int) (Math.random() * key.length())));
+		}
+		
+		return pswd;
+	}
 }

@@ -47,4 +47,8 @@ public class CajeroON {
 		pdao.eliminar(cedula);
 
 	}
+	
+	public long contar() {
+		return pdao.contar();
+	}
 }

@@ -115,8 +115,6 @@ public class ClienteMB {
 		String numero = d.getDate() + "" + d.getHours() + d.getSeconds() + System.currentTimeMillis();
 		cuenta.setNumero(numero);
 	}
-
-	
 	
 	public String generarContraseña() {
 		cliente = cON.buscarCorreo(this.correo);
@@ -150,6 +148,5 @@ public class ClienteMB {
 			System.out.println("No existe el correo");
 			return null;
 		}
-
 	}
 }
