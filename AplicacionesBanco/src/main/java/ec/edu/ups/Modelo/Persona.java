@@ -7,6 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+/**
+ *Esta clase Define los atributos de la entidad Persona                  
+ * @version: 27/05/2020
+ * @author: Braulio Castro
+ * 
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Persona {
@@ -76,6 +82,9 @@ public class Persona {
 		this.tipo = tipo;
 	}
 
+	/**
+	 *String de la clace objeto Persona
+	 */
 	@Override
 	public String toString() {
 		return "Persona [codigo=" + codigo + ", cedula=" + cedula + ", nombre=" + nombre + ", direccion=" + direccion

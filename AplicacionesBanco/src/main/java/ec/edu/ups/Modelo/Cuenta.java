@@ -2,16 +2,25 @@ package ec.edu.ups.Modelo;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+/**
+ * Esta clase define los atributos de las Entidad  Cuenta
+ * @author Marcela
+ * @version 27/05/2020
+ * 
+ */
 @Entity
 public class Cuenta {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 	private String numero;
 	private Double saldo;
@@ -19,6 +28,8 @@ public class Cuenta {
 	private List<Transferencia> trasferencias;
 	@OneToOne
 	private Cliente cliente;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Transaccion>transacciones;
 
 	public int getCodigo() {
 		return codigo;
@@ -58,6 +69,14 @@ public class Cuenta {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public List<Transaccion> getTransacciones() {
+		return transacciones;
+	}
+
+	public void setTransacciones(List<Transaccion> transacciones) {
+		this.transacciones = transacciones;
 	}
 
 }

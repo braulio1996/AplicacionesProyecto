@@ -19,8 +19,19 @@ public class JefeCreditoDAO {
 	private EntityManager em;
 
 	/**
+	 * Metodo guarda  los creditos del usuario
 	 * @param credito define el credito del usuario
-	 * @return el objeto credito
+	 * @return 
+	 * @throws Exception
+	 */
+	/**
+	 * @param credito
+	 * @return
+	 * @throws Exception
+	 */
+	/**
+	 * @param credito
+	 * @return
 	 * @throws Exception
 	 */
 	public boolean guardar(JefeCredito credito) throws Exception {
@@ -101,7 +112,7 @@ public class JefeCreditoDAO {
 	 */
 	public JefeCredito buscar(String cedula) throws Exception {
 		try {
-			String jpql = "SELECT a FROM Credito a WHERE a.cedula = :cedula";
+			String jpql = "SELECT a FROM JefeCredito a WHERE a.cedula = :cedula";
 			Query query = em.createQuery(jpql, JefeCredito.class);
 			query.setParameter("cedula", cedula);
 			JefeCredito c = (JefeCredito) query.getSingleResult();

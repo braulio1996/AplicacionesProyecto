@@ -20,6 +20,13 @@ import ec.edu.ups.DAO.AdministradorDAO;
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cliente;
 
+/**
+ * En esta clase se define el Objeto de Negocio  
+ * haciedo uso de AdministradorDAO
+ * @author Marcela
+ * @version 31/05/2020
+ *
+ */
 @Stateless
 public class AdministradorON {
 
@@ -27,21 +34,43 @@ public class AdministradorON {
 	private AdministradorDAO pdao;
 	
 
+	/**
+	 * Resgitra el administrador del metodo registrar de AdministradorON
+	 * @param administrador de tipo Objeto  Adminstrador
+	 * @throws Exception
+	 */
 	public void registrar(Administrador administrador) throws Exception {
 		pdao.registrar(administrador);
 
 	}
 
+	/**
+	 * Actualiza el administrador, este metodO hace uso del AdministradorDAO
+	 * @param administrador Objeto de Tipo Administrador
+	 * @throws Exception
+	 */
 	public void update(Administrador administrador) throws Exception {
 		pdao.update(administrador);
 
 	}
 
+	/**
+	 * Auntentificacion del administrador con los respectivos credenciales 
+	 * @param correo parametro de identificacion de  credenciales del administrador
+	 * @param clave parametro de identificacion de credenciales del usuario
+	 * @return correo  
+	 * @return clave
+	 * @throws Exception
+	 */
 	public Administrador loginC(String correo, String clave) throws Exception {
 		
 		return pdao.login(correo, clave);
 	}
 	
+	/**
+	 * Genera las cotraseñas de usuario de forma aleatroia con numeros, letras mayuculas y minusculas
+	 * @return pswd
+	 */
 	public String generarContraseña() {
 		
 		String NUMEROS = "0123456789";
@@ -59,6 +88,10 @@ public class AdministradorON {
 		return pswd;
 	}
 	
+	/**
+	 * Genera de manera aleatoria los id de cuentas 
+	 * @return pswd
+	 */
 	public String generarCuenta() {
 		
 		String NUMEROS = "0123456789";

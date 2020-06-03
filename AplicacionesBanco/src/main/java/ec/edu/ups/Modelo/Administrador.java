@@ -9,6 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+/**
+ *Esta clase Define los atributos de la entidad Administrador
+ * @version: 27/05/2020
+ * @author: Braulio Castro
+ *
+ */
 @Entity
 public class Administrador extends Persona {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

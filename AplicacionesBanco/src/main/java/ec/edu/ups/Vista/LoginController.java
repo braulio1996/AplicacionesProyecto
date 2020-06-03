@@ -1,6 +1,8 @@
 package ec.edu.ups.Vista;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import ec.edu.ups.Modelo.Acceso;
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
@@ -18,12 +21,18 @@ import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
-
+/**
+ * Esta Clase define los ManagedBean
+ * @version: 02/06/2020
+ * @author Braulio Castro
+ *
+ */
 @ManagedBean(name = "login")
 @SessionScoped
 public class LoginController {
 	private String nombreUsuario;
 	private FacesMessages facesMsg;
+	private Acceso acceso;
 
 	@Inject
 	private AdministradorON adminON;
@@ -47,9 +56,12 @@ public class LoginController {
 	private String correo;
 	private String clave;
 	private Cuenta cuenta;
+	Date myDate = new Date();
+	private List<Acceso>accesos;
 
 	@PostConstruct
 	public void init() {
+		acceso= new Acceso();
 		administrador = new Administrador();
 		cliente = new Cliente();
 		credito = new JefeCredito();
@@ -58,6 +70,7 @@ public class LoginController {
 		clientes = new ArrayList<>();
 		cajeros = new ArrayList<>();
 		creditos = new ArrayList<>();
+		accesos = new ArrayList<>();
 		correo = "";
 		clave = "";
 	}
@@ -154,9 +167,16 @@ public class LoginController {
 		this.nombreUsuario = nombreUsuario;
 	}//Fin metodo setnombreusuario
 
+	/**
+	 * El metodo login valida los credenciales y de acuerdo a los roles 
+	 * ya sea este si cumple correo y clave es igual administrador ingresa a su cuenta usaurio caso contrario 
+	 * se verificara si es una cuanta cajero o jefe de credito, se verificara los accesos fallidos y con exito 
+	 * al momento de ingresar a las cuentas 
+	 * @return
+	 * @throws Exception
+	 */
 	public String login() throws Exception {
 		System.out.println("Entro al metodo");
-		
 		boolean client = false;
 		
 		try {
@@ -197,11 +217,30 @@ public class LoginController {
 					setCliente(cliente);
 
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
+					acceso.setClave(clave);
+					acceso.setEstado("Correcto");
+					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
+					acceso.setHora(new SimpleDateFormat("HH:mm:ss").format(myDate));
+					acceso.setCliente(cliente);
+					accesos.add(acceso);
+					cliente.setAccesos(accesos);
+					clieOn.editar(cliente);
+					acceso = new Acceso();
+					accesos.clear();
 					return "inicioCliente?faces-redirect=true";
 				} else {
 					System.out.println("ERROR. Usuario Incorrecto");
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta",
 							"Su intento ha sido fallido, con contraseña: " + this.clave);
+			
+					acceso.setClave(clave);
+					acceso.setEstado("Fallido");
+					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
+					acceso.setHora(new SimpleDateFormat("HH:mm:ss").format(myDate));
+					acceso.setCliente(cliente);
+					accesos.add(acceso);
+					cliente.setAccesos(accesos);
+					clieOn.editar(cliente);
 				}//Fin if (clieOn.loginC(this.correo, this.clave) != null)
 			}else {
 				System.out.println("Error");
@@ -211,6 +250,9 @@ public class LoginController {
 		return null;
 	}//Fin metodo login
 	
+	/**
+	 * @return
+	 */
 	public String updCliente() {
 		try {
 			clieOn.editar(this.cliente);
