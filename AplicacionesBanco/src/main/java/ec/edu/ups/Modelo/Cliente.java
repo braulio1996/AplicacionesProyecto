@@ -23,9 +23,7 @@ public class Cliente extends Persona {
 	private List<Acceso> accesos;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<SolicitudCredito> solicitudesCredito;
-	
-
-	
+		
 	public String getTelefono() {
 		return telefono;
 	}

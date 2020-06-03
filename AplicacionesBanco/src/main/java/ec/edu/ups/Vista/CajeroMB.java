@@ -36,6 +36,9 @@ public class CajeroMB {
 	private CuentaON cON;
 	
 	@Inject
+	private ClienteON clienteON;
+	
+	@Inject
 	private CajeroON cjON;
 	
 	Date myDate = new Date();
@@ -54,55 +57,37 @@ public class CajeroMB {
 		transacciones = new ArrayList<>();
 	}
 	
-	
-	
 	public Cliente getCliente() {
 		return cliente;
 	}
-
-
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-
-
 	public Cajero getCajero() {
 		return cajero;
 	}
-
-
 
 	public void setCajero(Cajero cajero) {
 		this.cajero = cajero;
 	}
 
-
-
 	public Transaccion getT() {
 		return t;
 	}
-
-
 
 	public void setT(Transaccion t) {
 		this.t = t;
 	}
 
-
-
 	public List<Transaccion> getTransacciones() {
 		return transacciones;
 	}
 
-
-
 	public void setTransacciones(List<Transaccion> transacciones) {
 		this.transacciones = transacciones;
 	}
-
-
 
 	/**
 	 * El metodo retiro  es obtener el numero de cuenta, me develve el saldo
@@ -114,8 +99,8 @@ public class CajeroMB {
 	public String retiro() {
 		try {
 			Cuenta cuenta=cON.buscarCuenta(t.getCuenta().getNumero());
-			Double saldo=cuenta.getSaldo();
-			Double total=saldo-t.getMonto();
+			Double saldo = cuenta.getSaldo();
+			Double total = saldo - t.getMonto();
 			t.setTipo("Retiro");
 			t.setCuenta(cuenta);
 			t.setCajero(cajero);
@@ -128,17 +113,12 @@ public class CajeroMB {
 			cajero =new Cajero();
 			cuenta = new Cuenta();
 			transacciones.clear();
-			
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
 		return null;
 	}
-
 	
 	/**
 	 * Este metodp busca la cuenta en la que se va realiar el deposito,
@@ -162,18 +142,13 @@ public class CajeroMB {
 			cjON.editar(cajero);
 			cajero =new Cajero();
 			cuenta = new Cuenta();
-			transacciones.clear();
-			
-			
+			transacciones.clear();			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
 		return null;
 	}
-	
 	
 	/**
 	 * @param monto cantidad de dinero a depoitar en la cuenta
@@ -181,9 +156,14 @@ public class CajeroMB {
 	 * @return
 	 */
 	public String deposito(Double monto,Cliente cliente) {
-		
 		return null;
-		
 	}
-
+	
+//	public void buscarCliente() throws Exception {
+//		Cliente c = clienteON.buscar(this.cliente.getCedula());
+//		
+//		cliente.setNombre(c.getNombre());
+//		cliente.setCuenta(c.getCuenta());
+//		cliente.setCorreo(c.getCorreo());
+//	}
 }
