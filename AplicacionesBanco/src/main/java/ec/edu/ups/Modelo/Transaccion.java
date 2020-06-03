@@ -7,6 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+/**
+ *Esta clase Define los atributos de la entidad Transaccion                 
+ * @version: 27/05/2020
+ * @author: Braulio Castro
+ * 
+ */
+
 @Entity
 public class Transaccion {
 	@Id
@@ -24,6 +31,7 @@ public class Transaccion {
 	private String depositante;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Cajero cajero;
+	
 	public int getCodigo() {
 		return codigo;
 	}

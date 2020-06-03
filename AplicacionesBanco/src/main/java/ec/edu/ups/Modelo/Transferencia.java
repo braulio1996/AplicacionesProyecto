@@ -5,6 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ *Esta clase Define los atributos de la entidad Transferencia                  
+ * @version: 27/05/2020
+ * @author: Braulio Castro
+ * 
+ */
+
 @Entity
 public class Transferencia {
 	@Id

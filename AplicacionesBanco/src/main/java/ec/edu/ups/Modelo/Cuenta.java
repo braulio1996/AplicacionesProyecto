@@ -11,6 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+/**
+ * Esta clase define los atributos de las Entidad  Cuenta
+ * @author Marcela
+ * @version 27/05/2020
+ * 
+ */
 @Entity
 public class Cuenta {
 	@Id
