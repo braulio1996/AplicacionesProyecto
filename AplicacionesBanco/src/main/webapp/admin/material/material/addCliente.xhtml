@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
 
+	
 <ui:composition template="index2.xhtml">
 	<ui:define name="title">Administrador</ui:define>
 
@@ -22,13 +23,13 @@
 				src="../assets/images/menu/inicio16.png" alt="" /> <span
 				class="hide-menu">Inicio </span>
 		</a></li>
-		<li class="active"><a class="waves-effect waves-dark"
+		<li ><a class="waves-effect waves-dark"
 			href="addUsuario.xhtml" aria-expanded="false"> <img
 				style="padding-right: 10px;"
 				src="../assets/images/menu/ahorros16.png" alt="" /> <span
 				class="hide-menu">Usuarios</span>
 		</a></li>
-		<li><a class="waves-effect waves-dark" href="addCliente.xhtml"
+		<li class="active"><a class="waves-effect waves-dark" href="addCliente.xhtml"
 			aria-expanded="false"> <img style="padding-right: 10px;"
 				src="../assets/images/menu/caprob16.png" alt="" /><span
 				class="hide-menu">Clientes</span>
@@ -40,7 +41,7 @@
 			<div class="col-md-5 col-12 align-self-center">
 				<h3 class="text-themecolor">Dashboard</h3>
 				<ol class="breadcrumb">
-					<a>Usuarios</a>
+					<a>Clientes</a>
 				</ol>
 			</div>
 
@@ -51,28 +52,32 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="card-title mb-0">Lista jefes de crédito</h4>
+						<h4 class="card-title mb-0">Lista clientes</h4>
 					</div>
 					<h:form >
 					
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{administradorMB.listarCredito()}" var="cred">
+							<h:dataTable class="table" value="#{administradorMB.listarCliente()}" var="cliente">
 								<h:column>
 									<f:facet name="header">Cédula</f:facet>
-									#{cred.cedula}
+									#{cliente.cedula}
 								</h:column>
 								<h:column>
 									<f:facet name="header">Nombre</f:facet>
-									#{cred.nombre}
+									#{cliente.nombre}
 								</h:column>
 								<h:column>
 									<f:facet name="header">Dirección</f:facet>
-									#{cred.direccion}
+									#{cliente.direccion}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Teléfono</f:facet>
+									#{cliente.telefono}
 								</h:column>
 								<h:column>
 									<f:facet name="header">Correo</f:facet>
-									#{cred.correo}
+									#{cliente.correo}
 								</h:column>
 								<h:column>
 									<f:facet name="header">Acciones</f:facet>
@@ -91,58 +96,6 @@
 				</div>
 			</div>
 		</div>
-
-
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="card-title mb-0">Lista cajeros</h4>
-					</div>
-					<h:form>
-					
-					<div class="card-body collapse show">
-						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{administradorMB.listarCajero()}" var="caje">
-								<h:column>
-									<f:facet name="header">Cédula</f:facet>
-									#{caje.cedula}
-								</h:column>
-								<h:column>
-									<f:facet name="header">nombre</f:facet>
-									#{caje.nombre}
-								</h:column>
-								<h:column>
-									<f:facet name="header">Dirección</f:facet>
-									#{caje.direccion}
-								</h:column>
-								<h:column>
-									<f:facet name="header">Correo</f:facet>
-									#{caje.correo}
-								</h:column>
-								
-								<h:column>
-									<f:facet name="header">Acciones</f:facet>
-									#{caje.correo}
-								</h:column>
-								<h:column>
-									<f:facet name="header">Acciones</f:facet>
-									<a>
-										<img src="../assets/images/menu/editar.png" />
-									</a>
-									<a style="padding-right: 8px;"></a>
-									<a>
-										<img src="../assets/images/menu/eliminar.png" />
-									</a>
-								</h:column>
-							</h:dataTable>
-						</div>
-					</div>
-					</h:form>
-				</div>
-			</div>
-		</div>
-		
 		
 		<a
 			class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-block btn-sm pull-right ml-2"
@@ -158,7 +111,7 @@
 					<div class="modal-content">
 						<div class="modal-header" style="background-color: #37B0A9;">
 							<h4 class="modal-title" id="myModalLabel" style="color: #000000;">Control
-								Usuarios</h4>
+								Clientes</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">×</button>
 						</div>
@@ -172,7 +125,7 @@
 											style="display: inline-block; width: 100px;">Cédula:
 										</label>
 										<h:inputText style="width: 300px;" id="cedula"
-											value="#{operativo.cedula}"
+											value="#{administradorMB.cliente.cedula}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
 
@@ -181,30 +134,26 @@
 											style="display: inline-block; width: 100px;">Nombre:
 										</label>
 										<h:inputText style="width: 300px;" id="nombre"
-											value="#{operativo.nombre}"
+											value="#{administradorMB.cliente.nombre}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
 									
-									<h:panelGrid columns="2">
-										<label for="rol" style="display: inline-block; width: 100px;">Rol:
-										</label>
-										<h:selectOneMenu value="#{operativo.rol}"
-											styleClass="form-control text-holder-proj custom-select" style="width: 300px;">
-											<f:selectItem itemValue=""
-												itemLabel="Seleccionar" />
-											<f:selectItem itemValue="Cajero"
-												itemLabel="Cajero" />
-											<f:selectItem itemValue="Jefe Credito"
-												itemLabel="Jefe Credito" />
-										</h:selectOneMenu>
-									</h:panelGrid>
 									
 									<h:panelGrid columns="2">
 										<label for="direccion"
 											style="display: inline-block; width: 100px;">Dirección:
 										</label>
 										<h:inputText style="width: 300px;" id="direccion"
-											value="#{operativo.direccion}"
+											value="#{administradorMB.cliente.direccion}"
+											class="form-control text-holder-proj" type="text" required="" />
+									</h:panelGrid>
+									
+									<h:panelGrid columns="2">
+										<label for="telefono"
+											style="display: inline-block; width: 100px;">Teléfono:
+										</label>
+										<h:inputText style="width: 300px;" id="telefono"
+											value="#{administradorMB.cliente.telefono}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
 									
@@ -213,9 +162,10 @@
 											style="display: inline-block; width: 100px;">Correo:
 										</label>
 										<h:inputText style="width: 300px;" id="correo"
-											value="#{operativo.correo}"
+											value="#{administradorMB.cliente.correo}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
+									
 								</div>
 							</div>
 
@@ -224,10 +174,9 @@
 
 							<div class="form-group text-center mt-3">
 								<h:commandButton class="btn" type="submit" value="Aceptar"
-									action="#{operativo.registrarUsuario()}"
+									action="#{administradorMB.guardarCliente()}"
 									style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000; margin-right: 140px;" />
 							</div>
-
 						</div>
 
 					</div>
@@ -238,8 +187,6 @@
 			<!-- /.modal-dialog -->
 		</div>
 	</ui:define>
-
-
 
 </ui:composition>
 </html>

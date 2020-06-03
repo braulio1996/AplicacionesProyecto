@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.JefeCredito;
+import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
@@ -17,6 +18,9 @@ public class OperativoMB {
 	@Inject
 	private CreditoON crediON;
 
+	@Inject
+	private AdministradorON adminON;
+	
 	@Inject
 	private CajeroON cajeON;
 
@@ -129,7 +133,7 @@ public class OperativoMB {
 				cajero.setNombre(this.getNombre());
 				cajero.setDireccion(this.getDireccion());
 				cajero.setCorreo(this.getCorreo());
-				cajero.setClave(this.generarContraseña());
+				cajero.setClave(adminON.generarContraseña());
 				
 				cajeON.guardar(cajero);
 				cOn.enviarCorreo(this.getCorreo(), "Bienvenido al Sistema", "Contraseña: "+ cajero.getClave());
@@ -145,7 +149,7 @@ public class OperativoMB {
 				credito.setNombre(this.getNombre());
 				credito.setDireccion(this.getDireccion());
 				credito.setCorreo(this.getCorreo());
-				credito.setClave(this.generarContraseña());
+				credito.setClave(adminON.generarContraseña());
 				
 				crediON.guardar(credito);
 				cOn.enviarCorreo(this.getCorreo(), "Bienvenido al Sistema", "Contraseña: "+ credito.getClave());
@@ -160,20 +164,5 @@ public class OperativoMB {
 		return "inicioAdmin?faces-redirect=true";
 	}
 
-	public String generarContraseña() {
 	
-			String NUMEROS = "0123456789";
-			String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
-
-			String pswd = "";
-
-			String key = NUMEROS + MAYUSCULAS + MINUSCULAS;
-
-			for (int i = 0; i < 12; i++) {
-				pswd += (key.charAt((int) (Math.random() * key.length())));
-			}
-			
-			return pswd;
-	}
 }

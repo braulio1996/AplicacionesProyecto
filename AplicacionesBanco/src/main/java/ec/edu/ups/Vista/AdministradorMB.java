@@ -146,13 +146,17 @@ public class AdministradorMB {
 	}
 
 	public String guardarCliente() throws Exception {
+		
+		
 		System.out.println(cliente.toString());
 		System.out.println(administrador.getNombre());
 		cliente.setTipo("Cliente");
+		cuenta.setNumero(adminON.generarCuenta());
 		cuenta.setSaldo(0.0);
 		cuenta.setCliente(cliente);
 		clientes.add(cliente);
 		cliente.setCuenta(cuenta);
+		cliente.setClave(adminON.generarContraseña());
 		administrador.setClientes(clientes);
 		adminON.update(administrador);
 		String mensaje="Bienvenid@ a nuestro sistema "+cliente.getNombre()+" \n"+"Su correo es = "+cliente.getCorreo()+" \n"+"Su clave es = "+cliente.getClave()+" \n"+"Su numero de cuenta es = "+cuenta.getNumero()+"\n ";
