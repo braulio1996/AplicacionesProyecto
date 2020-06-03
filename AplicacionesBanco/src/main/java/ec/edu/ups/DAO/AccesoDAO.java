@@ -111,7 +111,7 @@ public class AccesoDAO {
 
 	
 	
-	/**Cuenta numero de acceso de usuarios fallidos o exitoso
+	/**Cuenta numero de acceso de usuarios ya sea fallidos o exitoso
 	 * @return c
 	 */
 	public long contar() {
