@@ -36,8 +36,9 @@ public class CuentaON {
 	private List<Transferencia> trasferencias;
 
 	/**
-	 * @param Cuenta
-	 * @return
+	 * Guarda las cuentas  
+	 * @param Cuenta objeto de tipo Cuenta
+	 * @return 
 	 * @throws Exception
 	 */
 	public boolean guardar(Cuenta cuenta) throws Exception {
@@ -56,10 +57,22 @@ public class CuentaON {
 
 	}
 
+	/**
+	 * Permite editar las cuentas 
+	 * @param cuenta objeto de tipo Objeto
+	 * @throws Exception
+	 */
+	
+	
 	public void editar(Cuenta cuenta) throws Exception {
 		pdao.editarCuenta(cuenta);
 	}
 	
+	/**
+	 * Metodo para buscar la cuenta, con el respectibo numero
+	 * @param numero identificador de la cuenta 
+	 * @return
+	 */
 	public Cuenta buscarCuenta(String numero) {
 		try {
 			return pdao.buscarCuenta(numero);
