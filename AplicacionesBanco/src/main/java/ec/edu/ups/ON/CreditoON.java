@@ -22,7 +22,6 @@ public class CreditoON {
 	}
 
 	public JefeCredito loginC(String correo, String clave) throws Exception {
-
 		return pdao.login(correo, clave);
 	}
 
