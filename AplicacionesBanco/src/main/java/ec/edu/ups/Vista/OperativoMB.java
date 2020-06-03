@@ -19,7 +19,12 @@ import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
-
+/**
+ * Esta Clase define los ManagedBean
+ * @version: 02/06/2020
+ * @author Braulio Castro
+ *
+ */
 @ManagedBean(name = "operativo")
 @ApplicationScoped
 public class OperativoMB {
@@ -183,6 +188,14 @@ public class OperativoMB {
 	}
 
 	
+	/**
+	 * Este metodo  registra los usuarios con los respectivos roles
+	 * ya sea Jede de Credito o Cajero, por la que solo el usuario administrador 
+	 * tiene permiso de asignar el rol, si el admin no asinga el rol, este no podra ser 
+	 * registrado 
+	 * @param administrador objeto de tipo administrador
+	 * @return
+	 */
 	public String registrarUsuario(Administrador administrador) {
 		
 		System.out.println("Rol: " + this.rol);

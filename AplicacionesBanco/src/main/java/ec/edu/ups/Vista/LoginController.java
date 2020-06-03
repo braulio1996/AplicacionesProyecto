@@ -21,7 +21,12 @@ import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
-
+/**
+ * Esta Clase define los ManagedBean
+ * @version: 02/06/2020
+ * @author Braulio Castro
+ *
+ */
 @ManagedBean(name = "login")
 @SessionScoped
 public class LoginController {
@@ -162,6 +167,14 @@ public class LoginController {
 		this.nombreUsuario = nombreUsuario;
 	}//Fin metodo setnombreusuario
 
+	/**
+	 * El metodo login valida los credenciales y de acuerdo a los roles 
+	 * ya sea este si cumple correo y clave es igual administrador ingresa a su cuenta usaurio caso contrario 
+	 * se verificara si es una cuanta cajero o jefe de credito, se verificara los accesos fallidos y con exito 
+	 * al momento de ingresar a las cuentas 
+	 * @return
+	 * @throws Exception
+	 */
 	public String login() throws Exception {
 		System.out.println("Entro al metodo");
 		boolean client = false;
@@ -237,6 +250,9 @@ public class LoginController {
 		return null;
 	}//Fin metodo login
 	
+	/**
+	 * @return
+	 */
 	public String updCliente() {
 		try {
 			clieOn.editar(this.cliente);
