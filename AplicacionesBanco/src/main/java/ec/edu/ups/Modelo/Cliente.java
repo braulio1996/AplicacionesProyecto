@@ -8,7 +8,11 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
+/**
+*Esta clase hija hereda atributos de la clase Persona
+* @version: 27/05/2020
+* @author: Braulio Castro
+*/
 @Entity
 public class Cliente extends Persona {
 	private String telefono;

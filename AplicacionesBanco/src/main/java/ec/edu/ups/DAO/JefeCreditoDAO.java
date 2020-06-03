@@ -19,8 +19,19 @@ public class JefeCreditoDAO {
 	private EntityManager em;
 
 	/**
+	 * Metodo guarda  los creditos del usuario
 	 * @param credito define el credito del usuario
-	 * @return el objeto credito
+	 * @return 
+	 * @throws Exception
+	 */
+	/**
+	 * @param credito
+	 * @return
+	 * @throws Exception
+	 */
+	/**
+	 * @param credito
+	 * @return
 	 * @throws Exception
 	 */
 	public boolean guardar(JefeCredito credito) throws Exception {

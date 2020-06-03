@@ -9,7 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
+/**
+ *Esta clase Define los atributos de la entidad Amortizacion
+ * @version: 02/06/2020
+ * @author: Marcela Zhagui
+ *
+ */
 
 @Entity
 public class Amortizacion {

@@ -7,6 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
+
+/**
+ *Esta clase Define los atributos de la entidad Cajero                  
+ * @version: 27/05/2020
+ * @author: Braulio Castro
+ * 
+ */
 @Entity
 public class Cajero extends Persona {
 

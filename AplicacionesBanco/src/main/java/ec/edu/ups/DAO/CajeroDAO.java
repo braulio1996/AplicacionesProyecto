@@ -12,7 +12,9 @@ import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 
 /**
- * @author Marcela
+ *Esta clase Define los metodos de Objetos de acceso a Datos
+ * @version: 31/05/2020
+ * @author: Braulio Castro
  *
  */
 @Stateless

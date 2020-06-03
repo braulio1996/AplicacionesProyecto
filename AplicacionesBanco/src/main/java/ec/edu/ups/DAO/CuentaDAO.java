@@ -17,6 +17,12 @@ public class CuentaDAO {
 	@PersistenceContext(name = "AplacacionesBancoPersistenceUnit")
 	private EntityManager em;
 
+	/**
+	 * Guarda la cuenta 
+	 * @param cuenta objeto de tipo Cuenta
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean guardar(Cuenta cuenta) throws Exception {
 
 		try {
@@ -30,6 +36,11 @@ public class CuentaDAO {
 	}
 
 
+	/**
+	 * Lista las cuentas de los  usuario
+	 * @return cuentaz restorna el objeto de tipo cuenta
+	 * @throws Exception
+	 */
 	public List<Cuenta> listar() throws Exception {
 
 		try {
@@ -44,6 +55,11 @@ public class CuentaDAO {
 	}
 
 
+	/**
+	 * Modificar los datos de las cuenta respectivas de los usuarios
+	 * @param cuenta onjeto de tipo cuenta
+	 * @throws Exception
+	 */
 	public void editarCuenta(Cuenta cuenta) throws Exception {
 
 		try {
@@ -56,6 +72,12 @@ public class CuentaDAO {
 	}
 
 
+	/**
+	 * Busca la cuenta mediante el numero respectivo 
+	 * @param numero permite identificar la cuenta del usuario 
+	 * @return c Retorna el objeto de tipo cuenta
+	 * @throws Exception
+	 */
 	public Cuenta buscarCuenta(String numero) throws Exception {
 		try {
 			String jpql = "SELECT a FROM Cuenta a WHERE a.numero = :numero";

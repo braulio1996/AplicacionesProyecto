@@ -9,6 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ *Esta clase Define los atributos de la entidad Acceso
+ * @version: 31/05/2020
+ * @author: Braulio Castro
+ *
+ */
 @Entity
 public class Acceso {
 	@Id
