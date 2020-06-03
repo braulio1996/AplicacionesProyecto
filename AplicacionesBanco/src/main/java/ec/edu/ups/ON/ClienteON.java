@@ -37,8 +37,9 @@ public class ClienteON {
 	private List<Transferencia> trasferencias;
 
 	/**
-	 * @param cliente
-	 * @return
+	 * Guarda los  clientesON de la entidad adminstradorDAO
+	 * @param cliente objeto de Tipo Cliente
+	 * @return cliente 
 	 * @throws Exception
 	 */
 	public boolean guardar(Cliente cliente) throws Exception {
