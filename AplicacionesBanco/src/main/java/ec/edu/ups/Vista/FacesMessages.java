@@ -1,5 +1,10 @@
 package ec.edu.ups.Vista;
-
+/**
+ * Esta Clase define los ManagedBean
+ * @version: 01/05/2020
+ * @author Christian 
+ *
+ */
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;

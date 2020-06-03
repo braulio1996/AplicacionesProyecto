@@ -1,5 +1,6 @@
 package ec.edu.ups.Vista;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,12 @@ import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.Transferencia;
 import ec.edu.ups.ON.ClienteON;
 
+/**
+ * Esta Clase define los ManagedBean
+ * @version: 01/05/2020
+ * @author Braulio Castro
+ *
+ */
 @ManagedBean
 @ApplicationScoped
 public class ClienteMB {
@@ -96,6 +103,13 @@ public class ClienteMB {
 		this.monto = monto;
 	}
 
+	/**
+	 * 
+	 * El metodeo transferencai 
+	 * se obtiene el id cliente es decir cuenta origen  y cuenta destino  y el monto 
+	 * en la cual incluira la fecha de transacion 
+	 * @return
+	 */
 	public String trasferencia() {
 		try {
 			t = cON.trasferencia(cliente, cuentaDestino, monto);
@@ -110,12 +124,21 @@ public class ClienteMB {
 		return null;
 	}
 
+	/**
+	 * 	Este metodo genra cuenta del del usuario
+	 */
 	public void generarCuenta() {
 		Date d = new Date();
 		String numero = d.getDate() + "" + d.getHours() + d.getSeconds() + System.currentTimeMillis();
 		cuenta.setNumero(numero);
 	}
 	
+	/**
+	 * Metodo para cambiar la contraseña y/o generar nuevas contraseñas de forma 
+	 * aleatoria antes se tendra que verificar si este usuario esta registrado para poder enviar
+	 * la clave generada al correo personal
+	 * @return
+	 */
 	public String generarContraseña() {
 		cliente = cON.buscarCorreo(this.correo);
 		if (cliente != null) {

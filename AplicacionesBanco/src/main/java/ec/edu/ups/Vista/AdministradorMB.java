@@ -1,5 +1,10 @@
 package ec.edu.ups.Vista;
-
+/**
+ * Esta Clase define los ManagedBean
+ * @version: 01/05/2020
+ * @author Braulio Castro
+ *
+ */
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -145,6 +150,14 @@ public class AdministradorMB {
 		this.cajero = cajero;
 	}
 
+	/**
+	 * Este metodo 	Guarda los clientes en la cual una vez creada la cuenta 
+	 * enviara un mensaje al correo con la que se registro con una clave de acceso
+	 * @param administrador
+	 * @return
+	 * @throws Exception
+	 */
+	
 	public String guardarCliente(Administrador administrador) throws Exception {
 		
 		
@@ -167,6 +180,14 @@ public class AdministradorMB {
 
 	}
 
+	/**
+	 * Este metodo guarda usuarios que sean de tipo Cajero 
+	 * que sera solo autorizado por el administrador para poder 
+	 * dar los roles respectivos, asi mismo se podra modificar por el 
+	 * adminitrador
+	 * @return listaCajeros
+	 * @throws Exception
+	 */
 	public String guardarCajero() throws Exception {
 		cajero.setTipo("Cajero");
 		cajeros.add(cajero);
@@ -179,6 +200,11 @@ public class AdministradorMB {
 
 	}
 
+	/**
+	 * Este metodo guarda los creditos  aprobados por el cajero 
+	 * @return listaCreditos muestra lista de creditos existentes
+	 * @throws Exception
+	 */
 	public String guardarCredito() throws Exception {
 		credito.setTipo("Credito");
 		creditos.add(credito);
@@ -202,6 +228,10 @@ public class AdministradorMB {
 		return cajeON.listar();
 	}
 	
+	/**Editar   cliente mediante la cedula 
+	 * @param cedula
+	 * @return
+	 */
 	public String editarAjaxCliente(String cedula) {
 		System.out.println(cedula);
 		try {
@@ -212,6 +242,10 @@ public class AdministradorMB {
 		return null;
 	}
 
+	/**Edita los datos del cajero mediante la cedula 
+	 * @param cedula
+	 * @return
+	 */
 	public String editarAjaxCajero(String cedula) {
 		System.out.println(cedula);
 		try {
@@ -221,7 +255,12 @@ public class AdministradorMB {
 		}
 		return null;
 	}
-
+ 
+	/**Edita las cuenta de creditos del usuario, en la cual se busca mediante el identificativo de la
+	 * cedula 
+	 * @param cedula id  del usuario para editar el credito
+	 * @return
+	 */
 	public String editarAjaxCredito(String cedula) {
 		System.out.println(cedula);
 		try {
@@ -232,33 +271,65 @@ public class AdministradorMB {
 		return null;
 	}
 
+	/**Metodo editar cliente 
+	 * @return
+	 * @throws Exception
+	 */
 	public String ediatrCliente() throws Exception {
 		clieOn.editar(cliente);
 		return null;
 	}
 
+	/*
+	 * Metodo  editaar cajero
+	 * @return
+	 * @throws Exception
+	 */
+	
 	public String ediatrCajero() throws Exception {
 		cajeON.editar(cajero);
 		return null;
 	}
 
+	/**
+	 * Editar credito  
+	 * @return
+	 * @throws Exception
+	 */
 	public String ediatrCredito() throws Exception {
 		crediON.editar(credito);
 		return null;
 	}
 
+	/**
+	 * @param cedula
+	 * @return
+	 * @throws Exception
+	 */
 	public String eliminarCliente(String cedula) throws Exception {
 		System.out.println("=======================  " + cedula);
 		clieOn.eliminar(cedula);
 		return null;
 	}
 
+
+	/**
+	 * Metodo Eliminar credito  mediante a cedula del usaurio 
+	 * @param cedula
+	 * @return
+	 * @throws Exception
+	 */
 	public String eliminarCredito(String cedula) throws Exception {
 		System.out.println("=======================  " + cedula);
 		crediON.eliminar(cedula);
 		return null;
 	}
 
+	/**
+	 * este metodo eliminar  cajero  son pruebas para verifcar su funcionamiento sin interfaz web
+	 * @return
+	 * @throws Exception
+	 */
 	public String eliminarCajero(String cedula) throws Exception {
 		System.out.println("=======================  " + cedula);
 		cajeON.eliminar(cedula);
