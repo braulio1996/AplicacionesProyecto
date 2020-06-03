@@ -17,6 +17,14 @@ public class ClienteDAO {
 	@PersistenceContext(name = "AplacacionesBancoPersistenceUnit")
 	private EntityManager em;
 
+	
+	
+	/**
+	 * Guarda los datos del cliente tipo persona
+	 * @param cliente define el objeto  cliente
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean guardar(Cliente cliente) throws Exception {
 
 		try {
@@ -29,6 +37,13 @@ public class ClienteDAO {
 		return true;
 	}
 
+	/**
+	 * Valida las credenciales para inicio de sesion  del Cliente tipo Persona
+	 * @param correo identifica las credenciales del cliente para el acceso
+	 * @param clave identifica las credencailes del cliente para el acceso
+	 * @return clie retorna el objeto Cliente que cumpla con las credenciales de identificacion
+	 * @throws Exception
+	 */
 	public Cliente login(String correo, String clave) throws Exception {
 		try {
 			String jpql = "SELECT a FROM Cliente a WHERE a.correo = :correo and a.clave=:clave";
@@ -45,6 +60,11 @@ public class ClienteDAO {
 
 	}
 
+	/**
+	 * Lista las personas Clientes
+	 * @return clientes retorna el objeto de tipo Cliente
+	 * @throws Exception
+	 */
 	public List<Cliente> listar() throws Exception {
 
 		try {
@@ -58,6 +78,11 @@ public class ClienteDAO {
 
 	}
 
+	/**
+	 * Edita las datos de Cliente tipo persona
+	 * @param cliente  define el objeto cliente
+	 * @throws Exception
+	 */
 	public void editar(Cliente cliente) throws Exception {
 
 		try {
@@ -69,6 +94,11 @@ public class ClienteDAO {
 		}
 	}
 
+	/**
+	 * Metodo permite modificar las cuentas del cliente
+	 * @param cuenta objeto de tipo cuenta
+	 * @throws Exception
+	 */
 	public void editarCuenta(Cuenta cuenta) throws Exception {
 
 		try {
@@ -80,6 +110,12 @@ public class ClienteDAO {
 		}
 	}
 
+	/**
+	 * Permite buscar al Cliente mediante la cedula
+	 * @param cedula  identificacion del usuario
+	 * @return clie retorna el objeto cliente
+	 * @throws Exception
+	 */
 	public Cliente buscar(String cedula) throws Exception {
 		try {
 			String jpql = "SELECT a FROM Cliente a WHERE a.cedula = :cedula";
@@ -93,15 +129,31 @@ public class ClienteDAO {
 		}
 	}
 
+	/**
+	 * Permite leer los datos del cliente mediante el id
+	 * @param id clave unica del cliente
+	 * @return id 
+	 */
 	public Cliente read(int id) {
 		return em.find(Cliente.class, id);
 	}
 
+	/**
+	 * Elimina  al cliente mediante la cedual de identificacion
+	 * @param cedula 
+	 * @throws Exception
+	 */
 	public void eliminar(String cedula) throws Exception {
 		Cliente c = buscar(cedula);
 		em.remove(c);
 	}
 
+	/**
+	 * Metodo par abuscar Cuenta del Cliente 
+	 * @param numero identifiacdor para buscar las respectivas cuentas
+	 * @return c retorno el objeto Cuenta
+	 * @throws Exception
+	 */
 	public Cuenta buscarCuenta(String numero) throws Exception {
 		try {
 			String jpql = "SELECT a FROM Cuenta a WHERE a.numero = :numero";
@@ -115,6 +167,11 @@ public class ClienteDAO {
 		}
 	}
 	
+	/**
+	 * Metodo Busca al Cliente mediante el correo
+	 * @param correo  identificador del cliente con el uso de las credenciales
+	 * @return c retorna un objeto de tipo cliente
+	 */
 	public Cliente buscarCorreo(String correo) {
 		String jpql = "SELECT c FROM Cliente c WHERE c.correo = :correo";
 		Query query = em.createQuery(jpql, Cliente.class);

@@ -15,6 +15,10 @@ import ec.edu.ups.Modelo.Cliente;
  * @author Braulio
  *
  */
+/**
+ * @author Marcela
+ *
+ */
 @Stateless
 public class AccesoDAO {
 	@PersistenceContext(name = "AplacacionesBancoPersistenceUnit")
@@ -107,6 +111,9 @@ public class AccesoDAO {
 
 	
 	
+	/**Cuenta numero de acceso de usuarios fallidos o exitoso
+	 * @return c
+	 */
 	public long contar() {
 		String jpql = "SELECT COUNT(a) FROM Acceso a";
 		Query query = em.createQuery(jpql, Long.class);		
