@@ -51,36 +51,97 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="card-title mb-0">Resumen cuenta de ahorros</h4>
+						<h4 class="card-title mb-0">Usuarios Cajeros</h4>
 					</div>
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<table class="table product-overview">
-								<thead>
-									<tr>
-										<th>Cédula</th>
-										<th>Nombre</th>
-										<th>Dirección</th>
-										<th>Rol</th>
-										<th>Correo</th>
-										<th style="text-align: center;">Acción</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>123456789</td>
-										<td>Christian Pillaga</td>
-										<td>Miraflores</td>
-										<td>Cajero</td>
-										<td>cpillaga@gmail.com</td>
-										<td align="center"><a href=""> <img
-												src="../assets/images/menu/editar.png" />
-										</a> <a style="padding-right: 5px;"></a> <a href=""> <img
-												src="../assets/images/menu/eliminar.png" />
-										</a></td>
-									</tr>
-								</tbody>
-							</table>
+							<h:dataTable value="#{operativo.listarCajero()}" var="p" class="table product-overview">
+							<h:column>
+								<f:facet name="header">Cedula</f:facet>
+								#{p.cedula}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Nombre</f:facet>
+								#{p.nombre}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Direccion</f:facet>
+								#{p.direccion}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Correo</f:facet>
+								#{p.correo}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Clave</f:facet>
+								#{p.clave}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Tipo</f:facet>
+								#{p.tipo}
+								</h:column>
+								<h:column>
+								    <f:facet name="header">Acciones</f:facet>
+									<h:commandButton action="#{operativo.editarAjaxCajero(p.cedula)}" value="Editar"> 
+									<f:ajax render="editar" />
+									</h:commandButton>
+									<a></a>
+									<h:commandButton action="#{operativo.eliminarCajero(p.cedula)}" value="Eliminar"> 
+									<f:ajax render="table" />
+									</h:commandButton>
+									</h:column>
+		
+							</h:dataTable>
+							<div class="card-header">
+						<h4 class="card-title mb-0">Usuarios Jefes de Credito</h4>
+					</div>
+					<h:dataTable value="#{operativo.listarCredito()}" var="p" class="table product-overview">
+								
+								<h:column>
+								<f:facet name="header">Cedula</f:facet>
+								#{p.cedula}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Nombre</f:facet>
+								#{p.nombre}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Direccion</f:facet>
+								#{p.direccion}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Correo</f:facet>
+								#{p.correo}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Clave</f:facet>
+								#{p.clave}
+								</h:column>
+								
+								<h:column>
+								<f:facet name="header">Tipo</f:facet>
+								#{p.tipo}
+								</h:column>
+								<h:column>
+								    <f:facet name="header">Acciones</f:facet>
+									<h:commandButton action="#{operativo.editarAjaxCredito(p.cedula)}" value="Editar"> 
+									<f:ajax render="editar" />
+									</h:commandButton>
+									<a></a>
+									<h:commandButton action="#{operativo.eliminarCredito(p.cedula)}" value="Eliminar"> 
+									<f:ajax render="table" />
+									</h:commandButton>
+									</h:column>
+								</h:dataTable>
 						</div>
 					</div>
 				</div>
@@ -131,11 +192,11 @@
 									<h:panelGrid columns="2">
 										<label for="rol" style="display: inline-block; width: 100px;">Rol:
 										</label>
-										<select class="form-control" value="#{operativo.rol}" style="width: 260px;" id="rol">
-											<option>Seleccionar</option>
-											<option>Cajero</option>
-											<option>Jefe Crédito</option>
-										</select>
+										<h:selectOneMenu value="#{operativo.rol}" class="form-control" style="width: 260px;" id="rol">
+	
+											<f:selectItem itemValue="Cajero"/>
+											<f:selectItem itemValue="Jefe Credito"/>
+										</h:selectOneMenu>
 									</h:panelGrid>
 									
 									<h:panelGrid columns="2">
@@ -172,7 +233,7 @@
 
 							<div class="form-group text-center mt-3">
 								<h:commandButton class="btn" type="submit" value="Aceptar"
-									action="#{operativo.registrarUsuario()}"
+									action="#{operativo.registrarUsuario(login.administrador)}"
 									style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000; margin-right: 140px;" />
 							</div>
 

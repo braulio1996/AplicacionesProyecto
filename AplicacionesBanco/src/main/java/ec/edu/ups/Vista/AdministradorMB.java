@@ -40,8 +40,8 @@ public class AdministradorMB {
 	private JefeCredito credito;
 	private Cajero cajero;
 	private List<Cajero> cajeros;
-	private List<Cliente> clientes;
 	private List<JefeCredito> creditos;
+	private List<Cliente> clientes;
 	private String correo;
 	private String clave;
 	private Cuenta cuenta;
