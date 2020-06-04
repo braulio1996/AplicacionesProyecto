@@ -24,8 +24,6 @@ public class Cuenta {
 	private int codigo;
 	private String numero;
 	private Double saldo;
-	@OneToMany
-	private List<Transferencia> trasferencias;
 	@OneToOne
 	private Cliente cliente;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -54,15 +52,6 @@ public class Cuenta {
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
-
-	public List<Transferencia> getTrasferencias() {
-		return trasferencias;
-	}
-
-	public void setTrasferencias(List<Transferencia> trasferencias) {
-		this.trasferencias = trasferencias;
-	}
-
 	public Cliente getCliente() {
 		return cliente;
 	}
