@@ -66,9 +66,8 @@ public class ClienteDAO {
 	 * @throws Exception
 	 */
 	public List<Cliente> listar() throws Exception {
-
 		try {
-			String jpql = "SELECT l FROM Cliente l";
+			String jpql = "SELECT l FROM Cliente l WHERE l.cedula >= 0";
 			Query query = em.createQuery(jpql, Cliente.class);
 			List<Cliente> clientez = query.getResultList();
 			return clientez;
@@ -84,13 +83,11 @@ public class ClienteDAO {
 	 * @throws Exception
 	 */
 	public void editar(Cliente cliente) throws Exception {
-
 		try {
 			em.merge(cliente);
 
 		} catch (Exception e) {
 			throw new Exception(e.toString());
-
 		}
 	}
 

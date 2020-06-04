@@ -66,7 +66,6 @@ public class ClienteON {
 	 */
 	public List<Cliente> listar() throws Exception {
 		return pdao.listar();
-
 	}
 
 	public void editar(Cliente cliente) throws Exception {
