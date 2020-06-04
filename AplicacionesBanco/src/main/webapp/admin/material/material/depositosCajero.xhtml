@@ -46,53 +46,60 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card card-outline-info">
+				<h:form class="form-material">
 					<div class="card-body">
-						<h:form class="form-material">
+						
 							<div class="form-group">
 								<div class="col-lg-12">
 									<div class="row">
 										<h:panelGrid columns="2" class="col-lg-5">
 											<label for="cedula" style="width: 90px; text-align: right;"> Cédula: </label>
-											<h:inputText id="cedula" type="text" class="form-control" />
+											<h:inputText value="#{cajeroMB.cedula}" id="cedula" type="text" class="form-control" /> 
+											<h:commandButton action="#{cajeroMB.buscarCliente()}" image="../assets/images/menu/buscar.png"/>
+											
 										</h:panelGrid>
+										</div>
+										
+										<div class="row">
 										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
 										<h:panelGrid columns="2" class="col-lg-5">
 											<label for="nombre" style="width: 90px; text-align: right;"> Nombre: </label>
-											<h:inputText id="nombre" type="text" class="form-control" />
+											<h:inputText value="#{cajeroMB.cliente.nombre}" id="nombre" type="text" class="form-control" />
 										</h:panelGrid>
 									</div>
+
 									<div class="row">
 										<h:panelGrid columns="2" class="col-lg-5">
 											<label for="correo" style="width: 90px; text-align: right;"> Correo: </label>
-											<h:inputText id="correo" type="text" class="form-control" />
+											<h:inputText value="#{cajeroMB.cliente.correo}" id="correo" type="text" class="form-control" />
 										</h:panelGrid>
 										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
 										<h:panelGrid columns="2" class="col-lg-5">
 											<label for="cuenta" style="width: 90px; text-align: right;"> # Cuenta: </label>
-											<h:inputText id="cuenta" type="text" class="form-control" />
+											<h:inputText value="#{cajeroMB.cuenta.numero}" id="cuenta" type="text" class="form-control" />
 										</h:panelGrid>
 									</div>
 									
 									<div class="row">
 										<h:panelGrid columns="2" class="col-lg-5">
 											<label for="cantidad" style="width: 90px; text-align: right;"> Cantidad: </label>
-											<h:inputText id="cantidad" type="text" class="form-control" />
+											<h:inputText value="#{cajeroMB.t.monto}" id="cantidad" type="text" class="form-control" />
 										</h:panelGrid>
 										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
 										<h:panelGrid columns="2" class="col-lg-5">
 											<label for="depositante" style="width: 90px; text-align: right;"> Depositante: </label>
-											<h:inputText id="depositante" type="text" class="form-control" />
+											<h:inputText value="#{cajeroMB.t.depositante}" id="depositante" type="text" class="form-control" />
 										</h:panelGrid>
 									</div>
 								</div>
 							</div>
-						</h:form>
+						
 					</div>
 					
 					<div class="card-footer" align="center">	
-						<h:commandButton class="btn btn-project" value="Aceptar" />
+						<h:commandButton action="#{cajeroMB.depositosC(login.cajero)}" Class="btn btn-project" value="Aceptar" />
 					</div>
-					
+					</h:form>
 				</div>
 			</div>
 		</div>

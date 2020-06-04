@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.BusyConversationException;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -44,9 +45,11 @@ public class CajeroMB {
 	Date myDate = new Date();
 
 	private Cliente cliente;
+	private Cuenta cuenta;
 	private Cajero cajero;
 	private Transaccion t;
 	private List<Transaccion> transacciones;
+	private String cedula;
 	
 	
 	@PostConstruct
@@ -55,8 +58,18 @@ public class CajeroMB {
 		cajero =new Cajero();
 		t = new Transaccion();
 		transacciones = new ArrayList<>();
+		cedula="";
+		cuenta=new Cuenta();
 	}
 	
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -85,6 +98,14 @@ public class CajeroMB {
 		return transacciones;
 	}
 
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
 	public void setTransacciones(List<Transaccion> transacciones) {
 		this.transacciones = transacciones;
 	}
@@ -96,74 +117,84 @@ public class CajeroMB {
 	 * editar: Permite modificar los datos en el caso de estar erroneo
 	 * @return
 	 */
-	public String retiro() {
+	public String retiro(Cajero cajero) {
 		try {
-			Cuenta cuenta=cON.buscarCuenta(t.getCuenta().getNumero());
-			Double saldo = cuenta.getSaldo();
+			cliente=clienteON.buscar(cedula);
+			Double saldo = cliente.getCuenta().getSaldo();
 			Double total = saldo - t.getMonto();
+			Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
+			cuenta.setSaldo(total);
+			cliente.setCuenta(cuenta);
 			t.setTipo("Retiro");
-			t.setCuenta(cuenta);
+			t.setCliente(cliente);
 			t.setCajero(cajero);
 			t.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
 			transacciones.add(t);
-			cuenta.setTransacciones(transacciones);
+			cliente.setTransacciones(transacciones);
 			cajero.setTransacciones(transacciones);
-			cON.editar(cuenta);
+			clienteON.editar(cliente);
 			cjON.editar(cajero);
+			t=new Transaccion();
+			cuenta=new Cuenta();
 			cajero =new Cajero();
-			cuenta = new Cuenta();
+			cliente=new Cliente();
 			transacciones.clear();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return "inicioCajero?faces-redirect=true";
 	}
-	
 	/**
-	 * Este metodp busca la cuenta en la que se va realiar el deposito,
+	 * Este metodp busca la cliente donde regresa una cuenta en la que se va realiar el deposito,
 	 * en la cual se sumara el monto anterior con el monto  actual, y la fecha que se realiza
 	 * la transacion 
 	 * @return
 	 */
-	public String deposito() {
+	public String buscarCliente() {
 		try {
-			Cuenta cuenta=cON.buscarCuenta(t.getCuenta().getNumero());
-			Double saldo=cuenta.getSaldo();
-			Double total=saldo+t.getMonto();
+			System.out.println(this.cedula);
+			cliente=clienteON.buscar(this.cedula);
+			cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
+			System.out.println(cliente);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String depositosC(Cajero cajero) {
+		System.out.println("Metodo Cajero");
+		try {
+			Double saldo = cliente.getCuenta().getSaldo();
+			Double total = saldo + t.getMonto();
+			
+			cuenta.setSaldo(total);
+			cliente.setCuenta(cuenta);
 			t.setTipo("Retiro");
-			t.setCuenta(cuenta);
+			t.setCliente(cliente);
 			t.setCajero(cajero);
 			t.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
+			t.setDepositante(t.getDepositante());
 			transacciones.add(t);
-			cuenta.setTransacciones(transacciones);
+			cliente.setTransacciones(transacciones);
 			cajero.setTransacciones(transacciones);
-			cON.editar(cuenta);
+			clienteON.editar(cliente);
 			cjON.editar(cajero);
+			t=new Transaccion();
+			cuenta=new Cuenta();
 			cajero =new Cajero();
-			cuenta = new Cuenta();
-			transacciones.clear();			
+			cliente=new Cliente();
+			transacciones.clear();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return "inicioCajero?faces-redirect=true";
+	
 	}
 	
-	/**
-	 * @param monto cantidad de dinero a depoitar en la cuenta
-	 * @param cliente objeto de tipo cliente
-	 * @return
-	 */
-	public String deposito(Double monto,Cliente cliente) {
-		return null;
-	}
-	
-//	public void buscarCliente() throws Exception {
-//		Cliente c = clienteON.buscar(this.cliente.getCedula());
-//		
-//		cliente.setNombre(c.getNombre());
-//		cliente.setCuenta(c.getCuenta());
-//		cliente.setCorreo(c.getCorreo());
-//	}
+
+
 }
