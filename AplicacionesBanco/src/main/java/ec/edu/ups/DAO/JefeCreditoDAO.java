@@ -24,16 +24,6 @@ public class JefeCreditoDAO {
 	 * @return 
 	 * @throws Exception
 	 */
-	/**
-	 * @param credito
-	 * @return
-	 * @throws Exception
-	 */
-	/**
-	 * @param credito
-	 * @return
-	 * @throws Exception
-	 */
 	public boolean guardar(JefeCredito credito) throws Exception {
 		try {
 			em.persist(credito);
