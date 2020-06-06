@@ -85,7 +85,6 @@ public class ClienteDAO {
 	public void editar(Cliente cliente) throws Exception {
 		try {
 			em.merge(cliente);
-
 		} catch (Exception e) {
 			throw new Exception(e.toString());
 		}
@@ -176,6 +175,15 @@ public class ClienteDAO {
 		Cliente c = (Cliente) query.getSingleResult();
 		
 		return c;
+	}
+	
+	public long contar() {
+		String jpql = "SELECT COUNT(c) FROM Cliente c WHERE c.cedula >=0";
+		Query query = em.createQuery(jpql, Long.class);		
+		
+		long c = (Long) query.getSingleResult();
+		return c;
+
 	}
 	
 }

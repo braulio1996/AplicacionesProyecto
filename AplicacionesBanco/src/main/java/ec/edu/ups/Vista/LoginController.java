@@ -255,6 +255,7 @@ public class LoginController {
 	 */
 	public String updCliente() {
 		try {
+			this.cliente.setCodigo(cliente.getCodigo());
 			clieOn.editar(this.cliente);
 			return null;
 		} catch (Exception e) {

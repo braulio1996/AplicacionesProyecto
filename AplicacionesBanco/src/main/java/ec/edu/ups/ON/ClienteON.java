@@ -173,7 +173,7 @@ public class ClienteON {
         }
 	}
 	
-	public void controlAccesos() {
-		
+	public long contar() {
+		return pdao.contar();
 	}
 }

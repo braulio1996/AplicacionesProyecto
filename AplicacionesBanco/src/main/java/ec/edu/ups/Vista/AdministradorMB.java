@@ -19,6 +19,7 @@ import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.JefeCredito;
+import ec.edu.ups.Modelo.Transaccion;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
@@ -216,8 +217,17 @@ public class AdministradorMB {
 		return "listaCreditos";
 	}
 
+	
+	public List<Transaccion> listarTransaccion(String cuenta){
+		return null;
+	}
+	
 	public List<Cliente> listarCliente() throws Exception {
-		return clieOn.listar();
+		List<Cliente> c = clieOn.listar();
+		
+		c.get(0).getCuenta().getCodigo();
+		
+		return c;
 	}
 
 	public List<JefeCredito> listarCredito() throws Exception {
@@ -338,6 +348,12 @@ public class AdministradorMB {
 	
 	public long contarUser() {
 		long c = cajeON.contar() + crediON.contar();
+		
+		return c;
+	}
+	
+	public long contarClient() {
+		long c = clieOn.contar();
 		
 		return c;
 	}

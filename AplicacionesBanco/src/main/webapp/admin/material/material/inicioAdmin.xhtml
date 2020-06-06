@@ -9,10 +9,17 @@
 
 	<ui:define name="profile">
 		<div class="profile-text">
-			<a>
+			<a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown"
+				role="button" aria-haspopup="true" aria-expanded="true">
 				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.administrador.getNombre()}</p>
 				<p style="font-size: 8px; color: #474646;">Administrador</p>
 			</a>
+			
+			<div class="dropdown-menu animated flipInY">
+
+				<a href="login-2.xhtml" class="dropdown-item"><i
+					class="fa fa-power-off"></i> Cerrar Sesión</a>
+			</div>
 		</div>
 	</ui:define>
 
@@ -76,7 +83,7 @@
 							
 							<div class="ml-2 align-self-center">
 								<h1>CLIENTES</h1>
-								<h3 class="mb-0 font-weight-light">$3249</h3>
+								<h3>#{administradorMB.contarClient()}</h3>
 								
 							</div>
 						</div>
@@ -99,7 +106,7 @@
 							
 							<div class="ml-2 align-self-center">
 								<h1>CRÉDITOS</h1>
-								<h3 class="mb-0 font-weight-light">$3249</h3>
+								<h3 class="mb-0 font-weight-light">0</h3>
 								
 							</div>
 						</div>
@@ -116,7 +123,7 @@
 							
 							<div class="ml-2 align-self-center">
 								<h1>SOLICITUDES</h1>
-								<h3 class="mb-0 font-weight-light">$3249</h3>
+								<h3 class="mb-0 font-weight-light">0</h3>
 								
 							</div>
 						</div>
