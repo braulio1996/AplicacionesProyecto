@@ -46,18 +46,18 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card card-outline-info">
+					<h:form class="form-material">
 					<div class="card-body">
-						<h:form class="form-material">
+						
 							<div class="form-group">
 								<div class="col-lg-12">
 									<div class="row">
 										<h:panelGrid columns="3" class="col-lg-5">
 											<label for="cedula" style="width: 90px; text-align: right;">
 												Cédula: </label>
-											<h:inputText id="cedula" type="text" class="form-control" value="#{cajeroMB.cliente.cedula}" />
-											<h:commandButton image="../assets/images/menu/buscar.png">
-												<f:ajax execute="#{cajeroMB.buscarCliente()}" event="click" render="frmCliente" />
-											</h:commandButton>
+											<h:inputText id="cedula" type="text" class="form-control" value="#{cajeroMB.cedula}" />
+											<h:commandButton image="../assets/images/menu/buscar.png" action="#{cajeroMB.buscarCliente()}"/>
+										
 										</h:panelGrid>
 										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
 										<h:panelGrid columns="2" class="col-lg-5">
@@ -84,19 +84,19 @@
 											<h:panelGrid columns="2" class="col-lg-5">
 												<label for="cuenta" style="width: 90px; text-align: right;">
 													# Cuenta: </label>
-												<h:inputText id="cuenta" type="text" class="form-control" value="#{cajeroMB.cliente.cuenta.numero}" />
+												<h:inputText id="cuenta" type="text" class="form-control" value="#{cajeroMB.cuenta.numero}" />
 											</h:panelGrid>
 										</div>
 									</h:form>
 								</div>
 							</div>
-						</h:form>
+						
 					</div>
 
 					<div class="card-footer" align="center">
-						<h:commandButton class="btn btn-project" value="Aceptar" />
+						<h:commandButton class="#{cajeroMB.retiro(login.cajero)}" value="Aceptar" />
 					</div>
-
+					</h:form>
 				</div>
 			</div>
 		</div>

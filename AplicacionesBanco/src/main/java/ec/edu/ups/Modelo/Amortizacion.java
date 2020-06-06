@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *Esta clase Define los atributos de la entidad Amortizacion
@@ -21,31 +22,40 @@ public class Amortizacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idAmortizacion;
-    @ManyToOne(optional = false)
-    private Cuenta idCuenta;
-    private int periodo;
+    private int codigo;
+   
+    private int numeroPago;
+    private Date fechaVencimiento;
+    private double capital;
     private double interes;
-    private double capitalSin;
-    private double couta;
-    private double deuda;
-    private String estado;
-    private Date fecha;
-
-    
-    
-    
-	public int getIdAmortizacion() {
-		return idAmortizacion;
+    private double pago;
+    private double pagoCapital;
+    private double saldo;
+    @OneToOne
+    private CreditoAprobado credito;
+	public int getCodigo() {
+		return codigo;
 	}
-	public void setIdAmortizacion(int idAmortizacion) {
-		this.idAmortizacion = idAmortizacion;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
-	public int getPeriodo() {
-		return periodo;
+	public int getNumeroPago() {
+		return numeroPago;
 	}
-	public void setPeriodo(int periodo) {
-		this.periodo = periodo;
+	public void setNumeroPago(int numeroPago) {
+		this.numeroPago = numeroPago;
+	}
+	public Date getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+	public void setFechaVencimiento(Date fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
+	public double getCapital() {
+		return capital;
+	}
+	public void setCapital(double capital) {
+		this.capital = capital;
 	}
 	public double getInteres() {
 		return interes;
@@ -53,50 +63,32 @@ public class Amortizacion {
 	public void setInteres(double interes) {
 		this.interes = interes;
 	}
-	public double getCapitalSin() {
-		return capitalSin;
+	public double getPago() {
+		return pago;
 	}
-	public void setCapitalSin(double capitalSin) {
-		this.capitalSin = capitalSin;
+	public void setPago(double pago) {
+		this.pago = pago;
 	}
-	public double getCouta() {
-		return couta;
+	public double getPagoCapital() {
+		return pagoCapital;
 	}
-	public void setCouta(double couta) {
-		this.couta = couta;
+	public void setPagoCapital(double pagoCapital) {
+		this.pagoCapital = pagoCapital;
 	}
-	public double getDeuda() {
-		return deuda;
+	public double getSaldo() {
+		return saldo;
 	}
-	public void setDeuda(double deuda) {
-		this.deuda = deuda;
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
 	}
-	public String getEstado() {
-		return estado;
+	public CreditoAprobado getCredito() {
+		return credito;
 	}
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setCredito(CreditoAprobado credito) {
+		this.credito = credito;
 	}
-	public Date getFecha() {
-		return fecha;
-	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-	public Cuenta getIdCuenta() {
-		return idCuenta;
-	}
-	public void setIdCuenta(Cuenta idCuenta) {
-		this.idCuenta = idCuenta;
-	}
-	@Override
-	public String toString() {
-		return "Amortizacion [idAmortizacion=" + idAmortizacion + ", periodo=" + periodo + ", interes=" + interes
-				+ ", capitalSin=" + capitalSin + ", couta=" + couta + ", deuda=" + deuda + ", estado=" + estado
-				+ ", fecha=" + fecha + ", idCuenta=" + idCuenta + "]";
-	}
+
     
     
-    
-    
+  
 }

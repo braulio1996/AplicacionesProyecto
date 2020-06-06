@@ -31,9 +31,11 @@ public class CajeroON {
 	}
 
 	/**
-	 * @param correo
-	 * @param clave
-	 * @return
+	 * Autentificacion de Cajero mediante las credenciales corro y clave
+	 * @param correo identificador del cajero
+	 * @param clave identificadro de clave de cajero
+	 * @return correo
+	 * @return clave
 	 * @throws Exception
 	 */
 	public Cajero loginC(String correo, String clave) throws Exception {
@@ -41,7 +43,7 @@ public class CajeroON {
 		return pdao.login(correo, clave);
 	}
 
-	/**
+	/**Lista los cajeros
 	 * @return
 	 * @throws Exception
 	 */
@@ -50,11 +52,9 @@ public class CajeroON {
 
 	}
 
+
 	/**
-	 * @param cajero
-	 * @throws Exception
-	 */
-	/**
+	 * Modificar cajero 
 	 * @param cajero
 	 * @throws Exception
 	 */

@@ -21,17 +21,12 @@ public class Transaccion {
 	private int codigo;
 	private String tipo;
 	private String fecha;
-	private Double monto;
-	private String cedula;
-	private String nombre;
-	private String correo;
-	
+	private Double monto;	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Cuenta cuenta;
+	private Cliente cliente;
 	private String depositante;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Cajero cajero;
-	
 	public int getCodigo() {
 		return codigo;
 	}
@@ -56,11 +51,11 @@ public class Transaccion {
 	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
-	public Cuenta getCuenta() {
-		return cuenta;
+	public Cliente getCliente() {
+		return cliente;
 	}
-	public void setCuenta(Cuenta cuenta) {
-		this.cuenta = cuenta;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	public String getDepositante() {
 		return depositante;
@@ -74,24 +69,8 @@ public class Transaccion {
 	public void setCajero(Cajero cajero) {
 		this.cajero = cajero;
 	}
-	public String getCedula() {
-		return cedula;
-	}
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getCorreo() {
-		return correo;
-	}
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
+	
+
 		
 
 	
