@@ -46,11 +46,15 @@ public class ClienteDAO {
 	 */
 	public Cliente login(String correo, String clave) throws Exception {
 		try {
-			String jpql = "SELECT a FROM Cliente a WHERE a.correo = :correo and a.clave=:clave";
+			String jpql = "SELECT a FROM Cliente a JOIN FETCH a.transacciones WHERE a.correo = :correo and a.clave=:clave";
 			Query query = em.createQuery(jpql, Cliente.class);
 			query.setParameter("correo", correo);
 			query.setParameter("clave", clave);
 			Cliente clie = (Cliente) query.getSingleResult();
+			for(int i =0; i < clie.getTransacciones().size(); i++) {
+				clie.getTransacciones().get(i).getCodigo();	
+			}
+			System.out.println("+++++++++++++++++++  "+clie.toString());
 			return clie;
 
 		} catch (Exception e) {
@@ -59,6 +63,7 @@ public class ClienteDAO {
 		return null;
 
 	}
+	
 
 	/**
 	 * Lista las personas Clientes
@@ -122,6 +127,7 @@ public class ClienteDAO {
 			Query query = em.createQuery(jpql, Cliente.class);
 			query.setParameter("cedula", cedula);
 			Cliente clie = (Cliente) query.getSingleResult();
+			
 			return clie;
 
 		} catch (Exception e) {

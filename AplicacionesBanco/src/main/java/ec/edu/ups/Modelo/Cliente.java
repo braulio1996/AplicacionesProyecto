@@ -23,7 +23,7 @@ public class Cliente extends Persona {
 	private List<Acceso> accesos;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<SolicitudCredito> solicitudesCredito;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Transaccion>transacciones;
 		
 	public String getTelefono() {
@@ -65,4 +65,10 @@ public class Cliente extends Persona {
 	public void setTransacciones(List<Transaccion> transacciones) {
 		this.transacciones = transacciones;
 	}
+
+	@Override
+	public String toString() {
+		return "Cliente [telefono=" + telefono + "," + ", transacciones=" + transacciones + "]";
+	}
+	
 }

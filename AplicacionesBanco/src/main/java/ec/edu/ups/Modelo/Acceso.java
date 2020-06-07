@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Acceso {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue
 	private int codigo;
 	private String estado;
 	private String clave;

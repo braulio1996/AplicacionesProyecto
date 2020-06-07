@@ -126,6 +126,7 @@ public class CajeroMB {
 			cuenta.setSaldo(total);
 			cliente.setCuenta(cuenta);
 			t.setTipo("Retiro");
+			t.setDepositante("NaN");
 			t.setCliente(cliente);
 			t.setCajero(cajero);
 			t.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
@@ -133,17 +134,18 @@ public class CajeroMB {
 			cliente.setTransacciones(transacciones);
 			cajero.setTransacciones(transacciones);
 			clienteON.editar(cliente);
-			cjON.editar(cajero);
+			//cjON.editar(cajero);
 			t=new Transaccion();
 			cuenta=new Cuenta();
 			cajero =new Cajero();
 			cliente=new Cliente();
+			cedula="";
 			transacciones.clear();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return "inicioCajero?faces-redirect=true";
+		return null;
 	}
 	/**
 	 * Este metodp busca la cliente donde regresa una cuenta en la que se va realiar el deposito,
@@ -172,7 +174,7 @@ public class CajeroMB {
 			
 			cuenta.setSaldo(total);
 			cliente.setCuenta(cuenta);
-			t.setTipo("Retiro");
+			t.setTipo("Deposito");
 			t.setCliente(cliente);
 			t.setCajero(cajero);
 			t.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
@@ -181,12 +183,14 @@ public class CajeroMB {
 			cliente.setTransacciones(transacciones);
 			cajero.setTransacciones(transacciones);
 			clienteON.editar(cliente);
-			cjON.editar(cajero);
+			//cjON.editar(cajero);
 			t=new Transaccion();
+			cedula="";
 			cuenta=new Cuenta();
 			cajero =new Cajero();
 			cliente=new Cliente();
 			transacciones.clear();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

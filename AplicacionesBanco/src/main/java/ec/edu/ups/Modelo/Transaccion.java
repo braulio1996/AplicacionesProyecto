@@ -4,7 +4,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 /**
@@ -17,15 +16,15 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Transaccion {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue
 	private int codigo;
 	private String tipo;
 	private String fecha;
 	private Double monto;	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Cliente cliente;
 	private String depositante;
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne
+	private Cliente cliente;
+	@ManyToOne
 	private Cajero cajero;
 	public int getCodigo() {
 		return codigo;
@@ -69,10 +68,10 @@ public class Transaccion {
 	public void setCajero(Cajero cajero) {
 		this.cajero = cajero;
 	}
+	@Override
+	public String toString() {
+		return "Transaccion [codigo=" + codigo + ", tipo=" + tipo + ", fecha=" + fecha + ", monto=" + monto
+				+ ", depositante=" + depositante + "]";
+	}
 	
-
-		
-
-	
-
 }
