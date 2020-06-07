@@ -21,22 +21,23 @@ public class CajeroON {
 	private CajeroDAO pdao;
 
 	/**
-	 * @param cajero
-	 * @return
-	 * @throws Exception
+	 * Guarda el objeto de tipo cajero
+	 * @param cajero  objeto cajero que se va guardar
+	 * @return cajero  si este existiera
+	 * @throws Exception control de Excepciones
 	 */
 	public boolean guardar(Cajero cajero) throws Exception {
 		return pdao.guardar(cajero);
 
 	}
-
+	
 	/**
 	 * Autentificacion de Cajero mediante las credenciales corro y clave
-	 * @param correo identificador del cajero
+	 * @param correo identificador del cajero 
 	 * @param clave identificadro de clave de cajero
-	 * @return correo
-	 * @return clave
-	 * @throws Exception
+	 * @return correo renorna los valores si estas existen
+	 * @return clave renorna los valores si estas existen
+	 * @throws Exception control de Excepciones
 	 */
 	public Cajero loginC(String correo, String clave) throws Exception {
 
@@ -44,8 +45,8 @@ public class CajeroON {
 	}
 
 	/**Lista los cajeros
-	 * @return
-	 * @throws Exception
+	 * @return lista los datos del objeto Cajero
+	 * @throws Exception control de Excepciones
 	 */
 	public List<Cajero> listar() throws Exception {
 		return pdao.listar();
@@ -54,9 +55,9 @@ public class CajeroON {
 
 
 	/**
-	 * Modificar cajero 
-	 * @param cajero
-	 * @throws Exception
+	 * Modificar el objeto de tipo Cajero
+	 * @param cajero el objeto que se va actualizar
+	 * @throws Exception  control de Excepciones
 	 */
 	public void editar(Cajero cajero) throws Exception {
 		pdao.editar(cajero);
@@ -64,27 +65,27 @@ public class CajeroON {
 
 	/**
 	 * Busca los usuarios mediante la cedula de identificacion
-	 * @param cedula
-	 * @return
-	 * @throws Exception
+	 * @param cedula identificador unico del objeto de tipo Persona
+	 * @return cedula retorna el valor si esta existe
+	 * @throws Exception control de Excepciones
 	 */
 	public Cajero buscar(String cedula) throws Exception {
 		return pdao.buscar(cedula);
 	}
 
 	/**
-	 * Permite leer los datos al buscar al usuario mendiante la ceduula
-	 * @param cedula
-	 * @return cedula del DAO Administrador
+	 * Permite leer los datos al buscar al usuario mendiante la cedula
+	 * @param cedula identificador del objeto Cajero de Tipo Persona
+	 * @return cedula retorna el valor si esta exite 
 	 */
 	public Cajero read(String cedula) {
 		return pdao.read(cedula);
 	}
 
 	/**
-	 * Elimina al usaurio mediante la cedula
-	 * @param cedula
-	 * @throws Exception
+	 * Elimina al usuario mediante la cedula 
+	 * @param cedula identificador que elimina el objeto Cajero
+	 * @throws Exception control de Excepciones
 	 */
 	public void eliminar(String cedula) throws Exception {
 		pdao.eliminar(cedula);
