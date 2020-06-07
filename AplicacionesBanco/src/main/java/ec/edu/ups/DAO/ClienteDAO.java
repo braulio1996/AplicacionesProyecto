@@ -47,7 +47,7 @@ public class ClienteDAO {
 	 */
 	public Cliente login(String correo, String clave) throws Exception {
 		try {
-			String jpql = "SELECT a FROM Cliente a JOIN FETCH a.transacciones WHERE a.correo = :correo and a.clave=:clave";
+			String jpql = "SELECT a FROM Cliente a WHERE a.correo = :correo and a.clave=:clave";
 			Query query = em.createQuery(jpql, Cliente.class);
 			query.setParameter("correo", correo);
 			query.setParameter("clave", clave);
@@ -118,20 +118,20 @@ public class ClienteDAO {
 	 * @return clie retorna el objeto cliente
 	 * @throws Exception
 	 */
-	public Cliente buscar(String correo) throws Exception {
+	public Cliente buscar(String cedula) throws Exception {
 		try {
-			String jpql = "SELECT a FROM Cliente a WHERE a.correo = :correo";
+			String jpql = "SELECT a FROM Cliente a WHERE a.cedula = :cedula";
 			Query query = em.createQuery(jpql, Cliente.class);
-			query.setParameter("correo", correo);
+			query.setParameter("cedula", cedula);
 			Cliente clie = (Cliente) query.getSingleResult();
 			
 			return clie;
-
 		} catch (Exception e) {
 			throw new Exception(e.toString());
 		}
 	}
-
+	
+	
 	/**
 	 * Permite leer los datos del cliente mediante el id
 	 * @param id clave unica del cliente
@@ -190,7 +190,6 @@ public class ClienteDAO {
 		
 		long c = (Long) query.getSingleResult();
 		return c;
-
 	}
 	
 	public Cuenta cuentaCliente(Cliente cliente) {
@@ -202,11 +201,10 @@ public class ClienteDAO {
 		return c;
 	}
 	
-	public List<Transaccion> transCliente(Cliente cliente) {
-		String jpql = "SELECT t FROM transaccion t WHERE t.cliente = :cliente";
+	public List<Transaccion> transCliente(int c) throws Exception {
+		String jpql = "SELECT t FROM Transaccion t WHERE t.cliente = "+c;
 		Query query = em.createQuery(jpql, Transaccion.class);
-		query.setParameter("cliente", cliente);
+		
 		return query.getResultList();
 	}
-	
 }

@@ -216,7 +216,7 @@ public class LoginController {
 					cliente = clieOn.loginC(getCorreo(), getClave());
 					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 					setCliente(cliente);
-
+					
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
 					acceso.setClave(clave);
 					acceso.setEstado("Correcto");
@@ -226,23 +226,26 @@ public class LoginController {
 					accesos.add(acceso);
 					cliente.setAccesos(accesos);
 					clieOn.editar(cliente);
+					
 					acceso = new Acceso();
 					accesos.clear();
+					
 					return "inicioCliente?faces-redirect=true";
 				} else {
 					System.out.println("ERROR. Usuario Incorrecto");
+					
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta",
 							"Su intento ha sido fallido, con contraseña: " + this.clave);
 			
-					
 					acceso.setClave(clave);
 					acceso.setEstado("Fallido");
-					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
+					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
 					acceso.setHora(new SimpleDateFormat("HH:mm:ss").format(myDate));
 					acceso.setCliente(cliente);
 					accesos.add(acceso);
 					cliente.setAccesos(accesos);
 					clieOn.editar(cliente);
+					
 					acceso = new Acceso();
 					accesos.clear();
 				}//Fin if (clieOn.loginC(this.correo, this.clave) != null)
@@ -269,14 +272,7 @@ public class LoginController {
 		}//Fin try-catch
 	}//Fin metodo updCliente
 	
-	public Cliente buscarCliente() throws Exception {
-		Cliente c = clieOn.buscar(this.getCorreo()); 
-		
-		return c;
-	}
-	
-	
-	public List<Transaccion> listarTrans() {
-		return clieOn.transCli(this.cliente);
+	public List<Transaccion> listarTrans() throws Exception {
+		return clieOn.transCli(this.cliente.getCodigo());
 	}
 }//Fin ControladorLogin

@@ -3,7 +3,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
-
 <ui:composition template="index2.xhtml">
 	<ui:define name="title">Cliente</ui:define>
 
@@ -17,24 +16,22 @@
 			</a>
 
 			<div class="dropdown-menu animated flipInY">
-				<a href="miPerfil.xhtml" class="dropdown-item"> 
-					<img src="../assets/images/menu/perfil16.png" alt="" /> 
-					Mi Perfil
-				</a>
-				
-				<a href="login-2.xhtml" class="dropdown-item"><i
+				<a href="miPerfil.xhtml" class="dropdown-item"> <img
+					src="../assets/images/menu/perfil16.png" alt="" /> Mi Perfil
+				</a> <a href="login-2.xhtml" class="dropdown-item"><i
 					class="fa fa-power-off"></i> Cerrar Sesión</a>
 			</div>
 		</div>
 	</ui:define>
 
 	<ui:define name="sidebar">
-		<li class="active"><a class="waves-effect waves-dark" href="inicioCliente.xhtml"
-			aria-expanded="false"> <img style="padding-right: 10px;"
+		<li class="active"><a class="waves-effect waves-dark"
+			href="inicioCliente.xhtml" aria-expanded="false"> <img
+				style="padding-right: 10px;"
 				src="../assets/images/menu/inicio16.png" alt="" /> <span
 				class="hide-menu">Inicio </span>
 		</a></li>
-		<li><a class="waves-effect waves-dark" href="#"
+		<li><a class="waves-effect waves-dark" href="cuentaAhorro.xhtml"
 			aria-expanded="false"> <img style="padding-right: 10px;"
 				src="../assets/images/menu/ahorros16.png" alt="" /> <span
 				class="hide-menu">Cuenta de Ahorros</span>
@@ -73,7 +70,6 @@
 					<a>Inicio</a>
 				</ol>
 			</div>
-
 		</div>
 	</ui:define>
 
@@ -86,55 +82,35 @@
 					</div>
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-<<<<<<< HEAD
-							<h:dataTable class="table" value="#{login.buscarCliente()}" var="c">
+							<h:dataTable class="table" value="#{login.cliente}" var="cc">
 								<h:column>
-									<f:facet name="header">#Cuenta</f:facet>
-									#{c.cuenta.numero}
-								</h:column>
-								<h:column>
-									<f:facet name="header">Propietario</f:facet>
-									#{c.nombre}
-=======
-						<h:dataTable class="table" value="#{login.cliente}" var="cc">
-						<h:column>
 									<f:facet name="header">Propietario</f:facet>
 									#{login.cliente.nombre}
->>>>>>> master
 								</h:column>
 								<h:column>
-								<f:facet name="header">Transacciones</f:facet>
-							<h:dataTable class="table" value="#{login.cliente.transacciones}" var="c">
-								
-								
-								<h:column>
-									<f:facet name="header">Fecha-Transacción</f:facet>
-<<<<<<< HEAD
-									#{c.transacciones.fecha}
-								</h:column>
-								<h:column>
-									<f:facet name="header">Valor</f:facet>
-=======
-									#{c.fecha}
-								</h:column>
-								<h:column>
-									<f:facet name="header">Movimiento</f:facet>
+									<h:dataTable class="table"
+										value="#{login.cliente.transacciones}" var="c">
+
+										<h:column>
+											<f:facet name="header">Fecha-Transacción</f:facet>
+											#{c.fecha}
+										</h:column>
+										<h:column>
+											<f:facet name="header">Movimiento</f:facet>
 									#{c.tipo}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Monto movimiento</f:facet>
->>>>>>> master
+										<h:column>
+											<f:facet name="header">Monto movimiento</f:facet>
 									#{c.monto}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Acciones</f:facet>
-								
-										<img src="../assets/images/menu/ver16.png" />
-							
+										<h:column>
+											<f:facet name="header">Acciones</f:facet>
+											<a href="cuentaAhorro.xhtml"> <img
+												src="../assets/images/menu/ver16.png" />
+											</a>
+										</h:column>
+									</h:dataTable>
 								</h:column>
-							</h:dataTable>
-							</h:column>
-
 							</h:dataTable>
 						</div>
 					</div>

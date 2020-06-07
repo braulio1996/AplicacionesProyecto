@@ -118,7 +118,7 @@ public class ClienteON {
 	}
 	
 
-	public List<Transaccion> transCli(Cliente c) {
+	public List<Transaccion> transCli(int c) throws Exception {
 		return pdao.transCliente(c);
 	}
 	

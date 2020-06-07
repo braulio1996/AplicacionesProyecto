@@ -21,14 +21,12 @@ public class Transaccion {
 	private String tipo;
 	private String fecha;
 	private Double monto;	
-<<<<<<< HEAD
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Cliente cliente;
-=======
->>>>>>> master
+
 	private String depositante;
-	@ManyToOne
-	private Cliente cliente;
+
 	@ManyToOne
 	private Cajero cajero;
 	public int getCodigo() {
