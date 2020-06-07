@@ -16,6 +16,7 @@ import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.JefeCredito;
+import ec.edu.ups.Modelo.Transaccion;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
@@ -233,6 +234,7 @@ public class LoginController {
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta",
 							"Su intento ha sido fallido, con contraseña: " + this.clave);
 			
+					
 					acceso.setClave(clave);
 					acceso.setEstado("Fallido");
 					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
@@ -264,4 +266,15 @@ public class LoginController {
 			return null;
 		}//Fin try-catch
 	}//Fin metodo updCliente
+	
+	public Cliente buscarCliente() throws Exception {
+		Cliente c = clieOn.buscar(this.getCorreo()); 
+		
+		return c;
+	}
+	
+	
+	public List<Transaccion> listarTrans() {
+		return clieOn.transCli(this.cliente);
+	}
 }//Fin ControladorLogin

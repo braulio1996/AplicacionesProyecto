@@ -86,7 +86,7 @@
 					</div>
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{administradorMB.listarCliente()}" var="c">
+							<h:dataTable class="table" value="#{login.buscarCliente()}" var="c">
 								<h:column>
 									<f:facet name="header">#Cuenta</f:facet>
 									#{c.cuenta.numero}
@@ -97,17 +97,16 @@
 								</h:column>
 								<h:column>
 									<f:facet name="header">Fecha-Transacción</f:facet>
-									
+									#{c.transacciones.fecha}
 								</h:column>
 								<h:column>
 									<f:facet name="header">Valor</f:facet>
-									
+									#{c.monto}
 								</h:column>
 								<h:column>
 									<f:facet name="header">Acciones</f:facet>
 								
-										<img
-												src="../assets/images/menu/ver16.png" />
+										<img src="../assets/images/menu/ver16.png" />
 							
 								</h:column>
 							</h:dataTable>

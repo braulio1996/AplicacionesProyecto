@@ -19,6 +19,7 @@ import ec.edu.ups.DAO.ClienteDAO;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
+import ec.edu.ups.Modelo.Transaccion;
 import ec.edu.ups.Modelo.Transferencia;
 
 /**
@@ -79,8 +80,8 @@ public class ClienteON {
 	 * @throws Exception control de excepciones
 	 */
 
-	public Cliente buscar(String cedula) throws Exception {
-		return pdao.buscar(cedula);
+	public Cliente buscar(String correo) throws Exception {
+		return pdao.buscar(correo);
 	}
 
 	/** Metod que busca un cliente por su codigo o Id
@@ -111,6 +112,16 @@ public class ClienteON {
 		return pdao.buscarCuenta(numero);
 	}
 
+	
+	public Cuenta cuentaCli(Cliente c) {
+		return pdao.cuentaCliente(c);
+	}
+	
+
+	public List<Transaccion> transCli(Cliente c) {
+		return pdao.transCliente(c);
+	}
+	
 	/**
 	 * Este metodo realiza una trasferencia 
 	 * @param cliente de session oh duenio de la cuenta

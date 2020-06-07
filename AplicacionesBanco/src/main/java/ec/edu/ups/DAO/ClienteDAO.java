@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
+import ec.edu.ups.Modelo.Transaccion;
 
 @Stateless
 public class ClienteDAO {
@@ -54,7 +55,7 @@ public class ClienteDAO {
 			return clie;
 
 		} catch (Exception e) {
-			// throw new Exception(e.toString());
+			e.printStackTrace();
 		}
 		return null;
 
@@ -112,11 +113,11 @@ public class ClienteDAO {
 	 * @return clie retorna el objeto cliente
 	 * @throws Exception
 	 */
-	public Cliente buscar(String cedula) throws Exception {
+	public Cliente buscar(String correo) throws Exception {
 		try {
-			String jpql = "SELECT a FROM Cliente a WHERE a.cedula = :cedula";
+			String jpql = "SELECT a FROM Cliente a WHERE a.correo = :correo";
 			Query query = em.createQuery(jpql, Cliente.class);
-			query.setParameter("cedula", cedula);
+			query.setParameter("correo", correo);
 			Cliente clie = (Cliente) query.getSingleResult();
 			return clie;
 
@@ -184,6 +185,22 @@ public class ClienteDAO {
 		long c = (Long) query.getSingleResult();
 		return c;
 
+	}
+	
+	public Cuenta cuentaCliente(Cliente cliente) {
+		String jpql = "SELECT  FROM Cuenta c WHERE c.cliente = :cliente";
+		Query query = em.createQuery(jpql, Cliente.class);
+		query.setParameter("cliente", cliente);
+		Cuenta c = (Cuenta) query.getSingleResult();
+		
+		return c;
+	}
+	
+	public List<Transaccion> transCliente(Cliente cliente) {
+		String jpql = "SELECT t FROM transaccion t WHERE t.cliente = :cliente";
+		Query query = em.createQuery(jpql, Transaccion.class);
+		query.setParameter("cliente", cliente);
+		return query.getResultList();
 	}
 	
 }

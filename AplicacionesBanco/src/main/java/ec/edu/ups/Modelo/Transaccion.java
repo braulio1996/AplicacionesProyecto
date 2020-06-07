@@ -22,7 +22,7 @@ public class Transaccion {
 	private String tipo;
 	private String fecha;
 	private Double monto;	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Cliente cliente;
 	private String depositante;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

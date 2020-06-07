@@ -223,13 +223,9 @@ public class AdministradorMB {
 	}
 	
 	public List<Cliente> listarCliente() throws Exception {
-		List<Cliente> c = clieOn.listar();
-		
-		c.get(0).getCuenta().getCodigo();
-		
-		return c;
+		return clieOn.listar();
 	}
-
+	
 	public List<JefeCredito> listarCredito() throws Exception {
 		return crediON.listar();
 	}
