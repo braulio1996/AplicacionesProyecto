@@ -237,12 +237,14 @@ public class LoginController {
 					
 					acceso.setClave(clave);
 					acceso.setEstado("Fallido");
-					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
+					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
 					acceso.setHora(new SimpleDateFormat("HH:mm:ss").format(myDate));
 					acceso.setCliente(cliente);
 					accesos.add(acceso);
 					cliente.setAccesos(accesos);
 					clieOn.editar(cliente);
+					acceso = new Acceso();
+					accesos.clear();
 				}//Fin if (clieOn.loginC(this.correo, this.clave) != null)
 			}else {
 				System.out.println("Error");

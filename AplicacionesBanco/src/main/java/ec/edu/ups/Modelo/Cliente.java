@@ -65,4 +65,10 @@ public class Cliente extends Persona {
 	public void setTransacciones(List<Transaccion> transacciones) {
 		this.transacciones = transacciones;
 	}
+
+	@Override
+	public String toString() {
+		return "Cliente [telefono=" + telefono + "," + ", transacciones=" + transacciones + "]";
+	}
+	
 }

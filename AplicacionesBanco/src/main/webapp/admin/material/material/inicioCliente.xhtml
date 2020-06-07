@@ -86,6 +86,7 @@
 					</div>
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
+<<<<<<< HEAD
 							<h:dataTable class="table" value="#{login.buscarCliente()}" var="c">
 								<h:column>
 									<f:facet name="header">#Cuenta</f:facet>
@@ -94,13 +95,35 @@
 								<h:column>
 									<f:facet name="header">Propietario</f:facet>
 									#{c.nombre}
+=======
+						<h:dataTable class="table" value="#{login.cliente}" var="cc">
+						<h:column>
+									<f:facet name="header">Propietario</f:facet>
+									#{login.cliente.nombre}
+>>>>>>> master
 								</h:column>
 								<h:column>
+								<f:facet name="header">Transacciones</f:facet>
+							<h:dataTable class="table" value="#{login.cliente.transacciones}" var="c">
+								
+								
+								<h:column>
 									<f:facet name="header">Fecha-Transacción</f:facet>
+<<<<<<< HEAD
 									#{c.transacciones.fecha}
 								</h:column>
 								<h:column>
 									<f:facet name="header">Valor</f:facet>
+=======
+									#{c.fecha}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Movimiento</f:facet>
+									#{c.tipo}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Monto movimiento</f:facet>
+>>>>>>> master
 									#{c.monto}
 								</h:column>
 								<h:column>
@@ -109,6 +132,9 @@
 										<img src="../assets/images/menu/ver16.png" />
 							
 								</h:column>
+							</h:dataTable>
+							</h:column>
+
 							</h:dataTable>
 						</div>
 					</div>
