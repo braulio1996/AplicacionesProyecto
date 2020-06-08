@@ -1,7 +1,13 @@
 package ec.edu.ups.ON;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -118,8 +124,8 @@ public class ClienteON {
 	}
 	
 
-	public List<Transaccion> transCli(int c) throws Exception {
-		return pdao.transCliente(c);
+	public List<Transaccion> transCli(int c, LocalDate fechaDesde, LocalDate fechaHasta, String tipo) throws Exception {
+		return pdao.transCliente(c, fechaDesde, fechaHasta, tipo);
 	}
 	
 	/**
@@ -187,4 +193,10 @@ public class ClienteON {
 	public long contar() {
 		return pdao.contar();
 	}
+	
+	public LocalDate restarFecha(LocalDate hasta) {
+			return hasta.minusDays(30);
+	}
+	
+	
 }

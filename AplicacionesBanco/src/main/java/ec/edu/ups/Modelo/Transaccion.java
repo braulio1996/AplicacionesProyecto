@@ -1,5 +1,8 @@
 package ec.edu.ups.Modelo;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +22,7 @@ public class Transaccion {
 	@GeneratedValue
 	private int codigo;
 	private String tipo;
-	private String fecha;
+	private Date fecha;
 	private Double monto;	
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -41,10 +44,10 @@ public class Transaccion {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 	public Double getMonto() {

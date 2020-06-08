@@ -129,7 +129,7 @@ public class CajeroMB {
 			t.setDepositante("NaN");
 			t.setCliente(cliente);
 			t.setCajero(cajero);
-			t.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
+			t.setFecha(myDate);
 			transacciones.add(t);
 			cliente.setTransacciones(transacciones);
 			cajero.setTransacciones(transacciones);
@@ -177,7 +177,7 @@ public class CajeroMB {
 			t.setTipo("Deposito");
 			t.setCliente(cliente);
 			t.setCajero(cajero);
-			t.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
+			t.setFecha(myDate);
 			t.setDepositante(t.getDepositante());
 			transacciones.add(t);
 			cliente.setTransacciones(transacciones);
@@ -196,7 +196,6 @@ public class CajeroMB {
 		}
 		
 		return "inicioCajero?faces-redirect=true";
-	
 	}
 	
 

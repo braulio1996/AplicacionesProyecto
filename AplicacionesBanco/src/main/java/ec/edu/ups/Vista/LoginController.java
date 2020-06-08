@@ -1,8 +1,15 @@
 package ec.edu.ups.Vista;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -59,6 +66,34 @@ public class LoginController {
 	private Cuenta cuenta;
 	Date myDate = new Date();
 	private List<Acceso>accesos;
+	private LocalDate fechaDesde;
+	private LocalDate fechaHasta;
+	private String buscarTipo;
+	
+	
+	public LocalDate getFechaDesde() {
+		return fechaDesde;
+	}
+
+	public void setFechaDesde(LocalDate fechaDesde) {
+		this.fechaDesde = fechaDesde;
+	}
+
+	public LocalDate getFechaHasta() {
+		return fechaHasta;
+	}
+
+	public void setFechaHasta(LocalDate fechaHasta) {
+		this.fechaHasta = fechaHasta;
+	}
+
+	public String getBuscarTipo() {
+		return buscarTipo;
+	}
+
+	public void setBuscarTipo(String buscarTipo) {
+		this.buscarTipo = buscarTipo;
+	}
 
 	@PostConstruct
 	public void init() {
@@ -74,6 +109,7 @@ public class LoginController {
 		accesos = new ArrayList<>();
 		correo = "";
 		clave = "";
+		
 	}
 
 	public Cuenta getCuenta() {
@@ -230,6 +266,9 @@ public class LoginController {
 					acceso = new Acceso();
 					accesos.clear();
 					
+					this.fechaHasta = LocalDate.now();
+					this.fechaDesde = clieOn.restarFecha(this.fechaHasta);
+					this.buscarTipo = "Todos";
 					return "inicioCliente?faces-redirect=true";
 				} else {
 					System.out.println("ERROR. Usuario Incorrecto");
@@ -273,6 +312,17 @@ public class LoginController {
 	}//Fin metodo updCliente
 	
 	public List<Transaccion> listarTrans() throws Exception {
-		return clieOn.transCli(this.cliente.getCodigo());
+		return clieOn.transCli(this.cliente.getCodigo(), fechaDesde, fechaHasta, buscarTipo);
+	}
+	
+	public String changedDate(LocalDate desde, LocalDate hasta, String tipo) throws Exception {
+		this.fechaDesde = desde;
+		this.fechaHasta = hasta;
+		this.buscarTipo = tipo;
+		
+		
+		System.out.println(fechaDesde + "-" + fechaHasta + " Tipo: "+tipo);
+		
+		return null;
 	}
 }//Fin ControladorLogin

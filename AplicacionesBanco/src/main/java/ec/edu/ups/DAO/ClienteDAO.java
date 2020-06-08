@@ -1,6 +1,9 @@
 package ec.edu.ups.DAO;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -201,10 +204,26 @@ public class ClienteDAO {
 		return c;
 	}
 	
-	public List<Transaccion> transCliente(int c) throws Exception {
-		String jpql = "SELECT t FROM Transaccion t WHERE t.cliente = "+c;
-		Query query = em.createQuery(jpql, Transaccion.class);
+	public List<Transaccion> transCliente(int c, LocalDate fechaDesde, LocalDate fechaHasta, String tipo) throws Exception {
+	
+		if (tipo.equals("Todos")) {
+			String jpql = "SELECT t "
+						+ "FROM Transaccion t "
+						+ "WHERE t.cliente = "+ c + "AND "
+							  + "t.fecha BETWEEN Date('" + fechaDesde + "') AND Date('" + fechaHasta + "')";
+			Query query = em.createQuery(jpql, Transaccion.class);
+			
+			return query.getResultList();
+		}else {
+			String jpql = "SELECT t "
+					+ "FROM Transaccion t "
+					+ "WHERE t.cliente = "+ c + "AND "
+						  + "t.fecha BETWEEN '" + fechaDesde + "' AND '" + fechaHasta + "' AND "
+						  + "t.tipo LIKE '"+tipo+"'";
+			
+			Query query = em.createQuery(jpql, Transaccion.class);
 		
-		return query.getResultList();
+			return query.getResultList();
+		}
 	}
 }
