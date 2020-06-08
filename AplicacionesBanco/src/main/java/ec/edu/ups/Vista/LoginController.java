@@ -312,16 +312,12 @@ public class LoginController {
 	}//Fin metodo updCliente
 	
 	public List<Transaccion> listarTrans() throws Exception {
+		System.out.println(fechaDesde + "-" + fechaHasta + " Tipo: "+buscarTipo);
 		return clieOn.transCli(this.cliente.getCodigo(), fechaDesde, fechaHasta, buscarTipo);
 	}
 	
-	public String changedDate(LocalDate desde, LocalDate hasta, String tipo) throws Exception {
-		this.fechaDesde = desde;
-		this.fechaHasta = hasta;
-		this.buscarTipo = tipo;
-		
-		
-		System.out.println(fechaDesde + "-" + fechaHasta + " Tipo: "+tipo);
+	public String changedDate() throws Exception {
+		System.out.println(fechaDesde + "-" + fechaHasta + " Tipo: "+buscarTipo);
 		
 		return null;
 	}

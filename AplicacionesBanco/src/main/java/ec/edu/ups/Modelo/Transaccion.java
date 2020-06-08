@@ -22,7 +22,7 @@ public class Transaccion {
 	@GeneratedValue
 	private int codigo;
 	private String tipo;
-	private Date fecha;
+	private LocalDate fecha;
 	private Double monto;	
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -44,10 +44,10 @@ public class Transaccion {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 	public Double getMonto() {

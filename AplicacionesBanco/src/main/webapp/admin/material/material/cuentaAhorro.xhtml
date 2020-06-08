@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 
 <ui:composition template="index2.xhtml">
 	<ui:define name="title">Cliente</ui:define>
@@ -82,20 +82,20 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
-					<div class="card-header col-md-12">
-						<h4 class="card-title mb-0 col-md-4">Movimientos cuenta de
-							ahorros</h4>
 
-						<h:form class="form-material row">
+					<div class="card-header col-md-12">
+						
+							<h4 class="card-title mb-0 col-md-4">Movimientos cuenta de
+								ahorros</h4>
+
+<h:form class="form-material row">
 							<div class="form-group col-md-4 ">
 								<div class="example">
 									<h6 class="my-1">Desde</h6>
 									<div class="input-group">
 										<h:inputText id="desde" styleClass="form-control datepicker"
-											value="#{login.fechaDesde}" >
-											<f:convertDateTime pattern="yyyy-mm-dd" type="date" />
-										</h:inputText>
-										
+											value="#{login.fechaDesde}" />
+
 										<div class="input-group-append">
 											<span class="input-group-text"> <i
 												class="icon-calender"></i>
@@ -109,9 +109,7 @@
 									<h6 class="my-1">Hasta</h6>
 									<div class="input-group">
 										<h:inputText id="hasta" styleClass="form-control datepicker"
-											value="#{login.fechaHasta}" >
-											<f:convertDateTime pattern="yyyy-mm-dd" type="date" />
-											</h:inputText>
+											value="#{login.fechaHasta}" />
 										<div class="input-group-append">
 											<span class="input-group-text"> <i
 												class="icon-calender"></i>
@@ -134,8 +132,9 @@
 							<div class="row col-md-12">
 								<div class="form-group col-md-5 "></div>
 								<div class="form-group col-md-2 mt-3">
-									<h:commandButton class="btn btn-project" value="Buscar" action="#{login.changedDate(login.fechaDesde, login.fechaHasta, login.buscarTipo)}">
-										<f:ajax render="tblAhorro" execute="tblAhorro" />	
+									<h:commandButton class="btn btn-project" value="Buscar"
+										action="#{login.changedDate()}">
+										<f:ajax render="tblAhorro" execute="tblAhorro" />
 									</h:commandButton>
 								</div>
 							</div>
@@ -144,7 +143,8 @@
 
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" id="tblAhorro" name="tblAhorro" value="#{login.cliente}" var="cc">
+							<h:dataTable class="table" id="tblAhorro" name="tblAhorro"
+								value="#{login.cliente}" var="cc">
 								<h:column>
 									<f:facet name="header">Propietario</f:facet>
 									#{login.cliente.nombre}

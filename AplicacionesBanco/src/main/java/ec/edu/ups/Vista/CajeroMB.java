@@ -1,6 +1,7 @@
 package ec.edu.ups.Vista;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +43,7 @@ public class CajeroMB {
 	@Inject
 	private CajeroON cjON;
 	
-	Date myDate = new Date();
+	LocalDate myDate = LocalDate.now();
 
 	private Cliente cliente;
 	private Cuenta cuenta;
