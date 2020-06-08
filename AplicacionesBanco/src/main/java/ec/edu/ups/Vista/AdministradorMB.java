@@ -1,4 +1,5 @@
 package ec.edu.ups.Vista;
+
 /**
  * Esta Clase define los ManagedBean
  * @version: 01/05/2020
@@ -25,6 +26,7 @@ import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
+import ec.edu.ups.Validations.Validaciones;
 
 @ManagedBean
 @ApplicationScoped
@@ -41,6 +43,7 @@ public class AdministradorMB {
 	@Inject
 	private CajeroON cajeON;
 
+	Validaciones validaciones = new Validaciones();
 	private Administrador administrador;
 	private Cliente cliente;
 	private JefeCredito credito;
@@ -52,7 +55,9 @@ public class AdministradorMB {
 	private String clave;
 	private Cuenta cuenta;
 	Date myDate = new Date();
-
+	String validaCedula;
+	String msgClass;
+	
 	@PostConstruct
 	public void init() {
 		administrador = new Administrador();
@@ -65,6 +70,27 @@ public class AdministradorMB {
 		creditos = new ArrayList<>();
 		correo = "";
 		clave = "";
+		validaCedula = "";
+		msgClass = "msg-white";
+	}
+
+	
+	public String getMsgClass() {
+		return msgClass;
+	}
+
+
+	public void setMsgClass(String msgClass) {
+		this.msgClass = msgClass;
+	}
+
+
+	public String getValidaCedula() {
+		return validaCedula;
+	}
+
+	public void setValidaCedula(String validaCedula) {
+		this.validaCedula = validaCedula;
 	}
 
 	public Cuenta getCuenta() {
@@ -152,38 +178,44 @@ public class AdministradorMB {
 	}
 
 	/**
-	 * Este metodo 	Guarda los clientes en la cual una vez creada la cuenta 
-	 * enviara un mensaje al correo con la que se registro con una clave de acceso
+	 * Este metodo Guarda los clientes en la cual una vez creada la cuenta enviara
+	 * un mensaje al correo con la que se registro con una clave de acceso
+	 * 
 	 * @param administrador
 	 * @return
 	 * @throws Exception
 	 */
-	
-	public String guardarCliente(Administrador administrador) throws Exception {
-		System.out.println(cliente.toString());
-		System.out.println(administrador.getNombre());
-		cliente.setTipo("Cliente");
-		cuenta.setNumero(adminON.generarCuenta());
-		cuenta.setSaldo(0.0);
-		cuenta.setCliente(cliente);
-		clientes.add(cliente);
-		cliente.setCuenta(cuenta);
-		cliente.setClave(adminON.generarContraseña());
-		administrador.setClientes(clientes);
-		adminON.update(administrador);
-		String mensaje="Bienvenid@ a nuestro sistema "+cliente.getNombre()+" \n"+"Su correo es = "+cliente.getCorreo()+" \n"+"Su clave es = "+cliente.getClave()+" \n"+"Su numero de cuenta es = "+cuenta.getNumero()+"\n ";
-		clieOn.enviarCorreo(cliente.getCorreo(),"Cuenta Cliente Creada", mensaje+" Creado el "+new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
-		cliente = new Cliente();
-		clientes.clear();
-		return "inicioAdmin?faces-redirect=true";
 
+	public String guardarCliente(Administrador administrador) throws Exception {
+		if (validarCedula() == true) {
+			cliente.setTipo("Cliente");
+			cuenta.setNumero(adminON.generarCuenta());
+			cuenta.setSaldo(0.0);
+			cuenta.setCliente(cliente);
+			clientes.add(cliente);
+			cliente.setCuenta(cuenta);
+			cliente.setClave(adminON.generarContraseña());
+			administrador.setClientes(clientes);
+			adminON.update(administrador);
+			String mensaje = "Bienvenid@ a nuestro sistema " + cliente.getNombre() + " \n" + "Su correo es = "
+					+ cliente.getCorreo() + " \n" + "Su clave es = " + cliente.getClave() + " \n"
+					+ "Su numero de cuenta es = " + cuenta.getNumero() + "\n ";
+			clieOn.enviarCorreo(cliente.getCorreo(), "Cuenta Cliente Creada",
+					mensaje + " Creado el " + new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
+			cliente = new Cliente();
+			clientes.clear();
+			return "inicioAdmin?faces-redirect=true";
+		} else {
+			System.out.println("Cédula Incorrecta");
+			return null;
+		}
 	}
 
 	/**
-	 * Este metodo guarda usuarios que sean de tipo Cajero 
-	 * que sera solo autorizado por el administrador para poder 
-	 * dar los roles respectivos, asi mismo se podra modificar por el 
-	 * adminitrador
+	 * Este metodo guarda usuarios que sean de tipo Cajero que sera solo autorizado
+	 * por el administrador para poder dar los roles respectivos, asi mismo se podra
+	 * modificar por el adminitrador
+	 * 
 	 * @return listaCajeros
 	 * @throws Exception
 	 */
@@ -196,11 +228,11 @@ public class AdministradorMB {
 		cajeros.clear();
 
 		return "listaCajeros";
-
 	}
 
 	/**
-	 * Este metodo guarda los creditos  aprobados por el cajero 
+	 * Este metodo guarda los creditos aprobados por el cajero
+	 * 
 	 * @return listaCreditos muestra lista de creditos existentes
 	 * @throws Exception
 	 */
@@ -215,15 +247,26 @@ public class AdministradorMB {
 		return "listaCreditos";
 	}
 
-	
-	public List<Transaccion> listarTransaccion(String cuenta){
+	public boolean validarCedula() throws Exception {
+		if (validaciones.validaCedula(this.cliente.getCedula())) {
+			this.validaCedula = "Cédula Correcta";
+			this.msgClass = "msg-success";
+			return true;
+		} else {
+			this.validaCedula = "Cédula Incorrecta";
+			this.msgClass = "msg-error";
+			return false;
+		}
+	}
+
+	public List<Transaccion> listarTransaccion(String cuenta) {
 		return null;
 	}
-	
+
 	public List<Cliente> listarCliente() throws Exception {
 		return clieOn.listar();
 	}
-	
+
 	public List<JefeCredito> listarCredito() throws Exception {
 		return crediON.listar();
 	}
@@ -231,8 +274,10 @@ public class AdministradorMB {
 	public List<Cajero> listarCajero() throws Exception {
 		return cajeON.listar();
 	}
-	
-	/**Editar   cliente mediante la cedula 
+
+	/**
+	 * Editar cliente mediante la cedula
+	 * 
 	 * @param cedula
 	 * @return
 	 */
@@ -246,7 +291,9 @@ public class AdministradorMB {
 		return null;
 	}
 
-	/**Edita los datos del cajero mediante la cedula 
+	/**
+	 * Edita los datos del cajero mediante la cedula
+	 * 
 	 * @param cedula
 	 * @return
 	 */
@@ -259,10 +306,12 @@ public class AdministradorMB {
 		}
 		return null;
 	}
- 
-	/**Edita las cuenta de creditos del usuario, en la cual se busca mediante el identificativo de la
-	 * cedula 
-	 * @param cedula id  del usuario para editar el credito
+
+	/**
+	 * Edita las cuenta de creditos del usuario, en la cual se busca mediante el
+	 * identificativo de la cedula
+	 * 
+	 * @param cedula id del usuario para editar el credito
 	 * @return
 	 */
 	public String editarAjaxCredito(String cedula) {
@@ -275,7 +324,9 @@ public class AdministradorMB {
 		return null;
 	}
 
-	/**Metodo editar cliente 
+	/**
+	 * Metodo editar cliente
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -285,18 +336,21 @@ public class AdministradorMB {
 	}
 
 	/*
-	 * Metodo  editaar cajero
+	 * Metodo editaar cajero
+	 * 
 	 * @return
+	 * 
 	 * @throws Exception
 	 */
-	
+
 	public String ediatrCajero() throws Exception {
 		cajeON.editar(cajero);
 		return null;
 	}
 
 	/**
-	 * Editar credito  
+	 * Editar credito
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -316,9 +370,9 @@ public class AdministradorMB {
 		return null;
 	}
 
-
 	/**
-	 * Metodo Eliminar credito  mediante a cedula del usaurio 
+	 * Metodo Eliminar credito mediante a cedula del usaurio
+	 * 
 	 * @param cedula
 	 * @return
 	 * @throws Exception
@@ -330,7 +384,9 @@ public class AdministradorMB {
 	}
 
 	/**
-	 * este metodo eliminar  cajero  son pruebas para verifcar su funcionamiento sin interfaz web
+	 * este metodo eliminar cajero son pruebas para verifcar su funcionamiento sin
+	 * interfaz web
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -339,16 +395,16 @@ public class AdministradorMB {
 		cajeON.eliminar(cedula);
 		return null;
 	}
-	
+
 	public long contarUser() {
 		long c = cajeON.contar() + crediON.contar();
-		
+
 		return c;
 	}
-	
+
 	public long contarClient() {
 		long c = clieOn.contar();
-		
+
 		return c;
 	}
 }

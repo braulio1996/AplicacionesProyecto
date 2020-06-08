@@ -81,13 +81,11 @@
 								</h:column>
 								<h:column>
 									<f:facet name="header">Acciones</f:facet>
+									<a style="padding-right: 20px;"></a>
 									<a>
 										<img src="../assets/images/menu/editar.png" />
 									</a>
-									<a style="padding-right: 8px;"></a>
-									<a>
-										<img src="../assets/images/menu/eliminar.png" />
-									</a>
+									
 								</h:column>
 							</h:dataTable>
 						</div>
@@ -106,7 +104,7 @@
 
 		<div id="addModal" class="modal fade" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg" style="width: 400px;">
+			<div class="modal-dialog modal-md" >
 				<h:form class="form-horizontal form-material">
 					<div class="modal-content">
 						<div class="modal-header" style="background-color: #37B0A9;">
@@ -126,9 +124,16 @@
 										</label>
 										<h:inputText style="width: 300px;" id="cedula"
 											value="#{administradorMB.cliente.cedula}"
-											class="form-control text-holder-proj" type="text" required="" />
+											class="form-control text-holder-proj" type="text" required="" >
+											<f:ajax event="blur" render="valCedula" listener="#{administradorMB.validarCedula()}"/>
+										</h:inputText>
+											
+										<label 
+											style="display: inline-block; width: 100px;">
+										</label>
+										<h:outputLabel value="#{administradorMB.validaCedula}" id="valCedula" style="color: #1F45CC; font-size: 10px;" />
 									</h:panelGrid>
-
+									
 									<h:panelGrid columns="2">
 										<label for="nombre"
 											style="display: inline-block; width: 100px;">Nombre:
@@ -175,7 +180,7 @@
 							<div class="form-group text-center mt-3">
 								<h:commandButton class="btn" type="submit" value="Aceptar"
 									action="#{administradorMB.guardarCliente(login.administrador)}"
-									style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000; margin-right: 140px;" />
+									style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000; margin-right: 190px;" />
 							</div>
 						</div>
 

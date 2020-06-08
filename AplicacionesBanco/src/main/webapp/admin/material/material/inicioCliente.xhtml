@@ -82,41 +82,41 @@
 					</div>
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							
-									<h:dataTable class="table"
-										value="#{login.listarTrans()}" var="c">
-										<h:column>
-											<f:facet name="header">Cuenta</f:facet>
+
+							<h:dataTable class="table" value="#{login.listarTrans()}" var="c">
+								<h:column>
+									<f:facet name="header">Cuenta</f:facet>
 											#{c.cliente.cuenta.numero}
 										</h:column>
-										<h:column>
-											<f:facet name="header">Propietario</f:facet>
+								<h:column>
+									<f:facet name="header">Propietario</f:facet>
 											#{c.cliente.nombre}
 										</h:column>
-										
-										<h:column>
-											<f:facet name="header">Fecha-Transacción</f:facet>
+
+								<h:column>
+									<f:facet name="header">Fecha-Transacción</f:facet>
 											#{c.fecha}
 										</h:column>
-										<h:column>
-											<f:facet name="header">Movimiento</f:facet>
+								<h:column>
+									<f:facet name="header">Movimiento</f:facet>
 									#{c.tipo}
 								</h:column>
-										<h:column>
-											<f:facet name="header">Monto movimiento</f:facet>
+								<h:column>
+									<f:facet name="header">Monto movimiento</f:facet>
 									#{c.monto}
 								</h:column>
 								<h:column>
-											<f:facet name="header">Saldo Cuenta</f:facet>
+									<f:facet name="header">Saldo Cuenta</f:facet>
 									#{c.saldoCuenta}
 								</h:column>
-										<h:column>
-											<f:facet name="header">Acciones</f:facet>
-											<a href="cuentaAhorro.xhtml"> <img
-												src="../assets/images/menu/ver16.png" />
-											</a>
-										</h:column>
-									</h:dataTable>
+								<h:column>
+									<f:facet name="header">Acciones</f:facet>
+									<a style="padding-right: 20px;"></a>
+									<a href="cuentaAhorro.xhtml"> <img
+										src="../assets/images/menu/ver16.png" />
+									</a>
+								</h:column>
+							</h:dataTable>
 						</div>
 					</div>
 				</div>
