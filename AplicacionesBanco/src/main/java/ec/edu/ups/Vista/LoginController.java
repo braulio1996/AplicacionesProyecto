@@ -76,12 +76,22 @@ public class LoginController {
 	private List<Acceso> accesos;
 	private LocalDate fechaDesde;
 	private LocalDate fechaHasta;
+	private Date fechaDesde2;
+	private Date fechaHasta2;
 	private String buscarTipo;
+<<<<<<< HEAD
 	private String estadoAcceso;
 
 	@PostConstruct
 	public void init() {
 		acceso = new Acceso();
+=======
+	List<Transaccion> listar;
+	@PostConstruct
+	public void init() {
+		java.util.Date fecha = new Date();
+		acceso= new Acceso();
+>>>>>>> master
 		administrador = new Administrador();
 		cliente = new Cliente();
 		credito = new JefeCredito();
@@ -93,6 +103,7 @@ public class LoginController {
 		accesos = new ArrayList<>();
 		correo = "";
 		clave = "";
+<<<<<<< HEAD
 	}
 
 	public String getEstadoAcceso() {
@@ -103,6 +114,17 @@ public class LoginController {
 		this.estadoAcceso = estadoAcceso;
 	}
 
+=======
+		buscarTipo="";
+		listar=new ArrayList<>();
+		fechaHasta = LocalDate.now();
+		fechaDesde = clieOn.restarFecha(this.fechaHasta);
+		fechaDesde2=fecha;
+		fechaHasta2=fecha;
+
+	}
+	
+>>>>>>> master
 	public LocalDate getFechaDesde() {
 		return fechaDesde;
 	}
@@ -127,6 +149,33 @@ public class LoginController {
 		this.buscarTipo = buscarTipo;
 	}
 
+<<<<<<< HEAD
+=======
+	public Date getFechaDesde2() {
+		return fechaDesde2;
+	}
+
+	public void setFechaDesde2(Date fechaDesde2) {
+		this.fechaDesde2 = fechaDesde2;
+	}
+
+	public Date getFechaHasta2() {
+		return fechaHasta2;
+	}
+
+	public void setFechaHasta2(Date fechaHasta2) {
+		this.fechaHasta2 = fechaHasta2;
+	}
+
+	public List<Transaccion> getListar() {
+		return listar;
+	}
+
+	public void setListar(List<Transaccion> listar) {
+		this.listar = listar;
+	}
+
+>>>>>>> master
 	public Cuenta getCuenta() {
 		return cuenta;
 	}
@@ -279,6 +328,7 @@ public class LoginController {
 					accesos.add(acceso);
 					cliente.setAccesos(accesos);
 					clieOn.editar(cliente);
+<<<<<<< HEAD
 
 					acceso = new Acceso();
 					accesos.clear();
@@ -287,6 +337,15 @@ public class LoginController {
 					this.fechaDesde = clieOn.restarFecha(this.fechaHasta);
 					this.buscarTipo = "Todos";
 					estadoAcceso = "Todos";
+=======
+					this.buscarTipo = "Todos";
+					acceso = new Acceso();
+					accesos.clear();
+					
+					//this.fechaHasta = LocalDate.now();
+					//this.fechaDesde = clieOn.restarFecha(this.fechaHasta);
+					
+>>>>>>> master
 					return "inicioCliente?faces-redirect=true";
 				} else {
 					System.out.println("ERROR. Usuario Incorrecto");
@@ -296,14 +355,18 @@ public class LoginController {
 
 					acceso.setClave(clave);
 					acceso.setEstado("Fallido");
-					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
+					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
 					acceso.setHora(new SimpleDateFormat("HH:mm:ss").format(myDate));
 					acceso.setCliente(cliente);
 					accesos.add(acceso);
 					cliente.setAccesos(accesos);
 					clieOn.editar(cliente);
+<<<<<<< HEAD
 
 					
+=======
+				
+>>>>>>> master
 					acceso = new Acceso();
 					accesos.clear();
 				} // Fin if (clieOn.loginC(this.correo, this.clave) != null)
@@ -331,12 +394,27 @@ public class LoginController {
 	}// Fin metodo updCliente
 
 	public List<Transaccion> listarTrans() throws Exception {
+<<<<<<< HEAD
 		return clieOn.transCli(this.cliente.getCodigo(), fechaDesde, fechaHasta, buscarTipo);
 	}
 
 	public String changedDate() throws Exception {
 		System.out.println("Entro a cambio fecha");
 		return null;
+=======
+		List<Transaccion> listar=clieOn.transCli(this.cliente.getCodigo(), fechaDesde, fechaHasta, buscarTipo);
+		return listar;
+	}
+	
+	public List<Transaccion> fechas() throws Exception {
+		SimpleDateFormat d=new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("-------------------- "+buscarTipo);
+		System.out.println("D-------------------- "+fechaDesde2);
+		System.out.println("H-------------------- "+fechaHasta2);
+		listar=clieOn.transCli(this.cliente.getCodigo(), clieOn.convert(fechaDesde2), clieOn.convert(fechaHasta2), buscarTipo);
+
+		return listar;
+>>>>>>> master
 	}
 
 	public List<Acceso> listarAcceso() throws Exception{

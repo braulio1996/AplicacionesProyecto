@@ -12,21 +12,20 @@ import ec.edu.ups.Modelo.Acceso;
 import ec.edu.ups.Modelo.Cliente;
 
 /**
+ *
  * @author Braulio
  *
  */
-/**
- * @author Marcela
- *
- */
+
 @Stateless
 public class AccesoDAO {
 	@PersistenceContext(name = "AplacacionesBancoPersistenceUnit")
 	private EntityManager em;
 
+	
 	/**
-	 * guarda los datos de Acceso 
-	 * @param Acceso define el objeto Acceso
+	 * Almacena  el objeto de Accesos  en la persistencia
+	 * @param acceso define el objeto acceso que se va guardar
 	 * @return 
 	 * @throws Exception
 	 */
@@ -46,8 +45,9 @@ public class AccesoDAO {
 
 
 	/**
-	 * Lista  accesos que tiene el rol de Acceso
-	 * @return Accesoz retorna un objeto de Tipo Acceso
+	 * Lista los accesos 
+	 * La clase que desea consultar
+	 * @return Accesoz retorna un objeto de Tipo Acceso (Lista resultante)
 	 * @throws Exception
 	 */
 	public List<Acceso> listar() throws Exception {
@@ -64,8 +64,8 @@ public class AccesoDAO {
 	}
 
 	/**
-	 * Edita al Acceso mediante los roles
-	 * @param Acceso objeto de tipo Acceso
+	 * Actualiza la informacion del objeto Acceso en la persistencia
+	 * @param Acceso objeto que tiene la informacion que se desea actualizar
 	 * @throws Exception
 	 */
 	public void editar(Acceso acceso) throws Exception {
@@ -80,9 +80,10 @@ public class AccesoDAO {
 	}
 
 	/**
-	 * Busca al Acceso mediante el cliente
-	 * @param cliente identificacion del Acceso
-	 * @return c retorna Acceso si esta consta en el registro
+	 * La Consulta Busca al Acceso mediante el ID cliente
+	 * @param cliente identificacion del Acceso que se desea consultar
+	 * @param estado de los usuario por la que se va consultar
+	 * @return c retorna Acceso si esta consta en el registro 
 	 * @throws Exception
 	 */
 	public List<Acceso> listaAccesos(int cliente, String estado) throws Exception {
@@ -106,18 +107,19 @@ public class AccesoDAO {
 	}
 	
 	/**
-	 * Permite leer los datos a buscar mediante la cliente
-	 * @param cliente
-	 * @return cedula retorna si esta exite en el registro
+	 * Permite leer los datos a buscar mediante el cliente en la persistencia
+	 * @param cliente  objeto que se va buscar
+	 * @return cedula retorna si esta exite en el registro 
+	 * Si no existe ninguna entidad con el identificador, se devuelve null
 	 */
 	public Acceso read(int cliente) {
 		return em.find(Acceso.class, cliente);
 	}
 
 	
-	
-	/**Cuenta numero de acceso de usuarios ya sea fallidos o exitoso
-	 * @return c
+
+	/**Cosulta que enumera los acceso de usuarios ya sea fallidos o exitoso
+	 * @return c valor devuelto es c
 	 */
 	public long contar() {
 		String jpql = "SELECT COUNT(a) FROM Acceso a";

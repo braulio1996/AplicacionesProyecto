@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,11 +44,12 @@ public class ClienteON {
 	private Transferencia trasferencia;
 	private List<Transferencia> trasferencias;
 
+
 	/**
-	 * Guarda los  clientesON de la entidad adminstradorDAO
-	 * @param cliente objeto de Tipo Cliente
-	 * @return cliente 
-	 * @throws Exception
+	 * Guarda los  objetos Cliente
+	 * @param cliente objeto de Tipo Cliente que se va guardar
+	 * @return cliente  retorna el valor 
+	 * @throws Exception control de Excepciones
 	 */
 	public boolean guardar(Cliente cliente) throws Exception {
 		return pdao.guardar(cliente);
@@ -55,10 +57,10 @@ public class ClienteON {
 	}
 
 	/**
-	 * Metodo de login, valida crdenciales de cliente
-	 * @param correo
-	 * @param clave
-	 * @return Cliente que cumpla con las credenciales
+	 * Consulta verifica las credenciales del usuario sean las correctas
+	 * @param correo identificador unico del objeto Persona de tipo Cliente
+	 * @param clave identificador unico del Objeto 
+	 * @return Cliente resnorna el valor si cumple con las credenciales
 	 * @throws Exception control de Excepciones
 	 */
 	public Cliente loginC(String correo, String clave) throws Exception {
@@ -67,14 +69,20 @@ public class ClienteON {
 	}
 
 	/**
-	 * Metodo para listar Clientes
-	 * @return Lista de clientes
+	 * Metodo para listar Clientes 
+	 * @return Lista de clientes 
 	 * @throws Exception Control de excepciones
 	 */
 	public List<Cliente> listar() throws Exception {
 		return pdao.listar();
 	}
-
+    
+	
+	/**
+	 * Actualiza el objeto de tipo Cliente
+	 * @param cliente el objeto que se va actualizar
+	 * @throws Exception  control de Excepciones
+	 */
 	public void editar(Cliente cliente) throws Exception {
 		pdao.editar(cliente);
 	}
@@ -101,7 +109,7 @@ public class ClienteON {
 	/**
 	 * Meto de Elimina una persona por su cedula
 	 * @param cedula o ruc de la persona a eliminar
-	 * @throws Exception
+	 * @throws Exception control de Excepciones
 	 */
 	public void eliminar(String cedula) throws Exception {
 		pdao.eliminar(cedula);
@@ -111,8 +119,8 @@ public class ClienteON {
 	/**
 	 * Metodo que busca una cuenta bancaria
 	 * @param numero de cuenta 
-	 * @return Objeto de tipo cuenta
-	 * @throws Exception
+	 * @return Objeto de tipo cuenta 
+	 * @throws Exception control de Excepciones
 	 */
 	public Cuenta buscarCuenta(String numero) throws Exception {
 		return pdao.buscarCuenta(numero);
@@ -152,10 +160,25 @@ public class ClienteON {
 		return trasferencia;
 	}
 	
+	
+	/**
+	 * Busca al cliente mediante el correo
+	 * @param correo identificador del objeto Cliente que se va buscar
+	 * @return  correo retorna los valores si existe
+	 */
 	public Cliente buscarCorreo(String correo) {
 		return pdao.buscarCorreo(correo);
 	}
 	
+	
+	
+	/**
+	 * Enviar el correo , reconociendo el nombre del host, puerto, se requiere el correo y contraseña para conectarse para
+	 * poder enviar al correo el asunto y mensaje
+	 * @param correo identificador del usuario 
+	 * @param asunto   el asunto a tratarse
+	 * @param mensaje cualquie tipo de mensaje
+	 */
 	public void enviarCorreo(String correo, String asunto, String mensaje) {
         Properties propiedad = new Properties();
         propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -195,8 +218,30 @@ public class ClienteON {
 	}
 	
 	public LocalDate restarFecha(LocalDate hasta) {
+		try {
 			return hasta.minusDays(30);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+			return null;
 	}
-	
-	
+	public static Date ParseFecha(String fecha)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
+	public LocalDate convert(Date dateToConvert) {
+	    return dateToConvert.toInstant()
+	      .atZone(ZoneId.systemDefault())
+	      .toLocalDate();
+	}	
 }

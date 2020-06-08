@@ -18,10 +18,10 @@ public class CuentaDAO {
 	private EntityManager em;
 
 	/**
-	 * Guarda la cuenta 
-	 * @param cuenta objeto de tipo Cuenta
+	 * Guarda el objeto cuenta en la peristencia de datos
+	 * @param cuenta objeto de tipo Cuenta que se va guardar
 	 * @return
-	 * @throws Exception
+	 * @throws Exception  control de Excepciones
 	 */
 	public boolean guardar(Cuenta cuenta) throws Exception {
 
@@ -38,8 +38,8 @@ public class CuentaDAO {
 
 	/**
 	 * Lista las cuentas de los  usuario
-	 * @return cuentaz restorna el objeto de tipo cuenta
-	 * @throws Exception
+	 * @return cuentaz retorna el objeto de tipo cuentam, devuele la lista Cuenta
+	 * @throws Exception control de Excepciones
 	 */
 	public List<Cuenta> listar() throws Exception {
 
@@ -56,9 +56,9 @@ public class CuentaDAO {
 
 
 	/**
-	 * Modificar los datos de las cuenta respectivas de los usuarios
-	 * @param cuenta onjeto de tipo cuenta
-	 * @throws Exception
+	 * Actualiza los datos de las cuenta respectivas de los usuarios
+	 * @param cuenta objeto de tipo cuenta que se va actualizar
+	 * @throws Exception control de Excepciones
 	 */
 	public void editarCuenta(Cuenta cuenta) throws Exception {
 
@@ -73,10 +73,10 @@ public class CuentaDAO {
 
 
 	/**
-	 * Busca la cuenta mediante el numero respectivo 
+	 * Consulta Busca la cuenta mediante el numero respectivo 
 	 * @param numero permite identificar la cuenta del usuario 
 	 * @return c Retorna el objeto de tipo cuenta
-	 * @throws Exception
+	 * @throws Exception control de Excepciones
 	 */
 	public Cuenta buscarCuenta(String numero) throws Exception {
 		try {

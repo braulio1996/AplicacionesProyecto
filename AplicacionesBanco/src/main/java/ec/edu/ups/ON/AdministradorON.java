@@ -21,8 +21,7 @@ import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cliente;
 
 /**
- * En esta clase se define el Objeto de Negocio  
- * haciedo uso de AdministradorDAO
+ * En esta clase se define el Objeto de Negocio - AdministradorDAO
  * @author Marcela
  * @version 31/05/2020
  *
@@ -35,9 +34,9 @@ public class AdministradorON {
 	
 
 	/**
-	 * Resgitra el administrador del metodo registrar de AdministradorON
-	 * @param administrador de tipo Objeto  Adminstrador
-	 * @throws Exception
+	 * Registra el administrador del metodo registrar de AdministradorON
+	 * @param administrador de tipo Objeto  Adminstrador que se va registrar
+	 * @throws Exception control de Excepciones
 	 */
 	public void registrar(Administrador administrador) throws Exception {
 		pdao.registrar(administrador);
@@ -47,7 +46,7 @@ public class AdministradorON {
 	/**
 	 * Actualiza el administrador, este metodO hace uso del AdministradorDAO
 	 * @param administrador Objeto de Tipo Administrador
-	 * @throws Exception
+	 * @throws Exception control de Excepciones
 	 */
 	public void update(Administrador administrador) throws Exception {
 		pdao.update(administrador);
@@ -55,12 +54,12 @@ public class AdministradorON {
 	}
 
 	/**
-	 * Auntentificacion del administrador con los respectivos credenciales 
+	 * verifica si el administrador cumple  con los respectivos credenciales 
 	 * @param correo parametro de identificacion de  credenciales del administrador
 	 * @param clave parametro de identificacion de credenciales del usuario
-	 * @return correo  
-	 * @return clave
-	 * @throws Exception
+	 * @return correo  valor devuelto si este exiate
+	 * @return clave valor devuelto si este existe
+	 * @throws Exception control de Excepciones
 	 */
 	public Administrador loginC(String correo, String clave) throws Exception {
 		
@@ -69,7 +68,7 @@ public class AdministradorON {
 	
 	/**
 	 * Genera las cotraseñas de usuario de forma aleatroia con numeros, letras mayuculas y minusculas
-	 * @return pswd
+	 * @return pswd  
 	 */
 	public String generarContraseña() {
 		

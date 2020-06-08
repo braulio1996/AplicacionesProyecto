@@ -19,10 +19,10 @@ public class JefeCreditoDAO {
 	private EntityManager em;
 
 	/**
-	 * Metodo guarda  los creditos del usuario
-	 * @param credito define el credito del usuario
+	 * Metodo guarda el objeto JefeCredito en la persistencia
+	 * @param credito define el objeto JefeCredito que se va guardar
 	 * @return 
-	 * @throws Exception
+	 * @throws Exception control de Excepciones
 	 */
 	public boolean guardar(JefeCredito credito) throws Exception {
 		try {
@@ -36,13 +36,12 @@ public class JefeCreditoDAO {
 	}
 
 	/**
-	 * Este metodo valida las credenciales de usuario
-	 * 
-	 * @param correo define el email del cajero
-	 * @param clave  define la contrase o clave de acceso
-	 * @return credito, retorna un Objeto de tipo Credito que con la identificacion
+	 * Esta consulta permite ingresar al Jefe de Credito con las credenciales
+	 * @param correo es el identificador del Jefe de Credito
+	 * @param clave  es el identificador o clave de acceso
+	 * @return credito, retorna un Objeto de tipo Credito con la identificacion
 	 *         de usuario
-	 * @throws Exception
+	 * @throws Exception control de Excepciones
 	 */
 	public JefeCredito login(String correo, String clave) throws Exception {
 		try {
@@ -61,10 +60,9 @@ public class JefeCreditoDAO {
 	}
 
 	/**
-	 * *Listas los creditos de los usuarios
-	 * 
-	 * @return retorna un objeto de tipo credito
-	 * @throws Exception
+	 * *Listas el objeto JefeCredito
+	 * @return retorna un objeto de tipo credito, lista resultante
+	 * @throws Exception control de Excepciones
 	 */
 	public List<JefeCredito> listar() throws Exception {
 
@@ -79,9 +77,10 @@ public class JefeCreditoDAO {
 
 	}
 
-	/**Editar creditos  usario
-	 * @param credito 
-	 * @throws Exception
+	/**
+	 * Actualiza el bojeto JefeCredito en la persistencia
+	 * @param credito  el objeto credito que se va actualizar
+	 * @throws Exception control de Excepciones
 	 */
 	public void editar(JefeCredito credito) throws Exception {
 
@@ -95,10 +94,10 @@ public class JefeCreditoDAO {
 	}
 
 	/**
-	 * Este metodo busca mediante la cedula al usuario
-	 * @param cedula identificaicion del usuario
-	 * @return credito retorna el objeto de tipo Credito 
-	 * @throws Exception
+	 * Este metodo busca mediante la cedula al objeto Jefe Credito
+	 * @param cedula identificacion del usuario  que se va buscar
+	 * @return credito retorna el objeto de tipo JefeCredito  
+	 * @throws Exception control de Excepciones
 	 */
 	public JefeCredito buscar(String cedula) throws Exception {
 		try {
@@ -123,9 +122,9 @@ public class JefeCreditoDAO {
 	}
 
 	/**
-	 * Objeto credito que se requiere eliminar
-	 * @param cedula
-	 * @throws Exception
+	 * Objeto JefeCredito que se requiere eliminar en la persistencia
+	 * @param cedula identificador del Jefe Credito que se va eliminar
+	 * @throws Exception control de Excepciones
 	 */
 	public void eliminar(String cedula) throws Exception {
 		JefeCredito c = buscar(cedula);

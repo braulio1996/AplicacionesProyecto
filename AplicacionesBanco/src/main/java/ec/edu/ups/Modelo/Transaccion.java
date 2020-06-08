@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 /**
@@ -19,11 +20,12 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Transaccion {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
 	private String tipo;
 	private LocalDate fecha;
 	private Double monto;	
+	private Double saldoCuenta;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Cliente cliente;
@@ -74,10 +76,12 @@ public class Transaccion {
 	public void setCajero(Cajero cajero) {
 		this.cajero = cajero;
 	}
-	@Override
-	public String toString() {
-		return "Transaccion [codigo=" + codigo + ", tipo=" + tipo + ", fecha=" + fecha + ", monto=" + monto
-				+ ", depositante=" + depositante + "]";
+	
+	public Double getSaldoCuenta() {
+		return saldoCuenta;
+	}
+	public void setSaldoCuenta(Double saldoCuenta) {
+		this.saldoCuenta = saldoCuenta;
 	}
 	
 }

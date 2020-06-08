@@ -23,8 +23,8 @@ public class AdministradorDAO {
 	private EntityManager em;
 
 	/**
-	 * Este Metodo registra un Administrador
-	 * @param administrador
+	 * Este Metodo registra el objeto Administrador en la persistencia
+	 * @param administrador El objeto a registrar
 	 * @throws Exception
 	 */
 	public void registrar(Administrador administrador) throws Exception {
@@ -37,10 +37,10 @@ public class AdministradorDAO {
 
 		}
 	}
-
+	
 	/**
-	 * Este metodo valida las credenciales de usuario
-	 * @param correo define el email de un administrador
+	 * Consulta las credenciales de usuario al momento de iniciar sesion
+	 * @param correo valor que ingresa el  administrador
 	 * @param clave define la clave de acceso
 	 * @return Administrador, retorna un Objeto de tipo Administrador que cumpla con las credenciales
 	 * @throws Exception manejo de erroes, no existe, o vacio 
@@ -61,9 +61,10 @@ public class AdministradorDAO {
 
 	}
 
+	
 	/**
 	 * Este metodo define la busqueda de un Objeto Persona de Tipo administrador mediante su id o codigo 
-	 * @param id define primary key
+	 * @param id define el ID del administrador
 	 * @return Administrador retorna un objeto persona de tipo administrador
 	 */
 	public Administrador read(int id) {
@@ -71,7 +72,7 @@ public class AdministradorDAO {
 	}
 
 	/**
-	 * Metodo que actuliza un objeto persona de tipo Administrador 
+	 * Metodo que actuliza un objeto Administrador de tipo Persona  en la persistencia
 	 * @param administrador, objeto que se pretende actualizar
 	 */
 	public void update(Administrador administrador) {
