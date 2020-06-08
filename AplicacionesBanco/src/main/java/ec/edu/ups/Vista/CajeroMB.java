@@ -126,6 +126,7 @@ public class CajeroMB {
 			Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
 			cuenta.setSaldo(total);
 			cliente.setCuenta(cuenta);
+			t.setSaldoCuenta(total);
 			t.setTipo("Retiro");
 			t.setDepositante("NaN");
 			t.setCliente(cliente);
@@ -146,7 +147,7 @@ public class CajeroMB {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return "depositosCajero?faces-redirect=true";
 	}
 	/**
 	 * Este metodp busca la cliente donde regresa una cuenta en la que se va realiar el deposito,
@@ -156,7 +157,6 @@ public class CajeroMB {
 	 */
 	public String buscarCliente() {
 		try {
-			System.out.println(this.cedula);
 			cliente=clienteON.buscar(this.cedula);
 			cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
 			System.out.println(cliente);
@@ -175,6 +175,7 @@ public class CajeroMB {
 			
 			cuenta.setSaldo(total);
 			cliente.setCuenta(cuenta);
+			t.setSaldoCuenta(total);
 			t.setTipo("Deposito");
 			t.setCliente(cliente);
 			t.setCajero(cajero);
@@ -184,12 +185,11 @@ public class CajeroMB {
 			cliente.setTransacciones(transacciones);
 			cajero.setTransacciones(transacciones);
 			clienteON.editar(cliente);
-			//cjON.editar(cajero);
 			t=new Transaccion();
-			cedula="";
 			cuenta=new Cuenta();
 			cajero =new Cajero();
 			cliente=new Cliente();
+			cedula="";
 			transacciones.clear();
 			
 		} catch (Exception e) {

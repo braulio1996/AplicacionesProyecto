@@ -15,7 +15,7 @@ import javax.persistence.Lob;
 @Entity
 public class SolicitudCredito {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
 	private String tipo;
 	private Double monto;

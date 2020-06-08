@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -217,8 +218,30 @@ public class ClienteON {
 	}
 	
 	public LocalDate restarFecha(LocalDate hasta) {
+		try {
 			return hasta.minusDays(30);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+			return null;
 	}
-	
-	
+	public static Date ParseFecha(String fecha)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
+	public LocalDate convert(Date dateToConvert) {
+	    return dateToConvert.toInstant()
+	      .atZone(ZoneId.systemDefault())
+	      .toLocalDate();
+	}	
 }

@@ -82,15 +82,18 @@
 					</div>
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{login.cliente}" var="cc">
-								<h:column>
-									<f:facet name="header">Propietario</f:facet>
-									#{login.cliente.nombre}
-								</h:column>
-								<h:column>
+							
 									<h:dataTable class="table"
-										value="#{login.cliente.transacciones}" var="c">
-
+										value="#{login.listarTrans()}" var="c">
+										<h:column>
+											<f:facet name="header">Cuenta</f:facet>
+											#{c.cliente.cuenta.numero}
+										</h:column>
+										<h:column>
+											<f:facet name="header">Propietario</f:facet>
+											#{c.cliente.nombre}
+										</h:column>
+										
 										<h:column>
 											<f:facet name="header">Fecha-Transacción</f:facet>
 											#{c.fecha}
@@ -110,8 +113,6 @@
 											</a>
 										</h:column>
 									</h:dataTable>
-								</h:column>
-							</h:dataTable>
 						</div>
 					</div>
 				</div>

@@ -68,8 +68,32 @@ public class LoginController {
 	private List<Acceso>accesos;
 	private LocalDate fechaDesde;
 	private LocalDate fechaHasta;
+	private Date fechaDesde2;
+	private Date fechaHasta2;
 	private String buscarTipo;
-	
+	List<Transaccion> listar;
+	@PostConstruct
+	public void init() {
+		acceso= new Acceso();
+		administrador = new Administrador();
+		cliente = new Cliente();
+		credito = new JefeCredito();
+		cajero = new Cajero();
+		cuenta = new Cuenta();
+		clientes = new ArrayList<>();
+		cajeros = new ArrayList<>();
+		creditos = new ArrayList<>();
+		accesos = new ArrayList<>();
+		correo = "";
+		clave = "";
+		buscarTipo="";
+		listar=new ArrayList<>();
+		fechaHasta = LocalDate.now();
+		fechaDesde = clieOn.restarFecha(this.fechaHasta);
+		fechaDesde2=null;
+		fechaHasta2=null;
+
+	}
 	
 	public LocalDate getFechaDesde() {
 		return fechaDesde;
@@ -95,21 +119,28 @@ public class LoginController {
 		this.buscarTipo = buscarTipo;
 	}
 
-	@PostConstruct
-	public void init() {
-		acceso= new Acceso();
-		administrador = new Administrador();
-		cliente = new Cliente();
-		credito = new JefeCredito();
-		cajero = new Cajero();
-		cuenta = new Cuenta();
-		clientes = new ArrayList<>();
-		cajeros = new ArrayList<>();
-		creditos = new ArrayList<>();
-		accesos = new ArrayList<>();
-		correo = "";
-		clave = "";
-		
+	public Date getFechaDesde2() {
+		return fechaDesde2;
+	}
+
+	public void setFechaDesde2(Date fechaDesde2) {
+		this.fechaDesde2 = fechaDesde2;
+	}
+
+	public Date getFechaHasta2() {
+		return fechaHasta2;
+	}
+
+	public void setFechaHasta2(Date fechaHasta2) {
+		this.fechaHasta2 = fechaHasta2;
+	}
+
+	public List<Transaccion> getListar() {
+		return listar;
+	}
+
+	public void setListar(List<Transaccion> listar) {
+		this.listar = listar;
 	}
 
 	public Cuenta getCuenta() {
@@ -262,13 +293,13 @@ public class LoginController {
 					accesos.add(acceso);
 					cliente.setAccesos(accesos);
 					clieOn.editar(cliente);
-					
+					this.buscarTipo = "Todos";
 					acceso = new Acceso();
 					accesos.clear();
 					
-					this.fechaHasta = LocalDate.now();
-					this.fechaDesde = clieOn.restarFecha(this.fechaHasta);
-					this.buscarTipo = "Todos";
+					//this.fechaHasta = LocalDate.now();
+					//this.fechaDesde = clieOn.restarFecha(this.fechaHasta);
+					
 					return "inicioCliente?faces-redirect=true";
 				} else {
 					System.out.println("ERROR. Usuario Incorrecto");
@@ -278,7 +309,7 @@ public class LoginController {
 			
 					acceso.setClave(clave);
 					acceso.setEstado("Fallido");
-					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(myDate));
+					acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
 					acceso.setHora(new SimpleDateFormat("HH:mm:ss").format(myDate));
 					acceso.setCliente(cliente);
 					accesos.add(acceso);
@@ -312,13 +343,17 @@ public class LoginController {
 	}//Fin metodo updCliente
 	
 	public List<Transaccion> listarTrans() throws Exception {
-		System.out.println(fechaDesde + "-" + fechaHasta + " Tipo: "+buscarTipo);
-		return clieOn.transCli(this.cliente.getCodigo(), fechaDesde, fechaHasta, buscarTipo);
+		List<Transaccion> listar=clieOn.transCli(this.cliente.getCodigo(), fechaDesde, fechaHasta, buscarTipo);
+		return listar;
 	}
 	
-	public String changedDate() throws Exception {
-		System.out.println(fechaDesde + "-" + fechaHasta + " Tipo: "+buscarTipo);
-		
-		return null;
+	public List<Transaccion> fechas() throws Exception {
+		SimpleDateFormat d=new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("-------------------- "+buscarTipo);
+		System.out.println("D-------------------- "+d.format(fechaDesde2));
+		System.out.println("H-------------------- "+d.format(fechaHasta2));
+		listar=clieOn.transCli(this.cliente.getCodigo(), clieOn.convert(fechaDesde2), clieOn.convert(fechaHasta2), buscarTipo);
+		System.out.println(listar.toString());
+		return listar;
 	}
 }//Fin ControladorLogin
