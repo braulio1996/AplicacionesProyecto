@@ -23,8 +23,8 @@ public class CajeroDAO {
 	private EntityManager em;
 
 	/**
-	 * guarda los datos de cajero de tipo persona
-	 * @param cajero define el objeto Cajero
+	 * Guarda los datos de cajero de tipo persona en la persistencia
+	 * @param cajero define el objeto Cajero que se va guardar
 	 * @return 
 	 * @throws Exception
 	 */
@@ -41,11 +41,12 @@ public class CajeroDAO {
 	}
 
 	/**
-	 * Datos o credenciales del Cajero de Tipo persona
+	 * Hace la consulta de los Datos o credenciales del Cajero de Tipo persona para poder verificar si esta es
+	 * o no el cajero que quiere ingresar
 	 * @param correo identificacion  de la cuenta del cajero e identifica las credenciales
 	 * @param clave  define el acceso al Cajero
 	 * @return cre retorna el objeto Cajero que cumpla con las credenciales de identificacion
-	 * @throws Exception
+	 * @throws Exception control de Excepciones
 	 */
 	public Cajero login(String correo, String clave) throws Exception {
 		try {
@@ -64,8 +65,8 @@ public class CajeroDAO {
 	}
 
 	/**
-	 * Lista  a personas que tiene el rol de Cajero
-	 * @return cajeroz retorna un objeto de Tipo Cajero
+	 * Lista  a personas del  rol de Cajero
+	 * @return cajeroz retorna un objeto de Tipo Cajero 
 	 * @throws Exception
 	 */
 	public List<Cajero> listar() throws Exception {
@@ -80,11 +81,11 @@ public class CajeroDAO {
 		}
 
 	}
-
+	
 	/**
-	 * Edita al cajero mediante los roles
-	 * @param cajero objeto de tipo Cajero
-	 * @throws Exception
+	 * Actualiza la informacion del objeto cajero en la persistencia
+	 * @param cajero objeto de tipo Cajero que se debe actualizar
+	 * @throws Exception control de Excepciones
 	 */
 	public void editar(Cajero cajero) throws Exception {
 
@@ -101,7 +102,7 @@ public class CajeroDAO {
 	 * Busca al usuario Cajero mediante la cedula
 	 * @param cedula identificacion del ususrio Cajero
 	 * @return c retorna Cajero si esta consta en el registro
-	 * @throws Exception
+	 * @throws Exception control de Excepciones
 	 */
 	public Cajero buscar(String cedula) throws Exception {
 		try {
@@ -119,7 +120,7 @@ public class CajeroDAO {
 
 	/**
 	 * Permite leer los datos a buscar mediante la cedula
-	 * @param cedula
+	 * @param cedula identificador de Objeto Cajero tipo Persona
 	 * @return cedula retorna si esta exite en el registro
 	 */
 	public Cajero read(String cedula) {
@@ -137,7 +138,7 @@ public class CajeroDAO {
 	}
 	
 	/**
-	 * Numero de veces que un cliente entre session 
+	 *Consulta de numero de veces que un cliente entre session 
 	 * sea esta fallidas o exitosas
 	 * @return c
 	 */

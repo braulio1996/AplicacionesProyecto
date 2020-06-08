@@ -37,9 +37,9 @@ public class CuentaON {
 
 	/**
 	 * Guarda las cuentas  
-	 * @param Cuenta objeto de tipo Cuenta
-	 * @return 
-	 * @throws Exception
+	 * @param Cuenta objeto de tipo Cuenta que se va guardar
+	 * @return  cuenta  valor devuelto 
+	 * @throws Exception control de excepciones
 	 */
 	public boolean guardar(Cuenta cuenta) throws Exception {
 		return pdao.guardar(cuenta);
@@ -50,7 +50,7 @@ public class CuentaON {
 	/**
 	 * Metodo para listar Cuentas
 	 * @return Lista de Cuentas
-	 * @throws Exception Control de excepciones
+	 * @throws Exception Control de Excepciones
 	 */
 	public List<Cuenta> listar() throws Exception {
 		return pdao.listar();
@@ -58,20 +58,19 @@ public class CuentaON {
 	}
 
 	/**
-	 * Permite editar las cuentas 
-	 * @param cuenta objeto de tipo Objeto
-	 * @throws Exception
-	 */
-	
-	
+	 * Permite editar  el objeto cuenta que se va actualizar
+	 * @param cuenta objeto de tipo Objeto que se va actualizar
+	 * @throws Exception control de Excepciones
+	 */	
 	public void editar(Cuenta cuenta) throws Exception {
 		pdao.editarCuenta(cuenta);
 	}
 	
 	/**
 	 * Metodo para buscar la cuenta, con el respectibo numero
-	 * @param numero identificador de la cuenta 
-	 * @return
+	 * @param numero identificador de la cuenta  a buscar
+	 * @return numero si esta existe
+	 *  
 	 */
 	public Cuenta buscarCuenta(String numero) {
 		try {

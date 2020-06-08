@@ -23,9 +23,10 @@ public class ClienteDAO {
 
 	
 	
+
 	/**
-	 * Guarda los datos del cliente tipo persona
-	 * @param cliente define el objeto  cliente
+	 * Guarda los datos del cliente tipo persona en la persistencia
+	 * @param cliente define el objeto  cliente que se va guardar
 	 * @return
 	 * @throws Exception
 	 */
@@ -42,11 +43,11 @@ public class ClienteDAO {
 	}
 
 	/**
-	 * Valida las credenciales para inicio de sesion  del Cliente tipo Persona
+	 * Consulta las credenciales para inicio de sesion  del Cliente tipo Persona
 	 * @param correo identifica las credenciales del cliente para el acceso
 	 * @param clave identifica las credencailes del cliente para el acceso
 	 * @return clie retorna el objeto Cliente que cumpla con las credenciales de identificacion
-	 * @throws Exception
+	 * @throws Exception Control de Excepciones
 	 */
 	public Cliente login(String correo, String clave) throws Exception {
 		try {
@@ -71,8 +72,8 @@ public class ClienteDAO {
 
 	/**
 	 * Lista las personas Clientes
-	 * @return clientes retorna el objeto de tipo Cliente
-	 * @throws Exception
+	 * @return clientes retorna el objeto de tipo Cliente, devuelve una lista clientez
+	 * @throws Exception control de Excepciones
 	 */
 	public List<Cliente> listar() throws Exception {
 		try {
@@ -87,9 +88,9 @@ public class ClienteDAO {
 	}
 
 	/**
-	 * Edita las datos de Cliente tipo persona
-	 * @param cliente  define el objeto cliente
-	 * @throws Exception
+	 * Actualiza los datos de Cliente tipo persona en la persistecia
+	 * @param cliente  define el objeto cliente que se va actualizar
+	 * @throws Exception control de Excepciones
 	 */
 	public void editar(Cliente cliente) throws Exception {
 		try {
@@ -102,7 +103,7 @@ public class ClienteDAO {
 	/**
 	 * Metodo permite modificar las cuentas del cliente
 	 * @param cuenta objeto de tipo cuenta
-	 * @throws Exception
+	 * @throws Exception control de Excepciones
 	 */
 	public void editarCuenta(Cuenta cuenta) throws Exception {
 
@@ -118,8 +119,8 @@ public class ClienteDAO {
 	/**
 	 * Permite buscar al Cliente mediante la cedula
 	 * @param cedula  identificacion del usuario
-	 * @return clie retorna el objeto cliente
-	 * @throws Exception
+	 * @return clie retorna el objeto cliente que se esta buscando
+	 * @throws Exception control de Excepciones
 	 */
 	public Cliente buscar(String cedula) throws Exception {
 		try {
@@ -137,8 +138,8 @@ public class ClienteDAO {
 	
 	/**
 	 * Permite leer los datos del cliente mediante el id
-	 * @param id clave unica del cliente
-	 * @return id 
+	 * @param id clave unica del cliente que se va buscar
+	 * @return id  el objeto solicitado si existiera
 	 */
 	public Cliente read(int id) {
 		return em.find(Cliente.class, id);
@@ -146,8 +147,8 @@ public class ClienteDAO {
 
 	/**
 	 * Elimina  al cliente mediante la cedual de identificacion
-	 * @param cedula 
-	 * @throws Exception
+	 * @param cedula identificador del objeto que se desea eliminar
+	 * @throws Exception control de Excepciones
 	 */
 	public void eliminar(String cedula) throws Exception {
 		Cliente c = buscar(cedula);
@@ -155,10 +156,10 @@ public class ClienteDAO {
 	}
 
 	/**
-	 * Metodo par abuscar Cuenta del Cliente 
-	 * @param numero identifiacdor para buscar las respectivas cuentas
-	 * @return c retorno el objeto Cuenta
-	 * @throws Exception
+	 * Consulta para buscar Cuenta del Cliente  
+	 * @param numero identifiacdor para buscar la respectiva cuenta
+	 * @return c retorno el objeto Cuenta que se busca
+	 * @throws Exception  control de Excepciones
 	 */
 	public Cuenta buscarCuenta(String numero) throws Exception {
 		try {
@@ -174,7 +175,7 @@ public class ClienteDAO {
 	}
 	
 	/**
-	 * Metodo Busca al Cliente mediante el correo
+	 * Consular para buscar al Cliente mediante el correo
 	 * @param correo  identificador del cliente con el uso de las credenciales
 	 * @return c retorna un objeto de tipo cliente
 	 */
