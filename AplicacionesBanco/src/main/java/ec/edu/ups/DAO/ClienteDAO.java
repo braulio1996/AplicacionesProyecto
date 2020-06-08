@@ -22,8 +22,6 @@ public class ClienteDAO {
 	private EntityManager em;
 
 	
-	
-
 	/**
 	 * Guarda los datos del cliente tipo persona en la persistencia
 	 * @param cliente define el objeto  cliente que se va guardar
@@ -34,10 +32,8 @@ public class ClienteDAO {
 
 		try {
 			em.persist(cliente);
-
 		} catch (Exception e) {
 			throw new Exception(e.toString());
-
 		}
 		return true;
 	}
@@ -68,6 +64,7 @@ public class ClienteDAO {
 		return null;
 
 	}
+	
 	
 
 	/**
@@ -206,10 +203,7 @@ public class ClienteDAO {
 	}
 	
 	public List<Transaccion> transCliente(int c, LocalDate fechaDesde, LocalDate fechaHasta, String tipo) throws Exception {
-<<<<<<< HEAD
-=======
-		
->>>>>>> master
+
 		if (tipo.equals("Todos")) {
 			String jpql = "SELECT t "
 						+ "FROM Transaccion t "

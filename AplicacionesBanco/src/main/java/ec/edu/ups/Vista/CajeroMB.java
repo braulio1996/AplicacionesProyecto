@@ -132,7 +132,6 @@ public class CajeroMB {
 		try {
 			cliente=clienteON.buscar(cedula);
 			Double saldo = cliente.getCuenta().getSaldo();
-<<<<<<< HEAD
 			
 			if(saldo < t.getMonto()) {
 				this.mensaje = "ERROR. El monto es mayor al saldo ("+saldo+")";
@@ -169,29 +168,6 @@ public class CajeroMB {
 				System.out.println(this.mensaje);
 				return null;
 			}
-=======
-			Double total = saldo - t.getMonto();
-			Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
-			cuenta.setSaldo(total);
-			cliente.setCuenta(cuenta);
-			t.setSaldoCuenta(total);
-			t.setTipo("Retiro");
-			t.setDepositante("NaN");
-			t.setCliente(cliente);
-			t.setCajero(cajero);
-			t.setFecha(myDate);
-			transacciones.add(t);
-			cliente.setTransacciones(transacciones);
-			cajero.setTransacciones(transacciones);
-			clienteON.editar(cliente);
-			//cjON.editar(cajero);
-			t=new Transaccion();
-			cuenta=new Cuenta();
-			cajero =new Cajero();
-			cliente=new Cliente();
-			cedula="";
-			transacciones.clear();
->>>>>>> master
 		} catch (Exception e) {
 			e.printStackTrace();
 			
@@ -200,12 +176,7 @@ public class CajeroMB {
 			System.out.println(this.mensaje);
 			return null;
 		}
-		
-<<<<<<< HEAD
-		
-=======
-		return "depositosCajero?faces-redirect=true";
->>>>>>> master
+
 	}
 	/**
 	 * Este metodp busca la cliente donde regresa una cuenta en la que se va realiar el deposito,
@@ -254,9 +225,7 @@ public class CajeroMB {
 			e.printStackTrace();
 		}
 		
-		return "inicioCajero?faces-redirect=true";
+		return null;
 	}
-	
-
 
 }

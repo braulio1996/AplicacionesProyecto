@@ -88,10 +88,8 @@ public class AccesoDAO {
 	 */
 	public List<Acceso> listaAccesos(int cliente, String estado) throws Exception {
 		try {
-			System.out.println("Cliente: "+cliente+ " estado: "+estado);
 			
 			if(estado.equals("Todos")) {
-				System.out.println("Entro aqui");
 				String jpql = "SELECT a FROM Acceso a WHERE a.cliente = "+cliente + " ORDER BY a.codigo desc";
 				Query query = em.createQuery(jpql, Acceso.class);
 
