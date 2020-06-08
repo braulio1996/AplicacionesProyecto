@@ -84,6 +84,4 @@ public class Transaccion {
 		this.saldoCuenta = saldoCuenta;
 	}
 	
-	
-	
 }

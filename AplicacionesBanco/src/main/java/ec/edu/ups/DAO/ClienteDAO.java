@@ -206,8 +206,6 @@ public class ClienteDAO {
 	}
 	
 	public List<Transaccion> transCliente(int c, LocalDate fechaDesde, LocalDate fechaHasta, String tipo) throws Exception {
-	
-		System.out.println(fechaDesde + "-" + fechaHasta + " Tipo: "+tipo);
 		
 		if (tipo.equals("Todos")) {
 			String jpql = "SELECT t "

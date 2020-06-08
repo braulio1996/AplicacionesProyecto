@@ -74,6 +74,7 @@ public class LoginController {
 	List<Transaccion> listar;
 	@PostConstruct
 	public void init() {
+		java.util.Date fecha = new Date();
 		acceso= new Acceso();
 		administrador = new Administrador();
 		cliente = new Cliente();
@@ -90,8 +91,8 @@ public class LoginController {
 		listar=new ArrayList<>();
 		fechaHasta = LocalDate.now();
 		fechaDesde = clieOn.restarFecha(this.fechaHasta);
-		fechaDesde2=null;
-		fechaHasta2=null;
+		fechaDesde2=fecha;
+		fechaHasta2=fecha;
 
 	}
 	
@@ -315,7 +316,7 @@ public class LoginController {
 					accesos.add(acceso);
 					cliente.setAccesos(accesos);
 					clieOn.editar(cliente);
-					
+				
 					acceso = new Acceso();
 					accesos.clear();
 				}//Fin if (clieOn.loginC(this.correo, this.clave) != null)
@@ -350,10 +351,10 @@ public class LoginController {
 	public List<Transaccion> fechas() throws Exception {
 		SimpleDateFormat d=new SimpleDateFormat("yyyy-MM-dd");
 		System.out.println("-------------------- "+buscarTipo);
-		System.out.println("D-------------------- "+d.format(fechaDesde2));
-		System.out.println("H-------------------- "+d.format(fechaHasta2));
+		System.out.println("D-------------------- "+fechaDesde2);
+		System.out.println("H-------------------- "+fechaHasta2);
 		listar=clieOn.transCli(this.cliente.getCodigo(), clieOn.convert(fechaDesde2), clieOn.convert(fechaHasta2), buscarTipo);
-		System.out.println(listar.toString());
+
 		return listar;
 	}
 }//Fin ControladorLogin
