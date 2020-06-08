@@ -2,7 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:b="http://java.sun.com/jsf/html">
+
+
 <ui:composition template="index2.xhtml">
 	<ui:define name="title">Cliente</ui:define>
 
@@ -25,9 +30,8 @@
 	</ui:define>
 
 	<ui:define name="sidebar">
-		<li class="active"><a class="waves-effect waves-dark"
-			href="inicioCliente.xhtml" aria-expanded="false"> <img
-				style="padding-right: 10px;"
+		<li><a class="waves-effect waves-dark" href="inicioCliente.xhtml"
+			aria-expanded="false"> <img style="padding-right: 10px;"
 				src="../assets/images/menu/inicio16.png" alt="" /> <span
 				class="hide-menu">Inicio </span>
 		</a></li>
@@ -46,8 +50,9 @@
 				src="../assets/images/menu/solicitud16.png" alt="" /> <span
 				class="hide-menu">Solicitudes</span>
 		</a></li>
-		<li><a class="waves-effect waves-dark" href="accesos.xhtml"
-			aria-expanded="false"> <img style="padding-right: 10px;"
+		<li class="active"><a class="waves-effect waves-dark"
+			href="accesos.xhtml" aria-expanded="false"> <img
+				style="padding-right: 10px;"
 				src="../assets/images/menu/acceso16.png" alt="" /> <span
 				class="hide-menu">Accesos</span>
 		</a></li>
@@ -61,13 +66,12 @@
 				<li><a href="#">Externas</a></li>
 			</ul></li>
 	</ui:define>
-
 	<ui:define name="dashboard">
 		<div class="row page-titles">
 			<div class="col-md-5 col-12 align-self-center">
 				<h3 class="text-themecolor">Dashboard</h3>
 				<ol class="breadcrumb">
-					<a>Inicio</a>
+					<a>Accesos</a>
 				</ol>
 			</div>
 		</div>
@@ -77,39 +81,50 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
-					<div class="card-header">
-						<h4 class="card-title mb-0">Resumen cuenta de ahorros</h4>
+					<div class="card-header col-md-12">
+						<h:form class="form-material form-horizontal row">
+							<h:panelGrid columns="4" class="col-lg-12">
+								<div class="d-md-flex no-block">
+
+									<div class="col-lg-10">
+										<h4 class="card-title ">Control de accesos</h4>
+									</div>
+									<div class="ml-auto form-group col-lg-10">
+										<div class="col-lg-2" style="margin-top: 25px;">Buscar:</div>
+										<div class="col-lg-6">
+											<h:selectOneMenu styleClass="form-control custom-select"
+												value="#{login.estadoAcceso}">
+												<f:selectItem itemValue="Todos" itemLabel="Todos" />
+												<f:selectItem itemValue="Correcto" itemLabel="Correcto" />
+												<f:selectItem itemValue="Fallido" itemLabel="Fallido" />
+											</h:selectOneMenu>
+
+											<h:commandButton class="btn btn-project" type="submit"
+												value="Buscar" action="#{login.listarAcceso()}">
+												<f:ajax render="tblAcceso" execute="tblAcceso" />
+											</h:commandButton>
+										</div>
+									</div>
+								</div>
+							</h:panelGrid>
+						</h:form>
 					</div>
+
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{login.cliente}" var="cc">
+							<h:dataTable class="table" value="#{login.listarAcceso()}"
+								var="c">
 								<h:column>
-									<f:facet name="header">Propietario</f:facet>
-									#{login.cliente.nombre}
+									<f:facet name="header">Fecha-Transacción</f:facet>
+									#{c.fecha}
 								</h:column>
 								<h:column>
-									<h:dataTable class="table"
-										value="#{login.cliente.transacciones}" var="c">
-
-										<h:column>
-											<f:facet name="header">Fecha-Transacción</f:facet>
-											#{c.fecha}
-										</h:column>
-										<h:column>
-											<f:facet name="header">Movimiento</f:facet>
-									#{c.tipo}
+									<f:facet name="header">Movimiento</f:facet>
+									#{c.clave}
 								</h:column>
-										<h:column>
-											<f:facet name="header">Monto movimiento</f:facet>
-									#{c.monto}
-								</h:column>
-										<h:column>
-											<f:facet name="header">Acciones</f:facet>
-											<a href="cuentaAhorro.xhtml"> <img
-												src="../assets/images/menu/ver16.png" />
-											</a>
-										</h:column>
-									</h:dataTable>
+								<h:column>
+									<f:facet name="header">Monto movimiento</f:facet>
+									#{c.estado}
 								</h:column>
 							</h:dataTable>
 						</div>
@@ -117,44 +132,9 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="card-title mb-0">Resumen créditos aprobados</h4>
-					</div>
-					<div class="card-body collapse show">
-						<div class="table-responsive no-wrap">
-							<table class="table product-overview">
-								<thead>
-									<tr>
-										<th>#Crédito</th>
-										<th>Tipo</th>
-										<th>Valor Crédito</th>
-										<th>Saldo</th>
-										<th>Fecha-Vencimiento</th>
-										<th style="text-align: center;">Acción</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>123456789</td>
-										<td>Consumo</td>
-										<td>1000.00</td>
-										<td>200</td>
-										<td>18/05/2020/</td>
-										<td align="center"><a href=""> <img
-												src="../assets/images/menu/ver16.png" />
-										</a></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</ui:define>
 </ui:composition>
+
+
+
 </html>

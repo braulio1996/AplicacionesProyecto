@@ -36,8 +36,6 @@ public class AccesoON {
 
 	}
 
-
-
 	/**
 	 * Lista los accesos de la clase AccesosON
 	 * @return listar retorna listar  de AccesoON
@@ -45,7 +43,6 @@ public class AccesoON {
 	 */
 	public List<Acceso> listar() throws Exception {
 		return pdao.listar();
-
 	}
 
 	/**Edita las acciones de la clase AccesoON
@@ -63,7 +60,7 @@ public class AccesoON {
 	 * @return cliente, estado 
 	 * @throws Exception
 	 */
-	public Acceso listarAccesos(int cliente, String estado) throws Exception {
+	public List<Acceso> listarAccesos(int cliente, String estado) throws Exception {
 		return pdao.listaAccesos(cliente, estado);
 	}
 

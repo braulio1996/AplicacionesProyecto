@@ -85,21 +85,26 @@ public class AccesoDAO {
 	 * @return c retorna Acceso si esta consta en el registro
 	 * @throws Exception
 	 */
-	public Acceso listaAccesos(int cliente, String estado) throws Exception {
+	public List<Acceso> listaAccesos(int cliente, String estado) throws Exception {
 		try {
-			String jpql = "SELECT a FROM Acceso a WHERE a.cliente = :cliente and a.estado = :estado";
-			Query query = em.createQuery(jpql, Acceso.class);
-			query.setParameter("cliente", cliente);
-			query.setParameter("estado", estado);
-			Acceso c = (Acceso) query.getSingleResult();
-			return c;
+			System.out.println("Cliente: "+cliente+ " estado: "+estado);
+			
+			if(estado.equals("Todos")) {
+				System.out.println("Entro aqui");
+				String jpql = "SELECT a FROM Acceso a WHERE a.cliente = "+cliente + " ORDER BY a.codigo desc";
+				Query query = em.createQuery(jpql, Acceso.class);
 
+				return query.getResultList();
+			}else {
+				String jpql = "SELECT a FROM Acceso a WHERE a.cliente = "+ cliente + " AND a.estado LIKE '"+estado+"' ORDER BY a.codigo desc";
+				Query query = em.createQuery(jpql, Acceso.class);
+				return query.getResultList();
+			}
 		} catch (Exception e) {
 			throw new Exception(e.toString());
 		}
-
 	}
-
+	
 	/**
 	 * Permite leer los datos a buscar mediante la cliente
 	 * @param cliente

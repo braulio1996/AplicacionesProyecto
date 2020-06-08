@@ -160,8 +160,6 @@ public class AdministradorMB {
 	 */
 	
 	public String guardarCliente(Administrador administrador) throws Exception {
-		
-		
 		System.out.println(cliente.toString());
 		System.out.println(administrador.getNombre());
 		cliente.setTipo("Cliente");

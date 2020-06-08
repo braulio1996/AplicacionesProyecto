@@ -238,14 +238,7 @@
 				format : 'yyyy-mm-dd'
 			})
 		});
-		$(document).ready(function() {
-			$("#datepicker").datepicker({
-				onSelect : function() {
-					var dateObject = $(this).datepicker('getDate');
-					console.log(dateObject);
-				}
-			})
-		});
+
 		/*******************************************/
 		//Calendars are not linked
 		/*******************************************/
@@ -405,7 +398,7 @@
 	</script>
 	<script>
 		// MAterial Date picker
-		$('#mdate').bootstrapMaterialDatePicker({
+		$('#desde').bootstrapMaterialDatePicker({
 			weekStart : 0,
 			time : false
 		});

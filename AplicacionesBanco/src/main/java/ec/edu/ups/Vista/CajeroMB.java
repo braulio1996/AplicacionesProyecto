@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.BusyConversationException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -51,7 +52,7 @@ public class CajeroMB {
 	private Transaccion t;
 	private List<Transaccion> transacciones;
 	private String cedula;
-	
+	private String mensaje;
 	
 	@PostConstruct
 	public void init() {
@@ -61,8 +62,17 @@ public class CajeroMB {
 		transacciones = new ArrayList<>();
 		cedula="";
 		cuenta=new Cuenta();
+		mensaje ="";
 	}
-	
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+
 	public Cuenta getCuenta() {
 		return cuenta;
 	}
@@ -122,31 +132,52 @@ public class CajeroMB {
 		try {
 			cliente=clienteON.buscar(cedula);
 			Double saldo = cliente.getCuenta().getSaldo();
-			Double total = saldo - t.getMonto();
-			Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
-			cuenta.setSaldo(total);
-			cliente.setCuenta(cuenta);
-			t.setTipo("Retiro");
-			t.setDepositante("NaN");
-			t.setCliente(cliente);
-			t.setCajero(cajero);
-			t.setFecha(myDate);
-			transacciones.add(t);
-			cliente.setTransacciones(transacciones);
-			cajero.setTransacciones(transacciones);
-			clienteON.editar(cliente);
-			//cjON.editar(cajero);
-			t=new Transaccion();
-			cuenta=new Cuenta();
-			cajero =new Cajero();
-			cliente=new Cliente();
-			cedula="";
-			transacciones.clear();
+			
+			if(saldo < t.getMonto()) {
+				this.mensaje = "ERROR. El monto es mayor al saldo ("+saldo+")";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", this.mensaje ); 
+				System.out.println(this.mensaje);
+				return null;
+			}else {
+				Double total = saldo - t.getMonto();
+				Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
+				cuenta.setSaldo(total);
+				cliente.setCuenta(cuenta);
+				t.setTipo("Retiro");
+				t.setDepositante("NaN");
+				t.setCliente(cliente);
+				t.setCajero(cajero);
+				t.setFecha(myDate);
+				transacciones.add(t);
+				cliente.setTransacciones(transacciones);
+				cajero.setTransacciones(transacciones);
+				clienteON.editar(cliente);
+				//cjON.editar(cajero);
+				t=new Transaccion();
+				cuenta=new Cuenta();
+				cajero =new Cajero();
+				cliente=new Cliente();
+				
+				cedula="";
+				transacciones.clear();
+				
+				this.mensaje = "Retiro realizado correctamente";
+				
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto", this.mensaje );
+				
+				System.out.println(this.mensaje);
+				return null;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			
+			this.mensaje = e.getMessage();
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", this.mensaje ); 
+			System.out.println(this.mensaje);
+			return null;
 		}
 		
-		return null;
+		
 	}
 	/**
 	 * Este metodp busca la cliente donde regresa una cuenta en la que se va realiar el deposito,
