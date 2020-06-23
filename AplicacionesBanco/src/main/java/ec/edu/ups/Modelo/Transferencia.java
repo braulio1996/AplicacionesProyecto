@@ -116,12 +116,6 @@ public class Transferencia {
 		this.concepto = concepto;
 	}
 
-	@Override
-	public String toString() {
-		return "Transferencia [codigo=" + codigo + ", tipo=" + tipo + ", fecha=" + fecha + ", institucion="
-				+ institucion + ", tipoCuenta=" + tipoCuenta + ", numeroCuenta=" + numeroCuenta + ", monto=" + monto
-				+ ", identificacion=" + identificacion + ", nombre=" + nombre + ", correo=" + correo + ", concepto="
-				+ concepto + "]";
-	}
+
 
 }
