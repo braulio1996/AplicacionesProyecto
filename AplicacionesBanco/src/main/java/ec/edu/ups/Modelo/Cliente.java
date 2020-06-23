@@ -25,6 +25,7 @@ public class Cliente extends Persona {
 	private List<SolicitudCredito> solicitudesCredito;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Transaccion>transacciones;
+	
 		
 	public String getTelefono() {
 		return telefono;
@@ -65,5 +66,7 @@ public class Cliente extends Persona {
 	public void setTransacciones(List<Transaccion> transacciones) {
 		this.transacciones = transacciones;
 	}
+
+
 	
 }

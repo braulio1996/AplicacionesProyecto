@@ -144,19 +144,21 @@ public class ClienteON {
 	 * @return un objeto Trasferencia con los parametros anteriores
 	 * @throws Exception control de excepciones
 	 */
-	public Transferencia trasferencia(Cliente cliente, String cuentaDestino, Double monto) throws Exception {
+	public Transferencia trasferencia(String cuentaOrigen, String cuentaDestino, Double monto) throws Exception {
 		trasferencia = new Transferencia();
-
+        List<Transferencia>transferencias = new ArrayList<>();
 		Cuenta cuentaD = pdao.buscarCuenta(cuentaDestino);
-		Cuenta cuentaO = cliente.getCuenta();
+		Cuenta cuentaO = pdao.buscarCuenta(cuentaOrigen);
 		Double saldoDestino = cuentaD.getSaldo() + monto;
 		Double salgoOrigen = cuentaO.getSaldo() - monto;
 		trasferencia.setMonto(monto);
 		trasferencia.setNumeroCuenta(cuentaDestino);
 		cuentaD.setSaldo(saldoDestino);
+		cuentaO.setSaldo(salgoOrigen);
+		transferencias.add(trasferencia);
+		cuentaO.setTransferencias(transferencias);
 		pdao.editarCuenta(cuentaD);
 		pdao.editarCuenta(cuentaO);
-
 		return trasferencia;
 	}
 	
@@ -226,7 +228,7 @@ public class ClienteON {
 		}
 			return null;
 	}
-	public static Date ParseFecha(String fecha)
+	public  Date ParseFecha(String fecha)
     {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaDate = null;
