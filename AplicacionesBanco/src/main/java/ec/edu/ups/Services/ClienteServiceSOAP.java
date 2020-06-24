@@ -61,7 +61,7 @@ private String estadoAcceso;
 //	return listado;
 //}
 @WebMethod
-public Respuesta transferencia(Cuenta cliente, String cuentaDestino,Double monto) {
+public Respuesta transferencia(String cliente, String cuentaDestino,Double monto) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
@@ -75,7 +75,7 @@ public Respuesta transferencia(Cuenta cliente, String cuentaDestino,Double monto
 	
 }
 @WebMethod
-public Respuesta retiro(Cajero cajero, String cedula, Double monto) {
+public Respuesta retiro(String cajero, String cedula, Double monto) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
@@ -90,7 +90,7 @@ return r;
 }
 
 @WebMethod
-public Respuesta deposito(Cajero cajero, String cedula, Double monto,String depositante) {
+public Respuesta deposito(String cajero, String cedula, Double monto,String depositante) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
@@ -103,7 +103,13 @@ public Respuesta deposito(Cajero cajero, String cedula, Double monto,String depo
 	return r;
 
 }
-public Persona login(String correo,String clave) throws Exception {
+
+
+@WebMethod
+
+
+public Respuesta login(String correo,String clave) throws Exception {
+
 	
 	boolean client = false;
 	Acceso acceso = new Acceso();
@@ -112,34 +118,15 @@ public Persona login(String correo,String clave) throws Exception {
 	String mensaje="";
 	Respuesta r=new  Respuesta();
 	try {
-		if (adminON.loginC(correo, clave) != null) {
-			client = true;
-			Administrador administrador = adminON.loginC(correo,clave);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-			mensaje="Ingreso Exitoso";
-            r.setCodigo(0);
-            r.setMensaje(mensaje);
-			return administrador;
-		}
-
-		if (crediON.loginC(correo, clave) != null) {
-			client = true;
-			JefeCredito credito = crediON.loginC(correo, clave);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-			mensaje="Ingreso Exitoso";
-            r.setCodigo(0);
-            r.setMensaje(mensaje);
-			return credito;
-		}
-
+		
 		if (caon.loginC(correo,clave).getTipo().equalsIgnoreCase("cajero")) {
 			client = true;
 			Cajero cajero = caon.loginC(correo,clave);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 			mensaje="Ingreso Exitoso";
-            r.setCodigo(0);
+            r.setCodigo(Integer.parseInt(cajero.getCedula()));
             r.setMensaje(mensaje);
-			return cajero;
+			return r;
 		} // Fin if (caon.loginC(this.correo,
 			// this.clave).getTipo().equalsIgnoreCase("cajero"))
 
@@ -172,9 +159,9 @@ public Persona login(String correo,String clave) throws Exception {
 				this.estadoAcceso = "Todos";
 				this.buscarTipo = "Todos";
 				mensaje="Ingreso Exitoso";
-	            r.setCodigo(0);
+	            r.setCodigo(Integer.parseInt(cliente.getCuenta().getNumero()));
 	            r.setMensaje(mensaje);
-				return cliente;
+				return r;
 			} else {
 				mensaje= "ERROR. Usuario Incorrecto";
 	            r.setCodigo(1);

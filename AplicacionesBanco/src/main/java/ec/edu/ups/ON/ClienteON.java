@@ -144,11 +144,12 @@ public class ClienteON {
 	 * @return un objeto Trasferencia con los parametros anteriores
 	 * @throws Exception control de excepciones
 	 */
-	public String trasferencia(Cuenta cuentaOrigen, String cuentaDestino, Double monto)  {
+	public String trasferencia(String cuentaO, String cuentaDestino, Double monto)  {
 		Transferencia trasferencia = new Transferencia();
         List<Transferencia>transferencias = new ArrayList<>();
         String mensaje="";
         try {
+        	Cuenta cuentaOrigen = pdao.buscarCuenta(cuentaO);
         	Cuenta cuentaD = pdao.buscarCuenta(cuentaDestino);
         	if(cuentaD==null) {
         		mensaje="No existe la Cuenta";

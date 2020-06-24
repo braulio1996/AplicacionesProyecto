@@ -112,13 +112,13 @@ public class CajeroON {
 	public long contar() {
 		return pdao.contar();
 	}
-	public String retiro(Cajero cajero, String cedula, Double monto) {
+	public String retiro(String cajeroID, String cedula, Double monto) {
 		List<Transaccion>transacciones = new ArrayList<Transaccion>();
 		Transaccion t= new Transaccion();
 		String mensaje="";
 		try {
 			
-
+			Cajero cajero =pdao.buscar(cajeroID);
 			Cliente cliente=clienteON.buscar(cedula);
 			Double saldo = cliente.getCuenta().getSaldo();
 			
@@ -168,12 +168,12 @@ public class CajeroON {
 		}
 
 	}
-	public String depositosC(Cajero cajero, String cedula, Double monto,String depositante) {
+	public String depositosC(String cajeroID, String cedula, Double monto,String depositante) {
 		Transaccion t= new Transaccion();
 		List<Transaccion>transacciones = new ArrayList<>();
 		String mensaje="";
 		try {
-			
+			Cajero cajero =pdao.buscar(cajeroID);
 			Cliente cliente=clienteON.buscar(cedula);
 			if(cliente==null) {
 				mensaje="No existe la Cuenta";
