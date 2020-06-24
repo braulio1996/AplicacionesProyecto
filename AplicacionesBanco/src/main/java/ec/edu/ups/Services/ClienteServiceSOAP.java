@@ -103,6 +103,7 @@ public Respuesta deposito(Cajero cajero, String cedula, Double monto,String depo
 	return r;
 
 }
+@WebMethod
 public Persona login(String correo,String clave) throws Exception {
 	
 	boolean client = false;
