@@ -110,19 +110,19 @@ public class ClienteMB {
 	 * en la cual incluira la fecha de transacion 
 	 * @return
 	 */
-	public String trasferencia() {
-		try {
-			t = cON.trasferencia(cliente, cuentaDestino, monto);
-			t.setFecha(new SimpleDateFormat("dd-MM-yyyy").format(myDate));
-			transferencias.add(t);
-			System.out.println(t.toString());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
-	}
+//	public String trasferencia() {
+//		try {
+//			t = cON.trasferencia(cliente, cuentaDestino, monto);
+//			t.setFecha(new SimpleDateFormat("dd-MM-yyyy").format(myDate));
+//			transferencias.add(t);
+//			System.out.println(t.toString());
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return null;
+//	}
 
 	/**
 	 * 	Este metodo genra cuenta del del usuario
