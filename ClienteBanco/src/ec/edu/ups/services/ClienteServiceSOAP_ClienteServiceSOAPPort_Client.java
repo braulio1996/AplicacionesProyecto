@@ -64,7 +64,6 @@ public final class ClienteServiceSOAP_ClienteServiceSOAPPort_Client {
         java.lang.Double _retiro_arg2 = (double) 10;
         port.retiro(_retiro_arg0, _retiro_arg1, _retiro_arg2);
 
-
        }
 //        {
 //        System.out.println("Invoking transferencia...");
