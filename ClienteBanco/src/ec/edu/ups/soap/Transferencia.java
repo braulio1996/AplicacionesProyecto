@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para retiro complex type.
+ * <p>Clase Java para transferencia complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="retiro">
+ * &lt;complexType name="transferencia">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -28,12 +28,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "retiro", propOrder = {
+@XmlType(name = "transferencia", propOrder = {
     "arg0",
     "arg1",
     "arg2"
 })
-public class Retiro {
+public class Transferencia {
 
     protected String arg0;
     protected String arg1;

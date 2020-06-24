@@ -103,20 +103,21 @@ public Respuesta deposito(String cajero, String cedula, Double monto,String depo
 	return r;
 
 }
+@WebMethod
 public Respuesta login(String correo,String clave) throws Exception {
 	
 	boolean client = false;
 	Acceso acceso = new Acceso();
 	List<Acceso>accesos=new ArrayList<Acceso>();
 	Cliente cliente;
-	String mensaje="";
+	String mensaje;
 	Respuesta r=new  Respuesta();
 	try {
 		
 		if (caon.loginC(correo,clave).getTipo().equalsIgnoreCase("cajero")) {
 			client = true;
 			Cajero cajero = caon.loginC(correo,clave);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
+			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 			mensaje="Ingreso Exitoso";
             r.setCodigo(Integer.parseInt(cajero.getCedula()));
             r.setMensaje(mensaje);
@@ -131,7 +132,7 @@ public Respuesta login(String correo,String clave) throws Exception {
 			if (con.loginC(correo,clave) != null) {
 				client = true;
 				cliente = con.loginC(correo,clave);
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
+				//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 				
 
 				con.enviarCorreo(correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
