@@ -48,15 +48,15 @@ public final class ClienteServiceSOAP_ClienteServiceSOAPPort_Client {
         ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
         ClienteServiceSOAP port = ss.getClienteServiceSOAPPort();  
         
-//        {
-//        System.out.println("Depositos");
-//        java.lang.String _deposito_arg0 = "0106220471";
-//        java.lang.String _deposito_arg1 = "0106220478";
-//        java.lang.Double _deposito_arg2 = (double) 100;
-//        port.deposito(_deposito_arg0, _deposito_arg1, _deposito_arg2);
-//
-//
-//        }
+        {
+        System.out.println("Depositos");
+        java.lang.String _deposito_arg0 = "0106220471";
+        java.lang.String _deposito_arg1 = "0106220478";
+        java.lang.Double _deposito_arg2 = (double) 100;
+        port.deposito(_deposito_arg0, _deposito_arg1, _deposito_arg2);
+
+
+        }
         {
         System.out.println("Retiro");
         java.lang.String _retiro_arg0 = "0106220471";
@@ -65,15 +65,14 @@ public final class ClienteServiceSOAP_ClienteServiceSOAPPort_Client {
         port.retiro(_retiro_arg0, _retiro_arg1, _retiro_arg2);
 
        }
-//        {
-//        System.out.println("Invoking transferencia...");
-//        java.lang.String _transferencia_arg0 = "4529867291";
-//        java.lang.String _transferencia_arg1 = "1651877268";
-//        java.lang.Double _transferencia_arg2 = 50.0;
-//        port.transferencia(_transferencia_arg0, _transferencia_arg1, _transferencia_arg2);
-//
-//
-//        }
+        {
+        System.out.println("Invoking transferencia...");
+        java.lang.String _transferencia_arg0 = "4529867291";
+        java.lang.String _transferencia_arg1 = "1651877268";
+        java.lang.Double _transferencia_arg2 = 50.0;
+        port.transferencia(_transferencia_arg0, _transferencia_arg1, _transferencia_arg2);
+
+        }
 
         System.exit(0);
     }
