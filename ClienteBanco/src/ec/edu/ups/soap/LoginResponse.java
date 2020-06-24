@@ -1,5 +1,5 @@
 
-package ec.edu.ups.services;
+package ec.edu.ups.soap;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para transferencia2Response complex type.
+ * <p>Clase Java para loginResponse complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="transferencia2Response">
+ * &lt;complexType name="loginResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "transferencia2Response", propOrder = {
+@XmlType(name = "loginResponse", propOrder = {
     "_return"
 })
-public class Transferencia2Response {
+public class LoginResponse {
 
     @XmlElement(name = "return")
     protected Respuesta _return;

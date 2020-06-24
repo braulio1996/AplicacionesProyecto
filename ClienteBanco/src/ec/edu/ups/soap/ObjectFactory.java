@@ -1,5 +1,5 @@
 
-package ec.edu.ups.services;
+package ec.edu.ups.soap;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the ec.edu.ups.services package. 
+ * generated in the ec.edu.ups.soap package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -35,7 +35,7 @@ public class ObjectFactory {
     private final static QName _RetiroResponse_QNAME = new QName("http://Services.ups.edu.ec/", "retiroResponse");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ec.edu.ups.services
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ec.edu.ups.soap
      * 
      */
     public ObjectFactory() {
@@ -111,78 +111,6 @@ public class ObjectFactory {
      */
     public Exception createException() {
         return new Exception();
-    }
-
-    /**
-     * Create an instance of {@link Transferencia }
-     * 
-     */
-    public Transferencia createTransferencia() {
-        return new Transferencia();
-    }
-
-    /**
-     * Create an instance of {@link Persona }
-     * 
-     */
-    public Persona createPersona() {
-        return new Persona();
-    }
-
-    /**
-     * Create an instance of {@link Acceso }
-     * 
-     */
-    public Acceso createAcceso() {
-        return new Acceso();
-    }
-
-    /**
-     * Create an instance of {@link Cajero }
-     * 
-     */
-    public Cajero createCajero() {
-        return new Cajero();
-    }
-
-    /**
-     * Create an instance of {@link Cliente }
-     * 
-     */
-    public Cliente createCliente() {
-        return new Cliente();
-    }
-
-    /**
-     * Create an instance of {@link Transaccion }
-     * 
-     */
-    public Transaccion createTransaccion() {
-        return new Transaccion();
-    }
-
-    /**
-     * Create an instance of {@link SolicitudCredito }
-     * 
-     */
-    public SolicitudCredito createSolicitudCredito() {
-        return new SolicitudCredito();
-    }
-
-    /**
-     * Create an instance of {@link Cuenta }
-     * 
-     */
-    public Cuenta createCuenta() {
-        return new Cuenta();
-    }
-
-    /**
-     * Create an instance of {@link LocalDate }
-     * 
-     */
-    public LocalDate createLocalDate() {
-        return new LocalDate();
     }
 
     /**

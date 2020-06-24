@@ -1,5 +1,5 @@
 
-package ec.edu.ups.services;
+package ec.edu.ups.soap;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

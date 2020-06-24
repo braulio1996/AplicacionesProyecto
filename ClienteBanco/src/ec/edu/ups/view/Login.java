@@ -7,9 +7,11 @@ import java.net.URL;
 import javax.swing.JOptionPane;
 import javax.xml.namespace.QName;
 
-import ec.edu.ups.services.ClienteServiceSOAP;
-import ec.edu.ups.services.ClienteServiceSOAPService;
-import ec.edu.ups.services.Exception_Exception;
+import ec.edu.ups.soap.ClienteServiceSOAP;
+import ec.edu.ups.soap.ClienteServiceSOAPService;
+import ec.edu.ups.soap.Exception_Exception;
+
+
 
 
 
@@ -115,7 +117,7 @@ public class Login extends javax.swing.JFrame {
          java.lang.String _login_arg0 = txtCorreo.getText();
          java.lang.String _login_arg1 = txtPassword.getText();
          try {
-        	 ec.edu.ups.services.Respuesta _login__return = port.login(_login_arg0, _login_arg1);
+        	 ec.edu.ups.soap.Respuesta _login__return = port.login(_login_arg0, _login_arg1);
              System.out.println("login.result=" + _login__return);
              JOptionPane.showMessageDialog(
              	    null, 

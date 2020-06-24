@@ -1,5 +1,5 @@
 
-package ec.edu.ups.services;
+package ec.edu.ups.soap;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para transferencia2 complex type.
+ * <p>Clase Java para retiro complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="transferencia2">
+ * &lt;complexType name="retiro">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="arg0" type="{http://Services.ups.edu.ec/}cuenta" minOccurs="0"/>
+ *         &lt;element name="arg0" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
  *       &lt;/sequence>
@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "transferencia2", propOrder = {
+@XmlType(name = "retiro", propOrder = {
     "arg0",
     "arg1",
     "arg2"
 })
-public class Transferencia2 {
+public class Retiro {
 
-    protected Cuenta arg0;
+    protected String arg0;
     protected String arg1;
     protected Double arg2;
 
@@ -44,10 +44,10 @@ public class Transferencia2 {
      * 
      * @return
      *     possible object is
-     *     {@link Cuenta }
+     *     {@link String }
      *     
      */
-    public Cuenta getArg0() {
+    public String getArg0() {
         return arg0;
     }
 
@@ -56,10 +56,10 @@ public class Transferencia2 {
      * 
      * @param value
      *     allowed object is
-     *     {@link Cuenta }
+     *     {@link String }
      *     
      */
-    public void setArg0(Cuenta value) {
+    public void setArg0(String value) {
         this.arg0 = value;
     }
 
