@@ -31,8 +31,6 @@ public class CajeroON {
 	private ClienteON clienteON;
 	@Inject
 	private CuentaON cON;
-	private String mensaje;
-	private Transaccion t;
 	LocalDate myDate = LocalDate.now();
 	
 
@@ -114,18 +112,21 @@ public class CajeroON {
 	public long contar() {
 		return pdao.contar();
 	}
-	public void retiro(String cajeroID, String cedula, Double monto) {
+	public String retiro(Cajero cajero, String cedula, Double monto) {
+		List<Transaccion>transacciones = new ArrayList<Transaccion>();
+		Transaccion t= new Transaccion();
+		String mensaje="";
 		try {
-			List<Transaccion>transacciones = new ArrayList<Transaccion>();
-			Cajero cajero=pdao.buscar(cajeroID);
+			
+
 			Cliente cliente=clienteON.buscar(cedula);
 			Double saldo = cliente.getCuenta().getSaldo();
 			
 			if(saldo < monto) {
-				this.mensaje = "ERROR. El monto es mayor al saldo ("+saldo+")";
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", this.mensaje ); 
-				System.out.println(this.mensaje);
-				//return null;
+				mensaje = "ERROR. El monto es mayor al saldo ("+saldo+")";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", mensaje ); 
+
+				return mensaje;
 			}else {
 				Double total = saldo - monto;
 				Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
@@ -150,29 +151,33 @@ public class CajeroON {
 //				cedula="";
 //				transacciones.clear();
 				
-				this.mensaje = "Retiro realizado correctamente";
+				mensaje = "Retiro realizado correctamente";
 				
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto", this.mensaje );
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto", mensaje );
 				
-				System.out.println(this.mensaje);
-				//return null;
+			
+				return mensaje;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			this.mensaje = e.getMessage();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", this.mensaje ); 
-			System.out.println(this.mensaje);
-			//return null;
+			mensaje = e.getMessage();
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", mensaje ); 
+			
+			return mensaje;
 		}
 
 	}
-	public void depositosC(String cajeroID, String cedula, Double monto) {
-	
+	public String depositosC(Cajero cajero, String cedula, Double monto,String depositante) {
+		Transaccion t= new Transaccion();
+		List<Transaccion>transacciones = new ArrayList<>();
+		String mensaje="";
 		try {
-			List<Transaccion>transacciones = new ArrayList<>();
-			Cajero cajero=pdao.buscar(cajeroID);
+			
 			Cliente cliente=clienteON.buscar(cedula);
+			if(cliente==null) {
+				mensaje="No existe la Cuenta";
+			}else {
 			Double saldo = cliente.getCuenta().getSaldo();
 			double total = saldo + monto;
 			Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
@@ -184,24 +189,27 @@ public class CajeroON {
 			t.setCajero(cajero);
 			t.setFecha(myDate);
 			t.setMonto(monto);
-			t.setDepositante(t.getDepositante());
+			t.setDepositante(depositante);
 			transacciones.add(t);
 			
 			cliente.setTransacciones(transacciones);
 			cajero.setTransacciones(transacciones);
+			System.out.println("----------------- "+t);
 			clienteON.editar(cliente);
+			mensaje="Deposito exitoso";
+			}
 //			t=new Transaccion();
 //			cuenta=new Cuenta();
 //			cajero =new Cajero();
 //			cliente=new Cliente();
 //			cedula="";
 //			transacciones.clear();
-			System.out.println("-------------------------------  "+transacciones);			
+		
 		} catch (Exception e) {
-			e.printStackTrace();
+			mensaje=e.toString();
 		}
 		
-		//return null;
+		return mensaje;
 	}
 
 }
