@@ -2,7 +2,6 @@ package ec.edu.ups.vista;
 
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
 
 public class Principal extends javax.swing.JFrame {
@@ -23,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
 		dskPane.add(login);
 
 		this.setExtendedState(Principal.MAXIMIZED_BOTH);
-		this.setTitle("SISTEMA FACTURACION");
+		this.setTitle("BANCA");
     }//Fin Constructor
 
     
@@ -50,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
         mnuDeposito = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(getIconImage());
+
 
         dskPane.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -202,12 +201,6 @@ public class Principal extends javax.swing.JFrame {
             dskPane.add(dep);	
         
     }                                           
-
-    @Override 
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/logo.png"));
-        return retValue;
-    }
 
 
     /**

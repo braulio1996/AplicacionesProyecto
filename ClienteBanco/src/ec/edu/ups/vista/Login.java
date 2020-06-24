@@ -43,7 +43,7 @@ public class Login extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/correo.png"))); // NOI18N
+
         jLabel1.setText("Correo:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -53,7 +53,7 @@ public class Login extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clave.png"))); // NOI18N
+
         jLabel2.setText("Contraseña:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -98,7 +98,6 @@ public class Login extends javax.swing.JInternalFrame {
         jPanel2Layout.rowHeights = new int[] {0};
         jPanel2.setLayout(jPanel2Layout);
 
-        btn_Entrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrar.png"))); // NOI18N
         btn_Entrar.setText("Entrar");
         btn_Entrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_Entrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -112,7 +111,7 @@ public class Login extends javax.swing.JInternalFrame {
         gridBagConstraints.gridy = 0;
         jPanel2.add(btn_Entrar, gridBagConstraints);
 
-        btn_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salida.png"))); // NOI18N
+       
         btn_Salir.setText(" Salir ");
         btn_Salir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_Salir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -152,7 +151,15 @@ public class Login extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>                        
 
-    private void btn_EntrarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void btn_EntrarActionPerformed(java.awt.event.ActionEvent evt) {             
+    	
+    	Deposito d = new Deposito();
+    	d.setVisible(true);
+    	
+    	Principal.dskPane.add(d);
+    	Principal.mnuPrincipal.setVisible(true);
+    	this.dispose();
+    	
         /*try {
             String nombre = txtNombre.getText();
             String clave = txtClave.getText();
