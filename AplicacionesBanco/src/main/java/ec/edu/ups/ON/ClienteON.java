@@ -41,7 +41,7 @@ public class ClienteON {
 	@Inject
 	private ClienteDAO pdao;
 
-	private Transferencia trasferencia;
+	
 	private List<Transferencia> trasferencias;
 
 
@@ -144,22 +144,35 @@ public class ClienteON {
 	 * @return un objeto Trasferencia con los parametros anteriores
 	 * @throws Exception control de excepciones
 	 */
-	public Transferencia trasferencia(String cuentaOrigen, String cuentaDestino, Double monto) throws Exception {
-		trasferencia = new Transferencia();
+	public String trasferencia(Cuenta cuentaOrigen, String cuentaDestino, Double monto)  {
+		Transferencia trasferencia = new Transferencia();
         List<Transferencia>transferencias = new ArrayList<>();
-		Cuenta cuentaD = pdao.buscarCuenta(cuentaDestino);
-		Cuenta cuentaO = pdao.buscarCuenta(cuentaOrigen);
-		Double saldoDestino = cuentaD.getSaldo() + monto;
-		Double salgoOrigen = cuentaO.getSaldo() - monto;
-		trasferencia.setMonto(monto);
-		trasferencia.setNumeroCuenta(cuentaDestino);
-		cuentaD.setSaldo(saldoDestino);
-		cuentaO.setSaldo(salgoOrigen);
-		transferencias.add(trasferencia);
-		cuentaO.setTransferencias(transferencias);
-		pdao.editarCuenta(cuentaD);
-		pdao.editarCuenta(cuentaO);
-		return trasferencia;
+        String mensaje="";
+        try {
+        	Cuenta cuentaD = pdao.buscarCuenta(cuentaDestino);
+        	if(cuentaD==null) {
+        		mensaje="No existe la Cuenta";
+        	}else if(cuentaOrigen.getSaldo()<monto) {
+        		
+        	mensaje="ERROR. El monto es mayor al saldo ("+monto+")";
+        	}else {
+    		Double saldoDestino = cuentaD.getSaldo() + monto;
+    		Double salgoOrigen = cuentaOrigen.getSaldo() - monto;
+    		trasferencia.setMonto(monto);
+    		trasferencia.setNumeroCuenta(cuentaDestino);
+    		cuentaD.setSaldo(saldoDestino);
+    		cuentaOrigen.setSaldo(salgoOrigen);
+    		transferencias.add(trasferencia);
+    		cuentaOrigen.setTransferencias(transferencias);
+    		pdao.editarCuenta(cuentaD);
+    		pdao.editarCuenta(cuentaOrigen);
+    		mensaje="Transferencia Exitosa";
+        }
+        }catch (Exception e) {
+			mensaje=e.getMessage();
+		}
+		return mensaje;
+	
 	}
 	
 	
