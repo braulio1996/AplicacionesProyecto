@@ -6,14 +6,21 @@ package ec.edu.ups.vista;
  */
 
 import java.awt.event.KeyEvent;
+import java.net.URL;
+
 import javax.swing.JOptionPane;
+import javax.xml.namespace.QName;
+
+import ec.edu.ups.soap.ClienteServiceSOAP;
+import ec.edu.ups.soap.ClienteServiceSOAPService;
+import ec.edu.ups.soap.Cuenta;
 
 /**
  *
  * @author Pillaga
  */
 public class Retiros extends javax.swing.JInternalFrame {
-
+private Cuenta cuenta;
     /**
      * Creates new form Retiros
      */
@@ -263,13 +270,38 @@ public class Retiros extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "ERROR..! Por favor, ingrese solo números");
         }//Fin if
     }                               
-
+    private static final QName SERVICE_NAME = new QName("http://Services.ups.edu.ec/", "ClienteServiceSOAPService");
+    URL wsdlURL = ClienteServiceSOAPService.WSDL_LOCATION;
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {                                             
-       
+    	ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
+        ClienteServiceSOAP port = ss.getClienteServiceSOAPPort();
+        
+        System.out.println("Invoking buscarCuenta...");
+        java.lang.String _buscarCuenta_arg0 = txtDNI.getText();
+        ec.edu.ups.soap.Cuenta _buscarCuenta__return = port.buscarCuenta(_buscarCuenta_arg0);
+        System.out.println("buscarCuenta.result=" + _buscarCuenta__return);
+        cuenta=_buscarCuenta__return;
+        JOptionPane.showMessageDialog(
+        	    null, 
+        	    "cuenta de"+_buscarCuenta__return.getCliente().getNombre(), 
+        	    "Cuenta",
+        	    JOptionPane.INFORMATION_MESSAGE);
+        txtCorreo.setText(_buscarCuenta__return.getCliente().getCorreo());
+        txtDireccion.setText(_buscarCuenta__return.getCliente().getDireccion());
+        txtNombre.setText(_buscarCuenta__return.getCliente().getTelefono());
+        
+
     }                                            
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {                                           
-       
+    	ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
+        ClienteServiceSOAP port = ss.getClienteServiceSOAPPort(); 
+        System.out.println("Invoking retiro...");
+        java.lang.String _retiro_arg0 = "";
+        ec.edu.ups.soap.Cuenta _retiro_arg1 = cuenta;
+        java.lang.Double _retiro_arg2 = 0.0;
+        ec.edu.ups.soap.Respuesta _retiro__return = port.retiro(_retiro_arg0, _retiro_arg1, _retiro_arg2);
+        System.out.println("retiro.result=" + _retiro__return);
     }                                          
 
 

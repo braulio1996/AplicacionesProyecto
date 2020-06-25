@@ -3,10 +3,16 @@ package ec.edu.ups.vista;
 
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.xml.namespace.QName;
+
+import ec.edu.ups.soap.ClienteServiceSOAP;
+import ec.edu.ups.soap.ClienteServiceSOAPService;
+import ec.edu.ups.soap.Exception_Exception;
 
 public class Login extends javax.swing.JInternalFrame {
 
@@ -150,15 +156,42 @@ public class Login extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>                        
-
+    private static final QName SERVICE_NAME = new QName("http://Services.ups.edu.ec/", "ClienteServiceSOAPService");
+    URL wsdlURL = ClienteServiceSOAPService.WSDL_LOCATION;
     private void btn_EntrarActionPerformed(java.awt.event.ActionEvent evt) {             
+    	ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
+        ClienteServiceSOAP port = ss.getClienteServiceSOAPPort(); 
+        java.lang.String _login_arg0 = txtNombre.getText();
+        java.lang.String _login_arg1 = txtClave.getText();
+        try {
+            ec.edu.ups.soap.Respuesta _login__return = port.login(_login_arg0, _login_arg1);
+            System.out.println("login.result=" + _login__return);
+            JOptionPane.showMessageDialog(
+            	    null, 
+            	    "Correcto", 
+            	    "Ingreso "+_login__return.getMensaje(),
+            	    JOptionPane.INFORMATION_MESSAGE); 
+            if(_login__return.getCodigo()==0) {
+            	 Deposito d = new Deposito();
+             	 d.setVisible(true);
+             	 Retiros r= new  Retiros();
+             	 r.setVisible(true);
+             	Principal.dskPane.add(d,r);
+             	Principal.mnuPrincipal.setVisible(true);
+             	this.dispose();
+            }else if(_login__return.getCodigo()==1) {
+            	Transacciones t= new Transacciones();
+            	t.setVisible(true);
+             	Principal.dskPane.add(t);
+             	Principal.mnuPrincipal.setVisible(true);
+             	this.dispose();
+            }
+           
+        } catch (Exception_Exception e) { 
+            System.out.println("Expected exception: Exception has occurred.");
+            System.out.println(e.toString());
+        }
     	
-    	Deposito d = new Deposito();
-    	d.setVisible(true);
-    	
-    	Principal.dskPane.add(d);
-    	Principal.mnuPrincipal.setVisible(true);
-    	this.dispose();
     	
         /*try {
             String nombre = txtNombre.getText();

@@ -25,6 +25,7 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Deposito_QNAME = new QName("http://Services.ups.edu.ec/", "deposito");
+    private final static QName _BuscarCuentaResponse_QNAME = new QName("http://Services.ups.edu.ec/", "buscarCuentaResponse");
     private final static QName _Retiro_QNAME = new QName("http://Services.ups.edu.ec/", "retiro");
     private final static QName _Transferencia2Response_QNAME = new QName("http://Services.ups.edu.ec/", "transferencia2Response");
     private final static QName _Transferencia2_QNAME = new QName("http://Services.ups.edu.ec/", "transferencia2");
@@ -32,6 +33,7 @@ public class ObjectFactory {
     private final static QName _Login_QNAME = new QName("http://Services.ups.edu.ec/", "login");
     private final static QName _LoginResponse_QNAME = new QName("http://Services.ups.edu.ec/", "loginResponse");
     private final static QName _DepositoResponse_QNAME = new QName("http://Services.ups.edu.ec/", "depositoResponse");
+    private final static QName _BuscarCuenta_QNAME = new QName("http://Services.ups.edu.ec/", "buscarCuenta");
     private final static QName _RetiroResponse_QNAME = new QName("http://Services.ups.edu.ec/", "retiroResponse");
 
     /**
@@ -58,6 +60,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link BuscarCuenta }
+     * 
+     */
+    public BuscarCuenta createBuscarCuenta() {
+        return new BuscarCuenta();
+    }
+
+    /**
      * Create an instance of {@link RetiroResponse }
      * 
      */
@@ -79,6 +89,14 @@ public class ObjectFactory {
      */
     public Deposito createDeposito() {
         return new Deposito();
+    }
+
+    /**
+     * Create an instance of {@link BuscarCuentaResponse }
+     * 
+     */
+    public BuscarCuentaResponse createBuscarCuentaResponse() {
+        return new BuscarCuentaResponse();
     }
 
     /**
@@ -114,6 +132,78 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Transferencia }
+     * 
+     */
+    public Transferencia createTransferencia() {
+        return new Transferencia();
+    }
+
+    /**
+     * Create an instance of {@link Persona }
+     * 
+     */
+    public Persona createPersona() {
+        return new Persona();
+    }
+
+    /**
+     * Create an instance of {@link Acceso }
+     * 
+     */
+    public Acceso createAcceso() {
+        return new Acceso();
+    }
+
+    /**
+     * Create an instance of {@link Cajero }
+     * 
+     */
+    public Cajero createCajero() {
+        return new Cajero();
+    }
+
+    /**
+     * Create an instance of {@link Cliente }
+     * 
+     */
+    public Cliente createCliente() {
+        return new Cliente();
+    }
+
+    /**
+     * Create an instance of {@link SolicitudCredito }
+     * 
+     */
+    public SolicitudCredito createSolicitudCredito() {
+        return new SolicitudCredito();
+    }
+
+    /**
+     * Create an instance of {@link Transaccion }
+     * 
+     */
+    public Transaccion createTransaccion() {
+        return new Transaccion();
+    }
+
+    /**
+     * Create an instance of {@link Cuenta }
+     * 
+     */
+    public Cuenta createCuenta() {
+        return new Cuenta();
+    }
+
+    /**
+     * Create an instance of {@link LocalDate }
+     * 
+     */
+    public LocalDate createLocalDate() {
+        return new LocalDate();
+    }
+
+    /**
      * Create an instance of {@link Respuesta }
      * 
      */
@@ -128,6 +218,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "deposito")
     public JAXBElement<Deposito> createDeposito(Deposito value) {
         return new JAXBElement<Deposito>(_Deposito_QNAME, Deposito.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarCuentaResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "buscarCuentaResponse")
+    public JAXBElement<BuscarCuentaResponse> createBuscarCuentaResponse(BuscarCuentaResponse value) {
+        return new JAXBElement<BuscarCuentaResponse>(_BuscarCuentaResponse_QNAME, BuscarCuentaResponse.class, null, value);
     }
 
     /**
@@ -191,6 +290,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "depositoResponse")
     public JAXBElement<DepositoResponse> createDepositoResponse(DepositoResponse value) {
         return new JAXBElement<DepositoResponse>(_DepositoResponse_QNAME, DepositoResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarCuenta }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "buscarCuenta")
+    public JAXBElement<BuscarCuenta> createBuscarCuenta(BuscarCuenta value) {
+        return new JAXBElement<BuscarCuenta>(_BuscarCuenta_QNAME, BuscarCuenta.class, null, value);
     }
 
     /**
