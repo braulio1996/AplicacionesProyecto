@@ -17,7 +17,11 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="arg0" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+<<<<<<< HEAD
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+=======
+ *         &lt;element name="arg1" type="{http://Services.ups.edu.ec/}cuenta" minOccurs="0"/>
+>>>>>>> master
  *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
  *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -38,7 +42,11 @@ import javax.xml.bind.annotation.XmlType;
 public class Deposito {
 
     protected String arg0;
+<<<<<<< HEAD
     protected String arg1;
+=======
+    protected Cuenta arg1;
+>>>>>>> master
     protected Double arg2;
     protected String arg3;
 
@@ -71,10 +79,17 @@ public class Deposito {
      * 
      * @return
      *     possible object is
+<<<<<<< HEAD
      *     {@link String }
      *     
      */
     public String getArg1() {
+=======
+     *     {@link Cuenta }
+     *     
+     */
+    public Cuenta getArg1() {
+>>>>>>> master
         return arg1;
     }
 
@@ -83,10 +98,17 @@ public class Deposito {
      * 
      * @param value
      *     allowed object is
+<<<<<<< HEAD
      *     {@link String }
      *     
      */
     public void setArg1(String value) {
+=======
+     *     {@link Cuenta }
+     *     
+     */
+    public void setArg1(Cuenta value) {
+>>>>>>> master
         this.arg1 = value;
     }
 

@@ -10,9 +10,9 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class Transacciones {
+public class Transacciones extends javax.swing.JInternalFrame {
 
-	private JFrame frame;
+	
 	private JTextField txtCuenta;
 	private JTextField txtNombre;
 	private JTextField txtCorreo;
@@ -21,18 +21,7 @@ public class Transacciones {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Transacciones window = new Transacciones();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
@@ -45,14 +34,11 @@ public class Transacciones {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 493, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+	
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 477, 261);
-		frame.getContentPane().add(tabbedPane);
+
 		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("New tab", null, panel, null);

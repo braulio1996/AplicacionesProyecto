@@ -112,14 +112,14 @@ public class CajeroON {
 	public long contar() {
 		return pdao.contar();
 	}
-	public String retiro(String cajeroID, String cedula, Double monto) {
+	public String retiro(String cajeroID, Cuenta cuenta, Double monto) {
 		List<Transaccion>transacciones = new ArrayList<Transaccion>();
 		Transaccion t= new Transaccion();
 		String mensaje="";
 		try {
 			
 			Cajero cajero =pdao.buscar(cajeroID);
-			Cliente cliente=clienteON.buscar(cedula);
+			Cliente cliente=clienteON.buscar(cuenta.getCliente().getCedula());
 			Double saldo = cliente.getCuenta().getSaldo();
 			
 			if(saldo < monto) {
@@ -129,7 +129,6 @@ public class CajeroON {
 				return mensaje;
 			}else {
 				Double total = saldo - monto;
-				Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
 				cuenta.setSaldo(total);
 				cliente.setCuenta(cuenta);
 				t.setTipo("Retiro");
@@ -168,19 +167,18 @@ public class CajeroON {
 		}
 
 	}
-	public String depositosC(String cajeroID, String cedula, Double monto,String depositante) {
+	public String depositosC(String cajeroID, Cuenta cuenta, Double monto,String depositante) {
 		Transaccion t= new Transaccion();
 		List<Transaccion>transacciones = new ArrayList<>();
 		String mensaje="";
 		try {
 			Cajero cajero =pdao.buscar(cajeroID);
-			Cliente cliente=clienteON.buscar(cedula);
+			Cliente cliente=clienteON.buscar(cuenta.getCliente().getCedula());
 			if(cliente==null) {
 				mensaje="No existe la Cuenta";
 			}else {
 			Double saldo = cliente.getCuenta().getSaldo();
 			double total = saldo + monto;
-			Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
 			cuenta.setSaldo(total);
 			cliente.setCuenta(cuenta);
 			t.setSaldoCuenta(total);

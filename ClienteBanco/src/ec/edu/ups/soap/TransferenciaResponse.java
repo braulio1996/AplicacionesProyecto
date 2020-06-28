@@ -8,12 +8,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
+<<<<<<< HEAD:ClienteBanco/src/ec/edu/ups/soap/TransferenciaResponse.java
  * <p>Clase Java para transferenciaResponse complex type.
+=======
+ * <p>Clase Java para transferencia2Response complex type.
+>>>>>>> master:ClienteBanco/src/ec/edu/ups/soap/Transferencia2Response.java
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
+<<<<<<< HEAD:ClienteBanco/src/ec/edu/ups/soap/TransferenciaResponse.java
  * &lt;complexType name="transferenciaResponse">
+=======
+ * &lt;complexType name="transferencia2Response">
+>>>>>>> master:ClienteBanco/src/ec/edu/ups/soap/Transferencia2Response.java
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -27,10 +35,17 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+<<<<<<< HEAD:ClienteBanco/src/ec/edu/ups/soap/TransferenciaResponse.java
 @XmlType(name = "transferenciaResponse", propOrder = {
     "_return"
 })
 public class TransferenciaResponse {
+=======
+@XmlType(name = "transferencia2Response", propOrder = {
+    "_return"
+})
+public class Transferencia2Response {
+>>>>>>> master:ClienteBanco/src/ec/edu/ups/soap/Transferencia2Response.java
 
     @XmlElement(name = "return")
     protected Respuesta _return;

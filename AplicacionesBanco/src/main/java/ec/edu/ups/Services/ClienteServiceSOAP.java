@@ -6,17 +6,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+<<<<<<< HEAD
 import javax.faces.context.FacesContext;
+=======
+
+>>>>>>> master
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import ec.edu.ups.Modelo.Acceso;
+<<<<<<< HEAD
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.JefeCredito;
+=======
+import ec.edu.ups.Modelo.Cajero;
+import ec.edu.ups.Modelo.Cliente;
+import ec.edu.ups.Modelo.Cuenta;
+>>>>>>> master
 import ec.edu.ups.Modelo.Persona;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
@@ -43,6 +53,7 @@ private LocalDate fechaHasta;
 private String buscarTipo;
 private String estadoAcceso;
 
+<<<<<<< HEAD
 //@WebMethod
 //public String saludo(String nombre) {
 //	return "Hola "+nombre;
@@ -66,6 +77,14 @@ public Respuesta transferencia(String cliente, String cuentaDestino,Double monto
 	try {
 		r.setCodigo(1);
 		r.setMensaje(con.trasferencia(cliente, cuentaDestino, monto));
+=======
+@WebMethod
+public Respuesta transferencia2(String cuentaOrigen, String cuentaDestino,Double monto, String nombre,String correo) {
+	Respuesta r = new Respuesta();
+	try {
+		r.setCodigo(1);
+		r.setMensaje(con.transferencia(cuentaOrigen, cuentaDestino, monto,nombre,correo));
+>>>>>>> master
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		r.setCodigo(0);
@@ -75,11 +94,19 @@ public Respuesta transferencia(String cliente, String cuentaDestino,Double monto
 	
 }
 @WebMethod
+<<<<<<< HEAD
 public Respuesta retiro(String cajero, String cedula, Double monto) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
 		r.setMensaje(caon.retiro(cajero, cedula,monto));
+=======
+public Respuesta retiro(String cajero, Cuenta cuenta, Double monto) {
+	Respuesta r = new Respuesta();
+	try {
+		r.setCodigo(1);
+		r.setMensaje(caon.retiro(cajero, cuenta,monto));
+>>>>>>> master
 	}catch (Exception e) {
 		r.setCodigo(0);
 		r.setMensaje("Error "+e.getMessage());
@@ -90,11 +117,19 @@ return r;
 }
 
 @WebMethod
+<<<<<<< HEAD
 public Respuesta deposito(String cajero, String cedula, Double monto,String depositante) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
 		r.setMensaje(caon.depositosC(cajero, cedula,monto,depositante));
+=======
+public Respuesta deposito(String cajero, Cuenta cuenta, Double monto,String depositante) {
+	Respuesta r = new Respuesta();
+	try {
+		r.setCodigo(1);
+		r.setMensaje(caon.depositosC(cajero, cuenta,monto,depositante));
+>>>>>>> master
 	}catch (Exception e) {
 		r.setCodigo(0);
 		r.setMensaje("Error "+e.getMessage());
@@ -103,12 +138,23 @@ public Respuesta deposito(String cajero, String cedula, Double monto,String depo
 	return r;
 
 }
+<<<<<<< HEAD
 @WebMethod
 public Respuesta login(String correo,String clave) throws Exception {
+=======
+
+
+@WebMethod
+
+
+public Respuesta login(String correo,String clave) throws Exception {
+
+>>>>>>> master
 	
 	boolean client = false;
 	Acceso acceso = new Acceso();
 	List<Acceso>accesos=new ArrayList<Acceso>();
+<<<<<<< HEAD
 	Cliente cliente;
 	String mensaje;
 	Respuesta r=new  Respuesta();
@@ -128,14 +174,43 @@ public Respuesta login(String correo,String clave) throws Exception {
 	} catch (Exception e) {
 		e.printStackTrace();
 
+=======
+	Cliente cliente= new Cliente();
+	String mensaje;
+	Respuesta r=new  Respuesta();
+	try {
+		//if(caon.loginC(correo,clave)!=null) {
+			if (caon.loginC(correo,clave).getTipo().equalsIgnoreCase("cajero")) {
+				client = true;
+				Cajero cajero = caon.loginC(correo,clave);
+				//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
+				mensaje="cajero";
+	            r.setCodigo(0);
+	            r.setMensaje(cajero.getCedula());
+				return r;
+			} // Fin if (caon.loginC(this.correo,
+				// this.clave).getTipo().equalsIgnoreCase("cajero"))
+		//}
+		
+
+	} catch (Exception e) {
+>>>>>>> master
 		if (con.buscarCorreo(correo) != null) {
 			if (con.loginC(correo,clave) != null) {
 				client = true;
 				cliente = con.loginC(correo,clave);
 				//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
+<<<<<<< HEAD
 				
 
 				con.enviarCorreo(correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
+=======
+				con.enviarCorreo(correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
+				mensaje="cliente";
+				//int c=Integer.parseInt();
+	            r.setCodigo(1);
+	            r.setMensaje(cliente.getCuenta().getNumero());
+>>>>>>> master
 				acceso.setClave(clave);
 				acceso.setEstado("Correcto");
 				acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
@@ -153,9 +228,13 @@ public Respuesta login(String correo,String clave) throws Exception {
 				this.buscarTipo = "Todos";
 				this.estadoAcceso = "Todos";
 				this.buscarTipo = "Todos";
+<<<<<<< HEAD
 				mensaje="Ingreso Exitoso";
 	            r.setCodigo(Integer.parseInt(cliente.getCuenta().getNumero()));
 	            r.setMensaje(mensaje);
+=======
+				
+>>>>>>> master
 				return r;
 			} else {
 				mensaje= "ERROR. Usuario Incorrecto";
@@ -163,7 +242,11 @@ public Respuesta login(String correo,String clave) throws Exception {
 	            r.setMensaje(mensaje);
 				con.enviarCorreo(correo, "Acceso a la cuenta",
 						"Su intento ha sido fallido, con contraseña: " + clave);
+<<<<<<< HEAD
 				cliente = con.loginC(correo,clave);
+=======
+				//cliente = con.loginC(correo,clave);
+>>>>>>> master
 				acceso.setClave(clave);
 				acceso.setEstado("Fallido");
 				acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
@@ -184,4 +267,19 @@ public Respuesta login(String correo,String clave) throws Exception {
 
 	return null;
 }// Fin metodo login
+<<<<<<< HEAD
+=======
+@WebMethod
+public Cuenta buscarCuenta(String numero) {
+	
+	try {
+		return con.buscarCuenta(numero);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+		
+}	
+>>>>>>> master
 }

@@ -144,7 +144,7 @@ public class ClienteON {
 	 * @return un objeto Trasferencia con los parametros anteriores
 	 * @throws Exception control de excepciones
 	 */
-	public String trasferencia(String cuentaO, String cuentaDestino, Double monto)  {
+	public String transferencia(String cuentaO, String cuentaDestino, Double monto,String nombre,String correo)  {
 		Transferencia trasferencia = new Transferencia();
         List<Transferencia>transferencias = new ArrayList<>();
         String mensaje="";
@@ -161,6 +161,10 @@ public class ClienteON {
     		Double salgoOrigen = cuentaOrigen.getSaldo() - monto;
     		trasferencia.setMonto(monto);
     		trasferencia.setNumeroCuenta(cuentaDestino);
+    		trasferencia.setNombre(nombre);
+    		trasferencia.setCorreo(correo);
+    		trasferencia.setTipoCuenta("Directa");
+    		trasferencia.setConcepto("NaN");
     		cuentaD.setSaldo(saldoDestino);
     		cuentaOrigen.setSaldo(salgoOrigen);
     		transferencias.add(trasferencia);
