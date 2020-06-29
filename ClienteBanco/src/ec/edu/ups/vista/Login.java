@@ -15,8 +15,26 @@ import ec.edu.ups.soap.ClienteServiceSOAPService;
 import ec.edu.ups.soap.Exception_Exception;
 
 public class Login extends javax.swing.JInternalFrame {
+private String cajero;
+private String cuenta;
 
-    public Login() {
+    public String getCajero() {
+	return cajero;
+}
+
+public void setCajero(String cajero) {
+	this.cajero = cajero;
+}
+
+public String getCuenta() {
+	return cuenta;
+}
+
+public void setCuenta(String cuenta) {
+	this.cuenta = cuenta;
+}
+
+	public Login() {
         initComponents();
         this.setTitle("FORMULARIO DE REGISTRO");
         
@@ -172,19 +190,23 @@ public class Login extends javax.swing.JInternalFrame {
             	    "Ingreso "+_login__return.getMensaje(),
             	    JOptionPane.INFORMATION_MESSAGE); 
             if(_login__return.getCodigo()==0) {
+            	cajero=_login__return.getMensaje();
+            	setCajero(_login__return.getMensaje());
             	 Deposito d = new Deposito();
+            	 Deposito.cajero=getCajero();
              	 d.setVisible(true);
              	 Retiros r= new  Retiros();
+             	 Retiros.cajero=getCajero();
              	 r.setVisible(true);
              	Principal.dskPane.add(d,r);
              	Principal.mnuPrincipal.setVisible(true);
              	this.dispose();
             }else if(_login__return.getCodigo()==1) {
-            	Transacciones t= new Transacciones();
-            	t.setVisible(true);
-             	Principal.dskPane.add(t);
-             	Principal.mnuPrincipal.setVisible(true);
-             	this.dispose();
+            	cuenta=_login__return.getMensaje();
+            	setCuenta(_login__return.getMensaje());
+            	Transacciones t = new Transacciones();
+               
+
             }
            
         } catch (Exception_Exception e) { 

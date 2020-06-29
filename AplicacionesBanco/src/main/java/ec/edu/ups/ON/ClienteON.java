@@ -40,7 +40,7 @@ public class ClienteON {
 
 	@Inject
 	private ClienteDAO pdao;
-
+	Date myDate = new Date();
 	
 	private List<Transferencia> trasferencias;
 
@@ -94,8 +94,8 @@ public class ClienteON {
 	 * @throws Exception control de excepciones
 	 */
 
-	public Cliente buscar(String correo) throws Exception {
-		return pdao.buscar(correo);
+	public Cliente buscar(String cedula) throws Exception {
+		return pdao.buscar(cedula);
 	}
 
 	/** Metod que busca un cliente por su codigo o Id
@@ -144,30 +144,26 @@ public class ClienteON {
 	 * @return un objeto Trasferencia con los parametros anteriores
 	 * @throws Exception control de excepciones
 	 */
-	public String transferencia(String cuentaO, String cuentaDestino, Double monto,String nombre,String correo)  {
-		Transferencia trasferencia = new Transferencia();
+
+	
+	public String transferencia(String cuentaO, Transferencia transferencia)  {
+		
         List<Transferencia>transferencias = new ArrayList<>();
-        String mensaje="";
+        String mensaje;
         try {
         	Cuenta cuentaOrigen = pdao.buscarCuenta(cuentaO);
-        	Cuenta cuentaD = pdao.buscarCuenta(cuentaDestino);
+        	Cuenta cuentaD = pdao.buscarCuenta(transferencia.getNumeroCuenta());
         	if(cuentaD==null) {
         		mensaje="No existe la Cuenta";
-        	}else if(cuentaOrigen.getSaldo()<monto) {
+        	}else if(cuentaOrigen.getSaldo()<transferencia.getMonto()) {
         		
-        	mensaje="ERROR. El monto es mayor al saldo ("+monto+")";
+        	mensaje="ERROR. El monto es mayor al saldo ("+transferencia.getMonto()+")";
         	}else {
-    		Double saldoDestino = cuentaD.getSaldo() + monto;
-    		Double salgoOrigen = cuentaOrigen.getSaldo() - monto;
-    		trasferencia.setMonto(monto);
-    		trasferencia.setNumeroCuenta(cuentaDestino);
-    		trasferencia.setNombre(nombre);
-    		trasferencia.setCorreo(correo);
-    		trasferencia.setTipoCuenta("Directa");
-    		trasferencia.setConcepto("NaN");
+    		Double saldoDestino = cuentaD.getSaldo() + transferencia.getMonto();
+    		Double salgoOrigen = cuentaOrigen.getSaldo() - transferencia.getMonto();
     		cuentaD.setSaldo(saldoDestino);
     		cuentaOrigen.setSaldo(salgoOrigen);
-    		transferencias.add(trasferencia);
+    		transferencias.add(transferencia);
     		cuentaOrigen.setTransferencias(transferencias);
     		pdao.editarCuenta(cuentaD);
     		pdao.editarCuenta(cuentaOrigen);
@@ -179,7 +175,6 @@ public class ClienteON {
 		return mensaje;
 	
 	}
-	
 	
 	/**
 	 * Busca al cliente mediante el correo

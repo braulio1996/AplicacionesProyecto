@@ -25,25 +25,15 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Deposito_QNAME = new QName("http://Services.ups.edu.ec/", "deposito");
-<<<<<<< HEAD
-    private final static QName _Retiro_QNAME = new QName("http://Services.ups.edu.ec/", "retiro");
-    private final static QName _Exception_QNAME = new QName("http://Services.ups.edu.ec/", "Exception");
-    private final static QName _TransferenciaResponse_QNAME = new QName("http://Services.ups.edu.ec/", "transferenciaResponse");
-    private final static QName _Login_QNAME = new QName("http://Services.ups.edu.ec/", "login");
-    private final static QName _LoginResponse_QNAME = new QName("http://Services.ups.edu.ec/", "loginResponse");
-    private final static QName _Transferencia_QNAME = new QName("http://Services.ups.edu.ec/", "transferencia");
-    private final static QName _DepositoResponse_QNAME = new QName("http://Services.ups.edu.ec/", "depositoResponse");
-=======
-    private final static QName _BuscarCuentaResponse_QNAME = new QName("http://Services.ups.edu.ec/", "buscarCuentaResponse");
     private final static QName _Retiro_QNAME = new QName("http://Services.ups.edu.ec/", "retiro");
     private final static QName _Transferencia2Response_QNAME = new QName("http://Services.ups.edu.ec/", "transferencia2Response");
     private final static QName _Transferencia2_QNAME = new QName("http://Services.ups.edu.ec/", "transferencia2");
     private final static QName _Exception_QNAME = new QName("http://Services.ups.edu.ec/", "Exception");
     private final static QName _Login_QNAME = new QName("http://Services.ups.edu.ec/", "login");
+    private final static QName _BuscarClienteResponse_QNAME = new QName("http://Services.ups.edu.ec/", "buscarClienteResponse");
+    private final static QName _BuscarCliente_QNAME = new QName("http://Services.ups.edu.ec/", "buscarCliente");
     private final static QName _LoginResponse_QNAME = new QName("http://Services.ups.edu.ec/", "loginResponse");
     private final static QName _DepositoResponse_QNAME = new QName("http://Services.ups.edu.ec/", "depositoResponse");
-    private final static QName _BuscarCuenta_QNAME = new QName("http://Services.ups.edu.ec/", "buscarCuenta");
->>>>>>> master
     private final static QName _RetiroResponse_QNAME = new QName("http://Services.ups.edu.ec/", "retiroResponse");
 
     /**
@@ -54,22 +44,19 @@ public class ObjectFactory {
     }
 
     /**
-<<<<<<< HEAD
-     * Create an instance of {@link Transferencia }
-     * 
-     */
-    public Transferencia createTransferencia() {
-        return new Transferencia();
-    }
-
-    /**
-=======
->>>>>>> master
      * Create an instance of {@link DepositoResponse }
      * 
      */
     public DepositoResponse createDepositoResponse() {
         return new DepositoResponse();
+    }
+
+    /**
+     * Create an instance of {@link BuscarCliente }
+     * 
+     */
+    public BuscarCliente createBuscarCliente() {
+        return new BuscarCliente();
     }
 
     /**
@@ -81,17 +68,6 @@ public class ObjectFactory {
     }
 
     /**
-<<<<<<< HEAD
-=======
-     * Create an instance of {@link BuscarCuenta }
-     * 
-     */
-    public BuscarCuenta createBuscarCuenta() {
-        return new BuscarCuenta();
-    }
-
-    /**
->>>>>>> master
      * Create an instance of {@link RetiroResponse }
      * 
      */
@@ -100,8 +76,6 @@ public class ObjectFactory {
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Create an instance of {@link Transferencia2 }
      * 
      */
@@ -110,7 +84,6 @@ public class ObjectFactory {
     }
 
     /**
->>>>>>> master
      * Create an instance of {@link Deposito }
      * 
      */
@@ -119,17 +92,6 @@ public class ObjectFactory {
     }
 
     /**
-<<<<<<< HEAD
-=======
-     * Create an instance of {@link BuscarCuentaResponse }
-     * 
-     */
-    public BuscarCuentaResponse createBuscarCuentaResponse() {
-        return new BuscarCuentaResponse();
-    }
-
-    /**
->>>>>>> master
      * Create an instance of {@link Retiro }
      * 
      */
@@ -138,8 +100,6 @@ public class ObjectFactory {
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Create an instance of {@link Transferencia2Response }
      * 
      */
@@ -148,12 +108,19 @@ public class ObjectFactory {
     }
 
     /**
->>>>>>> master
      * Create an instance of {@link Login }
      * 
      */
     public Login createLogin() {
         return new Login();
+    }
+
+    /**
+     * Create an instance of {@link BuscarClienteResponse }
+     * 
+     */
+    public BuscarClienteResponse createBuscarClienteResponse() {
+        return new BuscarClienteResponse();
     }
 
     /**
@@ -165,83 +132,11 @@ public class ObjectFactory {
     }
 
     /**
-<<<<<<< HEAD
-     * Create an instance of {@link TransferenciaResponse }
+     * Create an instance of {@link ClienteSoap }
      * 
      */
-    public TransferenciaResponse createTransferenciaResponse() {
-        return new TransferenciaResponse();
-=======
-     * Create an instance of {@link Transferencia }
-     * 
-     */
-    public Transferencia createTransferencia() {
-        return new Transferencia();
-    }
-
-    /**
-     * Create an instance of {@link Persona }
-     * 
-     */
-    public Persona createPersona() {
-        return new Persona();
-    }
-
-    /**
-     * Create an instance of {@link Acceso }
-     * 
-     */
-    public Acceso createAcceso() {
-        return new Acceso();
-    }
-
-    /**
-     * Create an instance of {@link Cajero }
-     * 
-     */
-    public Cajero createCajero() {
-        return new Cajero();
-    }
-
-    /**
-     * Create an instance of {@link Cliente }
-     * 
-     */
-    public Cliente createCliente() {
-        return new Cliente();
-    }
-
-    /**
-     * Create an instance of {@link SolicitudCredito }
-     * 
-     */
-    public SolicitudCredito createSolicitudCredito() {
-        return new SolicitudCredito();
-    }
-
-    /**
-     * Create an instance of {@link Transaccion }
-     * 
-     */
-    public Transaccion createTransaccion() {
-        return new Transaccion();
-    }
-
-    /**
-     * Create an instance of {@link Cuenta }
-     * 
-     */
-    public Cuenta createCuenta() {
-        return new Cuenta();
-    }
-
-    /**
-     * Create an instance of {@link LocalDate }
-     * 
-     */
-    public LocalDate createLocalDate() {
-        return new LocalDate();
->>>>>>> master
+    public ClienteSoap createClienteSoap() {
+        return new ClienteSoap();
     }
 
     /**
@@ -262,18 +157,6 @@ public class ObjectFactory {
     }
 
     /**
-<<<<<<< HEAD
-=======
-     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarCuentaResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "buscarCuentaResponse")
-    public JAXBElement<BuscarCuentaResponse> createBuscarCuentaResponse(BuscarCuentaResponse value) {
-        return new JAXBElement<BuscarCuentaResponse>(_BuscarCuentaResponse_QNAME, BuscarCuentaResponse.class, null, value);
-    }
-
-    /**
->>>>>>> master
      * Create an instance of {@link JAXBElement }{@code <}{@link Retiro }{@code >}}
      * 
      */
@@ -283,23 +166,6 @@ public class ObjectFactory {
     }
 
     /**
-<<<<<<< HEAD
-     * Create an instance of {@link JAXBElement }{@code <}{@link Exception }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "Exception")
-    public JAXBElement<Exception> createException(Exception value) {
-        return new JAXBElement<Exception>(_Exception_QNAME, Exception.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TransferenciaResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "transferenciaResponse")
-    public JAXBElement<TransferenciaResponse> createTransferenciaResponse(TransferenciaResponse value) {
-        return new JAXBElement<TransferenciaResponse>(_TransferenciaResponse_QNAME, TransferenciaResponse.class, null, value);
-=======
      * Create an instance of {@link JAXBElement }{@code <}{@link Transferencia2Response }{@code >}}
      * 
      */
@@ -324,7 +190,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "Exception")
     public JAXBElement<Exception> createException(Exception value) {
         return new JAXBElement<Exception>(_Exception_QNAME, Exception.class, null, value);
->>>>>>> master
     }
 
     /**
@@ -337,6 +202,24 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarClienteResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "buscarClienteResponse")
+    public JAXBElement<BuscarClienteResponse> createBuscarClienteResponse(BuscarClienteResponse value) {
+        return new JAXBElement<BuscarClienteResponse>(_BuscarClienteResponse_QNAME, BuscarClienteResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarCliente }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "buscarCliente")
+    public JAXBElement<BuscarCliente> createBuscarCliente(BuscarCliente value) {
+        return new JAXBElement<BuscarCliente>(_BuscarCliente_QNAME, BuscarCliente.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
      * 
      */
@@ -346,39 +229,12 @@ public class ObjectFactory {
     }
 
     /**
-<<<<<<< HEAD
-     * Create an instance of {@link JAXBElement }{@code <}{@link Transferencia }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "transferencia")
-    public JAXBElement<Transferencia> createTransferencia(Transferencia value) {
-        return new JAXBElement<Transferencia>(_Transferencia_QNAME, Transferencia.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DepositoResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "depositoResponse")
     public JAXBElement<DepositoResponse> createDepositoResponse(DepositoResponse value) {
         return new JAXBElement<DepositoResponse>(_DepositoResponse_QNAME, DepositoResponse.class, null, value);
-=======
-     * Create an instance of {@link JAXBElement }{@code <}{@link DepositoResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "depositoResponse")
-    public JAXBElement<DepositoResponse> createDepositoResponse(DepositoResponse value) {
-        return new JAXBElement<DepositoResponse>(_DepositoResponse_QNAME, DepositoResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarCuenta }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "buscarCuenta")
-    public JAXBElement<BuscarCuenta> createBuscarCuenta(BuscarCuenta value) {
-        return new JAXBElement<BuscarCuenta>(_BuscarCuenta_QNAME, BuscarCuenta.class, null, value);
->>>>>>> master
     }
 
     /**

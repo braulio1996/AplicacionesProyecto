@@ -112,15 +112,16 @@ public class CajeroON {
 	public long contar() {
 		return pdao.contar();
 	}
-	public String retiro(String cajeroID, Cuenta cuenta, Double monto) {
+	public String retiro(String cajeroID, String clienteID, Double monto) {
 		List<Transaccion>transacciones = new ArrayList<Transaccion>();
 		Transaccion t= new Transaccion();
 		String mensaje="";
 		try {
 			
 			Cajero cajero =pdao.buscar(cajeroID);
-			Cliente cliente=clienteON.buscar(cuenta.getCliente().getCedula());
+			Cliente cliente=clienteON.buscar(clienteID);
 			Double saldo = cliente.getCuenta().getSaldo();
+			Cuenta cuenta=clienteON.buscarCuenta(cliente.getCuenta().getNumero());
 			
 			if(saldo < monto) {
 				mensaje = "ERROR. El monto es mayor al saldo ("+saldo+")";
@@ -137,6 +138,7 @@ public class CajeroON {
 				t.setCajero(cajero);
 				t.setFecha(myDate);
 				t.setMonto(monto);
+				t.setSaldoCuenta(total);
 				transacciones.add(t);
 				cliente.setTransacciones(transacciones);
 				cajero.setTransacciones(transacciones);
@@ -167,18 +169,16 @@ public class CajeroON {
 		}
 
 	}
-	public String depositosC(String cajeroID, Cuenta cuenta, Double monto,String depositante) {
+	public String depositosC(String cajeroID, String clienteID, Double monto,String depositante) {
 		Transaccion t= new Transaccion();
 		List<Transaccion>transacciones = new ArrayList<>();
 		String mensaje="";
 		try {
 			Cajero cajero =pdao.buscar(cajeroID);
-			Cliente cliente=clienteON.buscar(cuenta.getCliente().getCedula());
-			if(cliente==null) {
-				mensaje="No existe la Cuenta";
-			}else {
+			Cliente cliente= clienteON.buscar(clienteID);
 			Double saldo = cliente.getCuenta().getSaldo();
 			double total = saldo + monto;
+			Cuenta cuenta=clienteON.buscarCuenta(cliente.getCuenta().getNumero());
 			cuenta.setSaldo(total);
 			cliente.setCuenta(cuenta);
 			t.setSaldoCuenta(total);
@@ -195,7 +195,7 @@ public class CajeroON {
 			System.out.println("----------------- "+t);
 			clienteON.editar(cliente);
 			mensaje="Deposito exitoso";
-			}
+			
 //			t=new Transaccion();
 //			cuenta=new Cuenta();
 //			cajero =new Cajero();

@@ -13,14 +13,18 @@ import javax.xml.namespace.QName;
 
 import ec.edu.ups.soap.ClienteServiceSOAP;
 import ec.edu.ups.soap.ClienteServiceSOAPService;
-import ec.edu.ups.soap.Cuenta;
+import ec.edu.ups.soap.ClienteSoap;
+
+import ec.edu.ups.soap.Exception_Exception;
+
+import java.awt.GridBagConstraints;
 
 /**
  *
  * @author Pillaga
  */
 public class Retiros extends javax.swing.JInternalFrame {
-private Cuenta cuenta;
+private ClienteSoap cliente;
     /**
      * Creates new form Retiros
      */
@@ -46,10 +50,10 @@ private Cuenta cuenta;
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
-        txtDireccion = new javax.swing.JTextField();
+        txtCuenta = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        txtDNI = new javax.swing.JTextField();
+        txtCedula = new javax.swing.JTextField();
         btnConsultar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txtCorreo = new javax.swing.JTextField();
@@ -86,7 +90,7 @@ private Cuenta cuenta;
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Teléfono:");
+        jLabel3.setText("Cuenta :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -105,7 +109,7 @@ private Cuenta cuenta;
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("Dirección:");
+        jLabel6.setText("Cantidad:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
@@ -124,43 +128,43 @@ private Cuenta cuenta;
         gridBagConstraints.weightx = 0.5;
         jPanel1.add(txtNombre, gridBagConstraints);
 
-        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTelefonoKeyTyped(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
-        jPanel1.add(txtTelefono, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
-        jPanel1.add(txtDireccion, gridBagConstraints);
+        gbc_txtCuenta = new java.awt.GridBagConstraints();
+        gbc_txtCuenta.gridx = 2;
+        gbc_txtCuenta.gridy = 4;
+        gbc_txtCuenta.fill = java.awt.GridBagConstraints.BOTH;
+        gbc_txtCuenta.weightx = 0.5;
+        jPanel1.add(txtCuenta, gbc_txtCuenta);
+        gbc_txtCantidad = new java.awt.GridBagConstraints();
+        gbc_txtCantidad.gridx = 6;
+        gbc_txtCantidad.gridy = 2;
+        gbc_txtCantidad.fill = java.awt.GridBagConstraints.BOTH;
+        gbc_txtCantidad.weightx = 0.5;
+        gbc_txtCantidad.insets = new java.awt.Insets(0, 0, 0, 5);
+        jPanel1.add(txtCantidad, gbc_txtCantidad);
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        txtDNI.addActionListener(new java.awt.event.ActionListener() {
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDNIActionPerformed(evt);
             }
         });
-        txtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDNIKeyTyped(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
-        jPanel3.add(txtDNI, gridBagConstraints);
+        gbc_txtCedula = new java.awt.GridBagConstraints();
+        gbc_txtCedula.gridx = 0;
+        gbc_txtCedula.gridy = 0;
+        gbc_txtCedula.fill = java.awt.GridBagConstraints.BOTH;
+        gbc_txtCedula.weightx = 0.5;
+        jPanel3.add(txtCedula, gbc_txtCedula);
 
         btnConsultar.setText("Buscar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -273,23 +277,30 @@ private Cuenta cuenta;
     private static final QName SERVICE_NAME = new QName("http://Services.ups.edu.ec/", "ClienteServiceSOAPService");
     URL wsdlURL = ClienteServiceSOAPService.WSDL_LOCATION;
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {                                             
-    	ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
-        ClienteServiceSOAP port = ss.getClienteServiceSOAPPort();
+
+
+   	 ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
+        ClienteServiceSOAP port = ss.getClienteServiceSOAPPort();  
+
+        System.out.println("Invoking buscarCliente...");
+        java.lang.String _buscarCliente_arg0 = txtCedula.getText();
+        try {
+            ec.edu.ups.soap.ClienteSoap _buscarCliente__return = port.buscarCliente(_buscarCliente_arg0);
+            if(_buscarCliente__return==null) {
+           	 JOptionPane.showMessageDialog(this, "El Cliente No EXISTE");	 
+            }else {
+                cliente=_buscarCliente__return;
+                txtCorreo.setText(cliente.getCorreo());
+                txtNombre.setText(cliente.getNombre());
+                txtCuenta.setText(cliente.getCuenta());	 
+            }
+        } catch (Exception_Exception e) { 
+            System.out.println("Expected exception: Exception has occurred.");
+            System.out.println(e.toString());
         
-        System.out.println("Invoking buscarCuenta...");
-        java.lang.String _buscarCuenta_arg0 = txtDNI.getText();
-        ec.edu.ups.soap.Cuenta _buscarCuenta__return = port.buscarCuenta(_buscarCuenta_arg0);
-        System.out.println("buscarCuenta.result=" + _buscarCuenta__return);
-        cuenta=_buscarCuenta__return;
-        JOptionPane.showMessageDialog(
-        	    null, 
-        	    "cuenta de"+_buscarCuenta__return.getCliente().getNombre(), 
-        	    "Cuenta",
-        	    JOptionPane.INFORMATION_MESSAGE);
-        txtCorreo.setText(_buscarCuenta__return.getCliente().getCorreo());
-        txtDireccion.setText(_buscarCuenta__return.getCliente().getDireccion());
-        txtNombre.setText(_buscarCuenta__return.getCliente().getTelefono());
         
+       
+        }  
 
     }                                            
 
@@ -297,11 +308,11 @@ private Cuenta cuenta;
     	ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
         ClienteServiceSOAP port = ss.getClienteServiceSOAPPort(); 
         System.out.println("Invoking retiro...");
-        java.lang.String _retiro_arg0 = "";
-        ec.edu.ups.soap.Cuenta _retiro_arg1 = cuenta;
-        java.lang.Double _retiro_arg2 = 0.0;
+        java.lang.String _retiro_arg0 = cajero;
+        java.lang.String _retiro_arg1 = cliente.getCedula();
+        java.lang.Double _retiro_arg2 = Double.parseDouble(txtCantidad.getText());
         ec.edu.ups.soap.Respuesta _retiro__return = port.retiro(_retiro_arg0, _retiro_arg1, _retiro_arg2);
-        System.out.println("retiro.result=" + _retiro__return);
+        JOptionPane.showMessageDialog(this, _retiro__return.getMensaje());
     }                                          
 
 
@@ -319,9 +330,13 @@ private Cuenta cuenta;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public static javax.swing.JTextField txtCorreo;
-    public static javax.swing.JTextField txtDNI;
-    public static javax.swing.JTextField txtDireccion;
+    public static javax.swing.JTextField txtCedula;
+    public static javax.swing.JTextField txtCantidad;
     public static javax.swing.JTextField txtNombre;
-    public static javax.swing.JTextField txtTelefono;
+    public static javax.swing.JTextField txtCuenta;
+    private GridBagConstraints gbc_txtCedula;
+    private GridBagConstraints gbc_txtCuenta;
+    private GridBagConstraints gbc_txtCantidad;
+    public static String cajero;
     // End of variables declaration                   
 }

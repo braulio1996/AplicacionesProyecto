@@ -6,28 +6,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-<<<<<<< HEAD
 import javax.faces.context.FacesContext;
-=======
-
->>>>>>> master
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.transaction.Transactional;
 
 import ec.edu.ups.Modelo.Acceso;
-<<<<<<< HEAD
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.JefeCredito;
-=======
-import ec.edu.ups.Modelo.Cajero;
-import ec.edu.ups.Modelo.Cliente;
-import ec.edu.ups.Modelo.Cuenta;
->>>>>>> master
 import ec.edu.ups.Modelo.Persona;
+import ec.edu.ups.Modelo.Transferencia;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
@@ -52,61 +44,26 @@ private LocalDate fechaDesde;
 private LocalDate fechaHasta;
 private String buscarTipo;
 private String estadoAcceso;
-
-<<<<<<< HEAD
-//@WebMethod
-//public String saludo(String nombre) {
-//	return "Hola "+nombre;
-//}
-//
-//@WebMethod
-//public List<Cliente> ListarCliente(){
-//	List<Cliente> listado= new ArrayList<Cliente>();
-//	try {
-//		listado =con.listar();
-//		
-//	}catch (Exception e) {
-//		// TODO: handle exception
-//		e.printStackTrace();
-//	}
-//	return listado;
-//}
 @WebMethod
-public Respuesta transferencia(String cliente, String cuentaDestino,Double monto) {
+public Respuesta transferencia2(String cuentaOrigen, Transferencia t) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
-		r.setMensaje(con.trasferencia(cliente, cuentaDestino, monto));
-=======
-@WebMethod
-public Respuesta transferencia2(String cuentaOrigen, String cuentaDestino,Double monto, String nombre,String correo) {
-	Respuesta r = new Respuesta();
-	try {
-		r.setCodigo(1);
-		r.setMensaje(con.transferencia(cuentaOrigen, cuentaDestino, monto,nombre,correo));
->>>>>>> master
+		r.setMensaje(con.transferencia(cuentaOrigen, t));
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		r.setCodigo(0);
 		r.setMensaje(e.getMessage());
 	}
 	return r;
 	
 }
+
 @WebMethod
-<<<<<<< HEAD
-public Respuesta retiro(String cajero, String cedula, Double monto) {
+public Respuesta retiro(String cajero, String cliente, Double monto) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
-		r.setMensaje(caon.retiro(cajero, cedula,monto));
-=======
-public Respuesta retiro(String cajero, Cuenta cuenta, Double monto) {
-	Respuesta r = new Respuesta();
-	try {
-		r.setCodigo(1);
-		r.setMensaje(caon.retiro(cajero, cuenta,monto));
->>>>>>> master
+		r.setMensaje(caon.retiro(cajero, cliente,monto));
 	}catch (Exception e) {
 		r.setCodigo(0);
 		r.setMensaje("Error "+e.getMessage());
@@ -117,19 +74,11 @@ return r;
 }
 
 @WebMethod
-<<<<<<< HEAD
-public Respuesta deposito(String cajero, String cedula, Double monto,String depositante) {
+public Respuesta deposito(String cajero, String cliente, Double monto,String depositante) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
-		r.setMensaje(caon.depositosC(cajero, cedula,monto,depositante));
-=======
-public Respuesta deposito(String cajero, Cuenta cuenta, Double monto,String depositante) {
-	Respuesta r = new Respuesta();
-	try {
-		r.setCodigo(1);
-		r.setMensaje(caon.depositosC(cajero, cuenta,monto,depositante));
->>>>>>> master
+		r.setMensaje(caon.depositosC(cajero, cliente,monto,depositante));
 	}catch (Exception e) {
 		r.setCodigo(0);
 		r.setMensaje("Error "+e.getMessage());
@@ -138,23 +87,12 @@ public Respuesta deposito(String cajero, Cuenta cuenta, Double monto,String depo
 	return r;
 
 }
-<<<<<<< HEAD
 @WebMethod
 public Respuesta login(String correo,String clave) throws Exception {
-=======
-
-
-@WebMethod
-
-
-public Respuesta login(String correo,String clave) throws Exception {
-
->>>>>>> master
 	
 	boolean client = false;
 	Acceso acceso = new Acceso();
 	List<Acceso>accesos=new ArrayList<Acceso>();
-<<<<<<< HEAD
 	Cliente cliente;
 	String mensaje;
 	Respuesta r=new  Respuesta();
@@ -165,8 +103,8 @@ public Respuesta login(String correo,String clave) throws Exception {
 			Cajero cajero = caon.loginC(correo,clave);
 			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 			mensaje="Ingreso Exitoso";
-            r.setCodigo(Integer.parseInt(cajero.getCedula()));
-            r.setMensaje(mensaje);
+            r.setCodigo(0);
+            r.setMensaje(cajero.getCedula());
 			return r;
 		} // Fin if (caon.loginC(this.correo,
 			// this.clave).getTipo().equalsIgnoreCase("cajero"))
@@ -174,43 +112,14 @@ public Respuesta login(String correo,String clave) throws Exception {
 	} catch (Exception e) {
 		e.printStackTrace();
 
-=======
-	Cliente cliente= new Cliente();
-	String mensaje;
-	Respuesta r=new  Respuesta();
-	try {
-		//if(caon.loginC(correo,clave)!=null) {
-			if (caon.loginC(correo,clave).getTipo().equalsIgnoreCase("cajero")) {
-				client = true;
-				Cajero cajero = caon.loginC(correo,clave);
-				//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-				mensaje="cajero";
-	            r.setCodigo(0);
-	            r.setMensaje(cajero.getCedula());
-				return r;
-			} // Fin if (caon.loginC(this.correo,
-				// this.clave).getTipo().equalsIgnoreCase("cajero"))
-		//}
-		
-
-	} catch (Exception e) {
->>>>>>> master
 		if (con.buscarCorreo(correo) != null) {
 			if (con.loginC(correo,clave) != null) {
 				client = true;
 				cliente = con.loginC(correo,clave);
 				//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
-<<<<<<< HEAD
 				
 
 				con.enviarCorreo(correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
-=======
-				con.enviarCorreo(correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
-				mensaje="cliente";
-				//int c=Integer.parseInt();
-	            r.setCodigo(1);
-	            r.setMensaje(cliente.getCuenta().getNumero());
->>>>>>> master
 				acceso.setClave(clave);
 				acceso.setEstado("Correcto");
 				acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
@@ -228,25 +137,17 @@ public Respuesta login(String correo,String clave) throws Exception {
 				this.buscarTipo = "Todos";
 				this.estadoAcceso = "Todos";
 				this.buscarTipo = "Todos";
-<<<<<<< HEAD
 				mensaje="Ingreso Exitoso";
-	            r.setCodigo(Integer.parseInt(cliente.getCuenta().getNumero()));
-	            r.setMensaje(mensaje);
-=======
-				
->>>>>>> master
+	            r.setCodigo(1);
+	            r.setMensaje(cliente.getCuenta().getNumero());
 				return r;
 			} else {
 				mensaje= "ERROR. Usuario Incorrecto";
-	            r.setCodigo(1);
+	            r.setCodigo(99);
 	            r.setMensaje(mensaje);
 				con.enviarCorreo(correo, "Acceso a la cuenta",
 						"Su intento ha sido fallido, con contraseña: " + clave);
-<<<<<<< HEAD
 				cliente = con.loginC(correo,clave);
-=======
-				//cliente = con.loginC(correo,clave);
->>>>>>> master
 				acceso.setClave(clave);
 				acceso.setEstado("Fallido");
 				acceso.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
@@ -260,26 +161,32 @@ public Respuesta login(String correo,String clave) throws Exception {
 			} // Fin if (con.loginC(this.correo, this.clave) != null)
 		} else {
 			mensaje="Error";
-            r.setCodigo(1);
+            r.setCodigo(99);
             r.setMensaje(mensaje);
 		} // Fin if (con.buscarCorreo(this.correo) != null)
 	} // FIn try-catch
 
 	return null;
 }// Fin metodo login
-<<<<<<< HEAD
-=======
+
 @WebMethod
-public Cuenta buscarCuenta(String numero) {
-	
+public ClienteSoap buscarCliente(String cedula) throws Exception {
+	ClienteSoap c= new ClienteSoap();
 	try {
-		return con.buscarCuenta(numero);
+		c.setCodigo(con.buscar(cedula).getCodigo());
+		c.setCedula(con.buscar(cedula).getCedula());
+		c.setNombre(con.buscar(cedula).getNombre());
+		c.setCorreo(con.buscar(cedula).getCorreo());
+		c.setCuenta(con.buscar(cedula).getCuenta().getNumero());
+
+	return c;
+
+
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	return null;
+}
 		
-}	
->>>>>>> master
 }
