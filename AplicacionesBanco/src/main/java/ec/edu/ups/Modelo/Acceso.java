@@ -24,7 +24,7 @@ public class Acceso {
 	private String clave;
 	private String fecha;
 	private String hora;
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Cliente cliente;
 	
 	

@@ -30,6 +30,8 @@ public class ObjectFactory {
     private final static QName _Transferencia2_QNAME = new QName("http://Services.ups.edu.ec/", "transferencia2");
     private final static QName _Exception_QNAME = new QName("http://Services.ups.edu.ec/", "Exception");
     private final static QName _Login_QNAME = new QName("http://Services.ups.edu.ec/", "login");
+    private final static QName _BuscarClienteResponse_QNAME = new QName("http://Services.ups.edu.ec/", "buscarClienteResponse");
+    private final static QName _BuscarCliente_QNAME = new QName("http://Services.ups.edu.ec/", "buscarCliente");
     private final static QName _LoginResponse_QNAME = new QName("http://Services.ups.edu.ec/", "loginResponse");
     private final static QName _DepositoResponse_QNAME = new QName("http://Services.ups.edu.ec/", "depositoResponse");
     private final static QName _RetiroResponse_QNAME = new QName("http://Services.ups.edu.ec/", "retiroResponse");
@@ -47,6 +49,14 @@ public class ObjectFactory {
      */
     public DepositoResponse createDepositoResponse() {
         return new DepositoResponse();
+    }
+
+    /**
+     * Create an instance of {@link BuscarCliente }
+     * 
+     */
+    public BuscarCliente createBuscarCliente() {
+        return new BuscarCliente();
     }
 
     /**
@@ -106,11 +116,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link BuscarClienteResponse }
+     * 
+     */
+    public BuscarClienteResponse createBuscarClienteResponse() {
+        return new BuscarClienteResponse();
+    }
+
+    /**
      * Create an instance of {@link Exception }
      * 
      */
     public Exception createException() {
         return new Exception();
+    }
+
+    /**
+     * Create an instance of {@link ClienteSoap }
+     * 
+     */
+    public ClienteSoap createClienteSoap() {
+        return new ClienteSoap();
     }
 
     /**
@@ -173,6 +199,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "login")
     public JAXBElement<Login> createLogin(Login value) {
         return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarClienteResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "buscarClienteResponse")
+    public JAXBElement<BuscarClienteResponse> createBuscarClienteResponse(BuscarClienteResponse value) {
+        return new JAXBElement<BuscarClienteResponse>(_BuscarClienteResponse_QNAME, BuscarClienteResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarCliente }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://Services.ups.edu.ec/", name = "buscarCliente")
+    public JAXBElement<BuscarCliente> createBuscarCliente(BuscarCliente value) {
+        return new JAXBElement<BuscarCliente>(_BuscarCliente_QNAME, BuscarCliente.class, null, value);
     }
 
     /**
