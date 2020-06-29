@@ -212,5 +212,16 @@ public ClienteSoap buscarCliente(@QueryParam("cedula")String cedula) throws Exce
 	}
 	return null;
 }
-		
+@GET
+@Path("customers")
+public Respuesta getCustomers(
+		@QueryParam("firstname") String firstname, 
+		@QueryParam("lastname") String lastname, 
+		@QueryParam("status") String status) {
+	String result = String.format("firstname = %s, lastname = %s, status = %s", new String[]{firstname, lastname, status});
+	Respuesta r = new Respuesta();
+	r.setCodigo(0);
+	r.setMensaje(result);
+	return r;
+}		
 }
