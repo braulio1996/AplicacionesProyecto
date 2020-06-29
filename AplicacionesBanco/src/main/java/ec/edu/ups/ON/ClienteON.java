@@ -163,6 +163,7 @@ public class ClienteON {
     		Double salgoOrigen = cuentaOrigen.getSaldo() - transferencia.getMonto();
     		cuentaD.setSaldo(saldoDestino);
     		cuentaOrigen.setSaldo(salgoOrigen);
+    		transferencia.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
     		transferencias.add(transferencia);
     		cuentaOrigen.setTransferencias(transferencias);
     		pdao.editarCuenta(cuentaD);
@@ -171,6 +172,7 @@ public class ClienteON {
         }
         }catch (Exception e) {
 			mensaje=e.getMessage();
+			System.out.println(e.toString());
 		}
 		return mensaje;
 	

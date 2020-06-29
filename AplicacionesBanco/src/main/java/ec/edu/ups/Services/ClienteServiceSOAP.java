@@ -53,6 +53,7 @@ public Respuesta transferencia2(String cuentaOrigen, Transferencia t) {
 	} catch (Exception e) {
 		r.setCodigo(0);
 		r.setMensaje(e.getMessage());
+		System.out.println(e.toString());
 	}
 	return r;
 	

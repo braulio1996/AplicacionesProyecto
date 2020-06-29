@@ -269,6 +269,12 @@ public class Deposito extends javax.swing.JInternalFrame {
          ec.edu.ups.soap.Respuesta _deposito__return = port.deposito(_deposito_arg0, _deposito_arg1, _deposito_arg2, _deposito_arg3);
          System.out.println("deposito.result=" + _deposito__return);
          JOptionPane.showMessageDialog(this,_deposito__return.getMensaje());
+         txtCantidad.setText("");
+         txtCedula.setText("");
+         txtNombre.setText("");
+         txtCorreo.setText("");
+         txtCuenta.setText("");
+         txtDepositante.setText("");
     }                                          
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {                                   

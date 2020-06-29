@@ -132,6 +132,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Transferencia }
+     * 
+     */
+    public Transferencia createTransferencia() {
+        return new Transferencia();
+    }
+
+    /**
      * Create an instance of {@link ClienteSoap }
      * 
      */

@@ -313,6 +313,12 @@ private ClienteSoap cliente;
         java.lang.Double _retiro_arg2 = Double.parseDouble(txtCantidad.getText());
         ec.edu.ups.soap.Respuesta _retiro__return = port.retiro(_retiro_arg0, _retiro_arg1, _retiro_arg2);
         JOptionPane.showMessageDialog(this, _retiro__return.getMensaje());
+        txtCantidad.setText("");
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtCorreo.setText("");
+        txtCuenta.setText("");
+        
     }                                          
 
 

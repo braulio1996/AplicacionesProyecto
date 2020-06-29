@@ -187,7 +187,7 @@ public void setCuenta(String cuenta) {
             JOptionPane.showMessageDialog(
             	    null, 
             	    "Correcto", 
-            	    "Ingreso "+_login__return.getMensaje(),
+            	    "Ingreso ",
             	    JOptionPane.INFORMATION_MESSAGE); 
             if(_login__return.getCodigo()==0) {
             	cajero=_login__return.getMensaje();
@@ -195,17 +195,24 @@ public void setCuenta(String cuenta) {
             	 Deposito d = new Deposito();
             	 Deposito.cajero=getCajero();
              	 d.setVisible(true);
+             	Principal.dskPane.add(d);
+             	Principal.mnuPrincipal.setVisible(true);
+             	this.dispose();
              	 Retiros r= new  Retiros();
              	 Retiros.cajero=getCajero();
              	 r.setVisible(true);
-             	Principal.dskPane.add(d,r);
+             	Principal.dskPane.add(r);
              	Principal.mnuPrincipal.setVisible(true);
              	this.dispose();
             }else if(_login__return.getCodigo()==1) {
             	cuenta=_login__return.getMensaje();
             	setCuenta(_login__return.getMensaje());
-            	Transacciones t = new Transacciones();
-               
+            	Tran t = new Tran();
+            	Tran.cedula=getCuenta();
+            	t.setVisible(true);
+            	Principal.dskPane.add(t);
+             	Principal.mnuPrincipal.setVisible(true);
+             	this.dispose();
 
             }
            
