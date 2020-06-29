@@ -119,17 +119,18 @@ public class ClienteDAO {
 	 * @return clie retorna el objeto cliente que se esta buscando
 	 * @throws Exception control de Excepciones
 	 */
-	public Cliente buscar(String cedula) throws Exception {
+	public Cliente buscar(String cedula) throws Exception{
 		try {
 			String jpql = "SELECT a FROM Cliente a WHERE a.cedula = :cedula";
 			Query query = em.createQuery(jpql, Cliente.class);
 			query.setParameter("cedula", cedula);
 			Cliente clie = (Cliente) query.getSingleResult();
-			
 			return clie;
+
 		} catch (Exception e) {
-			throw new Exception(e.toString());
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	

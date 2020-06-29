@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.transaction.Transactional;
 
 import ec.edu.ups.Modelo.Acceso;
 import ec.edu.ups.Modelo.Administrador;
@@ -18,6 +19,7 @@ import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.JefeCredito;
 import ec.edu.ups.Modelo.Persona;
+import ec.edu.ups.Modelo.Transferencia;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
@@ -42,44 +44,26 @@ private LocalDate fechaDesde;
 private LocalDate fechaHasta;
 private String buscarTipo;
 private String estadoAcceso;
-
-//@WebMethod
-//public String saludo(String nombre) {
-//	return "Hola "+nombre;
-//}
-//
-//@WebMethod
-//public List<Cliente> ListarCliente(){
-//	List<Cliente> listado= new ArrayList<Cliente>();
-//	try {
-//		listado =con.listar();
-//		
-//	}catch (Exception e) {
-//		// TODO: handle exception
-//		e.printStackTrace();
-//	}
-//	return listado;
-//}
 @WebMethod
-public Respuesta transferencia(String cliente, String cuentaDestino,Double monto) {
+public Respuesta transferencia2(String cuentaOrigen, Transferencia t) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
-		r.setMensaje(con.trasferencia(cliente, cuentaDestino, monto));
+		r.setMensaje(con.transferencia(cuentaOrigen, t));
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		r.setCodigo(0);
 		r.setMensaje(e.getMessage());
 	}
 	return r;
 	
 }
+
 @WebMethod
-public Respuesta retiro(String cajero, String cedula, Double monto) {
+public Respuesta retiro(String cajero, String cliente, Double monto) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
-		r.setMensaje(caon.retiro(cajero, cedula,monto));
+		r.setMensaje(caon.retiro(cajero, cliente,monto));
 	}catch (Exception e) {
 		r.setCodigo(0);
 		r.setMensaje("Error "+e.getMessage());
@@ -90,11 +74,11 @@ return r;
 }
 
 @WebMethod
-public Respuesta deposito(String cajero, String cedula, Double monto,String depositante) {
+public Respuesta deposito(String cajero, String cliente, Double monto,String depositante) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
-		r.setMensaje(caon.depositosC(cajero, cedula,monto,depositante));
+		r.setMensaje(caon.depositosC(cajero, cliente,monto,depositante));
 	}catch (Exception e) {
 		r.setCodigo(0);
 		r.setMensaje("Error "+e.getMessage());
@@ -103,29 +87,24 @@ public Respuesta deposito(String cajero, String cedula, Double monto,String depo
 	return r;
 
 }
-
-
 @WebMethod
-
-
 public Respuesta login(String correo,String clave) throws Exception {
-
 	
 	boolean client = false;
 	Acceso acceso = new Acceso();
 	List<Acceso>accesos=new ArrayList<Acceso>();
 	Cliente cliente;
-	String mensaje="";
+	String mensaje;
 	Respuesta r=new  Respuesta();
 	try {
 		
 		if (caon.loginC(correo,clave).getTipo().equalsIgnoreCase("cajero")) {
 			client = true;
 			Cajero cajero = caon.loginC(correo,clave);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
+			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 			mensaje="Ingreso Exitoso";
-            r.setCodigo(Integer.parseInt(cajero.getCedula()));
-            r.setMensaje(mensaje);
+            r.setCodigo(0);
+            r.setMensaje(cajero.getCedula());
 			return r;
 		} // Fin if (caon.loginC(this.correo,
 			// this.clave).getTipo().equalsIgnoreCase("cajero"))
@@ -137,7 +116,7 @@ public Respuesta login(String correo,String clave) throws Exception {
 			if (con.loginC(correo,clave) != null) {
 				client = true;
 				cliente = con.loginC(correo,clave);
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
+				//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 				
 
 				con.enviarCorreo(correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
@@ -159,12 +138,12 @@ public Respuesta login(String correo,String clave) throws Exception {
 				this.estadoAcceso = "Todos";
 				this.buscarTipo = "Todos";
 				mensaje="Ingreso Exitoso";
-	            r.setCodigo(Integer.parseInt(cliente.getCuenta().getNumero()));
-	            r.setMensaje(mensaje);
+	            r.setCodigo(1);
+	            r.setMensaje(cliente.getCuenta().getNumero());
 				return r;
 			} else {
 				mensaje= "ERROR. Usuario Incorrecto";
-	            r.setCodigo(1);
+	            r.setCodigo(99);
 	            r.setMensaje(mensaje);
 				con.enviarCorreo(correo, "Acceso a la cuenta",
 						"Su intento ha sido fallido, con contraseña: " + clave);
@@ -182,11 +161,32 @@ public Respuesta login(String correo,String clave) throws Exception {
 			} // Fin if (con.loginC(this.correo, this.clave) != null)
 		} else {
 			mensaje="Error";
-            r.setCodigo(1);
+            r.setCodigo(99);
             r.setMensaje(mensaje);
 		} // Fin if (con.buscarCorreo(this.correo) != null)
 	} // FIn try-catch
 
 	return null;
 }// Fin metodo login
+
+@WebMethod
+public ClienteSoap buscarCliente(String cedula) throws Exception {
+	ClienteSoap c= new ClienteSoap();
+	try {
+		c.setCodigo(con.buscar(cedula).getCodigo());
+		c.setCedula(con.buscar(cedula).getCedula());
+		c.setNombre(con.buscar(cedula).getNombre());
+		c.setCorreo(con.buscar(cedula).getCorreo());
+		c.setCuenta(con.buscar(cedula).getCuenta().getNumero());
+
+	return c;
+
+
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+}
+		
 }

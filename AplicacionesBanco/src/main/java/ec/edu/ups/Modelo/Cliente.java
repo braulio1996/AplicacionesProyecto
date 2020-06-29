@@ -13,7 +13,9 @@ import javax.persistence.OneToOne;
 * @version: 27/05/2020
 * @author: Braulio Castro
 */
+
 @Entity
+
 public class Cliente extends Persona {
 	private String telefono;
 
