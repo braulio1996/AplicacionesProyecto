@@ -223,5 +223,19 @@ public Respuesta getCustomers(
 	r.setCodigo(0);
 	r.setMensaje(result);
 	return r;
-}		
+}
+@GET
+@Path("/listarCliente")
+@Produces("application/json")
+public List<Cliente>listar(){
+	try {
+		return con.listar();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+	
+}
+
 }
