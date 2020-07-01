@@ -13,11 +13,12 @@ import javax.swing.JOptionPane;
 import javax.xml.namespace.QName;
 
 
-import ec.edu.ups.soap.ClienteServiceSOAP;
-import ec.edu.ups.soap.ClienteServiceSOAPService;
-import ec.edu.ups.soap.ClienteSoap;
-import ec.edu.ups.soap.Exception_Exception;
-import ec.edu.ups.soap.Transferencia;
+import ec.edu.ups.services.ClienteServiceSOAP;
+import ec.edu.ups.services.ClienteServiceSOAPService;
+import ec.edu.ups.services.ClienteTemporal;
+import ec.edu.ups.services.Exception_Exception;
+import ec.edu.ups.services.Transferencia;
+import ec.edu.ups.services.TransferenciaTemporal;
 
 import java.awt.GridBagConstraints;
 
@@ -26,7 +27,7 @@ import java.awt.GridBagConstraints;
  * @author Pillaga
  */
 public class Tran extends javax.swing.JInternalFrame {
-	private ClienteSoap cliente;
+	private ClienteTemporal cliente;
 
     /**
      * Creates new form Depositos
@@ -210,10 +211,8 @@ public class Tran extends javax.swing.JInternalFrame {
     	 ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
          ClienteServiceSOAP port = ss.getClienteServiceSOAPPort();
         
-         java.lang.String _transferencia2_arg0 = cedula;
-        
-         Transferencia t =new Transferencia();
-         
+         TransferenciaTemporal t =new TransferenciaTemporal();
+         t.setCuentaOrigen(cedula);
          t.setNumeroCuenta(txtCuenta.getText());
          t.setMonto(Double.parseDouble(txtMonto.getText()));
          t.setNombre(txtNombre.getText());
@@ -225,8 +224,9 @@ public class Tran extends javax.swing.JInternalFrame {
          t.setInstitucion("KaWill");
          System.out.println(t.toString());
          
-         ec.edu.ups.soap.Transferencia _transferencia2_arg1 = t;
-         ec.edu.ups.soap.Respuesta _transferencia2__return = port.transferencia2(_transferencia2_arg0, _transferencia2_arg1);
+         ec.edu.ups.services.TransferenciaTemporal _transferencia2_arg0 = t;
+         ec.edu.ups.services.Respuesta _transferencia2__return = port.transferencia2(_transferencia2_arg0);
+         
          System.out.println("transferencia2.result=" + _transferencia2__return.getMensaje());
          JOptionPane.showMessageDialog(this, _transferencia2__return.getMensaje());
          txtNombre.setText("");

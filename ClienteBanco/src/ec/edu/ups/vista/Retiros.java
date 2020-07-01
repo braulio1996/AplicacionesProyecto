@@ -7,16 +7,12 @@ package ec.edu.ups.vista;
 
 import java.awt.event.KeyEvent;
 import java.net.URL;
-
 import javax.swing.JOptionPane;
 import javax.xml.namespace.QName;
-
-import ec.edu.ups.soap.ClienteServiceSOAP;
-import ec.edu.ups.soap.ClienteServiceSOAPService;
-import ec.edu.ups.soap.ClienteSoap;
-
-import ec.edu.ups.soap.Exception_Exception;
-
+import ec.edu.ups.services.ClienteTemporal;
+import ec.edu.ups.services.ClienteServiceSOAP;
+import ec.edu.ups.services.ClienteServiceSOAPService;
+import ec.edu.ups.services.Exception_Exception;
 import java.awt.GridBagConstraints;
 
 /**
@@ -24,7 +20,7 @@ import java.awt.GridBagConstraints;
  * @author Pillaga
  */
 public class Retiros extends javax.swing.JInternalFrame {
-private ClienteSoap cliente;
+private ClienteTemporal cliente;
     /**
      * Creates new form Retiros
      */
@@ -285,7 +281,7 @@ private ClienteSoap cliente;
         System.out.println("Invoking buscarCliente...");
         java.lang.String _buscarCliente_arg0 = txtCedula.getText();
         try {
-            ec.edu.ups.soap.ClienteSoap _buscarCliente__return = port.buscarCliente(_buscarCliente_arg0);
+            ec.edu.ups.services.ClienteTemporal _buscarCliente__return = port.buscarCliente(_buscarCliente_arg0);
             if(_buscarCliente__return==null) {
            	 JOptionPane.showMessageDialog(this, "El Cliente No EXISTE");	 
             }else {
@@ -311,7 +307,7 @@ private ClienteSoap cliente;
         java.lang.String _retiro_arg0 = cajero;
         java.lang.String _retiro_arg1 = cliente.getCedula();
         java.lang.Double _retiro_arg2 = Double.parseDouble(txtCantidad.getText());
-        ec.edu.ups.soap.Respuesta _retiro__return = port.retiro(_retiro_arg0, _retiro_arg1, _retiro_arg2);
+        ec.edu.ups.services.Respuesta _retiro__return = port.retiro(_retiro_arg0, _retiro_arg1, _retiro_arg2);
         JOptionPane.showMessageDialog(this, _retiro__return.getMensaje());
         txtCantidad.setText("");
         txtCedula.setText("");

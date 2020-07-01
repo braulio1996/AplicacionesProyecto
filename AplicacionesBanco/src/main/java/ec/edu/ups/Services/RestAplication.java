@@ -8,16 +8,11 @@ import javax.ws.rs.core.Application;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.servers.Server;
 
-//@OpenAPIDefinition(
-//		servers = {
-//				@Server(
-//				description = "Servidor Local",
-//				url="/owa")
-//				
-//				}
-//			)
+@OpenAPIDefinition(
+		servers = {
+				@Server(
+				description = "Servidor Local",url="/AplacacionesBanco")})
 @ApplicationPath("/rs")
 public class RestAplication extends Application{
-
 	
 }
