@@ -44,9 +44,6 @@ public class Principal extends javax.swing.JFrame {
         mnuArchivo = new javax.swing.JMenu();
         mnuSesion = new javax.swing.JMenuItem();
         mnuSalir = new javax.swing.JMenuItem();
-        mnuPersonas = new javax.swing.JMenu();
-        mnuRetiro = new javax.swing.JMenuItem();
-        mnuDeposito = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,29 +107,6 @@ public class Principal extends javax.swing.JFrame {
 
         mnuPrincipal.add(mnuArchivo);
 
-        mnuPersonas.setText("Acciones");
-        mnuPersonas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        mnuRetiro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, java.awt.event.InputEvent.ALT_MASK));
-        mnuRetiro.setText("Retiros");
-        mnuRetiro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuRetiroActionPerformed(evt);
-            }
-        });
-        mnuPersonas.add(mnuRetiro);
-
-        mnuDeposito.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.ALT_MASK));
-        mnuDeposito.setText("Depósitos");
-        mnuDeposito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuDepositoActionPerformed(evt);
-            }
-        });
-        mnuPersonas.add(mnuDeposito);
-
-        mnuPrincipal.add(mnuPersonas);
-
         setJMenuBar(mnuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,6 +141,8 @@ public class Principal extends javax.swing.JFrame {
         dskPane.add(login); 
         
         login.txtNombre.requestFocus();
+        login.setCuenta("");
+        login.setCajero("");
         this.setExtendedState(Principal.MAXIMIZED_BOTH);
         mnuPrincipal.setVisible(false);
         lbl_Nombre.setText("");
@@ -175,32 +151,6 @@ public class Principal extends javax.swing.JFrame {
     private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {                                         
         System.exit(0);
     }                                        
-
-    private void mnuRetiroActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       
-            Retiros r = new Retiros();
-            
-            Dimension dim = dskPane.getSize();
-            r.setSize(dim);
-            dskPane.removeAll();
-            dskPane.repaint();
-            r.setVisible(true); 
-            dskPane.add(r);
-       
-    }                                         
-
-    private void mnuDepositoActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        
-            Deposito dep = new Deposito();
-            
-            Dimension dim = dskPane.getSize();
-            dep.setSize(dim);
-            dskPane.removeAll();
-            dskPane.repaint();
-            dep.setVisible(true); 
-            dskPane.add(dep);	
-        
-    }                                           
 
 
     /**
@@ -242,10 +192,7 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JLabel lbl_Nombre;
     public static javax.swing.JLabel lbl_Sucursal;
     public static javax.swing.JMenu mnuArchivo;
-    private javax.swing.JMenuItem mnuDeposito;
-    public static javax.swing.JMenu mnuPersonas;
     public static javax.swing.JMenuBar mnuPrincipal;
-    private javax.swing.JMenuItem mnuRetiro;
     private javax.swing.JMenuItem mnuSalir;
     private javax.swing.JMenuItem mnuSesion;
     public static javax.swing.JPanel pnl_Nombre;

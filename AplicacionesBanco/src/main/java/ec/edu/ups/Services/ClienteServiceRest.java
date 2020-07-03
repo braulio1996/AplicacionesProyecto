@@ -55,13 +55,13 @@ private String estadoAcceso;
 
 @POST
 @Path("/transferencia")
-@Produces("application/json")
-@Consumes("application/json")
-public Respuesta transferencia2(@QueryParam("cuentaOrigen") String cuentaOrigen, Transferencia t) {
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public Respuesta transferencia2(TransferenciaTemporal t) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
-		r.setMensaje(con.transferencia(cuentaOrigen, t));
+		r.setMensaje(con.transferencia(t));
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		r.setCodigo(0);
@@ -73,8 +73,8 @@ public Respuesta transferencia2(@QueryParam("cuentaOrigen") String cuentaOrigen,
 
 @POST
 @Path("/Retiro")
-@Produces("application/json")
-@Consumes("application/json")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public Respuesta retiro(@QueryParam("cajero") String cajero, @QueryParam("cliente") String cliente, @QueryParam("monto") Double monto) {
 	Respuesta r = new Respuesta();
 	try {
@@ -91,8 +91,8 @@ return r;
 
 @POST
 @Path("/Deposito")
-@Produces("application/json")
-@Consumes("application/json")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public Respuesta deposito(@QueryParam("cajero") String cajero, @QueryParam("cliente") String cliente, @QueryParam("monto") Double monto,@QueryParam("depositante") String depositante) {
 	Respuesta r = new Respuesta();
 	try {
@@ -109,7 +109,7 @@ public Respuesta deposito(@QueryParam("cajero") String cajero, @QueryParam("clie
 
 @GET
 @Path("/Login")
-@Produces("application/json")
+@Produces(MediaType.APPLICATION_JSON)
 public Respuesta login(@QueryParam("correo")String correo,@QueryParam("clave")String clave) throws Exception {
 	
 	boolean client = false;
@@ -193,9 +193,9 @@ public Respuesta login(@QueryParam("correo")String correo,@QueryParam("clave")St
 
 @GET
 @Path("/BuscarCliente")
-@Produces("application/json")
-public ClienteSoap buscarCliente(@QueryParam("cedula")String cedula) throws Exception {
-	ClienteSoap c= new ClienteSoap();
+@Produces(MediaType.APPLICATION_JSON)
+public ClienteTemporal buscarCliente(@QueryParam("cedula") String cedula) throws Exception {
+	ClienteTemporal c= new ClienteTemporal();
 	try {
 		c.setCodigo(con.buscar(cedula).getCodigo());
 		c.setCedula(con.buscar(cedula).getCedula());
@@ -212,5 +212,29 @@ public ClienteSoap buscarCliente(@QueryParam("cedula")String cedula) throws Exce
 	}
 	return null;
 }
-		
+@GET
+@Path("customers")
+public Respuesta getCustomers(
+		@QueryParam("firstname") String firstname, 
+		@QueryParam("lastname") String lastname, 
+		@QueryParam("status") String status) {
+	String result = String.format("firstname = %s, lastname = %s, status = %s", new String[]{firstname, lastname, status});
+	Respuesta r = new Respuesta();
+	r.setCodigo(0);
+	r.setMensaje(result);
+	return r;
+}
+@GET
+@Path("/listarCliente")
+public List<Cliente>listar(){
+	try {
+		return con.listar();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+	
+}
+
 }

@@ -1,13 +1,12 @@
 package ec.edu.ups.ON;
 
-import java.sql.SQLException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -23,11 +22,14 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import ec.edu.ups.DAO.ClienteDAO;
-import ec.edu.ups.Modelo.Cajero;
+
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.Transaccion;
+import ec.edu.ups.Services.TransferenciaTemporal;
 import ec.edu.ups.Modelo.Transferencia;
+
+
 
 /**
  * Esta Clase define los metodos de Objetos de Negocio
@@ -42,7 +44,6 @@ public class ClienteON {
 	private ClienteDAO pdao;
 	Date myDate = new Date();
 	
-	private List<Transferencia> trasferencias;
 
 
 	/**
@@ -146,24 +147,37 @@ public class ClienteON {
 	 */
 
 	
-	public String transferencia(String cuentaO, Transferencia transferencia)  {
+	public String transferencia(TransferenciaTemporal transferenciat)  {
 		
         List<Transferencia>transferencias = new ArrayList<>();
         String mensaje;
+        Transferencia t = new Transferencia();
         try {
-        	Cuenta cuentaOrigen = pdao.buscarCuenta(cuentaO);
-        	Cuenta cuentaD = pdao.buscarCuenta(transferencia.getNumeroCuenta());
+        	Cuenta cuentaOrigen = pdao.buscarCuenta(transferenciat.getCuentaOrigen());
+        	Cuenta cuentaD = pdao.buscarCuenta(transferenciat.getNumeroCuenta());
         	if(cuentaD==null) {
         		mensaje="No existe la Cuenta";
-        	}else if(cuentaOrigen.getSaldo()<transferencia.getMonto()) {
+        	}else if(cuentaOrigen.getSaldo()<transferenciat.getMonto()) {
         		
-        	mensaje="ERROR. El monto es mayor al saldo ("+transferencia.getMonto()+")";
+        	mensaje="ERROR. El monto es mayor al saldo ("+transferenciat.getMonto()+")";
         	}else {
-    		Double saldoDestino = cuentaD.getSaldo() + transferencia.getMonto();
-    		Double salgoOrigen = cuentaOrigen.getSaldo() - transferencia.getMonto();
+        		
+    		Double saldoDestino = cuentaD.getSaldo() + transferenciat.getMonto();
+    		Double salgoOrigen = cuentaOrigen.getSaldo() - transferenciat.getMonto();
     		cuentaD.setSaldo(saldoDestino);
     		cuentaOrigen.setSaldo(salgoOrigen);
-    		transferencias.add(transferencia);
+    		transferenciat.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
+    		t.setTipo(transferenciat.getTipo());
+    		t.setFecha(transferenciat.getFecha());
+    		t.setInstitucion(transferenciat.getInstitucion());
+    		t.setTipoCuenta(transferenciat.getTipoCuenta());
+    		t.setNumeroCuenta(transferenciat.getNumeroCuenta());
+    		t.setMonto(transferenciat.getMonto());
+    		t.setIdentificacion(transferenciat.getIdentificacion());
+    		t.setNombre(transferenciat.getNombre());
+    		t.setCorreo(transferenciat.getCorreo());
+    		t.setConcepto(transferenciat.getConcepto());
+    		transferencias.add(t);
     		cuentaOrigen.setTransferencias(transferencias);
     		pdao.editarCuenta(cuentaD);
     		pdao.editarCuenta(cuentaOrigen);
@@ -171,6 +185,7 @@ public class ClienteON {
         }
         }catch (Exception e) {
 			mensaje=e.getMessage();
+			System.out.println(e.toString());
 		}
 		return mensaje;
 	

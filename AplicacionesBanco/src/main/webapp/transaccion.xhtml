@@ -1,21 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-	<h1>Pagina Cajero</h1>
-<h:body> 
-<h2>Bienvenido</h2>
-<h2>Trasacciones</h2>
+<h1>Pagina Cajero</h1>
+<h:body>
+	<h2>Bienvenido</h2>
+	<h2>Trasacciones</h2>
 
-<h:form>
-<h3>Retiro</h3>
-<h:panelGrid columns="2" id="p1">
+	<h:form>
+		<h3>Retiro</h3>
+		<h:panelGrid columns="2" id="p1">
 Cedula:
 <h:inputText value="#{cajeroMB.t.cedula}" />
 Nombre:
-<h:inputText  value="#{cajeroMB.t.nombre}" />
+<h:inputText value="#{cajeroMB.t.nombre}" />
 Correo:
 <h:inputText value="#{cajeroMB.t.correo}" />
 Cuenta:
@@ -25,18 +25,18 @@ Cantidad:
 
 
 
-<h:commandButton action="#{cajeroMB.retiro()}" value="Aceptar"  />
-</h:panelGrid>
-</h:form>
+			<h:commandButton action="#{cajeroMB.retiro()}" value="Aceptar" />
+		</h:panelGrid>
+	</h:form>
 
 
-<h:form>
-<h3>Deposito</h3>
-<h:panelGrid columns="2" id="p1">
+	<h:form>
+		<h3>Deposito</h3>
+		<h:panelGrid columns="2" id="p1">
 Cedula:
 <h:inputText value="#{cajeroMB.t.cedula}" />
 Nombre:
-<h:inputText  value="#{cajeroMB.t.nombre}" />
+<h:inputText value="#{cajeroMB.t.nombre}" />
 Correo:
 <h:inputText value="#{cajeroMB.t.correo}" />
 Cuenta:
@@ -46,8 +46,8 @@ Cantidad:
 Depositante:
 <h:inputText value="#{cajeroMB.t.depositante}" />
 
-<h:commandButton action="#{cajeroMB.deposito()}" value="Aceptar"  />
-</h:panelGrid>
-</h:form>
-</h:body> 
+			<h:commandButton action="#{cajeroMB.deposito()}" value="Aceptar" />
+		</h:panelGrid>
+	</h:form>
+</h:body>
 </html>

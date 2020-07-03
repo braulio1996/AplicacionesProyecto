@@ -53,40 +53,39 @@
 					<div class="card-header">
 						<h4 class="card-title mb-0">Lista jefes de crédito</h4>
 					</div>
-					<h:form >
-					
-					<div class="card-body collapse show">
-						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{administradorMB.listarCredito()}" var="cred">
-								<h:column>
-									<f:facet name="header">Cédula</f:facet>
+					<h:form>
+
+						<div class="card-body collapse show">
+							<div class="table-responsive no-wrap">
+								<h:dataTable class="table"
+									value="#{administradorMB.listarCredito()}" var="cred">
+									<h:column>
+										<f:facet name="header">Cédula</f:facet>
 									#{cred.cedula}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Nombre</f:facet>
+									<h:column>
+										<f:facet name="header">Nombre</f:facet>
 									#{cred.nombre}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Dirección</f:facet>
+									<h:column>
+										<f:facet name="header">Dirección</f:facet>
 									#{cred.direccion}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Correo</f:facet>
+									<h:column>
+										<f:facet name="header">Correo</f:facet>
 									#{cred.correo}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Acciones</f:facet>
-									<a>
-										<img src="../assets/images/menu/editar.png" />
-									</a>
-									<a style="padding-right: 8px;"></a>
-									<a>
-										<img src="../assets/images/menu/eliminar.png" />
-									</a>
-								</h:column>
-							</h:dataTable>
+									<h:column>
+										<f:facet name="header">Acciones</f:facet>
+										<a> <img src="../assets/images/menu/editar.png" />
+										</a>
+										<a style="padding-right: 8px;"></a>
+										<a> <img src="../assets/images/menu/eliminar.png" />
+										</a>
+									</h:column>
+								</h:dataTable>
+							</div>
 						</div>
-					</div>
 					</h:form>
 				</div>
 			</div>
@@ -100,50 +99,50 @@
 						<h4 class="card-title mb-0">Lista cajeros</h4>
 					</div>
 					<h:form>
-					
-					<div class="card-body collapse show">
-						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{administradorMB.listarCajero()}" var="caje">
-								<h:column>
-									<f:facet name="header">Cédula</f:facet>
+
+						<div class="card-body collapse show">
+							<div class="table-responsive no-wrap">
+								<h:dataTable class="table"
+									value="#{administradorMB.listarCajero()}" var="caje">
+									<h:column>
+										<f:facet name="header">Cédula</f:facet>
 									#{caje.cedula}
 								</h:column>
-								<h:column>
-									<f:facet name="header">nombre</f:facet>
+									<h:column>
+										<f:facet name="header">nombre</f:facet>
 									#{caje.nombre}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Dirección</f:facet>
+									<h:column>
+										<f:facet name="header">Dirección</f:facet>
 									#{caje.direccion}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Correo</f:facet>
+									<h:column>
+										<f:facet name="header">Correo</f:facet>
 									#{caje.correo}
 								</h:column>
-								
-								<h:column>
-									<f:facet name="header">Acciones</f:facet>
+
+									<h:column>
+										<f:facet name="header">Acciones</f:facet>
 									#{caje.correo}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Acciones</f:facet>
-									<a>
-										<img src="../assets/images/menu/editar.png" />
-									</a>
-									<a style="padding-right: 8px;"></a>
-									<a>
-										<img src="../assets/images/menu/eliminar.png" />
-									</a>
-								</h:column>
-							</h:dataTable>
+									<h:column>
+										<f:facet name="header">Acciones</f:facet>
+										<a> <img src="../assets/images/menu/editar.png" />
+										</a>
+										<a style="padding-right: 8px;"></a>
+										<a> <img src="../assets/images/menu/eliminar.png" />
+										</a>
+									</h:column>
+								</h:dataTable>
+							</div>
 						</div>
-					</div>
 					</h:form>
 				</div>
 			</div>
 		</div>
-		
-		<a class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-block btn-sm pull-right ml-2"
+
+		<a
+			class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-block btn-sm pull-right ml-2"
 			data-toggle="modal" data-target="#addModal"> <i
 			class="mdi mdi-plus text-white" style="width: 12px; height: 12px;"></i>
 		</a>
@@ -179,21 +178,20 @@
 											value="#{operativo.nombre}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
-									
+
 									<h:panelGrid columns="2">
 										<label for="rol" style="display: inline-block; width: 100px;">Rol:
 										</label>
 										<h:selectOneMenu value="#{operativo.rol}"
-											styleClass="form-control text-holder-proj custom-select" style="width: 300px;">
-											<f:selectItem itemValue=""
-												itemLabel="Seleccionar" />
-											<f:selectItem itemValue="Cajero"
-												itemLabel="Cajero" />
+											styleClass="form-control text-holder-proj custom-select"
+											style="width: 300px;">
+											<f:selectItem itemValue="" itemLabel="Seleccionar" />
+											<f:selectItem itemValue="Cajero" itemLabel="Cajero" />
 											<f:selectItem itemValue="Jefe Credito"
 												itemLabel="Jefe Credito" />
 										</h:selectOneMenu>
 									</h:panelGrid>
-									
+
 									<h:panelGrid columns="2">
 										<label for="direccion"
 											style="display: inline-block; width: 100px;">Dirección:
@@ -202,7 +200,7 @@
 											value="#{operativo.direccion}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
-									
+
 									<h:panelGrid columns="2">
 										<label for="correo"
 											style="display: inline-block; width: 100px;">Correo:

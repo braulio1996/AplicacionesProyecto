@@ -5,20 +5,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.transaction.Transactional;
-
 import ec.edu.ups.Modelo.Acceso;
-import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
-import ec.edu.ups.Modelo.Cuenta;
-import ec.edu.ups.Modelo.JefeCredito;
-import ec.edu.ups.Modelo.Persona;
 import ec.edu.ups.Modelo.Transferencia;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
@@ -45,12 +37,13 @@ private LocalDate fechaHasta;
 private String buscarTipo;
 private String estadoAcceso;
 @WebMethod
-public Respuesta transferencia2(String cuentaOrigen, Transferencia t) {
+public Respuesta transferencia2(TransferenciaTemporal t) {
 	Respuesta r = new Respuesta();
 	try {
 		r.setCodigo(1);
-		r.setMensaje(con.transferencia(cuentaOrigen, t));
+		r.setMensaje(con.transferencia(t));
 	} catch (Exception e) {
+		// TODO Auto-generated catch block
 		r.setCodigo(0);
 		r.setMensaje(e.getMessage());
 	}
@@ -170,8 +163,8 @@ public Respuesta login(String correo,String clave) throws Exception {
 }// Fin metodo login
 
 @WebMethod
-public ClienteSoap buscarCliente(String cedula) throws Exception {
-	ClienteSoap c= new ClienteSoap();
+public ClienteTemporal buscarCliente(String cedula) throws Exception {
+	ClienteTemporal c= new ClienteTemporal();
 	try {
 		c.setCodigo(con.buscar(cedula).getCodigo());
 		c.setCedula(con.buscar(cedula).getCedula());
@@ -187,6 +180,17 @@ public ClienteSoap buscarCliente(String cedula) throws Exception {
 		e.printStackTrace();
 	}
 	return null;
+}
+@WebMethod
+public List<Cliente>listar(){
+	try {
+		return con.listar();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+	
 }
 		
 }
