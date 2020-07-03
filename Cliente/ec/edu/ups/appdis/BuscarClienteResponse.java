@@ -1,9 +1,5 @@
 
-<<<<<<< HEAD:Cliente/ec/edu/ups/appdis/DepositoResponse.java
 package ec.edu.ups.appdis;
-=======
-package ec.edu.ups.soap;
->>>>>>> master:ClienteBanco/src/ec/edu/ups/soap/BuscarClienteResponse.java
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

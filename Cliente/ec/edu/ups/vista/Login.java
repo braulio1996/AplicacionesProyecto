@@ -1,6 +1,5 @@
 package ec.edu.ups.vista;
 
-
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,9 +11,6 @@ import ec.edu.ups.appdis.ClienteServiceSOAP;
 import ec.edu.ups.appdis.ClienteServiceSOAPService;
 import ec.edu.ups.appdis.Exception_Exception;
 import ec.edu.ups.appdis.Respuesta;
-
-
-
 
 public class Login extends javax.swing.JFrame {
 
