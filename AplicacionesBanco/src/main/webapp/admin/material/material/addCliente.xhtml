@@ -1,10 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-	
+
 <ui:composition template="index2.xhtml">
 	<ui:define name="title">Administrador</ui:define>
 
@@ -23,14 +23,14 @@
 				src="../assets/images/menu/inicio16.png" alt="" /> <span
 				class="hide-menu">Inicio </span>
 		</a></li>
-		<li ><a class="waves-effect waves-dark"
-			href="addUsuario.xhtml" aria-expanded="false"> <img
-				style="padding-right: 10px;"
+		<li><a class="waves-effect waves-dark" href="addUsuario.xhtml"
+			aria-expanded="false"> <img style="padding-right: 10px;"
 				src="../assets/images/menu/ahorros16.png" alt="" /> <span
 				class="hide-menu">Usuarios</span>
 		</a></li>
-		<li class="active"><a class="waves-effect waves-dark" href="addCliente.xhtml"
-			aria-expanded="false"> <img style="padding-right: 10px;"
+		<li class="active"><a class="waves-effect waves-dark"
+			href="addCliente.xhtml" aria-expanded="false"> <img
+				style="padding-right: 10px;"
 				src="../assets/images/menu/caprob16.png" alt="" /><span
 				class="hide-menu">Clientes</span>
 		</a></li>
@@ -54,47 +54,47 @@
 					<div class="card-header">
 						<h4 class="card-title mb-0">Lista clientes</h4>
 					</div>
-					<h:form >
-					
-					<div class="card-body collapse show">
-						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{administradorMB.listarCliente()}" var="cliente">
-								<h:column>
-									<f:facet name="header">Cédula</f:facet>
+					<h:form>
+
+						<div class="card-body collapse show">
+							<div class="table-responsive no-wrap">
+								<h:dataTable class="table"
+									value="#{administradorMB.listarCliente()}" var="cliente">
+									<h:column>
+										<f:facet name="header">Cédula</f:facet>
 									#{cliente.cedula}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Nombre</f:facet>
+									<h:column>
+										<f:facet name="header">Nombre</f:facet>
 									#{cliente.nombre}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Dirección</f:facet>
+									<h:column>
+										<f:facet name="header">Dirección</f:facet>
 									#{cliente.direccion}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Teléfono</f:facet>
+									<h:column>
+										<f:facet name="header">Teléfono</f:facet>
 									#{cliente.telefono}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Correo</f:facet>
+									<h:column>
+										<f:facet name="header">Correo</f:facet>
 									#{cliente.correo}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Acciones</f:facet>
-									<a style="padding-right: 20px;"></a>
-									<a>
-										<img src="../assets/images/menu/editar.png" />
-									</a>
-									
-								</h:column>
-							</h:dataTable>
+									<h:column>
+										<f:facet name="header">Acciones</f:facet>
+										<a style="padding-right: 20px;"></a>
+										<a> <img src="../assets/images/menu/editar.png" />
+										</a>
+
+									</h:column>
+								</h:dataTable>
+							</div>
 						</div>
-					</div>
 					</h:form>
 				</div>
 			</div>
 		</div>
-		
+
 		<a
 			class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-block btn-sm pull-right ml-2"
 			data-toggle="modal" data-target="#addModal"> <i
@@ -104,7 +104,7 @@
 
 		<div id="addModal" class="modal fade" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-md" >
+			<div class="modal-dialog modal-md">
 				<h:form class="form-horizontal form-material">
 					<div class="modal-content">
 						<div class="modal-header" style="background-color: #37B0A9;">
@@ -124,16 +124,16 @@
 										</label>
 										<h:inputText style="width: 300px;" id="cedula"
 											value="#{administradorMB.cliente.cedula}"
-											class="form-control text-holder-proj" type="text" required="" >
-											<f:ajax event="blur" render="valCedula" listener="#{administradorMB.validarCedula()}"/>
+											class="form-control text-holder-proj" type="text" required="">
+											<f:ajax event="blur" render="valCedula"
+												listener="#{administradorMB.validarCedula()}" />
 										</h:inputText>
-											
-										<label 
-											style="display: inline-block; width: 100px;">
-										</label>
-										<h:outputLabel value="#{administradorMB.validaCedula}" id="valCedula" style="color: #1F45CC; font-size: 10px;" />
+
+										<label style="display: inline-block; width: 100px;"> </label>
+										<h:outputLabel value="#{administradorMB.validaCedula}"
+											id="valCedula" style="color: #1F45CC; font-size: 10px;" />
 									</h:panelGrid>
-									
+
 									<h:panelGrid columns="2">
 										<label for="nombre"
 											style="display: inline-block; width: 100px;">Nombre:
@@ -142,8 +142,8 @@
 											value="#{administradorMB.cliente.nombre}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
-									
-									
+
+
 									<h:panelGrid columns="2">
 										<label for="direccion"
 											style="display: inline-block; width: 100px;">Dirección:
@@ -152,7 +152,7 @@
 											value="#{administradorMB.cliente.direccion}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
-									
+
 									<h:panelGrid columns="2">
 										<label for="telefono"
 											style="display: inline-block; width: 100px;">Teléfono:
@@ -161,7 +161,7 @@
 											value="#{administradorMB.cliente.telefono}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
-									
+
 									<h:panelGrid columns="2">
 										<label for="correo"
 											style="display: inline-block; width: 100px;">Correo:
@@ -170,7 +170,7 @@
 											value="#{administradorMB.cliente.correo}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
-									
+
 								</div>
 							</div>
 

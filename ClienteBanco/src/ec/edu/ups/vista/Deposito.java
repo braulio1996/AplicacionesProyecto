@@ -17,19 +17,19 @@ import javax.swing.JOptionPane;
 import javax.xml.namespace.QName;
 
 
-import ec.edu.ups.soap.ClienteServiceSOAP;
-import ec.edu.ups.soap.ClienteServiceSOAPService;
-import ec.edu.ups.soap.ClienteSoap;
-import ec.edu.ups.soap.Exception_Exception;
+import ec.edu.ups.services.ClienteServiceSOAP;
+import ec.edu.ups.services.ClienteServiceSOAPService;
+import ec.edu.ups.services.ClienteTemporal;
+import ec.edu.ups.services.Exception_Exception;
 
 import java.awt.GridBagConstraints;
 
 /**
  *
- * @author Pillaga
+ * @author Braulio Castro
  */
 public class Deposito extends javax.swing.JInternalFrame {
-	private ClienteSoap cliente;
+	private ClienteTemporal cliente;
 
     /**
      * Creates new form Depositos
@@ -272,9 +272,15 @@ public class Deposito extends javax.swing.JInternalFrame {
          java.lang.String _deposito_arg1 = cliente.getCedula();
          java.lang.Double _deposito_arg2 = Double.parseDouble(txtCantidad.getText());
          java.lang.String _deposito_arg3 = txtDepositante.getText();
-         ec.edu.ups.soap.Respuesta _deposito__return = port.deposito(_deposito_arg0, _deposito_arg1, _deposito_arg2, _deposito_arg3);
+         ec.edu.ups.services.Respuesta _deposito__return = port.deposito(_deposito_arg0, _deposito_arg1, _deposito_arg2, _deposito_arg3);
          System.out.println("deposito.result=" + _deposito__return);
          JOptionPane.showMessageDialog(this,_deposito__return.getMensaje());
+         txtCantidad.setText("");
+         txtCedula.setText("");
+         txtNombre.setText("");
+         txtCorreo.setText("");
+         txtCuenta.setText("");
+         txtDepositante.setText("");
     }                                          
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {                                   
@@ -320,7 +326,7 @@ public class Deposito extends javax.swing.JInternalFrame {
          System.out.println("Invoking buscarCliente...");
          java.lang.String _buscarCliente_arg0 = txtCedula.getText();
          try {
-             ec.edu.ups.soap.ClienteSoap _buscarCliente__return = port.buscarCliente(_buscarCliente_arg0);
+        	 ec.edu.ups.services.ClienteTemporal _buscarCliente__return = port.buscarCliente(_buscarCliente_arg0);
              if(_buscarCliente__return==null) {
             	 JOptionPane.showMessageDialog(this, "El Cliente No EXISTE");	 
              }else {

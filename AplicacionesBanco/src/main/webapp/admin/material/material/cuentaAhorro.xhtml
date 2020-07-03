@@ -31,7 +31,7 @@
 
 	<ui:define name="sidebar">
 		<li><a class="waves-effect waves-dark" href="inicioCliente.xhtml"
-			aria-expanded="false" > <img style="padding-right: 10px;"
+			aria-expanded="false"> <img style="padding-right: 10px;"
 				src="../assets/images/menu/inicio16.png" alt="" /> <span
 				class="hide-menu">Inicio </span>
 		</a></li>
@@ -88,7 +88,7 @@
 							ahorros</h4>
 
 						<h:form class="form-material mt-4 row">
-						<div class="form-group col-md-4 ">
+							<div class="form-group col-md-4 ">
 								<div class="example">
 									<h6 class="my-1">Movimiento</h6>
 									<h:selectOneMenu styleClass="form-control custom-select"
@@ -104,8 +104,8 @@
 									<h6 class="my-1">Desde</h6>
 									<div class="input-group">
 										<h:inputText id="desde" styleClass="form-control datepicker"
-											value="#{login.fechaDesde2}" >
-											<f:convertDateTime pattern="yyyy-MM-dd"/> 
+											value="#{login.fechaDesde2}">
+											<f:convertDateTime pattern="yyyy-MM-dd" />
 										</h:inputText>
 										<div class="input-group-append">
 											<span class="input-group-text"> <i
@@ -120,9 +120,9 @@
 									<h6 class="my-1">Hasta</h6>
 									<div class="input-group">
 										<h:inputText id="hasta" styleClass="form-control datepicker"
-											value="#{login.fechaHasta2}" >
-											<f:convertDateTime pattern="yyyy-MM-dd"/> 
-											</h:inputText>
+											value="#{login.fechaHasta2}">
+											<f:convertDateTime pattern="yyyy-MM-dd" />
+										</h:inputText>
 										<div class="input-group-append">
 											<span class="input-group-text"> <i
 												class="icon-calender"></i>
@@ -131,7 +131,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="row col-md-12">
 								<div class="form-group col-md-5 "></div>
 								<div class="form-group col-md-2 mt-3">
@@ -146,30 +146,30 @@
 
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<h:dataTable id="tb" class="table"
-										value="#{login.fechas()}" var="c">
-										<h:column>
-											<f:facet name="header">Cuenta</f:facet>
+							<h:dataTable id="tb" class="table" value="#{login.fechas()}"
+								var="c">
+								<h:column>
+									<f:facet name="header">Cuenta</f:facet>
 											#{c.cliente.cuenta.numero}
 										</h:column>
-										<h:column>
-											<f:facet name="header">Propietario</f:facet>
+								<h:column>
+									<f:facet name="header">Propietario</f:facet>
 											#{c.cliente.nombre}
 										</h:column>
-										
-										<h:column>
-											<f:facet name="header">Fecha-Transacción</f:facet>
+
+								<h:column>
+									<f:facet name="header">Fecha-Transacción</f:facet>
 											#{c.fecha}
 										</h:column>
-										<h:column>
-											<f:facet name="header">Movimiento</f:facet>
+								<h:column>
+									<f:facet name="header">Movimiento</f:facet>
 									#{c.tipo}
 								</h:column>
-										<h:column>
-											<f:facet name="header">Monto movimiento</f:facet>
+								<h:column>
+									<f:facet name="header">Monto movimiento</f:facet>
 									#{c.monto}
 								</h:column>
-									</h:dataTable>
+							</h:dataTable>
 						</div>
 					</div>
 				</div>

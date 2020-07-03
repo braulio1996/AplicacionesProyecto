@@ -1,29 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head> 
-<h:body> 
-<h1>Registro</h1>
-<h:form>
-<h:panelGrid columns="2" id="p1">
+<h:head></h:head>
+<h:body>
+	<h1>Registro</h1>
+	<h:form>
+		<h:panelGrid columns="2" id="p1">
 Cedula:
 <h:inputText value="#{administradorMB.administrador.cedula}" />
 Nombre:
-<h:inputText  value="#{administradorMB.administrador.nombre}" />
+<h:inputText value="#{administradorMB.administrador.nombre}" />
 Dirrecion:
 <h:inputText value="#{administradorMB.administrador.direccion}" />
 Correo:
 <h:inputText value="#{administradorMB.administrador.correo}" />
 Clave:
 <h:inputText value="#{administradorMB.administrador.clave}" />
-</h:panelGrid>
+		</h:panelGrid>
 
-<h:commandButton action="#{administradorMB.registrar()}" value="Aceptar" onclick="return confirm('Seguro que desea Guardar?')" />
+		<h:commandButton action="#{administradorMB.registrar()}"
+			value="Aceptar" onclick="return confirm('Seguro que desea Guardar?')" />
 
 
-</h:form>
-</h:body> 
+	</h:form>
+</h:body>
 </html>
