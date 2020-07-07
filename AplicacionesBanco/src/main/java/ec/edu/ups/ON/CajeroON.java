@@ -113,9 +113,9 @@ public class CajeroON {
 		return pdao.contar();
 	}
 	public String retiro(String cajeroID, String clienteID, Double monto) {
-		List<Transaccion>transacciones = new ArrayList<Transaccion>();
+		List<Transaccion>transacciones = new ArrayList<>();
 		Transaccion t= new Transaccion();
-		String mensaje="";
+		String mensaje;
 		try {
 			
 			Cajero cajero =pdao.buscar(cajeroID);
@@ -152,7 +152,7 @@ public class CajeroON {
 //				cedula="";
 //				transacciones.clear();
 				
-				mensaje = "Retiro realizado correctamente";
+				mensaje = "Retiro realizado correctamente "+"\n"+"Saldo "+total;
 				
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto", mensaje );
 				
@@ -172,7 +172,7 @@ public class CajeroON {
 	public String depositosC(String cajeroID, String clienteID, Double monto,String depositante) {
 		Transaccion t= new Transaccion();
 		List<Transaccion>transacciones = new ArrayList<>();
-		String mensaje="";
+		String mensaje;
 		try {
 			Cajero cajero =pdao.buscar(cajeroID);
 			Cliente cliente= clienteON.buscar(clienteID);
@@ -194,7 +194,7 @@ public class CajeroON {
 			cajero.setTransacciones(transacciones);
 			System.out.println("----------------- "+t);
 			clienteON.editar(cliente);
-			mensaje="Deposito exitoso";
+			mensaje="Deposito exitoso " +"\n"+"Saldo "+total;
 			
 //			t=new Transaccion();
 //			cuenta=new Cuenta();

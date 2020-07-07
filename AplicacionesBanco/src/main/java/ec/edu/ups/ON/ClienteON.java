@@ -157,6 +157,9 @@ public class ClienteON {
         	Cuenta cuentaD = pdao.buscarCuenta(transferenciat.getNumeroCuenta());
         	if(cuentaD==null) {
         		mensaje="No existe la Cuenta";
+        	}else if(cuentaD==cuentaOrigen) {
+        		mensaje="Error No se puede realizar una transferencia a su misma Cuenta";
+        		
         	}else if(cuentaOrigen.getSaldo()<transferenciat.getMonto()) {
         		
         	mensaje="ERROR. El monto es mayor al saldo ("+transferenciat.getMonto()+")";

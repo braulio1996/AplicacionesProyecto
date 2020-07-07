@@ -21,11 +21,11 @@ public class Cliente extends Persona {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Cuenta cuenta;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "cliente")
 	private List<Acceso> accesos;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<SolicitudCredito> solicitudesCredito;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "cliente")
 	private List<Transaccion>transacciones;
 	
 		
