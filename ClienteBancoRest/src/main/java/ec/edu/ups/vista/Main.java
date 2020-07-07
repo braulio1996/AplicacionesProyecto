@@ -15,36 +15,40 @@ public class Main {
 		
 		Rest r= new Rest();
 		
-
-		ClienteTemporal ct = r.buscarCliente("");
-		System.out.println(ct.toString());
-		
-		//Cosumiendo WS-REST de tipo GET que retorna una colección de objeto 
-		List<Cliente> clientes = r.listar();
-		System.out.println(clientes.toString());
-		
+//
+//		ClienteTemporal ct = r.buscarCliente("");
+//		System.out.println(ct.toString());
+//		
+//		//Cosumiendo WS-REST de tipo GET que retorna una colección de objeto 
+//		List<Cliente> clientes = r.listar();
+//		System.out.println(clientes.toString());
+//		
 		//Consumiento un WS-REST de tipo POST enviando una entidad como parametro
-		Respuesta respuesta = r.retiro("cajero", "cliente", 10.0);
+		Respuesta respuesta = r.retiro("0223945123", "0704417344", 10.0);
 		System.out.println(respuesta);
+//		
+//		Respuesta respuesta2 = r.desposito("cajero", "cliente", 10.0,"Depositante");
+//		System.out.println(respuesta2);
+//		
+//		
+//		//TRansferencia
+//		
+//		 TransferenciaTemporal t =new TransferenciaTemporal();
+//	        t.setTipo("Externa");
+//			t.setInstitucion("JEP");
+//			t.setTipoCuenta("Ahorros");
+//			t.setNumeroCuenta("9435322713");
+//			t.setMonto(10.0);
+//			t.setIdentificacion("0106220478");
+//			t.setNombre("Angel");
+//			t.setCorreo("angel@gmail.com");
+//			t.setConcepto("Pago de Matricula");
+//			
+//			Respuesta respuesta3 = r.transferencia(t);
+//			System.out.println(respuesta3);
+//		Respuesta rr =r.login("bcastroj@est.ups.edu.ec", "HpKKXVJt34rl");
+//		System.out.println(rr);
 		
-		Respuesta respuesta2 = r.desposito("cajero", "cliente", 10.0,"Depositante");
-		System.out.println(respuesta2);
 		
-		
-		//TRansferencia
-		
-		 TransferenciaTemporal t =new TransferenciaTemporal();
-	        t.setTipo("Externa");
-			t.setInstitucion("JEP");
-			t.setTipoCuenta("Ahorros");
-			t.setNumeroCuenta("9435322713");
-			t.setMonto(10.0);
-			t.setIdentificacion("0106220478");
-			t.setNombre("Angel");
-			t.setCorreo("angel@gmail.com");
-			t.setConcepto("Pago de Matricula");
-			
-			Respuesta respuesta3 = r.transferencia(t);
-			System.out.println(respuesta3);
-	}
+}
 }

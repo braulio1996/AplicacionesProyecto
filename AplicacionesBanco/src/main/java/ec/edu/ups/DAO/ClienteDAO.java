@@ -76,14 +76,15 @@ public class ClienteDAO {
 	@SuppressWarnings("unchecked")
 	public List<Cliente> listar() throws SQLException {
 		try {
-			String jpql = "SELECT l FROM Cliente l JOIN FETCH l.accesos";
+			String jpql = "SELECT l FROM Cliente l";
+			// JOIN FETCH l.accesos
 			Query query = em.createQuery(jpql, Cliente.class);
 			Cliente cliente = (Cliente) query.getSingleResult();
 			List<Cliente> clientes = query.getResultList();
-			List<Acceso> accesos = new ArrayList<>();
-			for (Acceso acceso : cliente.getAccesos()) {
-				accesos.add(acceso);
-			}
+//			List<Acceso> accesos = new ArrayList<>();
+//			for (Acceso acceso : cliente.getAccesos()) {
+//				accesos.add(acceso);
+//			}
 			return clientes;
 		} catch (Exception e) {
 			System.out.println(e.toString());
