@@ -7,11 +7,9 @@ package ec.edu.ups.vista;
  */
 
 import java.awt.event.KeyEvent;
-<<<<<<< HEAD
 import java.beans.PropertyVetoException;
-=======
 import java.net.URL;
->>>>>>> master
+
 
 import javax.swing.JOptionPane;
 import javax.xml.namespace.QName;

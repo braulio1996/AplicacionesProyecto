@@ -11,7 +11,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
 		
-		Login123 login = new Login123();
+		Login login = new Login();
 		login.setVisible(true);
 
 		this.setSize((pantallaTamano.width), (pantallaTamano.height)); 
@@ -129,7 +129,7 @@ public class Principal extends javax.swing.JFrame {
 
 
     private void mnuSesionActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        Login123 login = new Login123();
+        Login login = new Login();
         
         this.setSize((pantallaTamano.width), (pantallaTamano.height)); 
         Dimension tamanoPanel = login.getSize(); 
