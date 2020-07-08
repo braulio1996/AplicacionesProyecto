@@ -191,8 +191,8 @@ public class Login extends javax.swing.JInternalFrame {
 			if (_login__return.getCodigo() == 0) {
 				cajero = _login__return.getMensaje();
 				setCajero(_login__return.getMensaje());
-//				Deposito d = new Deposito();
-//				Deposito.cajero = getCajero();
+				Deposito d = new Deposito();
+				Deposito.cajero = getCajero();
 //				d.setVisible(true);
 //				Principal.dskPane.add(d);
 //				Principal.mnuPrincipal.setVisible(true);
@@ -213,6 +213,7 @@ public class Login extends javax.swing.JInternalFrame {
 				setCuenta(_login__return.getMensaje());
 				Interna t = new Interna();
 				Interna.cedula = getCuenta();
+				Externa.cedula = getCuenta();
 				t.setVisible(true);
 				Dimension dim = Principal.dskPane.getSize();
 				t.setSize(dim);
