@@ -1,5 +1,6 @@
 package ec.edu.ups.vista;
 
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JOptionPane;
@@ -188,24 +189,32 @@ public class Login extends javax.swing.JInternalFrame {
 			if (respuesta.getCodigo() == 0) {
 				cajero = respuesta.getMensaje();
 				setCajero(respuesta.getMensaje());
-				Deposito d = new Deposito();
-				Deposito.cajero = getCajero();
-				d.setVisible(true);
-				Principal.dskPane.add(d);
-				Principal.mnuPrincipal.setVisible(true);
-				this.dispose();
+				
 				Retiros rr = new Retiros();
 				Retiros.cajero = getCajero();
 				rr.setVisible(true);
+				
+				Dimension dim = Principal.dskPane.getSize();
+				rr.setSize(dim);
+				Principal.mnuCajero.setVisible(true);
+				Principal.mnuTransferencias.setVisible(false);
+				
 				Principal.dskPane.add(rr);
 				Principal.mnuPrincipal.setVisible(true);
 				this.dispose();
+				
 			} else if (respuesta.getCodigo() == 1) {
 				cuenta = respuesta.getMensaje();
 				setCuenta(respuesta.getMensaje());
-				Tran t = new Tran();
-				Tran.cedula = getCuenta();
+				Interna t = new Interna();
+				Interna.cedula = getCuenta();
 				t.setVisible(true);
+				
+				Dimension dim = Principal.dskPane.getSize();
+				t.setSize(dim);
+				Principal.mnuCajero.setVisible(false);
+				Principal.mnuTransferencias.setVisible(true);
+				
 				Principal.dskPane.add(t);
 				Principal.mnuPrincipal.setVisible(true);
 				this.dispose();

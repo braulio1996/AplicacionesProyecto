@@ -38,7 +38,7 @@ public class ClienteServiceSOAP {
 	private String estadoAcceso;
 
 	@WebMethod
-	public Respuesta transferencia2(TransferenciaTemporal t) {
+	public Respuesta trans(TransferenciaTemporal t) {
 		Respuesta r = new Respuesta();
 		try {
 			r.setCodigo(1);

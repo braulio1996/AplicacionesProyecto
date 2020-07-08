@@ -1,28 +1,35 @@
-package ec.edu.ups.vista;
 
+package ec.edu.ups.vista;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Principal extends javax.swing.JFrame {
 
     Dimension pantallaTamano = Toolkit.getDefaultToolkit().getScreenSize();
     
     public Principal() {
-        initComponents();
-		
-		Login login = new Login();
-		login.setVisible(true);
 
-		this.setSize((pantallaTamano.width), (pantallaTamano.height)); 
-		Dimension tamanoPanel = login.getSize(); 
-		login.setBounds(((pantallaTamano.width - tamanoPanel.width) / 2), (((pantallaTamano.height - tamanoPanel.height) / 2)-100),(int) tamanoPanel.getWidth(), (int) tamanoPanel.getHeight()); 
-		pnl_Nombre.setVisible(true);
-		mnuPrincipal.setVisible(false);
-		dskPane.add(login);
+            initComponents();
 
-		this.setExtendedState(Principal.MAXIMIZED_BOTH);
-		this.setTitle("BANCA");
+            dskPane.setBorder(new ec.edu.ups.vista.ImagenFondo());
+            
+            Login login = new Login();
+            login.setVisible(true);
+
+            this.setSize((pantallaTamano.width), (pantallaTamano.height)); 
+            Dimension tamanoPanel = login.getSize(); 
+            login.setBounds(((pantallaTamano.width - tamanoPanel.width) / 2), (((pantallaTamano.height - tamanoPanel.height) / 2)-100),(int) tamanoPanel.getWidth(), (int) tamanoPanel.getHeight()); 
+            pnl_Nombre.setVisible(true);
+            mnuPrincipal.setVisible(false);
+            dskPane.add(login);
+
+            this.setExtendedState(Principal.MAXIMIZED_BOTH);
+            this.setTitle("SISTEMA FACTURACION");
     }//Fin Constructor
 
     
@@ -44,9 +51,15 @@ public class Principal extends javax.swing.JFrame {
         mnuArchivo = new javax.swing.JMenu();
         mnuSesion = new javax.swing.JMenuItem();
         mnuSalir = new javax.swing.JMenuItem();
+        mnuCajero = new javax.swing.JMenu();
+        mnuRetiro = new javax.swing.JMenuItem();
+        mnuDeposito = new javax.swing.JMenuItem();
+        mnuTransferencias = new javax.swing.JMenu();
+        mnuInterna = new javax.swing.JMenuItem();
+        mnuExterna = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        setIconImage(getIconImage());
 
         dskPane.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -107,6 +120,50 @@ public class Principal extends javax.swing.JFrame {
 
         mnuPrincipal.add(mnuArchivo);
 
+        mnuCajero.setText("Acciones");
+        mnuCajero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        mnuRetiro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, java.awt.event.InputEvent.ALT_MASK));
+        mnuRetiro.setText("Retiros");
+        mnuRetiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRetiroActionPerformed(evt);
+            }
+        });
+        mnuCajero.add(mnuRetiro);
+
+        mnuDeposito.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.ALT_MASK));
+        mnuDeposito.setText("Depósitos");
+        mnuDeposito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuDepositoActionPerformed(evt);
+            }
+        });
+        mnuCajero.add(mnuDeposito);
+
+        mnuPrincipal.add(mnuCajero);
+
+        mnuTransferencias.setText("Transferencias");
+        mnuTransferencias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        mnuInterna.setText("Interna");
+        mnuInterna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuInternaActionPerformed(evt);
+            }
+        });
+        mnuTransferencias.add(mnuInterna);
+
+        mnuExterna.setText("Externa");
+        mnuExterna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuExternaActionPerformed(evt);
+            }
+        });
+        mnuTransferencias.add(mnuExterna);
+
+        mnuPrincipal.add(mnuTransferencias);
+
         setJMenuBar(mnuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,30 +184,77 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
+    private void mnuDepositoActionPerformed(java.awt.event.ActionEvent evt) {                                            
 
-    private void mnuSesionActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        Login login = new Login();
-        
-        this.setSize((pantallaTamano.width), (pantallaTamano.height)); 
-        Dimension tamanoPanel = login.getSize(); 
-        login.setBounds((pantallaTamano.width - tamanoPanel.width) / 2, (((pantallaTamano.height - tamanoPanel.height) / 2)-100),(int) tamanoPanel.getWidth(), (int) tamanoPanel.getHeight()); 
-        
+        Deposito dep = new Deposito();
+
+        Dimension dim = dskPane.getSize();
+        dep.setSize(dim);
         dskPane.removeAll();
         dskPane.repaint();
-        login.setVisible(true);
-        dskPane.add(login); 
-        
-        login.txtNombre.requestFocus();
-        login.setCuenta("");
-        login.setCajero("");
-        this.setExtendedState(Principal.MAXIMIZED_BOTH);
-        mnuPrincipal.setVisible(false);
-        lbl_Nombre.setText("");
+        dep.setVisible(true);
+        dskPane.add(dep);
+
+    }                                           
+
+    private void mnuRetiroActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        Retiros r = new Retiros();
+
+        Dimension dim = dskPane.getSize();
+        r.setSize(dim);
+        dskPane.removeAll();
+        dskPane.repaint();
+        r.setVisible(true);
+        dskPane.add(r);
+
     }                                         
 
     private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {                                         
         System.exit(0);
     }                                        
+
+    private void mnuSesionActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Login login = new Login();
+
+        this.setSize((pantallaTamano.width), (pantallaTamano.height));
+        Dimension tamanoPanel = login.getSize();
+        login.setBounds((pantallaTamano.width - tamanoPanel.width) / 2, (((pantallaTamano.height - tamanoPanel.height) / 2)-100),(int) tamanoPanel.getWidth(), (int) tamanoPanel.getHeight());
+
+        dskPane.removeAll();
+        dskPane.repaint();
+        login.setVisible(true);
+        dskPane.add(login);
+
+        login.txtNombre.requestFocus();
+        this.setExtendedState(Principal.MAXIMIZED_BOTH);
+        mnuPrincipal.setVisible(false);
+        lbl_Nombre.setText("");
+    }                                         
+
+    private void mnuExternaActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        Externa r = new Externa();
+
+        Dimension dim = dskPane.getSize();
+        r.setSize(dim);
+        dskPane.removeAll();
+        dskPane.repaint();
+        r.setVisible(true);
+        dskPane.add(r);
+    }                                          
+
+    private void mnuInternaActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        Interna r = new Interna();
+
+        Dimension dim = dskPane.getSize();
+        r.setSize(dim);
+        dskPane.removeAll();
+        dskPane.repaint();
+        r.setVisible(true);
+        dskPane.add(r);
+    }                                          
+
+
 
 
     /**
@@ -192,9 +296,15 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JLabel lbl_Nombre;
     public static javax.swing.JLabel lbl_Sucursal;
     public static javax.swing.JMenu mnuArchivo;
+    public static javax.swing.JMenu mnuCajero;
+    private javax.swing.JMenuItem mnuDeposito;
+    private javax.swing.JMenuItem mnuExterna;
+    private javax.swing.JMenuItem mnuInterna;
     public static javax.swing.JMenuBar mnuPrincipal;
+    private javax.swing.JMenuItem mnuRetiro;
     private javax.swing.JMenuItem mnuSalir;
     private javax.swing.JMenuItem mnuSesion;
+    public static javax.swing.JMenu mnuTransferencias;
     public static javax.swing.JPanel pnl_Nombre;
     // End of variables declaration                   
 }

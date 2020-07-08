@@ -21,12 +21,12 @@ import ec.edu.ups.Modelo.TransferenciaTemporal;
 
 public class Rest {
 
-	public String urlString1 = "http://localhost:8080/AplicacionesBanco/services/users/BuscarCliente";
-	public String urlString2 = "http://localhost:8080/AplicacionesBanco/services/users/Deposito";
-	public String urlString3 = "http://localhost:8080/AplicacionesBanco/services/users/Login";
-	public String urlString4 = "http://localhost:8080/AplicacionesBanco/services/users/Retiro";
-	public String urlString5 = "http://localhost:8080/AplicacionesBanco/services/users/transferencia";
-	public String urlString6 = "http://localhost:8080/AplicacionesBanco/services/users/listarCliente";
+	public String urlString1 = "http://localhost:18080/AplicacionesBanco/services/users/BuscarCliente";
+	public String urlString2 = "http://localhost:18080/AplicacionesBanco/services/users/Deposito";
+	public String urlString3 = "http://localhost:18080/AplicacionesBanco/services/users/Login";
+	public String urlString4 = "http://localhost:18080/AplicacionesBanco/services/users/Retiro";
+	public String urlString5 = "http://localhost:18080/AplicacionesBanco/services/users/transferencia";
+	public String urlString6 = "http://localhost:18080/AplicacionesBanco/services/users/listarCliente";
 
 	public ClienteTemporal buscarCliente(String cedula) {
 		Client client = ClientBuilder.newBuilder()

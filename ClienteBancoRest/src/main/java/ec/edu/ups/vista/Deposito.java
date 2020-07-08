@@ -263,8 +263,7 @@ public class Deposito extends javax.swing.JInternalFrame {
 		pack();
 	}// </editor-fold>
 
-	private static final QName SERVICE_NAME = new QName("http://Services.ups.edu.ec/", "ClienteServiceSOAPService");
-
+	
 	private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {
 		
 		Rest r = new Rest();

@@ -264,12 +264,12 @@ public class Deposito extends javax.swing.JInternalFrame {
     private static final QName SERVICE_NAME = new QName("http://Services.ups.edu.ec/", "ClienteServiceSOAPService");
     URL wsdlURL = ClienteServiceSOAPService.WSDL_LOCATION;
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {      
-    	 ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
-         ClienteServiceSOAP port = ss.getClienteServiceSOAPPort();  
-         java.lang.String _deposito_arg0 = cajero;
-         java.lang.String _deposito_arg1 = cliente.getCedula();
-         java.lang.Double _deposito_arg2 = Double.parseDouble(txtCantidad.getText());
-         java.lang.String _deposito_arg3 = txtDepositante.getText();
+    	ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
+        ClienteServiceSOAP port = ss.getClienteServiceSOAPPort();  
+        java.lang.String _deposito_arg0 = cajero;
+        java.lang.String _deposito_arg1 = cliente.getCedula();
+        java.lang.Double _deposito_arg2 = Double.parseDouble(txtCantidad.getText());
+        java.lang.String _deposito_arg3 = txtDepositante.getText();
          ec.edu.ups.services.Respuesta _deposito__return = port.deposito(_deposito_arg0, _deposito_arg1, _deposito_arg2, _deposito_arg3);
          System.out.println("deposito.result=" + _deposito__return);
          JOptionPane.showMessageDialog(this,_deposito__return.getMensaje());
@@ -336,9 +336,6 @@ public class Deposito extends javax.swing.JInternalFrame {
          } catch (Exception_Exception e) { 
              System.out.println("Expected exception: Exception has occurred.");
              System.out.println(e.toString());
-         
-         
-        
          }  
     }                                            
 
