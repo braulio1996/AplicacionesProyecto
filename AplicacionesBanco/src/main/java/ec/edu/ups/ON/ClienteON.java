@@ -25,7 +25,9 @@ import ec.edu.ups.DAO.ClienteDAO;
 
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
+import ec.edu.ups.Modelo.SolicitudCredito;
 import ec.edu.ups.Modelo.Transaccion;
+import ec.edu.ups.Services.Respuesta;
 import ec.edu.ups.Services.TransferenciaTemporal;
 import ec.edu.ups.Modelo.Transferencia;
 
@@ -76,6 +78,10 @@ public class ClienteON {
 	 */
 	public List<Cliente> listar() throws Exception {
 		return pdao.listar();
+	}
+	
+	public List<SolicitudCredito> listarSoli() throws Exception {
+		return pdao.listSolicitud();
 	}
     
 	
@@ -277,4 +283,26 @@ public class ClienteON {
 	      .atZone(ZoneId.systemDefault())
 	      .toLocalDate();
 	}	
+
+public boolean solicitudCredito(Cliente cliente, SolicitudCredito s) throws Exception {
+	System.out.println("Solicitud-------------------------");
+	
+	List<SolicitudCredito>solicitudes= new ArrayList<>();
+	try {
+		s.setCliente(cliente);
+		s.setEstado("Pendiente");
+		solicitudes.add(s);
+		
+		cliente.setSolicitudesCredito(solicitudes);
+		pdao.editar(cliente);
+
+	}catch (Exception e) {
+		// TODO: handle exception
+		System.out.println("Error Solicitud-------"+e.getMessage());
+		throw new Exception(e.toString());
+	}
+	return true;
+		
+}
+
 }

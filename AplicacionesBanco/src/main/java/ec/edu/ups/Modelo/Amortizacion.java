@@ -25,12 +25,12 @@ public class Amortizacion {
     private int codigo;
    
     private int numeroPago;
-    private Date fechaVencimiento;
+    private String fechaVencimiento;
     private double capital;
     private double interes;
     private double pago;
-    private double pagoCapital;
     private double saldo;
+    private String estado;
     @OneToOne
     private CreditoAprobado credito;
 	public int getCodigo() {
@@ -45,10 +45,10 @@ public class Amortizacion {
 	public void setNumeroPago(int numeroPago) {
 		this.numeroPago = numeroPago;
 	}
-	public Date getFechaVencimiento() {
+	public String getFechaVencimiento() {
 		return fechaVencimiento;
 	}
-	public void setFechaVencimiento(Date fechaVencimiento) {
+	public void setFechaVencimiento(String fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
 	public double getCapital() {
@@ -69,12 +69,7 @@ public class Amortizacion {
 	public void setPago(double pago) {
 		this.pago = pago;
 	}
-	public double getPagoCapital() {
-		return pagoCapital;
-	}
-	public void setPagoCapital(double pagoCapital) {
-		this.pagoCapital = pagoCapital;
-	}
+
 	public double getSaldo() {
 		return saldo;
 	}
@@ -86,6 +81,12 @@ public class Amortizacion {
 	}
 	public void setCredito(CreditoAprobado credito) {
 		this.credito = credito;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
     

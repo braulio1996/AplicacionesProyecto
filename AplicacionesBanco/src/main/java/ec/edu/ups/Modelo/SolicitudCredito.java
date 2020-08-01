@@ -1,10 +1,13 @@
 package ec.edu.ups.Modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 /**
  *Esta clase Define los atributos de la entidad Solicitud Credito                  
@@ -19,6 +22,9 @@ public class SolicitudCredito {
 	private int codigo;
 	private String tipo;
 	private Double monto;
+	private int meses;
+	private double ingreso;
+	private double egreso;
 	private String estado;
 	@Lob
 	private byte[] fotoCedulaF;
@@ -28,7 +34,8 @@ public class SolicitudCredito {
 	private byte[] fotoPlantilla;
 	@Lob
 	private byte[] fotoRolPagos;
-
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Cliente cliente;
 	public int getCodigo() {
 		return codigo;
 	}
@@ -91,6 +98,38 @@ public class SolicitudCredito {
 
 	public void setFotoRolPagos(byte[] fotoRolPagos) {
 		this.fotoRolPagos = fotoRolPagos;
+	}
+
+	public int getMeses() {
+		return meses;
+	}
+
+	public void setMeses(int meses) {
+		this.meses = meses;
+	}
+
+	public double getIngreso() {
+		return ingreso;
+	}
+
+	public void setIngreso(double ingreso) {
+		this.ingreso = ingreso;
+	}
+
+	public double getEgreso() {
+		return egreso;
+	}
+
+	public void setEgreso(double egreso) {
+		this.egreso = egreso;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

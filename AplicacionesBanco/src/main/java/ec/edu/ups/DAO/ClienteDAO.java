@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import ec.edu.ups.Modelo.Acceso;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
+import ec.edu.ups.Modelo.SolicitudCredito;
 import ec.edu.ups.Modelo.Transaccion;
 
 @Stateless
@@ -81,10 +82,14 @@ public class ClienteDAO {
 			Query query = em.createQuery(jpql, Cliente.class);
 			Cliente cliente = (Cliente) query.getSingleResult();
 			List<Cliente> clientes = query.getResultList();
-//			List<Acceso> accesos = new ArrayList<>();
-//			for (Acceso acceso : cliente.getAccesos()) {
-//				accesos.add(acceso);
-//			}
+			List<Acceso> accesos = new ArrayList<>();
+			List<Transaccion>tt= new ArrayList<>();
+			for (Acceso acceso : cliente.getAccesos()) {
+				accesos.add(acceso);
+			}
+			for (Transaccion t : cliente.getTransacciones()) {
+				tt.add(t);
+			}
 			return clientes;
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -235,5 +240,14 @@ public class ClienteDAO {
 
 			return query.getResultList();
 		}
+	}
+	public List<SolicitudCredito>listSolicitud(){
+		//String jpql="SELECT s FROM SolicitudCredito WHERE s.cliente = :cliente";
+		String jpql="SELECT s FROM SolicitudCredito s";
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		//query.setParameter("cliente", cliente);
+		
+		return query.getResultList();
+		
 	}
 }
