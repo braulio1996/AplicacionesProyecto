@@ -305,4 +305,42 @@ public boolean solicitudCredito(Cliente cliente, SolicitudCredito s) throws Exce
 		
 }
 
+public Respuesta generarContraseña(String correo) {
+	Respuesta r= new Respuesta();
+	Cliente cliente = pdao.buscarCorreo(correo);
+	if (cliente != null) {
+		try {
+			String NUMEROS = "0123456789";
+			String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
+
+			String pswd = "";
+
+			String key = NUMEROS + MAYUSCULAS + MINUSCULAS;
+
+			for (int i = 0; i < 12; i++) {
+				pswd += (key.charAt((int) (Math.random() * key.length())));
+			}
+
+			
+			cliente.setCorreo(correo);
+			r.setCodigo(1);
+			r.setMensaje("Su nueva contraseña es: " + pswd);
+
+			enviarCorreo(correo, "Cambio de Contraseña", "Su nueva contraseña es: " + pswd);
+
+			cliente.setClave(pswd);
+			pdao.editar(cliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return r;
+	} else {
+		System.out.println("No existe el correo");
+		r.setCodigo(0);
+		r.setMensaje("No existe el correo");
+		return r;
+	}
+}
 }
