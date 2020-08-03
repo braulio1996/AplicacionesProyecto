@@ -190,6 +190,9 @@ public class Login extends javax.swing.JInternalFrame {
 				cajero = respuesta.getMensaje();
 				setCajero(respuesta.getMensaje());
 				
+				Deposito d = new Deposito();
+				Deposito.cajero = getCajero();
+				
 				Retiros rr = new Retiros();
 				Retiros.cajero = getCajero();
 				rr.setVisible(true);
@@ -206,6 +209,10 @@ public class Login extends javax.swing.JInternalFrame {
 			} else if (respuesta.getCodigo() == 1) {
 				cuenta = respuesta.getMensaje();
 				setCuenta(respuesta.getMensaje());
+				
+				Externa e = new Externa();
+				Externa.cedula = getCuenta();
+				
 				Interna t = new Interna();
 				Interna.cedula = getCuenta();
 				t.setVisible(true);

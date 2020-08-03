@@ -70,8 +70,7 @@ public class AdministradorON {
 	 * Genera las cotraseñas de usuario de forma aleatroia con numeros, letras mayuculas y minusculas
 	 * @return pswd  
 	 */
-	public String generarContraseña() {
-		
+	public String generarContraseña(){
 		String NUMEROS = "0123456789";
 		String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";

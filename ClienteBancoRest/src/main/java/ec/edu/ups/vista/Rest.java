@@ -114,7 +114,7 @@ public class Rest {
 		WebTarget webTarget = client.target(urlString3);
 
 		webTarget = webTarget.queryParam("correo", correo).queryParam("clave", clave);
-		;
+		
 
 		final Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 

@@ -97,7 +97,7 @@
 			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -149,6 +149,13 @@
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>net.bootsfaces</groupId>
+			<artifactId>bootsfaces</artifactId>
+			<version>1.4.2</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -156,7 +163,7 @@
 			the version - a non versioned name is required e.g. when building a deployable 
 			artifact using the ShrinkWrap API -->
 		<finalName>${project.artifactId}</finalName>
-		
+
 		<plugins>
 			<!--Configuration of the maven-compiler-plugin -->
 			<plugin>

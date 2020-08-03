@@ -229,4 +229,15 @@ public class ClienteServiceRest implements Serializable {
 		
 	}
 
+	
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Respuesta getModels123(@PathParam("id") String id) {
+		Respuesta r = new Respuesta();
+		System.out.println("-----------------------------------------------------------");
+		r.setCodigo(1);
+		r.setMensaje(id);
+		return r;
+	}
 }
