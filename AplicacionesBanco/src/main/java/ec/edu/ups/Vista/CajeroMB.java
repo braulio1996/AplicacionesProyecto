@@ -1,33 +1,27 @@
 package ec.edu.ups.Vista;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.BusyConversationException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 
-import ec.edu.ups.Modelo.Acceso;
-import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
+import ec.edu.ups.Modelo.SolicitudCredito;
 import ec.edu.ups.Modelo.Transaccion;
-import ec.edu.ups.Modelo.Transferencia;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CuentaON;
 
-
 /**
  * Esta Clase define los ManagedBean
+ * 
  * @version: 01/05/2020
  * @author Christian
  *
@@ -37,13 +31,13 @@ import ec.edu.ups.ON.CuentaON;
 public class CajeroMB {
 	@Inject
 	private CuentaON cON;
-	
+
 	@Inject
 	private ClienteON clienteON;
-	
+
 	@Inject
 	private CajeroON cjON;
-	
+
 	LocalDate myDate = LocalDate.now();
 
 	private Cliente cliente;
@@ -53,16 +47,16 @@ public class CajeroMB {
 	private List<Transaccion> transacciones;
 	private String cedula;
 	private String mensaje;
-	
+
 	@PostConstruct
 	public void init() {
 		cliente = new Cliente();
-		cajero =new Cajero();
+		cajero = new Cajero();
 		t = new Transaccion();
 		transacciones = new ArrayList<>();
-		cedula="";
-		cuenta=new Cuenta();
-		mensaje ="";
+		cedula = "";
+		cuenta = new Cuenta();
+		mensaje = "";
 	}
 
 	public String getMensaje() {
@@ -122,25 +116,26 @@ public class CajeroMB {
 	}
 
 	/**
-	 * El metodo retiro  es obtener el numero de cuenta, me develve el saldo
-	 * menos la cantidad a retirar, el tipo de retiro que se realiza y la fecha en la que se 
-	 * realiza esa transaccion 
-	 * editar: Permite modificar los datos en el caso de estar erroneo
+	 * El metodo retiro es obtener el numero de cuenta, me develve el saldo menos la
+	 * cantidad a retirar, el tipo de retiro que se realiza y la fecha en la que se
+	 * realiza esa transaccion editar: Permite modificar los datos en el caso de
+	 * estar erroneo
+	 * 
 	 * @return
 	 */
 	public String retiro(Cajero cajero) {
 		try {
-			cliente=clienteON.buscar(cedula);
+			cliente = clienteON.buscar(cedula);
 			Double saldo = cliente.getCuenta().getSaldo();
-			
-			if(saldo < t.getMonto()) {
-				this.mensaje = "ERROR. El monto es mayor al saldo ("+saldo+")";
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", this.mensaje ); 
+
+			if (saldo < t.getMonto()) {
+				this.mensaje = "ERROR. El monto es mayor al saldo (" + saldo + ")";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", this.mensaje);
 				System.out.println(this.mensaje);
 				return null;
-			}else {
+			} else {
 				Double total = saldo - t.getMonto();
-				Cuenta cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
+				Cuenta cuenta = cON.buscarCuenta(cliente.getCuenta().getNumero());
 				cuenta.setSaldo(total);
 				cliente.setCuenta(cuenta);
 				t.setTipo("Retiro");
@@ -152,42 +147,44 @@ public class CajeroMB {
 				cliente.setTransacciones(transacciones);
 				cajero.setTransacciones(transacciones);
 				clienteON.editar(cliente);
-				//cjON.editar(cajero);
-				t=new Transaccion();
-				cuenta=new Cuenta();
-				cajero =new Cajero();
-				cliente=new Cliente();
-				
-				cedula="";
+				// cjON.editar(cajero);
+				t = new Transaccion();
+				cuenta = new Cuenta();
+				cajero = new Cajero();
+				cliente = new Cliente();
+
+				cedula = "";
 				transacciones.clear();
-				
+
 				this.mensaje = "Retiro realizado correctamente";
-				
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto", this.mensaje );
-				
+
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", this.mensaje);
+
 				System.out.println(this.mensaje);
 				return null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			this.mensaje = e.getMessage();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", this.mensaje ); 
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", this.mensaje);
 			System.out.println(this.mensaje);
 			return null;
 		}
 
 	}
+
 	/**
-	 * Este metodp busca la cliente donde regresa una cuenta en la que se va realiar el deposito,
-	 * en la cual se sumara el monto anterior con el monto  actual, y la fecha que se realiza
-	 * la transacion 
+	 * Este metodp busca la cliente donde regresa una cuenta en la que se va realiar
+	 * el deposito, en la cual se sumara el monto anterior con el monto actual, y la
+	 * fecha que se realiza la transacion
+	 * 
 	 * @return
 	 */
 	public String buscarCliente() {
 		try {
-			cliente=clienteON.buscar(this.cedula);
-			cuenta= cON.buscarCuenta(cliente.getCuenta().getNumero());
+			cliente = clienteON.buscar(this.cedula);
+			cuenta = cON.buscarCuenta(cliente.getCuenta().getNumero());
 			System.out.println(cliente);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -195,13 +192,13 @@ public class CajeroMB {
 		}
 		return null;
 	}
-	
+
 	public String depositosC(Cajero cajero) {
 		System.out.println("Metodo Cajero");
 		try {
 			Double saldo = cliente.getCuenta().getSaldo();
 			Double total = saldo + t.getMonto();
-			
+
 			cuenta.setSaldo(total);
 			cliente.setCuenta(cuenta);
 			t.setSaldoCuenta(total);
@@ -214,17 +211,17 @@ public class CajeroMB {
 			cliente.setTransacciones(transacciones);
 			cajero.setTransacciones(transacciones);
 			clienteON.editar(cliente);
-			t=new Transaccion();
-			cuenta=new Cuenta();
-			cajero =new Cajero();
-			cliente=new Cliente();
-			cedula="";
+			t = new Transaccion();
+			cuenta = new Cuenta();
+			cajero = new Cajero();
+			cliente = new Cliente();
+			cedula = "";
 			transacciones.clear();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 

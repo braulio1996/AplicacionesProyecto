@@ -1,7 +1,6 @@
 package ec.edu.ups.Vista;
 
-
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,18 +8,21 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 
-import ec.edu.ups.Modelo.Acceso;
-import ec.edu.ups.Modelo.Administrador;
+import ec.edu.ups.Modelo.Amortizacion;
 import ec.edu.ups.Modelo.Cliente;
+import ec.edu.ups.Modelo.CreditoAprobado;
 import ec.edu.ups.Modelo.Cuenta;
+import ec.edu.ups.Modelo.SolicitudCredito;
 import ec.edu.ups.Modelo.Transferencia;
 import ec.edu.ups.ON.ClienteON;
+import ec.edu.ups.ON.SolicitudON;
 
 /**
  * Esta Clase define los ManagedBean
+ * 
  * @version: 01/05/2020
  * @author Braulio Castro
  *
@@ -30,22 +32,113 @@ import ec.edu.ups.ON.ClienteON;
 public class ClienteMB {
 	@Inject
 	private ClienteON cON;
+	
+	@Inject
+	private SolicitudON sON;
+	
 	Date myDate = new Date();
 
 	private Cliente cliente;
 	private Transferencia t;
 	private List<Transferencia> transferencias;
+	private SolicitudCredito s;
+	private CreditoAprobado c;
+	private Amortizacion m;
 	private String cuentaDestino;
 	private Double monto;
 	private Cuenta cuenta;
 	private String correo;
+	private Part file;
+	private Part file1;
+	private Part file2;
+	private Part file3;
 
 	@PostConstruct
 	public void init() {
 		cliente = new Cliente();
 		t = new Transferencia();
+		s = new SolicitudCredito();
+		c= new CreditoAprobado();
+		m=new Amortizacion();
 		transferencias = new ArrayList<>();
+		try {
+			sON.debitoCreditoVencido();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+
+	public Amortizacion getM() {
+		return m;
+	}
+
+
+	public void setM(Amortizacion m) {
+		this.m = m;
+	}
+
+
+	public CreditoAprobado getC() {
+		return c;
+	}
+
+
+	public void setC(CreditoAprobado c) {
+		this.c = c;
+	}
+
+
+	public SolicitudCredito getS() {
+		return s;
+	}
+
+
+	public void setS(SolicitudCredito s) {
+		this.s = s;
+	}
+
+
+	public Part getFile() {
+		return file;
+	}
+
+
+	public void setFile(Part file) {
+		this.file = file;
+	}
+
+
+	public Part getFile1() {
+		return file1;
+	}
+
+
+	public void setFile1(Part file1) {
+		this.file1 = file1;
+	}
+
+
+	public Part getFile2() {
+		return file2;
+	}
+
+
+	public void setFile2(Part file2) {
+		this.file2 = file2;
+	}
+
+
+	public Part getFile3() {
+		return file3;
+	}
+
+
+	public void setFile3(Part file3) {
+		this.file3 = file3;
+	}
+
 
 	public String getCorreo() {
 		return correo;
@@ -105,9 +198,9 @@ public class ClienteMB {
 
 	/**
 	 * 
-	 * El metodeo transferencai 
-	 * se obtiene el id cliente es decir cuenta origen  y cuenta destino  y el monto 
-	 * en la cual incluira la fecha de transacion 
+	 * El metodeo transferencai se obtiene el id cliente es decir cuenta origen y
+	 * cuenta destino y el monto en la cual incluira la fecha de transacion
+	 * 
 	 * @return
 	 */
 //	public String trasferencia() {
@@ -125,18 +218,19 @@ public class ClienteMB {
 //	}
 
 	/**
-	 * 	Este metodo genra cuenta del del usuario
+	 * Este metodo genra cuenta del del usuario
 	 */
 	public void generarCuenta() {
 		Date d = new Date();
 		String numero = d.getDate() + "" + d.getHours() + d.getSeconds() + System.currentTimeMillis();
 		cuenta.setNumero(numero);
 	}
-	
+
 	/**
-	 * Metodo para cambiar la contraseña y/o generar nuevas contraseñas de forma 
-	 * aleatoria antes se tendra que verificar si este usuario esta registrado para poder enviar
-	 * la clave generada al correo personal
+	 * Metodo para cambiar la contraseña y/o generar nuevas contraseñas de forma
+	 * aleatoria antes se tendra que verificar si este usuario esta registrado para
+	 * poder enviar la clave generada al correo personal
+	 * 
 	 * @return
 	 */
 	public String generarContraseña() {
@@ -159,7 +253,7 @@ public class ClienteMB {
 				this.cliente.setCorreo(this.correo);
 
 				cON.enviarCorreo(this.correo, "Cambio de Contraseña", "Su nueva contraseña es: " + pswd);
-				
+
 				cliente.setClave(pswd);
 				cON.editar(cliente);
 			} catch (Exception e) {
@@ -172,4 +266,65 @@ public class ClienteMB {
 			return null;
 		}
 	}
+//Metodo para crear solicitudes 
+	public String solicitudCredito(Cliente cliente) throws Exception {
+		try {
+			if (file != null || file1 != null || file2 != null || file3 != null) {
+				int size = (int) file.getSize();
+				int size1 = (int) file1.getSize();
+				int size2 = (int) file2.getSize();
+				int size3 = (int) file3.getSize();
+				byte[] cedulaF;
+				byte[] cedulaT;
+				byte[] plantilla;
+				byte[] rol;
+				if (size > 0 || size1 > 0 || size2 > 0 || size3 > 0) {
+					cedulaF = new byte[size];
+					cedulaT = new byte[size1];
+					plantilla = new byte[size2];
+					rol = new byte[size3];
+					file.getInputStream().read(cedulaF);
+					file1.getInputStream().read(cedulaT);
+					file2.getInputStream().read(plantilla);
+					file3.getInputStream().read(rol);
+					s.setFotoCedulaT(cedulaT);
+					s.setFotoCedulaF(cedulaF);
+					s.setFotoPlantilla(plantilla);
+					s.setFotoRolPagos(rol);
+				}
+                 System.out.println("Solicitud-------------------------"+s.toString());
+				cON.solicitudCredito(cliente, s);
+				s = null;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return "inicioCliente?faces-redirect=true";
+	}
+	public List<SolicitudCredito>listarSolicitud(){
+		try {
+			return cON.listarSoli();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+//crear un boton en la lista de Solicitudescreditos en el Objeto jefe de credito 
+//paso de parametros una Solicitud y un Credito Aprobado==llenar datos 
+public String aprobarCredito() throws Exception {
+	sON.aprobarSolicitud(s, c);
+	
+	return "inicioCliente?faces-redirect=true";
+	
+}
+//Realizar debito desde el cliente web
+//crear un boton en la lista de amortizacion y pagar 
+ public String debitoCredito() {
+	 sON.debitoCredito(m, monto);
+	
+	 return "inicioCliente?faces-redirect=true"; 
+ }
+
 }

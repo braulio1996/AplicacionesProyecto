@@ -25,7 +25,9 @@ import ec.edu.ups.DAO.ClienteDAO;
 
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.Cuenta;
+import ec.edu.ups.Modelo.SolicitudCredito;
 import ec.edu.ups.Modelo.Transaccion;
+import ec.edu.ups.Services.Respuesta;
 import ec.edu.ups.Services.TransferenciaTemporal;
 import ec.edu.ups.Modelo.Transferencia;
 
@@ -76,6 +78,10 @@ public class ClienteON {
 	 */
 	public List<Cliente> listar() throws Exception {
 		return pdao.listar();
+	}
+	
+	public List<SolicitudCredito> listarSoli() throws Exception {
+		return pdao.listSolicitud();
 	}
     
 	
@@ -277,4 +283,64 @@ public class ClienteON {
 	      .atZone(ZoneId.systemDefault())
 	      .toLocalDate();
 	}	
+
+public boolean solicitudCredito(Cliente cliente, SolicitudCredito s) throws Exception {
+	System.out.println("Solicitud-------------------------");
+	
+	List<SolicitudCredito>solicitudes= new ArrayList<>();
+	try {
+		s.setCliente(cliente);
+		s.setEstado("Pendiente");
+		solicitudes.add(s);
+		
+		cliente.setSolicitudesCredito(solicitudes);
+		pdao.editar(cliente);
+
+	}catch (Exception e) {
+		// TODO: handle exception
+		System.out.println("Error Solicitud-------"+e.getMessage());
+		throw new Exception(e.toString());
+	}
+	return true;
+		
+}
+
+public Respuesta generarContraseña(String correo) {
+	Respuesta r= new Respuesta();
+	Cliente cliente = pdao.buscarCorreo(correo);
+	if (cliente != null) {
+		try {
+			String NUMEROS = "0123456789";
+			String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
+
+			String pswd = "";
+
+			String key = NUMEROS + MAYUSCULAS + MINUSCULAS;
+
+			for (int i = 0; i < 12; i++) {
+				pswd += (key.charAt((int) (Math.random() * key.length())));
+			}
+
+			
+			cliente.setCorreo(correo);
+			r.setCodigo(1);
+			r.setMensaje("Su nueva contraseña es: " + pswd);
+
+			enviarCorreo(correo, "Cambio de Contraseña", "Su nueva contraseña es: " + pswd);
+
+			cliente.setClave(pswd);
+			pdao.editar(cliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return r;
+	} else {
+		System.out.println("No existe el correo");
+		r.setCodigo(0);
+		r.setMensaje("No existe el correo");
+		return r;
+	}
+}
 }

@@ -275,25 +275,26 @@ public class Externa extends javax.swing.JInternalFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	ClienteServiceSOAPService ss = new ClienteServiceSOAPService(wsdlURL, SERVICE_NAME);
         ClienteServiceSOAP port = ss.getClienteServiceSOAPPort();
-        TransferenciaTemporal t = new TransferenciaTemporal();
-        t.setCuentaOrigen(cedula);
-        t.setInstitucion((String) cmbInstitucion.getSelectedItem());
-        t.setNumeroCuenta(txtNumCuenta.getText());
-        t.setMonto(Double.parseDouble(txtMonto.getText()));
-        t.setNombre(txtNombre.getText());
-        t.setCorreo(txtCorreo.getText());
-        t.setTipo("Externa");
-        t.setTipoCuenta((String)cmbTipoCuenta.getSelectedItem());
-        t.setConcepto(txtConcepto.getText());
-        t.setIdentificacion(txtIdentificacion.getText());
-        t.setInstitucion("KaWill");
-        System.out.println(t.toString());
+        TransferenciaTemporal tt = new TransferenciaTemporal();
+        tt.setCuentaOrigen(cedula);
+        tt.setInstitucion((String) cmbInstitucion.getSelectedItem());
+        tt.setNumeroCuenta(txtNumCuenta.getText());
+        tt.setMonto(Double.parseDouble(txtMonto.getText()));
+        tt.setNombre(txtNombre.getText());
+        tt.setCorreo(txtCorreo.getText());
+        tt.setTipo("Externa");
+        tt.setTipoCuenta((String)cmbTipoCuenta.getSelectedItem());
+        tt.setConcepto(txtConcepto.getText());
+        tt.setIdentificacion(txtIdentificacion.getText());
+        tt.setInstitucion("KaWill");
+        
 
-        ec.edu.ups.services.TransferenciaTemporal _transferencia2_arg0 = t;
-        ec.edu.ups.services.Respuesta _transferencia2__return = port.trans(_transferencia2_arg0);
+        ec.edu.ups.services.TransferenciaTemporal _trans_arg0 = tt;
+        ec.edu.ups.services.Respuesta _trans__return = port.trans(_trans_arg0);
+        System.out.println("trans.result=" + _trans__return);
 
-        System.out.println("transferencia2.result=" + _transferencia2__return.getMensaje());
-        JOptionPane.showMessageDialog(this, _transferencia2__return.getMensaje());
+        System.out.println("transferencia2.result=" + _trans__return.getMensaje());
+        JOptionPane.showMessageDialog(this, _trans__return.getMensaje());
         
         txtNumCuenta.setText("");
         txtMonto.setText("");

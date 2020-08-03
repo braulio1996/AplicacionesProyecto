@@ -208,26 +208,35 @@ public class ClienteServiceRest implements Serializable {
 		}
 		return null;
 	}
-
+//
+//	@GET
+//	@Path("/{id}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Respuesta getModels(@PathParam("id") String id) {
+//		Respuesta r = new Respuesta();
+//		System.out.println("-----------------------------------------------------------");
+//		r.setCodigo(1);
+//		r.setMensaje(id);
+//		return r;
+//	}
+//
+//	@GET
+//	@Path("listarCliente")
+//	@Produces("application/json")
+//	public List<Cliente> listar() throws Exception {
+//	System.out.println("-----------------------------------------------------------");
+//			return con.listar();
+//		
+//	}
+	
 	@GET
-	@Path("/{id}")
+	@Path("/Password")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Respuesta getModels(@PathParam("id") String id) {
-		Respuesta r = new Respuesta();
-		System.out.println("-----------------------------------------------------------");
-		r.setCodigo(1);
-		r.setMensaje(id);
-		return r;
-	}
-
-	@GET
-	@Path("listarCliente")
-	@Produces("application/json")
-	public List<Cliente> listar() throws Exception {
-	System.out.println("-----------------------------------------------------------");
-			return con.listar();
+	public Respuesta cambioPassword(@QueryParam("correo") String correo) throws Exception {
+		return con.generarContraseña(correo);
 		
 	}
+	
 
 	
 	@GET

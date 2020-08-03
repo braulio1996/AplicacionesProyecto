@@ -178,11 +178,13 @@ public class Interna extends javax.swing.JInternalFrame {
         t.setInstitucion("KaWill");
         System.out.println(t.toString());
 
-        ec.edu.ups.services.TransferenciaTemporal _transferencia2_arg0 = t;
-        ec.edu.ups.services.Respuesta _transferencia2__return = port.trans(_transferencia2_arg0);
+        ec.edu.ups.services.TransferenciaTemporal _trans_arg0 = t;
+        ec.edu.ups.services.Respuesta _trans__return = port.trans(_trans_arg0);
+        System.out.println("trans.result=" + _trans__return);
 
-        System.out.println("transferencia2.result=" + _transferencia2__return.getMensaje());
-        JOptionPane.showMessageDialog(this, _transferencia2__return.getMensaje());
+        System.out.println("transferencia2.result=" + _trans__return.getMensaje());
+        JOptionPane.showMessageDialog(this, _trans__return.getMensaje());
+        
         txtNombre.setText("");
         txtCorreo.setText("");
         txtCuenta.setText("");

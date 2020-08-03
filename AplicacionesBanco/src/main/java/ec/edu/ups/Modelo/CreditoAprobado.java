@@ -62,9 +62,4 @@ public class CreditoAprobado {
 	public void setAmortizacion(List<Amortizacion> amortizacion) {
 		this.amortizacion = amortizacion;
 	}
-	
-	
-	
-	
-
 }

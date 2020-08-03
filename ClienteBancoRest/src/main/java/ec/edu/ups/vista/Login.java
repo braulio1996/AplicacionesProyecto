@@ -195,6 +195,7 @@ public class Login extends javax.swing.JInternalFrame {
 				
 				Retiros rr = new Retiros();
 				Retiros.cajero = getCajero();
+				Deposito.cajero = getCajero();
 				rr.setVisible(true);
 				
 				Dimension dim = Principal.dskPane.getSize();
@@ -215,6 +216,7 @@ public class Login extends javax.swing.JInternalFrame {
 				
 				Interna t = new Interna();
 				Interna.cedula = getCuenta();
+				Externa.cedula = getCuenta();
 				t.setVisible(true);
 				
 				Dimension dim = Principal.dskPane.getSize();
