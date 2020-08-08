@@ -1,5 +1,7 @@
 package ec.edu.ups.Modelo;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +28,7 @@ public class SolicitudCredito {
 	private double ingreso;
 	private double egreso;
 	private String estado;
+	private String observaciones;
 	@Lob
 	private byte[] fotoCedulaF;
 	@Lob
@@ -50,6 +53,15 @@ public class SolicitudCredito {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
 	}
 
 	public Double getMonto() {
