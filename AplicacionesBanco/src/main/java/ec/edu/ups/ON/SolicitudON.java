@@ -62,6 +62,9 @@ public class SolicitudON {
 		return pdao.listSolicitud();
 	}
     
+	public SolicitudCredito buscarSolicitud(int codigo) {
+		return pdao.buscarSolicitud(codigo);
+	}
 	
 	/**
 	 * Actualiza el objeto de tipo Solicitud

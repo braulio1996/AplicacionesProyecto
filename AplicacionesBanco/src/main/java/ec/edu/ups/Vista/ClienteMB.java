@@ -1,6 +1,8 @@
 package ec.edu.ups.Vista;
 
+import java.io.Console;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -283,6 +285,7 @@ public class ClienteMB {
 					cedulaT = new byte[size1];
 					plantilla = new byte[size2];
 					rol = new byte[size3];
+					
 					file.getInputStream().read(cedulaF);
 					file1.getInputStream().read(cedulaT);
 					file2.getInputStream().read(plantilla);
@@ -291,6 +294,7 @@ public class ClienteMB {
 					s.setFotoCedulaF(cedulaF);
 					s.setFotoPlantilla(plantilla);
 					s.setFotoRolPagos(rol);
+					s.setObservaciones("Pendiente");
 				}
                  System.out.println("Solicitud-------------------------"+s.toString());
 				cON.solicitudCredito(cliente, s);
@@ -311,6 +315,13 @@ public class ClienteMB {
 		}
 		return null;
 	}
+	
+	public void buscarSolicitud(int codigo) {
+		System.out.println("Entroooo");
+		this.s =  sON.buscarSolicitud(codigo);
+		System.out.println(this.s + " ----- " + codigo);
+	}
+	
 //crear un boton en la lista de Solicitudescreditos en el Objeto jefe de credito 
 //paso de parametros una Solicitud y un Credito Aprobado==llenar datos 
 public String aprobarCredito() throws Exception {
@@ -326,5 +337,10 @@ public String aprobarCredito() throws Exception {
 	
 	 return "inicioCliente?faces-redirect=true"; 
  }
+ 
+ 
+// public void getData(SolicitudCredito soli) {
+//	System.out.println("Datoooos: " + soli);	
+// }
 
 }

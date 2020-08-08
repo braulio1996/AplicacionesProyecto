@@ -102,19 +102,16 @@
 					</div>
 					<div
 						class="card-body border-top collapse show table-responsive no-wrap">
-						<table class="table v-middle table-borderless">
-							<tbody>
-								<tr>
-									<td style="width: 40px"><img
-										src="../assets/images/users/1.jpg" width="50"
-										class="rounded-circle" alt="logo" /></td>
-									<td>Andrew</td>
-									<td align="right"><span
-										class="badge px-2 py-1 label-light-info">$2300</span></td>
-								</tr>
-
-							</tbody>
-						</table>
+						<h:dataTable class="table" value="#{clienteMB.listarSolicitud()}" var="sol">
+							<h:column onclick="clickedMe('#{row.productId}');">
+								<h6> #{sol.cliente.nombre}</h6> 
+								#{sol.tipo}
+							</h:column>
+						
+							<h:column>
+								$ #{sol.monto}
+							</h:column>
+						</h:dataTable>
 					</div>
 				</div>
 			</div>

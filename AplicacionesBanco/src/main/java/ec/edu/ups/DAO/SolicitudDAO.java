@@ -43,6 +43,16 @@ public class SolicitudDAO {
 		
 	}
 	
+	public SolicitudCredito buscarSolicitud(int codigo){
+		//String jpql="SELECT s FROM SolicitudCredito WHERE s.cliente = :cliente";
+		String jpql="SELECT s FROM SolicitudCredito s WHERE s.codigo = "+ codigo;
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		//query.setParameter("cliente", cliente);
+		
+		return (SolicitudCredito) query.getSingleResult();
+		
+	}
+	
 	public boolean aprobado(CreditoAprobado credito) throws Exception {
 
 		try {
