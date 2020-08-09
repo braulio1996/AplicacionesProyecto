@@ -57,37 +57,39 @@
 						</div>
 						<div class="card-body collapse show">
 							<div class="table-responsive no-wrap">
-								<table class="table product-overview">
-									<thead>
-										<tr>
-											<th>Customer</th>
-											<th>Photo</th>
-											<th>Quantity</th>
-											<th>Date</th>
-											<th>Status</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Steave Jobs</td>
-											<td><img src="../assets/images/gallery/chair.jpg"
-												alt="iMac" width="80" /></td>
-											<td>20</td>
-											<td>10-7-2020</td>
-											<td><span
-												class="px-2 py-1 badge badge-success font-weight-100">Paid</span>
-											</td>
-											<td><a href="javascript:void(0)"
-												class="text-inverse pr-2" data-toggle="tooltip" title=""
-												data-original-title="Edit"> <i class="ti-marker-alt"></i>
-											</a> <a href="javascript:void(0)" class="text-inverse" title=""
-												data-toggle="tooltip" data-original-title="Delete"> <i
-													class="ti-trash"></i>
-											</a></td>
-										</tr>
-									</tbody>
-								</table>
+								<h:dataTable class="table" value="#{clienteMB.listarSolicitud()}"
+								var="c">
+								<h:column>
+									<f:facet name="header">Tipo</f:facet>
+									#{c.tipo}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Monto</f:facet>
+									#{c.monto}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Meses</f:facet>
+									#{c.meses}
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">Ingreso</f:facet>
+									#{c.ingreso}
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">Egreso</f:facet>
+									#{c.egreso}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Estado</f:facet>
+									#{c.estado}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Cliente</f:facet>
+									#{c.cliente.nombre}
+								</h:column>
+							</h:dataTable>
 							</div>
 						</div>
 					</div>

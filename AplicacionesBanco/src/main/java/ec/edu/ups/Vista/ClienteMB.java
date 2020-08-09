@@ -308,11 +308,15 @@ public class ClienteMB {
 					s.setFotoCedulaF(cedulaF);
 					s.setFotoPlantilla(plantilla);
 					s.setFotoRolPagos(rol);
+<<<<<<< HEAD
 					s.setObservaciones("Pendiente");
+=======
+					s.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
+>>>>>>> master
 				}
 				
 				cON.solicitudCredito(cliente, s);
-				s = null;
+				//s = null;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -330,10 +334,22 @@ public class ClienteMB {
 		return null;
 	}
 	
+<<<<<<< HEAD
 	public void buscarSolicitud(int codigo) {
 		this.s =  sON.buscarSolicitud(codigo);
 	}
 	
+=======
+	public List<SolicitudCredito>listarSolicitudTipo(String tipo){
+		try {
+			return cON.listarSolicitudTipos(tipo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+>>>>>>> master
 //crear un boton en la lista de Solicitudescreditos en el Objeto jefe de credito 
 //paso de parametros una Solicitud y un Credito Aprobado==llenar datos 
 public String aprobarCredito() throws Exception {

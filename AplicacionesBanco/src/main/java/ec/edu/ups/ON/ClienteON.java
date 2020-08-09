@@ -84,6 +84,9 @@ public class ClienteON {
 		return pdao.listSolicitud();
 	}
     
+	public List<SolicitudCredito> listarSolicitudTipos(String tipo) throws Exception {
+		return pdao.listSolicitudTipo(tipo);
+	}
 	
 	/**
 	 * Actualiza el objeto de tipo Cliente
