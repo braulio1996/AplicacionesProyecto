@@ -1,6 +1,7 @@
 package ec.edu.ups.Vista;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -291,6 +292,7 @@ public class ClienteMB {
 					s.setFotoCedulaF(cedulaF);
 					s.setFotoPlantilla(plantilla);
 					s.setFotoRolPagos(rol);
+					s.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
 				}
                  System.out.println("Solicitud-------------------------"+s.toString());
 				cON.solicitudCredito(cliente, s);

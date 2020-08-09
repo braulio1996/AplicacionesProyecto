@@ -61,9 +61,16 @@ public class SolicitudDAO {
 		}
 	}
 	public List<Amortizacion>listaCreditos(String estado){
-		String jpql="SELECT s FROM Amortizacion WHERE s.estado = :estado";	
+		String jpql="SELECT s FROM Amortizacion s WHERE s.estado = :estado";	
 		Query query = em.createQuery(jpql, SolicitudCredito.class);
 		query.setParameter("estado", estado);
+		return query.getResultList();
+		
+	}
+	public List<Amortizacion>listaCreditosT(){
+		String jpql="SELECT s FROM Amortizacion s";	
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		
 		return query.getResultList();
 		
 	}

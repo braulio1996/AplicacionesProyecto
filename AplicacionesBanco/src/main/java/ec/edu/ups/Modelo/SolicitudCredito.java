@@ -26,6 +26,7 @@ public class SolicitudCredito {
 	private double ingreso;
 	private double egreso;
 	private String estado;
+	private String fecha;
 	@Lob
 	private byte[] fotoCedulaF;
 	@Lob
@@ -130,6 +131,14 @@ public class SolicitudCredito {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 
 }

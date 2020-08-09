@@ -206,5 +206,26 @@ public class SolicitudON {
 			
 		
 	}
-	
+	public void fechavencida() throws Exception {
+		List<Amortizacion> creditos=pdao.listaCreditosT();
+		Amortizacion a;
+		
+		for(Amortizacion amortizacion:creditos) {
+			a=amortizacion;
+		Date fechaactual = new Date(System.currentTimeMillis());
+		String fechaInicio =a.getFechaVencimiento();
+		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+		Date fechaInicioDate = date.parse(fechaInicio);  //String a date
+
+		 //comprueba si es que inicio esta después que fecha actual       
+		if(fechaInicioDate.after(fechaactual)){
+		    System.out.println("Fecha inicio mayor");
+		    a.setEstado("Vencido");
+		}else{
+			 a.setEstado("Pendiente");
+		    
+		}
+		pdao.upAmortizacion(a);
+	}
+	}
 }
