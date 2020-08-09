@@ -54,7 +54,8 @@ public class ClienteMB {
 	private Part file1;
 	private Part file2;
 	private Part file3;
-
+	private int codSolbus;
+	
 	@PostConstruct
 	public void init() {
 		cliente = new Cliente();
@@ -71,6 +72,19 @@ public class ClienteMB {
 		}
 	}
 	
+	
+
+	public int getCodSolbus() {
+		return codSolbus;
+	}
+
+
+
+	public void setCodSolbus(int codSolbus) {
+		this.codSolbus = codSolbus;
+	}
+
+
 
 	public Amortizacion getM() {
 		return m;
@@ -296,7 +310,7 @@ public class ClienteMB {
 					s.setFotoRolPagos(rol);
 					s.setObservaciones("Pendiente");
 				}
-                 System.out.println("Solicitud-------------------------"+s.toString());
+				
 				cON.solicitudCredito(cliente, s);
 				s = null;
 			}
@@ -304,7 +318,7 @@ public class ClienteMB {
 			e.printStackTrace();
 		}
 
-		return "inicioCliente?faces-redirect=true";
+		return "solicitudCredito?faces-redirect=true";
 	}
 	public List<SolicitudCredito>listarSolicitud(){
 		try {
@@ -317,9 +331,7 @@ public class ClienteMB {
 	}
 	
 	public void buscarSolicitud(int codigo) {
-		System.out.println("Entroooo");
 		this.s =  sON.buscarSolicitud(codigo);
-		System.out.println(this.s + " ----- " + codigo);
 	}
 	
 //crear un boton en la lista de Solicitudescreditos en el Objeto jefe de credito 

@@ -285,7 +285,6 @@ public class ClienteON {
 	}	
 
 public boolean solicitudCredito(Cliente cliente, SolicitudCredito s) throws Exception {
-	System.out.println("Solicitud-------------------------");
 	
 	List<SolicitudCredito>solicitudes= new ArrayList<>();
 	try {
@@ -297,7 +296,6 @@ public boolean solicitudCredito(Cliente cliente, SolicitudCredito s) throws Exce
 		pdao.editar(cliente);
 
 	}catch (Exception e) {
-		// TODO: handle exception
 		System.out.println("Error Solicitud-------"+e.getMessage());
 		throw new Exception(e.toString());
 	}

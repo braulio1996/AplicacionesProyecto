@@ -113,6 +113,10 @@
 							<h:dataTable class="table" value="#{clienteMB.listarSolicitud()}"
 								var="sol">
 								<h:column>
+									<f:facet name="header">Código</f:facet>
+									#{sol.codigo}
+								</h:column>
+								<h:column>
 									<f:facet name="header">Fecha</f:facet>
 									#{sol.codigo}
 								</h:column>
@@ -129,12 +133,11 @@
 									#{sol.estado}
 								</h:column>
 								<h:column>
+								<!-- <f:ajax execute="#{clienteMB.buscarSolicitud(sol.codigo)}" /> -->
 									<f:facet name="header">Acción</f:facet>
-									<h:commandLink data-toggle="modal" data-target="#detail">
+									<a data-toggle="modal" data-target="#detail">
 										<img src="../assets/images/menu/ver16.png" />
-										<f:ajax execute="#{clienteMB.buscarSolicitud(sol.codigo)}"
-											render="@detail" />
-									</h:commandLink>
+									</a>
 								</h:column>
 							</h:dataTable>
 						</div>
@@ -195,6 +198,24 @@
 											</h:selectOneMenu>
 										</div>
 									</div>
+									
+									<div class="form-group col-md-4">
+										<div class="example">
+											<h6 class="my-1">Ingresos</h6>
+											<h:inputText id="ingreso" type="text"
+												styleClass="form-control" value="#{clienteMB.s.ingreso}"
+												a:placeholder="Relación a meses" />
+										</div>
+									</div>
+									
+									<div class="form-group col-md-4">
+										<div class="example">
+											<h6 class="my-1">Egresos</h6>
+											<h:inputText id="egreso" type="text"
+												styleClass="form-control" value="#{clienteMB.s.egreso}"
+												a:placeholder="Relación a meses" />
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -207,10 +228,10 @@
 												value="#{clienteMB.file}"
 												class="form-control text-holder-proj" type="text"
 												required="" />
-											<div class="fileinput-new thumbnail">
-												<img src="../assets/images/Rectangle.png" alt="..." />
+											<div class="fileinput-new thumbnail" style="width: 286px !important; height: 133px !important;">
+												<img src="../assets/images/Rectangle.png"  />
 											</div>
-											<div class="fileinput-preview fileinput-exists thumbnail"></div>
+											<div class="fileinput-preview fileinput-exists thumbnail" style="width: 286px !important; height: 133px !important;"></div>
 										</div>
 									</div>
 
@@ -222,10 +243,10 @@
 												value="#{clienteMB.file1}"
 												class="form-control text-holder-proj" type="text"
 												required="" />
-											<div class="fileinput-new thumbnail">
-												<img src="../assets/images/Rectangle.png" alt="..." />
+											<div class="fileinput-new thumbnail" style="width: 286px !important; height: 133px !important;">
+												<img src="../assets/images/Rectangle.png"  />
 											</div>
-											<div class="fileinput-preview fileinput-exists thumbnail"></div>
+											<div class="fileinput-preview fileinput-exists thumbnail" style="width: 286px !important; height: 133px !important;"></div>
 										</div>
 									</div>
 								</div>
@@ -240,10 +261,10 @@
 												value="#{clienteMB.file2}"
 												class="form-control text-holder-proj" type="text"
 												required="" />
-											<div class="fileinput-new thumbnail">
-												<img src="../assets/images/Rectangle.png" alt="..." />
+											<div class="fileinput-new thumbnail" style="width: 286px !important; height: 133px !important;">
+												<img src="../assets/images/Rectangle.png"  />
 											</div>
-											<div class="fileinput-preview fileinput-exists thumbnail"></div>
+											<div class="fileinput-preview fileinput-exists thumbnail" style="width: 286px !important; height: 133px !important;"></div>
 										</div>
 									</div>
 
@@ -255,10 +276,10 @@
 												value="#{clienteMB.file3}"
 												class="form-control text-holder-proj" type="text"
 												required="" />
-											<div class="fileinput-new thumbnail">
-												<img src="../assets/images/Rectangle.png" alt="..." />
+											<div class="fileinput-new thumbnail" style="width: 286px !important; height: 133px !important;">
+												<img src="../assets/images/Rectangle.png"  />
 											</div>
-											<div class="fileinput-preview fileinput-exists thumbnail"></div>
+											<div class="fileinput-preview fileinput-exists thumbnail" style="width: 286px !important; height: 133px !important;"></div>
 										</div>
 									</div>
 								</div>
@@ -289,6 +310,7 @@
 							aria-hidden="true">×</button>
 					</div>
 
+					<!--clienteMB.buscarSolicitud(sol.codigo)-->
 					<h:form enctype="multipart/form-data">
 						<div class="modal-body" style="color: #000000;">
 							<div class="col-md-12">
@@ -357,6 +379,8 @@
 				</div>
 			</div>
 		</div>
+		
+		
 	</ui:define>
 </ui:composition>
 </html>
