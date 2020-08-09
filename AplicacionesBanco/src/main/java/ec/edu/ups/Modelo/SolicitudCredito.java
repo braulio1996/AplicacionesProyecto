@@ -28,11 +28,9 @@ public class SolicitudCredito {
 	private double ingreso;
 	private double egreso;
 	private String estado;
-<<<<<<< HEAD
 	private String observaciones;
-=======
 	private String fecha;
->>>>>>> master
+	
 	@Lob
 	private byte[] fotoCedulaF;
 	@Lob
