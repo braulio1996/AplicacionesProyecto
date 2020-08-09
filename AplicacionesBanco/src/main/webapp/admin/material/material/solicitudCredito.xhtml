@@ -159,6 +159,7 @@
 							×
 						</button>
 					</div>
+<<<<<<< HEAD
 					
 					<h:form enctype="multipart/form-data">
 						<div class="modal-body" style="color: #000000;">
@@ -186,6 +187,45 @@
 												<f:selectItem itemValue="Deposito" itemLabel="Normal" />
 											</h:selectOneMenu>
 										</div>
+=======
+					<div class="modal-body" style="color: #000000;">
+						<div class="col-md-12">
+							<h:form class="form-material form-material mt-4 row">
+								<div class="form-group col-md-4">
+									<div class="example">
+										<h6 class="my-1">Monto</h6>
+										<h:inputText id="monto" styleClass="form-control" value="#{clienteMB.s.monto}"/>
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<div class="example">
+										<h6 class="my-1">Periodo</h6>
+										<h:inputText id="periodo" styleClass="form-control" a:placeholder="Relación a meses" value="#{clienteMB.s.meses}"/>
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<div class="example">
+										<h6 class="my-1">Ingreso</h6>
+										<h:inputText id="periodo" styleClass="form-control" a:placeholder="Relación a meses" value="#{clienteMB.s.ingreso}"/>
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<div class="example">
+										<h6 class="my-1">Egreso</h6>
+										<h:inputText id="periodo" styleClass="form-control" a:placeholder="Relación a meses" value="#{clienteMB.s.egreso}"/>
+									</div>
+								</div>
+								<div class="form-group col-md-4 ">
+									<div class="example">
+										<h6 class="my-1">Tipo Crédito</h6>
+										<h:selectOneMenu styleClass="form-control custom-select"
+											value="#{login.buscarTipo}">
+											<f:selectItem itemValue="Todos" itemLabel="Seleccionar" />
+											<f:selectItem itemValue="Retiro" itemLabel="Hipotecario" />
+											<f:selectItem itemValue="Deposito" itemLabel="Normal" />
+						
+										</h:selectOneMenu>
+>>>>>>> 96b3f627ba97bf3e1222c6194a159d810e498170
 									</div>
 								</div>
 							</div>
@@ -272,6 +312,7 @@
 							×
 						</button>
 					</div>
+<<<<<<< HEAD
 					
 					<h:form enctype="multipart/form-data">
 						<div class="modal-body" style="color: #000000;">
@@ -321,6 +362,13 @@
 									</div>
 								</div>
 							</div>
+=======
+					<div class="modal-footer">
+						<div class="form-group">
+							<h:commandButton class="btn" type="submit" value="Enviar"
+								action="#{clienteMB.solicitudCredito(login.cliente)}"
+								style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000; margin-right: 350px; margin-left: auto;" />
+>>>>>>> 96b3f627ba97bf3e1222c6194a159d810e498170
 						</div>
 							
 						<div class="modal-footer">
