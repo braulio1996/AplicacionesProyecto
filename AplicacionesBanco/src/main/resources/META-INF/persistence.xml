@@ -27,9 +27,18 @@
 				If you prefer this, use this Hibernate property instead: <property name="hibernate.hbm2ddl.auto" 
 				value="create-drop" /> -->
 			<property
+<<<<<<< HEAD
 				name="javax.persistence.schema-generation.database.action"
 				value="update" />
 			<property
+=======
+<<<<<<< HEAD
+				name="javax.persistence.schema-generation.database.action"
+				value="drop-and-create" />
+			<property
+=======
+>>>>>>> Pillaga
+>>>>>>> master
 				name="javax.persistence.schema-generation.create-source"
 				value="metadata" />
 			<property
