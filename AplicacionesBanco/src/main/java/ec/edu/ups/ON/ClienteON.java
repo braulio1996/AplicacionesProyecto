@@ -80,10 +80,15 @@ public class ClienteON {
 		return pdao.listar();
 	}
 	
-	public List<SolicitudCredito> listarSoli() throws Exception {
-		return pdao.listSolicitud();
+	public List<SolicitudCredito> listarSoli(int cliente) throws Exception {
+		return pdao.listSolicitud(cliente);
 	}
     
+	public List<SolicitudCredito> allSoli() throws Exception {
+		return pdao.allSolicitud();
+	}
+    
+	
 	public List<SolicitudCredito> listarSolicitudTipos(String tipo) throws Exception {
 		return pdao.listSolicitudTipo(tipo);
 	}
@@ -297,7 +302,6 @@ public boolean solicitudCredito(Cliente cliente, SolicitudCredito s) throws Exce
 		
 		cliente.setSolicitudesCredito(solicitudes);
 		pdao.editar(cliente);
-
 	}catch (Exception e) {
 		System.out.println("Error Solicitud-------"+e.getMessage());
 		throw new Exception(e.toString());

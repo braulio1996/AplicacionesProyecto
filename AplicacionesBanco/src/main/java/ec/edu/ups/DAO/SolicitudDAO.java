@@ -92,4 +92,11 @@ public class SolicitudDAO {
 			throw new Exception(e.toString());
 		}
 	}
+	
+	public SolicitudCredito verDetalle(int codigo) {
+		String jpql="SELECT s FROM SolicitudCredito s WHERE s.codigo = :codigo";	
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		query.setParameter("codigo", codigo);
+		return (SolicitudCredito) query.getSingleResult();
+	}
 }

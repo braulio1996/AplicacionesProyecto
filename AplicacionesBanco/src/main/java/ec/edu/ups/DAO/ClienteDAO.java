@@ -241,7 +241,17 @@ public class ClienteDAO {
 			return query.getResultList();
 		}
 	}
-	public List<SolicitudCredito>listSolicitud(){
+	public List<SolicitudCredito>listSolicitud(int cliente){
+		//String jpql="SELECT s FROM SolicitudCredito WHERE s.cliente = :cliente";
+		String jpql="SELECT s FROM SolicitudCredito s WHERE s.cliente = " + cliente;
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		//query.setParameter("cliente", cliente);
+		
+		return query.getResultList();
+		
+	}
+	
+	public List<SolicitudCredito>allSolicitud(){
 		//String jpql="SELECT s FROM SolicitudCredito WHERE s.cliente = :cliente";
 		String jpql="SELECT s FROM SolicitudCredito s";
 		Query query = em.createQuery(jpql, SolicitudCredito.class);
@@ -250,6 +260,7 @@ public class ClienteDAO {
 		return query.getResultList();
 		
 	}
+	
 	public List<SolicitudCredito>listSolicitudTipo(String tipo){
 		if (tipo.equals("Todos")) {
 		String jpql="SELECT s FROM SolicitudCredito s";

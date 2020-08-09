@@ -1,6 +1,7 @@
 package ec.edu.ups.Modelo;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -47,8 +48,8 @@ public class CreditoAprobado {
 	public Date getFecha() {
 		return Fecha;
 	}
-	public void setFecha(Date fecha) {
-		Fecha = fecha;
+	public void setFecha(Date date) {
+		Fecha = date;
 	}
 	public Cliente getCliente() {
 		return cliente;

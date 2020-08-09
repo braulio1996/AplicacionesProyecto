@@ -21,6 +21,7 @@ import ec.edu.ups.Modelo.SolicitudCredito;
 import ec.edu.ups.Modelo.Transferencia;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.SolicitudON;
+import ec.edu.ups.Services.TransferenciaTemporal;
 
 /**
  * Esta Clase define los ManagedBean
@@ -55,6 +56,7 @@ public class ClienteMB {
 	private Part file2;
 	private Part file3;
 	private int codSolbus;
+	private TransferenciaTemporal tt;
 	
 	@PostConstruct
 	public void init() {
@@ -64,6 +66,8 @@ public class ClienteMB {
 		c= new CreditoAprobado();
 		m=new Amortizacion();
 		transferencias = new ArrayList<>();
+		tt = new TransferenciaTemporal();
+		
 		try {
 			sON.debitoCreditoVencido();
 		} catch (Exception e) {
@@ -196,6 +200,15 @@ public class ClienteMB {
 		this.transferencias = transferencias;
 	}
 
+	
+	public TransferenciaTemporal getTt() {
+		return tt;
+	}
+
+	public void setTt(TransferenciaTemporal tt) {
+		this.tt = tt;
+	}
+
 	public String getCuentaDestino() {
 		return cuentaDestino;
 	}
@@ -219,19 +232,17 @@ public class ClienteMB {
 	 * 
 	 * @return
 	 */
-//	public String trasferencia() {
-//		try {
-//			t = cON.trasferencia(cliente, cuentaDestino, monto);
-//			t.setFecha(new SimpleDateFormat("dd-MM-yyyy").format(myDate));
-//			transferencias.add(t);
-//			System.out.println(t.toString());
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		return null;
-//	}
+	
+	public String trasferencia() {
+		try {
+			return cON.transferencia(tt);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 
 	/**
 	 * Este metodo genra cuenta del del usuario
@@ -313,7 +324,7 @@ public class ClienteMB {
 				}
 				
 				cON.solicitudCredito(cliente, s);
-				//s = null;
+				s = null;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -321,9 +332,9 @@ public class ClienteMB {
 
 		return "solicitudCredito?faces-redirect=true";
 	}
-	public List<SolicitudCredito>listarSolicitud(){
+	public List<SolicitudCredito>listarSolicitud(int cliente){
 		try {
-			return cON.listarSoli();
+			return cON.listarSoli(cliente);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -331,6 +342,15 @@ public class ClienteMB {
 		return null;
 	}
 	
+	public List<SolicitudCredito>allSolicitud(){
+		try {
+			return cON.allSoli();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public void buscarSolicitud(int codigo) {
 		this.s =  sON.buscarSolicitud(codigo);
@@ -346,14 +366,6 @@ public class ClienteMB {
 		return null;
 	}
 
-//crear un boton en la lista de Solicitudescreditos en el Objeto jefe de credito 
-//paso de parametros una Solicitud y un Credito Aprobado==llenar datos 
-public String aprobarCredito() throws Exception {
-	sON.aprobarSolicitud(s, c);
-	
-	return "inicioCliente?faces-redirect=true";
-	
-}
 //Realizar debito desde el cliente web
 //crear un boton en la lista de amortizacion y pagar 
  public String debitoCredito() {

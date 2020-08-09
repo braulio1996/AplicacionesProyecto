@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 
 <ui:composition template="index2.xhtml">
@@ -14,6 +16,11 @@
 				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.credito.getNombre()}</p>
 				<p style="font-size: 8px; color: #474646;">Jefe Crédito</p>
 			</a>
+			
+			<div class="dropdown-menu animated flipInY">
+				<a href="login-2.xhtml" class="dropdown-item"><i
+					class="fa fa-power-off"></i> Cerrar Sesión</a>
+			</div>
 		</div>
 	</ui:define>
 
@@ -57,39 +64,39 @@
 						</div>
 						<div class="card-body collapse show">
 							<div class="table-responsive no-wrap">
-								<h:dataTable class="table" value="#{clienteMB.listarSolicitud()}"
-								var="c">
-								<h:column>
-									<f:facet name="header">Tipo</f:facet>
+								<h:dataTable class="table" value="#{clienteMB.allSolicitud()}"
+									var="c">
+									<h:column>
+										<f:facet name="header">Tipo</f:facet>
 									#{c.tipo}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Monto</f:facet>
+									<h:column>
+										<f:facet name="header">Monto</f:facet>
 									#{c.monto}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Meses</f:facet>
+									<h:column>
+										<f:facet name="header">Meses</f:facet>
 									#{c.meses}
 								</h:column>
-								
-								<h:column>
-									<f:facet name="header">Ingreso</f:facet>
+
+									<h:column>
+										<f:facet name="header">Ingreso</f:facet>
 									#{c.ingreso}
 								</h:column>
-								
-								<h:column>
-									<f:facet name="header">Egreso</f:facet>
+
+									<h:column>
+										<f:facet name="header">Egreso</f:facet>
 									#{c.egreso}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Estado</f:facet>
+									<h:column>
+										<f:facet name="header">Estado</f:facet>
 									#{c.estado}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Cliente</f:facet>
+									<h:column>
+										<f:facet name="header">Cliente</f:facet>
 									#{c.cliente.nombre}
 								</h:column>
-							</h:dataTable>
+								</h:dataTable>
 							</div>
 						</div>
 					</div>
@@ -104,21 +111,29 @@
 					</div>
 					<div
 						class="card-body border-top collapse show table-responsive no-wrap">
-						<h:dataTable class="table" value="#{clienteMB.listarSolicitud()}" var="sol">
-							<h:column onclick="clickedMe('#{row.productId}');">
-								<h6> #{sol.cliente.nombre}</h6> 
-								#{sol.tipo}
-							</h:column>
-						
-							<h:column>
-								$ #{sol.monto}
-							</h:column>
-						</h:dataTable>
+						<h:form>
+							<h:dataTable class="table" value="#{clienteMB.allSolicitud()}"
+								var="sol">
+
+								<h:column>
+									<h:commandLink action="#{operativo.verDetalle(sol.codigo)}">
+										<h6>#{sol.codigo} #{sol.cliente.nombre}</h6> 
+										#{sol.tipo}
+									</h:commandLink>
+								</h:column>
+
+								<h:column>
+									$ #{sol.monto}
+								</h:column>
+
+							</h:dataTable>
+						</h:form>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Column -->
+
 	</ui:define>
 </ui:composition>
 </html>

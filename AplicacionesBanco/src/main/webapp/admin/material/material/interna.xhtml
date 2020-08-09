@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<ui:composition template="index2.xhtml">
+	<ui:define name="title">Cliente</ui:define>
+	
+		<ui:define name="profile">
+		<div class="profile-text">
+
+			<a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown"
+				role="button" aria-haspopup="true" aria-expanded="true">
+				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.cliente.getNombre()}</p>
+				<p style="font-size: 8px; color: #474646;">Cliente</p>
+			</a>
+
+			<div class="dropdown-menu animated flipInY">
+				<a href="miPerfil.xhtml" class="dropdown-item"> <img
+					src="../assets/images/menu/perfil16.png" alt="" /> Mi Perfil
+				</a> <a href="login-2.xhtml" class="dropdown-item"><i
+					class="fa fa-power-off"></i> Cerrar Sesión</a>
+			</div>
+		</div>
+	</ui:define>
+	
+	<ui:define name="sidebar">
+		<li><a class="waves-effect waves-dark" href="inicioCliente.xhtml"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+				src="../assets/images/menu/inicio16.png" alt="" /> <span
+				class="hide-menu">Inicio </span>
+		</a></li>
+		<li><a class="waves-effect waves-dark" href="cuentaAhorro.xhtml"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+				src="../assets/images/menu/ahorros16.png" alt="" /> <span
+				class="hide-menu">Cuenta de Ahorros</span>
+		</a></li>
+		<li><a class="waves-effect waves-dark" href="#"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+				src="../assets/images/menu/caprob16.png" alt="" /><span
+				class="hide-menu">CreditosAprobados</span>
+		</a></li>
+		<li class="active"><a class="waves-effect waves-dark"
+			href="solicitudCredito.xhtml" aria-expanded="false"> <img
+				style="padding-right: 10px;"
+				src="../assets/images/menu/solicitud16.png" alt="" /> <span
+				class="hide-menu">Solicitudes</span>
+		</a></li>
+		<li><a class="waves-effect waves-dark" href="accesos.xhtml"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+				src="../assets/images/menu/acceso16.png" alt="" /> <span
+				class="hide-menu">Accesos</span>
+		</a></li>
+		<li><a class="has-arrow waves-effect waves-dark" href="#"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+				src="../assets/images/menu/transferir16.png" alt="" /> <span
+				class="hide-menu">Transferencias</span>
+		</a>
+			<ul aria-expanded="false" class="collapse">
+				<li><a href="#">Internas</a></li>
+				<li><a href="#">Externas</a></li>
+			</ul></li>
+	</ui:define>
+	
+	<ui:define name="dashboard">
+		<div class="row page-titles">
+			<div class="col-md-5 col-12 align-self-center">
+				<h3 class="text-themecolor">Dashboard</h3>
+				<ol class="breadcrumb">
+					<a>Transferencias > Internas</a>
+				</ol>
+			</div>
+		</div>
+	</ui:define>
+	
+	<ui:define name="body">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-outline-info">
+					<h:form class="form-material">
+						<div class="card-body">
+							<div class="form-group">
+								<div class="col-lg-12">
+									<div class="row">
+										<h:panelGrid columns="3" class="col-lg-5">
+											<label for="cedula" style="width: 90px; text-align: right;">
+												# Cuenta: </label>
+											<h:inputText id="cedula" type="text" class="form-control"
+												value="#{clienteMB.tt.numeroCuenta}" />
+											<h:commandButton image="../assets/images/menu/buscar.png"
+												action="#{cajeroMB.buscarCliente()}" />
+
+										</h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label for="cantidad" style="width: 90px; text-align: right;">
+												Monto: </label>
+											<h:inputText id="cantidad" type="text" class="form-control"
+												value="#{clienteMB.tt.monto}" />
+										</h:panelGrid>
+									</div>
+
+									<div class="row">
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label for="nombre" style="width: 90px; text-align: right;">
+												Nombre: </label>
+											<h:inputText readonly="true" id="nombre" type="text"
+												class="form-control" value="#{clienteMB.tt.nombre}" />
+										</h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label for="correo" style="width: 90px; text-align: right;">
+												Correo: </label>
+											<h:inputText readonly="true" id="correo" type="text"
+												class="form-control" value="#{clienteMB.tt.correo}" />
+										</h:panelGrid>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card-footer" align="center"
+							style="background-color: #fff;">
+							<h:commandButton class="btn btn-project"
+								action="#{cajeroMB.retiro(clienteMB.trasferencia())}" value="Aceptar" />
+						</div>
+					</h:form>
+
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

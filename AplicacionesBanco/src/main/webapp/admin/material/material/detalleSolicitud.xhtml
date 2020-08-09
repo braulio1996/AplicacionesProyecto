@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<ui:composition template="index2.xhtml">
+		<ui:define name="title">Jefe Crédito</ui:define>
+
+	<ui:define name="profile">
+		<div class="profile-text">
+			<a>
+				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.credito.getNombre()}</p>
+				<p style="font-size: 8px; color: #474646;">Jefe Crédito</p>
+			</a>
+			
+			<div class="dropdown-menu animated flipInY">
+				<a href="login-2.xhtml" class="dropdown-item"><i
+					class="fa fa-power-off"></i> Cerrar Sesión</a>
+			</div>
+		</div>
+	</ui:define>
+
+	<ui:define name="sidebar">
+		<li class="active"><a class="waves-effect waves-dark"
+			href="inicioCredito.xhtml" aria-expanded="false"> <img
+				style="padding-right: 10px;"
+				src="../assets/images/menu/inicio16.png" alt="" /> <span
+				class="hide-menu">Inicio </span>
+		</a></li>
+	</ui:define>
+
+	<ui:define name="dashboard">
+		<div class="row page-titles">
+			<div class="col-md-5 col-12 align-self-center">
+				<h3 class="text-themecolor">Dashboard</h3>
+				<ol class="breadcrumb">
+					<a>Inicio</a>
+				</ol>
+			</div>
+		</div>
+	</ui:define>
+	
+	<ui:define name="body">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-outline-info">
+					<h:form class="form-material">
+						<div class="card-body">
+							<div class="form-group">
+								<div class="col-lg-12">
+									<div class="row">
+										<h:panelGrid columns="3" class="col-lg-5">
+											<label for="nombre" style="width: 90px; text-align: right;">
+												Nombre: </label>
+											<label style="font-size: 18px; padding-left: 35px;">
+												#{operativo.cliente.nombre} </label>
+										</h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label for="tipo" style="width: 90px; text-align: right;">
+												Tipo: </label>
+											<label style="font-size: 18px; padding-left: 35px;">
+												#{operativo.solicitud.tipo} </label>
+										</h:panelGrid>
+									</div>
+
+									<div class="row">
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label for="monto" style="width: 90px; text-align: right;">
+												Monto: </label>
+											<label style="font-size: 18px; padding-left: 35px;">
+												#{operativo.solicitud.monto} </label>
+										</h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label for="periodo" style="width: 90px; text-align: right;">
+												Periodo: </label>
+											<label style="font-size: 18px; padding-left: 35px;">
+												#{operativo.solicitud.meses} meses </label>
+										</h:panelGrid>
+									</div>
+									
+									<div class="row">
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label for="monto" style="width: 90px; text-align: right;">
+												Ingresos: </label>
+											<label style="font-size: 18px; padding-left: 35px;">
+												#{operativo.solicitud.ingreso} </label>
+										</h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label for="periodo" style="width: 90px; text-align: right;">
+												Egresos: </label>
+											<label style="font-size: 18px; padding-left: 35px;">
+												#{operativo.solicitud.egreso} </label>
+										</h:panelGrid>
+									</div>
+
+
+									<div class="row">
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label style="width: 90px; text-align: right;">
+												Cédula: </label>
+										</h:panelGrid>
+									</div>
+
+									<div class="row">
+										<h:panelGrid columns="1" class="col-lg-5">
+											<label> <!-- <img src="../assets/images/frontal.jpg" /> -->
+											</label>
+										</h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label> <!--  <img src="../assets/images/posterior.jpg" />  -->
+
+											</label>
+										</h:panelGrid>
+									</div>
+
+									<div class="row">
+										<h:panelGrid columns="1" class="col-lg-5">
+											<label> <!-- <img src="../assets/images/planilla.jpg" /> -->
+											</label>
+										</h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
+										<h:panelGrid columns="2" class="col-lg-5">
+											<label> <!--<img src="../assets/images/rolPago.jpg" /> -->
+											</label>
+										</h:panelGrid>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card-footer" align="center"
+							style="background-color: #fff">
+							<h:commandButton class="btn btn-projectNeg"
+								action="#{cajeroMB.retiro(clienteMB.trasferencia())}"
+								value="Negar" />
+							<a style="padding-left: 10px; padding-right: 10px;">.</a>
+							<h:commandButton class="btn btn-project"
+								action="#{operativo.aprobarCredito()}"
+								value="Aceptar" />
+
+						</div>
+					</h:form>
+
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

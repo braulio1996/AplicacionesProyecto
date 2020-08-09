@@ -1,6 +1,7 @@
 package ec.edu.ups.ON;
 
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -75,10 +76,23 @@ public class SolicitudON {
 		pdao.editar(solicitud);
 	}
 
-	public void aprobarSolicitud(SolicitudCredito solicitud,CreditoAprobado credito) throws Exception {
+	public int generarNum() {
+		String NUMEROS = "0123456789";
+		
+		String pswd = "";
+
+		String key = NUMEROS;
+
+		for (int i = 0; i < 5; i++) {
+			pswd += (key.charAt((int) (Math.random() * key.length())));
+		}
+		
+		int num = Integer.parseInt(pswd);
+		return num;
+	}
+	
+	public void aprobarSolicitud(SolicitudCredito solicitud, CreditoAprobado credito) throws Exception {
 		List<Amortizacion>aa= new ArrayList<>();
-		
-		
 		
 		Cuenta cuenta =solicitud.getCliente().getCuenta();
 		Double saldo =cuenta.getSaldo()+solicitud.getMonto();
@@ -167,6 +181,14 @@ public class SolicitudON {
 				clieOn.editar(cliente);
 			}
 		}
+		
+	public void negarSoli(SolicitudCredito solicitud) throws Exception {
+		solicitud.setEstado("Negado");
+		
+		
+		pdao.editar(solicitud);
+	}
+	
 	public void debitoCredito(Amortizacion amortizacion,Double monto) {
 		Transaccion t= new Transaccion();
 		List<Transaccion>transacciones = new ArrayList<>();
@@ -215,20 +237,25 @@ public class SolicitudON {
 		
 		for(Amortizacion amortizacion:creditos) {
 			a=amortizacion;
-		Date fechaactual = new Date(System.currentTimeMillis());
-		String fechaInicio =a.getFechaVencimiento();
-		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-		Date fechaInicioDate = date.parse(fechaInicio);  //String a date
-
-		 //comprueba si es que inicio esta después que fecha actual       
-		if(fechaInicioDate.after(fechaactual)){
-		    System.out.println("Fecha inicio mayor");
-		    a.setEstado("Vencido");
-		}else{
-			 a.setEstado("Pendiente");
-		    
+			Date fechaactual = new Date(System.currentTimeMillis());
+			String fechaInicio =a.getFechaVencimiento();
+			SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+			Date fechaInicioDate = date.parse(fechaInicio);  //String a date
+	
+			 //comprueba si es que inicio esta después que fecha actual       
+			if(fechaInicioDate.after(fechaactual)){
+			    System.out.println("Fecha inicio mayor");
+			    a.setEstado("Vencido");
+			}else{
+				 a.setEstado("Pendiente");
+			    
+			}
+			pdao.upAmortizacion(a);
 		}
-		pdao.upAmortizacion(a);
 	}
+	
+	
+	public SolicitudCredito verDetalle(int codigo) {
+		return pdao.verDetalle(codigo);
 	}
 }

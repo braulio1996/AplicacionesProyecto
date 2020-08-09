@@ -1,5 +1,7 @@
 package ec.edu.ups.Vista;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,17 +10,28 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+
 import javax.inject.Inject;
 
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
+import ec.edu.ups.Modelo.CreditoAprobado;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.JefeCredito;
+import ec.edu.ups.Modelo.SolicitudCredito;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
+import ec.edu.ups.ON.SolicitudON;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+
 /**
  * Esta Clase define los ManagedBean
  * @version: 02/06/2020
@@ -37,10 +50,13 @@ public class OperativoMB {
 	private ClienteON clieOn;
 	@Inject
 	private CajeroON cajeON;
+	@Inject
+	private SolicitudON sON;
 
 	private JefeCredito credito;
 	private Cliente cliente;
 	private Cajero cajero;
+	private SolicitudCredito solicitud;
 	private String cedula;
 	private String nombre;
 	private String rol;
@@ -53,7 +69,13 @@ public class OperativoMB {
 	private List<Cliente> clientes;
 	private List<JefeCredito> creditos;
 	Date myDate = new Date();
-
+	
+	private Byte[] cedulaF;
+	private Byte[] cedulaT;
+	private Byte[] planilla;
+	private Byte[] rolPago;
+	
+	
 	@PostConstruct
 	public void init() {
 		credito = new JefeCredito();
@@ -64,14 +86,9 @@ public class OperativoMB {
 
 	}
 
-    
-
-
-
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
-
 
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
@@ -105,6 +122,14 @@ public class OperativoMB {
 
 	public void setCreditos(List<JefeCredito> creditos) {
 		this.creditos = creditos;
+	}
+	
+	public SolicitudCredito getSolicitud() {
+		return solicitud;
+	}
+
+	public void setSolicitud(SolicitudCredito solicitud) {
+		this.solicitud = solicitud;
 	}
 
 	public String getRCaj() {
@@ -187,7 +212,38 @@ public class OperativoMB {
 		Direccion = direccion;
 	}
 
-	
+	public Byte[] getCedulaF() {
+		return cedulaF;
+	}
+
+	public void setCedulaF(Byte[] cedulaF) {
+		this.cedulaF = cedulaF;
+	}
+
+	public Byte[] getCedulaT() {
+		return cedulaT;
+	}
+
+	public void setCedulaT(Byte[] cedulaT) {
+		this.cedulaT = cedulaT;
+	}
+
+	public Byte[] getPlanilla() {
+		return planilla;
+	}
+
+	public void setPlanilla(Byte[] planilla) {
+		this.planilla = planilla;
+	}
+
+	public Byte[] getRolPago() {
+		return rolPago;
+	}
+
+	public void setRolPago(Byte[] rolPago) {
+		this.rolPago = rolPago;
+	}
+
 	/**
 	 * Este metodo  registra los usuarios con los respectivos roles
 	 * ya sea Jede de Credito o Cajero, por la que solo el usuario administrador 
@@ -248,6 +304,36 @@ public class OperativoMB {
 		}
 
 		return "inicioAdmin?faces-redirect=true";
+	}
+
+
+	//crear un boton en la lista de Solicitudescreditos en el Objeto jefe de credito 
+	//paso de parametros una Solicitud y un Credito Aprobado==llenar datos 
+	public String aprobarCredito() throws Exception {
+		CreditoAprobado cap = new CreditoAprobado();
+
+		cap.setNumero(sON.generarNum());
+		cap.setTipo(solicitud.getTipo());
+		cap.setFecha(new Date());
+		cap.setMonto(solicitud.getMonto());
+		cap.setCliente(solicitud.getCliente());
+		
+		sON.aprobarSolicitud(solicitud, cap);
+		
+		return "creditosAprobados?faces-redirect=true";
+	}
+	
+	public String negarSoli() throws Exception {
+		sON.negarSoli(solicitud);
+		
+		return "SolicitudCredito?faces-redirect=true";
+	}
+	
+	public String verDetalle(int codigo) {
+		this.solicitud = sON.verDetalle(codigo);
+		cliente = solicitud.getCliente();
+		
+		return "detalleSolicitud?faces-redirect=true";
 	}
 
 }

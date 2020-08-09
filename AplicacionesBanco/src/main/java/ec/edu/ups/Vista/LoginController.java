@@ -31,13 +31,6 @@ import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
 
-/**
- * Esta Clase define los ManagedBean
- * 
- * @version: 02/06/2020
- * @author Braulio Castro
- *
- */
 @ManagedBean(name = "login")
 @SessionScoped
 public class LoginController {
@@ -81,6 +74,7 @@ public class LoginController {
 	private String buscarTipo;
 
 	private String estadoAcceso;
+	
 	List<Transaccion> listar;
 	
 	
