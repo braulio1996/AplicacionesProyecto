@@ -81,6 +81,7 @@ public class LoginController {
 	private String buscarTipo;
 
 	private String estadoAcceso;
+	
 	List<Transaccion> listar;
 	
 	

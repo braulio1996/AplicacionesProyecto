@@ -46,6 +46,9 @@ public class ClienteON {
 	private ClienteDAO pdao;
 	Date myDate = new Date();
 	
+	
+
+
 
 
 	/**
@@ -254,7 +257,6 @@ public class ClienteON {
             System.out.println(ex);
         }
 	}
-	
 	public long contar() {
 		return pdao.contar();
 	}
