@@ -133,7 +133,11 @@
 									#{sol.estado}
 								</h:column>
 								<h:column>
+<<<<<<< HEAD
 									<!-- <f:ajax execute="#{clienteMB.buscarSolicitud(sol.codigo)}" /> -->
+=======
+
+>>>>>>> ee99937896910b5c49f0d3234b9ef6b4afc65451
 									<f:facet name="header">Acción</f:facet>
 									<a data-toggle="modal" data-target="#detail"> <img
 										src="../assets/images/menu/ver16.png" />
@@ -192,9 +196,15 @@
 											<h6 class="my-1">Tipo Crédito</h6>
 											<h:selectOneMenu styleClass="form-control custom-select"
 												value="#{clienteMB.s.tipo}">
+<<<<<<< HEAD
 												<f:selectItem itemValue="Todos" itemLabel="Seleccionar" />
 												<f:selectItem itemValue="Hipotecario" itemLabel="Hipotecario" />
 												<f:selectItem itemValue="Prestamo" itemLabel="Préstamo" />
+=======
+												<f:selectItem itemValue="Seleccionar" itemLabel="Seleccionar" />
+												<f:selectItem itemValue="Hipotecario" itemLabel="Hipotecario" />
+												<f:selectItem itemValue="Normal" itemLabel="Normal" />
+>>>>>>> ee99937896910b5c49f0d3234b9ef6b4afc65451
 											</h:selectOneMenu>
 										</div>
 									</div>
@@ -213,7 +223,7 @@
 											<h6 class="my-1">Egresos</h6>
 											<h:inputText id="egreso" type="text"
 												styleClass="form-control" value="#{clienteMB.s.egreso}"
-												a:placeholder="Relación a meses" />
+												a:placeholder=" " />
 										</div>
 									</div>
 								</div>
@@ -318,7 +328,7 @@
 							aria-hidden="true">×</button>
 					</div>
 
-					<!--clienteMB.buscarSolicitud(sol.codigo)-->
+
 					<h:form enctype="multipart/form-data">
 						<div class="modal-body" style="color: #000000;">
 							<div class="col-md-12">

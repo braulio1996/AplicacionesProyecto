@@ -56,7 +56,11 @@ public class ClienteMB {
 	private Part file2;
 	private Part file3;
 	private int codSolbus;
+<<<<<<< HEAD
 	private TransferenciaTemporal tt;
+=======
+	private String estadoAcceso;
+>>>>>>> ee99937896910b5c49f0d3234b9ef6b4afc65451
 	
 	@PostConstruct
 	public void init() {
@@ -65,10 +69,12 @@ public class ClienteMB {
 		s = new SolicitudCredito();
 		c= new CreditoAprobado();
 		m=new Amortizacion();
+		estadoAcceso="";
 		transferencias = new ArrayList<>();
 		tt = new TransferenciaTemporal();
 		
 		try {
+			sON.fechavencida();
 			sON.debitoCreditoVencido();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -77,6 +83,18 @@ public class ClienteMB {
 	}
 	
 	
+
+	public String getEstadoAcceso() {
+		return estadoAcceso;
+	}
+
+
+
+	public void setEstadoAcceso(String estadoAcceso) {
+		this.estadoAcceso = estadoAcceso;
+	}
+
+
 
 	public int getCodSolbus() {
 		return codSolbus;
