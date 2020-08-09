@@ -294,7 +294,7 @@ public class ClienteMB {
 				}
                  System.out.println("Solicitud-------------------------"+s.toString());
 				cON.solicitudCredito(cliente, s);
-				s = null;
+				//s = null;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -305,6 +305,16 @@ public class ClienteMB {
 	public List<SolicitudCredito>listarSolicitud(){
 		try {
 			return cON.listarSoli();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<SolicitudCredito>listarSolicitudTipo(String tipo){
+		try {
+			return cON.listarSolicitudTipos(tipo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

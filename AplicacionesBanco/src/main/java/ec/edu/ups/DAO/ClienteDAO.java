@@ -250,4 +250,16 @@ public class ClienteDAO {
 		return query.getResultList();
 		
 	}
+	public List<SolicitudCredito>listSolicitudTipo(String tipo){
+		if (tipo.equals("Todos")) {
+		String jpql="SELECT s FROM SolicitudCredito s";
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		return query.getResultList();
+		}else {
+			String jpql="SELECT s FROM SolicitudCredito s"+"WHERE s.estado LIKE "+tipo;
+			Query query = em.createQuery(jpql, SolicitudCredito.class);
+			return query.getResultList();
+			
+		}
+	}
 }

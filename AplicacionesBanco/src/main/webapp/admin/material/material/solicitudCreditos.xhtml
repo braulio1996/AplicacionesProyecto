@@ -88,7 +88,7 @@
 								<div class="col-lg-6">
 									<h4 class="card-title ">Solicitud</h4>
 								</div>
-								<h:form class="form-material form-horizontal">
+								<h:form class="form-material form-horizontal" enctype="multipart/form-data">
 										<div class="modal-body" style="color: #000000;">
 							<div class="form-group mt-3">
 								<div class="col-xs-12">
@@ -97,7 +97,7 @@
 											style="display: inline-block; width: 100px;">Tipo:
 										</label>
 										<h:inputText style="width: 300px;" id="cedula"
-											value="#{operativo.cedula}"
+											value="#{clienteMB.s.tipo}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
 
@@ -106,7 +106,7 @@
 											style="display: inline-block; width: 100px;">Monto:
 										</label>
 										<h:inputText style="width: 300px;" id="nombre"
-											value="#{operativo.nombre}"
+											value="#{clienteMB.s.monto}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
 
@@ -116,7 +116,7 @@
 											style="display: inline-block; width: 100px;">Meses:
 										</label>
 										<h:inputText style="width: 300px;" id="direccion"
-											value="#{operativo.direccion}"
+											value="#{clienteMB.s.meses}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
 
@@ -125,7 +125,7 @@
 											style="display: inline-block; width: 100px;">Ingreso:
 										</label>
 										<h:inputText style="width: 300px;" id="ingreso"
-											value="#{operativo.correo}"
+											value="#{clienteMB.s.ingreso}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
 									
@@ -134,7 +134,7 @@
 											style="display: inline-block; width: 100px;">Engreso:
 										</label>
 										<h:inputText style="width: 300px;" id="egreso"
-											value="#{operativo.correo}"
+											value="#{clienteMB.s.egreso}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
 									
@@ -143,7 +143,7 @@
 											style="display: inline-block; width: 100px;">Estado:
 										</label>
 										<h:inputText style="width: 300px;" id="estado"
-											value="#{operativo.correo}"
+											value="#{clienteMB.s.estado}"
 											class="form-control text-holder-proj" type="text" required="" />
 									</h:panelGrid>
 									
