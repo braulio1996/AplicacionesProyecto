@@ -56,11 +56,9 @@ public class ClienteMB {
 	private Part file2;
 	private Part file3;
 	private int codSolbus;
-<<<<<<< HEAD
 	private TransferenciaTemporal tt;
-=======
 	private String estadoAcceso;
->>>>>>> ee99937896910b5c49f0d3234b9ef6b4afc65451
+
 	
 	@PostConstruct
 	public void init() {
@@ -387,7 +385,7 @@ public class ClienteMB {
 //Realizar debito desde el cliente web
 //crear un boton en la lista de amortizacion y pagar 
  public String debitoCredito() {
-	 sON.debitoCredito(m, monto);
+	 sON.debitoCredito(cliente,m, monto);
 	
 	 return "inicioCliente?faces-redirect=true"; 
  }

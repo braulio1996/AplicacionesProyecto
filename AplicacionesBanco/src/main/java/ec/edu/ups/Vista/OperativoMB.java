@@ -57,6 +57,7 @@ public class OperativoMB {
 	private Cliente cliente;
 	private Cajero cajero;
 	private SolicitudCredito solicitud;
+	private CreditoAprobado cap;
 	private String cedula;
 	private String nombre;
 	private String rol;
@@ -83,7 +84,17 @@ public class OperativoMB {
 		cajero = new Cajero();
 		cajeros = new ArrayList<>();
 		creditos = new ArrayList<>();
+		solicitud= new SolicitudCredito();
+		cap = new CreditoAprobado();
 
+	}
+
+	public CreditoAprobado getCap() {
+		return cap;
+	}
+
+	public void setCap(CreditoAprobado cap) {
+		this.cap = cap;
 	}
 
 	public List<Cliente> getClientes() {
@@ -310,14 +321,15 @@ public class OperativoMB {
 	//crear un boton en la lista de Solicitudescreditos en el Objeto jefe de credito 
 	//paso de parametros una Solicitud y un Credito Aprobado==llenar datos 
 	public String aprobarCredito() throws Exception {
-		CreditoAprobado cap = new CreditoAprobado();
+		
 
 		cap.setNumero(sON.generarNum());
 		cap.setTipo(solicitud.getTipo());
 		cap.setFecha(new Date());
 		cap.setMonto(solicitud.getMonto());
 		cap.setCliente(solicitud.getCliente());
-		
+		System.out.println("---------------- Soli "+solicitud.getCodigo());
+		System.out.println("---------------- CreditoAprobado "+cap.getTipo());
 		sON.aprobarSolicitud(solicitud, cap);
 		
 		return "creditosAprobados?faces-redirect=true";

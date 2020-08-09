@@ -95,30 +95,35 @@ public class SolicitudON {
 		List<Amortizacion>aa= new ArrayList<>();
 		
 		Cuenta cuenta =solicitud.getCliente().getCuenta();
-		Double saldo =cuenta.getSaldo()+solicitud.getMonto();
-		cuenta.setSaldo(saldo);
+		cuenta.setSaldo(cuenta.getSaldo()+solicitud.getMonto());
 		cdao.editarCuenta(cuenta);
 		
 		Double interes=0.12*solicitud.getMeses();
 		Double total=solicitud.getMonto()*interes;
 		Double capital=solicitud.getMonto();
-		Double pago=total/interes;
+		Double pago=(total/solicitud.getMeses());
+		System.out.println("--------------------- "+pago);
 		Double pp=solicitud.getIngreso()-solicitud.getEgreso();
 		String mensaje;
-		if(pago<pp) {
+		if(pago>pp) {
 			mensaje="Cliente no Valido para prestamo TASA DE PAGO = "+pago+"  Excede a la TASA de pago valida ="+pp;
 			System.out.println(mensaje);
 			clieOn.enviarCorreo(solicitud.getCliente().getCorreo(), "Credito Rechazado", mensaje);
 		}else {
 			
 		
-		 Calendar fecha = Calendar.getInstance();
-	        int año = fecha.get(Calendar.YEAR);
-	        int mes = fecha.get(Calendar.MONTH) + 1;
-	        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+//		 Calendar fecha = Calendar.getInstance();
+//	        int año = fecha.get(Calendar.YEAR);
+//	        int mes = fecha.get(Calendar.MONTH) + 1;
+//	        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+	        java.util.Date fecha = new Date();
+	        int dia=fecha.getDay();
+	        int año=fecha.getYear();
+	        int mes=fecha.getMonth();
+	      
 		for (int i = 0; i < solicitud.getMeses(); i++) {
 			Amortizacion a = new Amortizacion();
-			if(mes==12) {
+			if(mes==13) {
 				año=año+1;	
 				mes=1;
 			}
@@ -129,29 +134,30 @@ public class SolicitudON {
 			a.setPago(pago);
 			a.setSaldo(pago);
 			a.setEstado("Pendiente");
-			a.setCredito(credito);
 			aa.add(a);
 			credito.setAmortizacion(aa);
 			mes++;
+			pdao.crearAmortizacion(a);
 		}
 		solicitud.setEstado("Aprobado");
 		pdao.editar(solicitud);
-		pdao.aprobado(credito);
+		
 		pdao.amortizacion(credito);
-		clieOn.enviarCorreo(solicitud.getCliente().getCorreo(), "Credito Rechazado", ""+aa.toString());
+		clieOn.enviarCorreo(solicitud.getCliente().getCorreo(), "Credito Aprovado", ""+aa.toString());
 	}
 	}
 		public void debitoCreditoVencido() throws Exception {
 			Transaccion t= new Transaccion();
 			List<Transaccion>transacciones = new ArrayList<>();
-			List<Amortizacion> creditos=pdao.listaCreditos("Vencido");
+			List<CreditoAprobado> creditos=pdao.listaCreditosAprobado();
 			Amortizacion a;
 			
-			for(Amortizacion amortizacion:creditos) {
-				a=amortizacion;
-				Double saldo=amortizacion.getCredito().getCliente().getCuenta().getSaldo();
-				Cuenta cuenta=amortizacion.getCredito().getCliente().getCuenta();
-				Cliente cliente =amortizacion.getCredito().getCliente();
+			for(CreditoAprobado c:creditos) {
+				for(Amortizacion amortizacion:c.getAmortizacion()) {
+					if(amortizacion.getEstado().equalsIgnoreCase("Vencido")) {
+				Double saldo=c.getCliente().getCuenta().getSaldo();		
+				Cuenta cuenta=c.getCliente().getCuenta();
+				Cliente cliente =c.getCliente();
 				Double pago=amortizacion.getPago();
 				Double saldoCredito=amortizacion.getSaldo();
 				Double saldoT=saldo-pago;
@@ -162,10 +168,10 @@ public class SolicitudON {
 					cuenta.setSaldo(saldoT);
 				}
 				if(saldoCreditoT<0) {
-					a.setSaldo(0);
-					a.setEstado("Pagado");
+					amortizacion.setSaldo(0);
+					amortizacion.setEstado("Pagado");
 				}else {
-					a.setSaldo(saldoCreditoT);
+					amortizacion.setSaldo(saldoCreditoT);
 				}
 				
 				cliente.setCuenta(cuenta);
@@ -177,8 +183,10 @@ public class SolicitudON {
 				t.setDepositante("NaN");
 				transacciones.add(t);
 				cliente.setTransacciones(transacciones);
-				pdao.upAmortizacion(a);
+				pdao.upAmortizacion(amortizacion);
 				clieOn.editar(cliente);
+					}
+			}
 			}
 		}
 		
@@ -189,15 +197,14 @@ public class SolicitudON {
 		pdao.editar(solicitud);
 	}
 	
-	public void debitoCredito(Amortizacion amortizacion,Double monto) {
+	public void debitoCredito(Cliente cliente, Amortizacion amortizacion,Double monto) {
 		Transaccion t= new Transaccion();
 		List<Transaccion>transacciones = new ArrayList<>();
 		Amortizacion a;
 		try {	
 		a=amortizacion;
-		Double saldo=amortizacion.getCredito().getCliente().getCuenta().getSaldo();
-		Cuenta cuenta=amortizacion.getCredito().getCliente().getCuenta();
-		Cliente cliente =amortizacion.getCredito().getCliente();
+	
+		Cuenta cuenta=cliente.getCuenta();
 		Double pago=amortizacion.getPago();
 		Double saldoCredito=amortizacion.getSaldo();
 		Double saldoT=monto-pago;

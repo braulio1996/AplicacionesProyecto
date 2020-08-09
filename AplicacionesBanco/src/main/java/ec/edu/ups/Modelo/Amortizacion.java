@@ -3,6 +3,7 @@ package ec.edu.ups.Modelo;
 import java.math.BigDecimal;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,8 +32,6 @@ public class Amortizacion {
     private double pago;
     private double saldo;
     private String estado;
-    @OneToOne
-    private CreditoAprobado credito;
 	public int getCodigo() {
 		return codigo;
 	}
@@ -76,12 +75,7 @@ public class Amortizacion {
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
-	public CreditoAprobado getCredito() {
-		return credito;
-	}
-	public void setCredito(CreditoAprobado credito) {
-		this.credito = credito;
-	}
+
 	public String getEstado() {
 		return estado;
 	}
