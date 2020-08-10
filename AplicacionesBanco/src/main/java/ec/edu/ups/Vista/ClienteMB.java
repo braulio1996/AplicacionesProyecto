@@ -370,6 +370,7 @@ public class ClienteMB {
 				
 				cON.solicitudCredito(cliente, s);
 				s = null;
+				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

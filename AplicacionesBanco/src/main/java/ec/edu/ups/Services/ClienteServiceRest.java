@@ -163,8 +163,7 @@ public class ClienteServiceRest implements Serializable {
 					return r;
 				} else {
 					mensaje = "ERROR. Usuario Incorrecto";
-					r.setCodigo(99);
-					r.setMensaje(mensaje);
+					
 					con.enviarCorreo(correo, "Acceso a la cuenta",
 							"Su intento ha sido fallido, con contraseña: " + clave);
 					cliente = con.loginC(correo, clave);
@@ -176,12 +175,17 @@ public class ClienteServiceRest implements Serializable {
 					accesos.add(acceso);
 					cliente.setAccesos(accesos);
 					con.editar(cliente);
-
+					acceso = new Acceso();
+					accesos.clear();
+					r.setCodigo(2);
+					r.setMensaje("Error intento Fallido");
+					return r;
 				} // Fin if (con.loginC(this.correo, this.clave) != null)
 			} else {
 				mensaje = "Error";
 				r.setCodigo(99);
 				r.setMensaje(mensaje);
+				return r;
 			} // Fin if (con.buscarCorreo(this.correo) != null)
 		} // FIn try-catch
 
