@@ -57,6 +57,8 @@ public class ClienteMB {
 	private Part file3;
 	private int codSolbus;
 	private TransferenciaTemporal tt;
+	private String estadoAcceso;
+
 	
 	@PostConstruct
 	public void init() {
@@ -65,10 +67,12 @@ public class ClienteMB {
 		s = new SolicitudCredito();
 		c= new CreditoAprobado();
 		m=new Amortizacion();
+		estadoAcceso="";
 		transferencias = new ArrayList<>();
 		tt = new TransferenciaTemporal();
 		
 		try {
+			sON.fechavencida();
 			sON.debitoCreditoVencido();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -77,6 +81,18 @@ public class ClienteMB {
 	}
 	
 	
+
+	public String getEstadoAcceso() {
+		return estadoAcceso;
+	}
+
+
+
+	public void setEstadoAcceso(String estadoAcceso) {
+		this.estadoAcceso = estadoAcceso;
+	}
+
+
 
 	public int getCodSolbus() {
 		return codSolbus;
@@ -371,7 +387,7 @@ public class ClienteMB {
 //Realizar debito desde el cliente web
 //crear un boton en la lista de amortizacion y pagar 
  public String debitoCredito() {
-	 sON.debitoCredito(m, monto);
+	 sON.debitoCredito(cliente,m, monto);
 	
 	 return "inicioCliente?faces-redirect=true"; 
  }

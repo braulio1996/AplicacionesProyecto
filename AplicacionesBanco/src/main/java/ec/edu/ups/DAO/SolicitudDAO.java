@@ -52,6 +52,15 @@ public class SolicitudDAO {
 		return (SolicitudCredito) query.getSingleResult();
 		
 	}
+	public boolean crearAmortizacion(Amortizacion amortizacion) throws Exception {
+
+		try {
+			em.persist(amortizacion);
+		} catch (Exception e) {
+			throw new Exception(e.toString());
+		}
+		return true;
+	}
 	
 	public boolean aprobado(CreditoAprobado credito) throws Exception {
 
@@ -80,6 +89,13 @@ public class SolicitudDAO {
 	public List<Amortizacion>listaCreditosT(){
 		String jpql="SELECT s FROM Amortizacion s";	
 		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		
+		return query.getResultList();
+		
+	}
+	public List<CreditoAprobado>listaCreditosAprobado(){
+		String jpql="SELECT s FROM CreditoAprobado s";	
+		Query query = em.createQuery(jpql, CreditoAprobado.class);
 		
 		return query.getResultList();
 		
