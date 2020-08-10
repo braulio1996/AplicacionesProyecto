@@ -332,4 +332,26 @@ public class ClienteDAO {
 		}
 		return sumSaldo;
 	}
+	
+	
+	public List<CreditoAprobado> listaCreditosAprobado(int cliente){
+		System.out.println("AAAAAAAAAAAAAAA " + cliente);
+		String jpql="SELECT s FROM CreditoAprobado s WHERE s.cliente = " + cliente;	
+		Query query = em.createQuery(jpql, CreditoAprobado.class);
+		
+		return query.getResultList();
+	}
+	
+	public List<Amortizacion> listaAmort(int cliente, int numero){
+		String jpql="SELECT s FROM CreditoAprobado s WHERE s.cliente = " + cliente + " AND s.numero = " + numero;	
+		Query query = em.createQuery(jpql, CreditoAprobado.class);
+		CreditoAprobado creditoAprobado = (CreditoAprobado) query.getSingleResult();
+		
+		List<Amortizacion> ss= new ArrayList<>();
+		for (Amortizacion s: creditoAprobado.getAmortizacion()){
+			ss.add(s);
+		}
+		return ss;
+		
+	}
 }

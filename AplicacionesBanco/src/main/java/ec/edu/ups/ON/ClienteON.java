@@ -22,7 +22,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import ec.edu.ups.DAO.ClienteDAO;
-
+import ec.edu.ups.Modelo.Amortizacion;
+import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.CreditoAprobado;
 import ec.edu.ups.Modelo.Cuenta;
@@ -47,9 +48,10 @@ public class ClienteON {
 	private ClienteDAO pdao;
 	Date myDate = new Date();
 	
-	
+	private Transaccion trans;
+	private List<Transaccion> transacciones; 
 
-
+	LocalDate fechaActual = LocalDate.now();
 
 
 	/**
@@ -203,6 +205,8 @@ public class ClienteON {
     		cuentaOrigen.setTransferencias(transferencias);
     		pdao.editarCuenta(cuentaD);
     		pdao.editarCuenta(cuentaOrigen);
+    		
+    		
     		mensaje="Transferencia Exitosa";
         }
         }catch (Exception e) {
@@ -223,7 +227,13 @@ public class ClienteON {
 		return pdao.buscarCorreo(correo);
 	}
 	
+	public List<CreditoAprobado> listaCreditosAprobado(int cliente){
+		return pdao.listaCreditosAprobado(cliente);
+	}
 	
+	public List<Amortizacion> listarAmortizacion(int cliente, int numero){
+		return pdao.listaAmort(cliente, numero);
+	}
 	
 	/**
 	 * Enviar el correo , reconociendo el nombre del host, puerto, se requiere el correo y contraseña para conectarse para

@@ -3,6 +3,7 @@ package ec.edu.ups.Vista;
 import java.io.Console;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.CreditoAprobado;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.SolicitudCredito;
+import ec.edu.ups.Modelo.Transaccion;
 import ec.edu.ups.Modelo.Transferencia;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.SolicitudON;
@@ -60,7 +62,12 @@ public class ClienteMB {
 	private TransferenciaTemporal tt;
 	private String estadoAcceso;
 	private String txtBuscar;
+	private Transaccion trans;
+	private List<Transaccion> transacciones;
+	private List<Amortizacion> amorti;
 	
+	
+	private int numeroBuscar;
 	
 	@PostConstruct
 	public void init() {
@@ -73,6 +80,9 @@ public class ClienteMB {
 		transferencias = new ArrayList<>();
 		tt = new TransferenciaTemporal();
 		txtBuscar="Todos";
+		trans = new Transaccion();
+		transacciones = new ArrayList<>();
+		amorti = new ArrayList<>();
 		
 		try {
 			solicitudes = sON.buscarSol(txtBuscar);
@@ -85,6 +95,22 @@ public class ClienteMB {
 	}
 	
 	
+	
+	
+
+	public int getNumeroBuscar() {
+		return numeroBuscar;
+	}
+
+
+
+
+	public void setNumeroBuscar(int numeroBuscar) {
+		this.numeroBuscar = numeroBuscar;
+	}
+
+
+
 
 	public List<SolicitudCredito> getSolicitudes() {
 		return solicitudes;
@@ -252,6 +278,14 @@ public class ClienteMB {
 	public void setTt(TransferenciaTemporal tt) {
 		this.tt = tt;
 	}
+	
+	public List<Amortizacion> getAmorti() {
+		return amorti;
+	}
+
+	public void setAmorti(List<Amortizacion> amorti) {
+		this.amorti = amorti;
+	}
 
 	public String getCuentaDestino() {
 		return cuentaDestino;
@@ -279,7 +313,10 @@ public class ClienteMB {
 	
 	public String trasferencia() {
 		try {
+			
 			return cON.transferencia(tt);
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -438,4 +475,13 @@ public class ClienteMB {
 		return null;
 	}
 
+	 public String listarAmort(int cliente, int numero){
+		 amorti = cON.listarAmortizacion(cliente, numero);
+		 
+		 return "tabAmortizacion?faces-redirect=true"; 
+	 }
+	 
+	 public List<CreditoAprobado> listaCreditosAprobado(int cliente){
+		 return cON.listaCreditosAprobado(cliente);
+	 }
 }

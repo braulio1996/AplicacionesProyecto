@@ -92,8 +92,9 @@
 		</div>
 		<div class="card-body collapse show">
 		<div class="table-responsive no-wrap">
+		<h:form>
 		<h:dataTable class="table"
-			value="#{clienteMB.listarCA(login.cliente.codigo)}" var="c" >
+			value="#{clienteMB.listaCreditosAprobado(login.cliente.codigo)}" var="c" >
 			<h:column>
 				<f:facet name="header"># Crédito</f:facet>
 											#{c.numero}
@@ -107,20 +108,15 @@
 				<f:facet name="header">Monto</f:facet>
 											#{c.monto}
 										</h:column>
-			<h:column>
-				<f:facet name="header">Fecha Vencimiento</f:facet>
-									#{c.amortizacion.get(0).fechaVencimiento}
-							</h:column>
-
+			
 			<h:column>
 				<f:facet name="header">Acciones</f:facet>
 				<a style="padding-right: 20px;"></a>
-				<a href="cuentaAhorro.xhtml"> <img
-					src="../assets/images/menu/ver16.png" />
-				</a>
+				<h:commandButton action="#{clienteMB.listarAmort(login.cliente.codigo, c.numero)}" value="Ver" /> 
+					
 			</h:column>
 		</h:dataTable>
-
+</h:form>
 		</div>
 		</div>
 		</div>
