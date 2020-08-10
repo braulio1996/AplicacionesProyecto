@@ -21,11 +21,16 @@ import javax.ws.rs.core.MediaType;
 import ec.edu.ups.Modelo.Acceso;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
+
 import ec.edu.ups.Modelo.Transaccion;
+
+import ec.edu.ups.Modelo.SolicitudCredito;
+
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
+import ec.edu.ups.ON.SolicitudON;
 
 @Path("/users")
 public class ClienteServiceRest implements Serializable {
@@ -42,6 +47,9 @@ public class ClienteServiceRest implements Serializable {
 	private CreditoON crediON;
 	@Inject
 	private AdministradorON adminON;
+	
+	@Inject
+	private SolicitudON s;
 
 	Date myDate = new Date();
 
@@ -249,5 +257,12 @@ public class ClienteServiceRest implements Serializable {
 		r.setCodigo(1);
 		r.setMensaje(id);
 		return r;
+	}
+	@GET
+	@Path("/BuscarCliente")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<SolicitudCredito>solicitudes() throws Exception{
+		return s.listarSoli();
+		
 	}
 }

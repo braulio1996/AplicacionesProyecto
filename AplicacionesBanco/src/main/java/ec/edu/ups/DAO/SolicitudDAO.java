@@ -31,6 +31,13 @@ public class SolicitudDAO {
 			throw new Exception(e.toString());
 		}
 	}
+	public void add(SolicitudCredito solicitud) throws Exception {
+		try {
+			em.persist(solicitud);
+		} catch (Exception e) {
+			throw new Exception(e.toString());
+		}
+	}
 
 	
 	public List<SolicitudCredito>listSolicitud(){
@@ -96,7 +103,11 @@ public class SolicitudDAO {
 	public List<CreditoAprobado>listaCreditosAprobado(){
 		String jpql="SELECT s FROM CreditoAprobado s";	
 		Query query = em.createQuery(jpql, CreditoAprobado.class);
-		
+		CreditoAprobado creditoAprobado = (CreditoAprobado) query.getSingleResult();
+		List<Amortizacion>ss= new ArrayList<>();
+		for (Amortizacion s: creditoAprobado.getAmortizacion()){
+			ss.add(s);
+		}
 		return query.getResultList();
 		
 	}

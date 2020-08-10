@@ -385,14 +385,14 @@ public class OperativoMB {
 
 	//crear un boton en la lista de Solicitudescreditos en el Objeto jefe de credito 
 	//paso de parametros una Solicitud y un Credito Aprobado==llenar datos 
-	public String aprobarCredito() throws Exception {
+	public String aprobarCredito(Cliente c) throws Exception {
 		cap.setNumero(sON.generarNum());
 		cap.setTipo(solicitud.getTipo());
 		cap.setFecha(new Date());
 		cap.setMonto(solicitud.getMonto());
-		cap.setCliente(solicitud.getCliente());
+		//cap.setCliente(solicitud.getCliente());
 		
-		sON.aprobarSolicitud(solicitud, cap);
+		sON.aprobarSolicitud(c,solicitud, cap);
 		
 		return "inicioCredito?faces-redirect=true";
 	}
@@ -405,7 +405,7 @@ public class OperativoMB {
 	
 	public String verDetalle(int codigo) {
 		this.solicitud = sON.verDetalle(codigo);
-		cliente = solicitud.getCliente();
+		//cliente = solicitud.getCliente();
 		
 		
 		return "detalleSolicitud?faces-redirect=true";

@@ -88,10 +88,10 @@ public class SolicitudON {
 		return num;
 	}
 
-	public void aprobarSolicitud(SolicitudCredito solicitud, CreditoAprobado credito) throws Exception {
+	public void aprobarSolicitud(Cliente cliente,SolicitudCredito solicitud, CreditoAprobado credito) throws Exception {
 		List<Amortizacion> aa = new ArrayList<>();
 
-		Cuenta cuenta = solicitud.getCliente().getCuenta();
+		Cuenta cuenta = cliente.getCuenta();
 		cuenta.setSaldo(cuenta.getSaldo() + solicitud.getMonto());
 		cdao.editarCuenta(cuenta);
 
@@ -106,7 +106,7 @@ public class SolicitudON {
 			mensaje = "Cliente no Valido para prestamo TASA DE PAGO = " + pago + "  Excede a la TASA de pago valida ="
 					+ pp;
 			System.out.println(mensaje);
-			clieOn.enviarCorreo(solicitud.getCliente().getCorreo(), "Credito Rechazado", mensaje);
+			clieOn.enviarCorreo(cliente.getCorreo(), "Credito Rechazado", mensaje);
 
 			solicitud.setObservaciones(mensaje);
 			negarSoli(solicitud);
@@ -149,7 +149,7 @@ public class SolicitudON {
 				msj = msj + "\n" + aa.get(i).getNumeroPago() + "\t\t" + aa.get(i).getFechaVencimiento() + "\t\t" + aa.get(i).getPago() + "\n";
 			}
 			
-			clieOn.enviarCorreo(solicitud.getCliente().getCorreo(), "Crédito Aprobado", "" + msj);
+			clieOn.enviarCorreo(cliente.getCorreo(), "Crédito Aprobado", "" + msj);
 		}
 	}
 

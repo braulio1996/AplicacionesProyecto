@@ -102,6 +102,36 @@ public class ClienteDAO {
 		return null;
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Cliente> listar2(int codigo) throws SQLException {
+		try {
+			String jpql = "SELECT l FROM Cliente l a WHERE l.codigo = :codigo";
+			Query query = em.createQuery(jpql, Cliente.class);
+			query.setParameter("codigo", codigo);
+			Cliente cliente = (Cliente) query.getSingleResult();
+			List<Cliente> clientes = query.getResultList();
+			List<Acceso> accesos = new ArrayList<>();
+			List<Transaccion>tt= new ArrayList<>();
+			List<SolicitudCredito>ss= new ArrayList<>();
+			for (Acceso acceso : cliente.getAccesos()) {
+				accesos.add(acceso);
+			}
+			for (Transaccion t : cliente.getTransacciones()) {
+				tt.add(t);
+			}
+			for (SolicitudCredito s: cliente.getSolicitudesCredito()) {
+				ss.add(s);
+			}
+			
+			
+			return clientes;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return null;
+
+	}
 
 	/**
 	 * Actualiza los datos de Cliente tipo persona en la persistecia
