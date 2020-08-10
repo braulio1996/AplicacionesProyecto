@@ -24,6 +24,7 @@ import javax.mail.internet.MimeMessage;
 import ec.edu.ups.DAO.ClienteDAO;
 
 import ec.edu.ups.Modelo.Cliente;
+import ec.edu.ups.Modelo.CreditoAprobado;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.SolicitudCredito;
 import ec.edu.ups.Modelo.Transaccion;
@@ -83,8 +84,8 @@ public class ClienteON {
 		return pdao.listar();
 	}
 	
-	public List<SolicitudCredito> listarSoli(int cliente) throws Exception {
-		return pdao.listSolicitud(cliente);
+	public List<SolicitudCredito> listarSoli(int cliente, String estado) throws Exception {
+		return pdao.listSolicitud(cliente, estado);
 	}
     
 	public List<SolicitudCredito> allSoli() throws Exception {
@@ -295,60 +296,70 @@ public class ClienteON {
 	      .toLocalDate();
 	}	
 
-public boolean solicitudCredito(Cliente cliente, SolicitudCredito s) throws Exception {
 	
-	List<SolicitudCredito>solicitudes= new ArrayList<>();
-	try {
-		s.setCliente(cliente);
-		s.setEstado("Pendiente");
-		solicitudes.add(s);
-		
-		cliente.setSolicitudesCredito(solicitudes);
-		pdao.editar(cliente);
-	}catch (Exception e) {
-		System.out.println("Error Solicitud-------"+e.getMessage());
-		throw new Exception(e.toString());
-	}
-	return true;
-		
-}
-
-public Respuesta generarContraseña(String correo) {
-	Respuesta r= new Respuesta();
-	Cliente cliente = pdao.buscarCorreo(correo);
-	if (cliente != null) {
+	
+	public boolean solicitudCredito(Cliente cliente, SolicitudCredito s) throws Exception {
 		try {
-			String NUMEROS = "0123456789";
-			String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
-
-			String pswd = "";
-
-			String key = NUMEROS + MAYUSCULAS + MINUSCULAS;
-
-			for (int i = 0; i < 12; i++) {
-				pswd += (key.charAt((int) (Math.random() * key.length())));
-			}
-
+			List<SolicitudCredito> solicitudes = new ArrayList<>();
+			s.setCliente(cliente);
+			s.setEstado("Pendiente");
+			solicitudes.add(s);
 			
-			cliente.setCorreo(correo);
-			r.setCodigo(1);
-			r.setMensaje("Su nueva contraseña es: " + pswd);
-
-			enviarCorreo(correo, "Cambio de Contraseña", "Su nueva contraseña es: " + pswd);
-
-			cliente.setClave(pswd);
+			cliente.setSolicitudesCredito(solicitudes);
 			pdao.editar(cliente);
-		} catch (Exception e) {
-			e.printStackTrace();
+		}catch (Exception e) {
+			System.out.println("Error Solicitud-------"+e.getMessage());
+			throw new Exception(e.toString());
 		}
-
-		return r;
-	} else {
-		System.out.println("No existe el correo");
-		r.setCodigo(0);
-		r.setMensaje("No existe el correo");
-		return r;
+		return true;
+			
 	}
-}
+	
+	public Respuesta generarContraseña(String correo) {
+		Respuesta r= new Respuesta();
+		Cliente cliente = pdao.buscarCorreo(correo);
+		if (cliente != null) {
+			try {
+				String NUMEROS = "0123456789";
+				String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
+	
+				String pswd = "";
+	
+				String key = NUMEROS + MAYUSCULAS + MINUSCULAS;
+	
+				for (int i = 0; i < 12; i++) {
+					pswd += (key.charAt((int) (Math.random() * key.length())));
+				}
+	
+				
+				cliente.setCorreo(correo);
+				r.setCodigo(1);
+				r.setMensaje("Su nueva contraseña es: " + pswd);
+	
+				enviarCorreo(correo, "Cambio de Contraseña", "Su nueva contraseña es: " + pswd);
+	
+				cliente.setClave(pswd);
+				pdao.editar(cliente);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	
+			return r;
+		} else {
+			System.out.println("No existe el correo");
+			r.setCodigo(0);
+			r.setMensaje("No existe el correo");
+			return r;
+		}
+	}
+	
+	public List<CreditoAprobado> listarCA(int cliente) throws Exception {
+		return pdao.listCA(cliente);
+	}
+
+	public CreditoAprobado buscarCA(int cliente, int codigo) throws Exception {
+		return pdao.buscarCA(cliente, codigo);
+	}
+	
 }

@@ -196,7 +196,7 @@
 
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{clienteMB.listarSolicitud()}"
+							<h:dataTable class="table" value="#{clienteMB.listarSolicitud(login.cliente.codigo)}"
 								var="c">
 								<h:column>
 									<f:facet name="header">Tipo</f:facet>

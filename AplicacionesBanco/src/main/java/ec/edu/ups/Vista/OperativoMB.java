@@ -2,6 +2,7 @@ package ec.edu.ups.Vista;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,9 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import javax.inject.Inject;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import ec.edu.ups.Modelo.Administrador;
 import ec.edu.ups.Modelo.Cajero;
@@ -30,6 +34,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -70,7 +76,11 @@ public class OperativoMB {
 	private List<Cliente> clientes;
 	private List<JefeCredito> creditos;
 	private List<SolicitudCredito> solicitudes;
-
+	private StreamedContent cedulaFrontal;
+	private StreamedContent cedulaPosterior;
+	private StreamedContent fotoPlanilla;
+	private StreamedContent fotoRol;
+	
 	Date myDate = new Date();
 	private String txtBuscar;
 	
@@ -87,14 +97,11 @@ public class OperativoMB {
 		cajero = new Cajero();
 		cajeros = new ArrayList<>();
 		creditos = new ArrayList<>();
-<<<<<<< HEAD
 		txtBuscar = "Todos";
 		solicitudes = new ArrayList<>();
-=======
 		solicitud= new SolicitudCredito();
 		cap = new CreditoAprobado();
 
->>>>>>> master
 	}
 
 	public CreditoAprobado getCap() {
@@ -113,6 +120,38 @@ public class OperativoMB {
 		this.clientes = clientes;
 	}
 
+	
+	public StreamedContent getCedulaFrontal() {
+		return cedulaFrontal;
+	}
+
+	public void setCedulaFrontal(StreamedContent cedulaFrontal) {
+		this.cedulaFrontal = cedulaFrontal;
+	}
+
+	public StreamedContent getCedulaPosterior() {
+		return cedulaPosterior;
+	}
+
+	public void setCedulaPosterior(StreamedContent cedulaPosterior) {
+		this.cedulaPosterior = cedulaPosterior;
+	}
+
+	public StreamedContent getFotoPlanilla() {
+		return fotoPlanilla;
+	}
+
+	public void setFotoPlanilla(StreamedContent fotoPlanilla) {
+		this.fotoPlanilla = fotoPlanilla;
+	}
+
+	public StreamedContent getFotoRol() {
+		return fotoRol;
+	}
+
+	public void setFotoRol(StreamedContent fotoRol) {
+		this.fotoRol = fotoRol;
+	}
 
 	public List<Cajero> getCajeros() {
 		return cajeros;
@@ -141,6 +180,9 @@ public class OperativoMB {
 		this.creditos = creditos;
 	}
 	
+	public CreditoAprobado buscarCA(int cliente, int codigo) throws Exception {
+		return clieOn.buscarCA(cliente, codigo);
+	}
 	
 	public List<SolicitudCredito> getSolicitudes() {
 		return solicitudes;
@@ -344,33 +386,32 @@ public class OperativoMB {
 	//crear un boton en la lista de Solicitudescreditos en el Objeto jefe de credito 
 	//paso de parametros una Solicitud y un Credito Aprobado==llenar datos 
 	public String aprobarCredito() throws Exception {
-		
-
 		cap.setNumero(sON.generarNum());
 		cap.setTipo(solicitud.getTipo());
 		cap.setFecha(new Date());
 		cap.setMonto(solicitud.getMonto());
 		cap.setCliente(solicitud.getCliente());
-		System.out.println("---------------- Soli "+solicitud.getCodigo());
-		System.out.println("---------------- CreditoAprobado "+cap.getTipo());
+		
 		sON.aprobarSolicitud(solicitud, cap);
 		
-		return "creditosAprobados?faces-redirect=true";
+		return "inicioCredito?faces-redirect=true";
 	}
 	
 	public String negarSoli() throws Exception {
 		sON.negarSoli(solicitud);
 		
-		return "SolicitudCredito?faces-redirect=true";
+		return "inicioCredito?faces-redirect=true";
 	}
 	
 	public String verDetalle(int codigo) {
 		this.solicitud = sON.verDetalle(codigo);
 		cliente = solicitud.getCliente();
 		
+		
 		return "detalleSolicitud?faces-redirect=true";
 	}
-
+	
+	
 	public List<SolicitudCredito> solPendientes(){
 		try {
 			return sON.solPendientes();
@@ -393,11 +434,16 @@ public class OperativoMB {
 	
 	public List<SolicitudCredito> buscarSol(){
 		try {
-			solicitudes = sON.buscarSol(txtBuscar);
+			return sON.buscarSol(txtBuscar);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public SolicitudCredito buscarSolJC(int codigo) {
+		System.out.println("Codigo: " + codigo);
+		return sON.buscarSolJC(codigo);
 	}
 }

@@ -383,7 +383,14 @@ public class LoginController {
 	}
 
 	public List<Acceso> listarAcceso() throws Exception{
-		System.out.println("-------------------- "+buscarTipo);
-		return accesoON.listarAccesos(this.cliente.getCodigo(), estadoAcceso);
+		List<Acceso> access = accesoON.listarAccesos(this.cliente.getCodigo(), estadoAcceso);
+		
+		
+		for(int i=0; i<access.size(); i++) {
+			if(access.get(i).getEstado().equals("Correcto")) {
+				access.get(i).setClave("");
+			}
+		}
+		return access;
 	}
 }// Fin ControladorLogin

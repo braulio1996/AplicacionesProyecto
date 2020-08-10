@@ -11,7 +11,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import ec.edu.ups.Modelo.Acceso;
+import ec.edu.ups.Modelo.Amortizacion;
 import ec.edu.ups.Modelo.Cliente;
+import ec.edu.ups.Modelo.CreditoAprobado;
 import ec.edu.ups.Modelo.Cuenta;
 import ec.edu.ups.Modelo.SolicitudCredito;
 import ec.edu.ups.Modelo.Transaccion;
@@ -90,6 +92,8 @@ public class ClienteDAO {
 			for (Transaccion t : cliente.getTransacciones()) {
 				tt.add(t);
 			}
+			
+			
 			return clientes;
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -241,12 +245,19 @@ public class ClienteDAO {
 			return query.getResultList();
 		}
 	}
-	public List<SolicitudCredito>listSolicitud(int cliente){
-		//String jpql="SELECT s FROM SolicitudCredito WHERE s.cliente = :cliente";
-		String jpql="SELECT s FROM SolicitudCredito s WHERE s.cliente = " + cliente;
-		Query query = em.createQuery(jpql, SolicitudCredito.class);
-		//query.setParameter("cliente", cliente);
+	public List<SolicitudCredito>listSolicitud(int cliente, String estado){
+		System.out.println("Buscar estado: " + estado);
 		
+		String jpql = "";
+		
+		if(estado.equals("") || estado.equals("Todos")) {
+			jpql="SELECT s FROM SolicitudCredito s WHERE s.cliente = " + cliente;			
+		}else {
+			jpql="SELECT s FROM SolicitudCredito s WHERE s.cliente = " + cliente + " AND s.estado = '"+estado+"'";		
+		}
+		
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+
 		return query.getResultList();
 		
 	}
@@ -274,5 +285,36 @@ public class ClienteDAO {
 			return query.getResultList();
 			
 		}
+	}
+	
+	public List<CreditoAprobado> listCA(int cliente){
+		//String jpql="SELECT s FROM SolicitudCredito WHERE s.cliente = :cliente";
+		String jpql="SELECT s FROM CreditoAprobado s WHERE s.cliente = " + cliente;
+		Query query = em.createQuery(jpql, CreditoAprobado.class);
+		//query.setParameter("cliente", cliente);
+		
+		return query.getResultList();
+		
+	}
+	
+	public CreditoAprobado buscarCA(int cliente, int codigo){
+		//String jpql="SELECT s FROM SolicitudCredito WHERE s.cliente = :cliente";
+		String jpql="SELECT s FROM CreditoAprobado s WHERE s.cliente = " + cliente + " AND s.numero = " + codigo;
+		Query query = em.createQuery(jpql, CreditoAprobado.class);
+		//query.setParameter("cliente", cliente);
+		
+		return (CreditoAprobado) query.getSingleResult();
+	}
+	
+	public double getSaldo() {
+		String jpql="SELECT s FROM Amortizacion s";
+		Query query = em.createQuery(jpql, Amortizacion.class);
+		
+		List<Amortizacion> a = query.getResultList();
+		double sumSaldo = 0; 
+		for (int i=0; i< a.size(); i++) {
+			sumSaldo = sumSaldo + a.get(i).getSaldo();
+		}
+		return sumSaldo;
 	}
 }

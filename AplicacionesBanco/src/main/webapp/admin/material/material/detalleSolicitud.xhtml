@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
 
 
 <ui:composition template="index2.xhtml">
@@ -109,13 +110,14 @@
 
 									<div class="row">
 										<h:panelGrid columns="1" class="col-lg-5">
-											<label> <!-- <img src="../assets/images/frontal.jpg" /> -->
-											</label>
+											
+												<img src="data:image/png;base64, #{operativo.solicitud.fotoCedulaF}" />
+											
 										</h:panelGrid>
 										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
 										<h:panelGrid columns="2" class="col-lg-5">
 											<label> <!--  <img src="../assets/images/posterior.jpg" />  -->
-
+											
 											</label>
 										</h:panelGrid>
 									</div>

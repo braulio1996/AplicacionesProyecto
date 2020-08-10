@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import ec.edu.ups.DAO.JefeCreditoDAO;
 import ec.edu.ups.Modelo.Cajero;
+import ec.edu.ups.Modelo.CreditoAprobado;
 import ec.edu.ups.Modelo.JefeCredito;
 import ec.edu.ups.Modelo.SolicitudCredito;
 
@@ -103,7 +104,5 @@ public class CreditoON {
 	public long contar() {
 		return pdao.contar();
 	}
-	
-	
-	
+
 }

@@ -137,17 +137,26 @@ public class SolicitudDAO {
 	}
 	
 	public List<SolicitudCredito> buscarSol(String estado){
-		System.out.println("Entro a buscar: " + estado);
-		
+
 		String jpql = "";
-		if(estado.equals("Todos") || estado == "Todos") {
+		if(estado.equals("Todos") || estado == "Todos" || estado == "") {
 			jpql="SELECT s FROM SolicitudCredito s WHERE s.estado != 'Pendiente'";
 		}else {
 			jpql="SELECT s FROM SolicitudCredito s WHERE s.estado LIKE '"+estado+"'";
 		}
 		
+		System.out.println("SQL: " + jpql);
 		Query query = em.createQuery(jpql, SolicitudCredito.class);
 		
 		return query.getResultList();
+	}
+	
+	public SolicitudCredito buscarSolJC(int codigo){
+
+		String jpql="SELECT s FROM SolicitudCredito s WHERE s.codigo LIKE '"+codigo+"'";
+		
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		
+		return (SolicitudCredito) query.getSingleResult();
 	}
 }

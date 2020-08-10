@@ -45,6 +45,7 @@ public class ClienteMB {
 	private Transferencia t;
 	private List<Transferencia> transferencias;
 	private SolicitudCredito s;
+	private List<SolicitudCredito> solicitudes;
 	private CreditoAprobado c;
 	private Amortizacion m;
 	private String cuentaDestino;
@@ -58,20 +59,23 @@ public class ClienteMB {
 	private int codSolbus;
 	private TransferenciaTemporal tt;
 	private String estadoAcceso;
-
+	private String txtBuscar;
+	
 	
 	@PostConstruct
 	public void init() {
 		cliente = new Cliente();
 		t = new Transferencia();
 		s = new SolicitudCredito();
-		c= new CreditoAprobado();
-		m=new Amortizacion();
+		c = new CreditoAprobado();
+		m = new Amortizacion();
 		estadoAcceso="";
 		transferencias = new ArrayList<>();
 		tt = new TransferenciaTemporal();
+		txtBuscar="Todos";
 		
 		try {
+			solicitudes = sON.buscarSol(txtBuscar);
 			sON.fechavencida();
 			sON.debitoCreditoVencido();
 		} catch (Exception e) {
@@ -82,11 +86,35 @@ public class ClienteMB {
 	
 	
 
+	public List<SolicitudCredito> getSolicitudes() {
+		return solicitudes;
+	}
+
+
+
+	public void setSolicitudes(List<SolicitudCredito> solicitudes) {
+		this.solicitudes = solicitudes;
+	}
+
+	
+
+	public String getTxtBuscar() {
+		return txtBuscar;
+	}
+
+
+
+	public void setTxtBuscar(String txtBuscar) {
+		this.txtBuscar = txtBuscar;
+	}
+
+
+
 	public String getEstadoAcceso() {
 		return estadoAcceso;
 	}
 
-
+	
 
 	public void setEstadoAcceso(String estadoAcceso) {
 		this.estadoAcceso = estadoAcceso;
@@ -331,6 +359,7 @@ public class ClienteMB {
 					file1.getInputStream().read(cedulaT);
 					file2.getInputStream().read(plantilla);
 					file3.getInputStream().read(rol);
+					
 					s.setFotoCedulaT(cedulaT);
 					s.setFotoCedulaF(cedulaF);
 					s.setFotoPlantilla(plantilla);
@@ -345,12 +374,14 @@ public class ClienteMB {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		return "solicitudCredito?faces-redirect=true";
 	}
+	
 	public List<SolicitudCredito>listarSolicitud(int cliente){
 		try {
-			return cON.listarSoli(cliente);
+			System.out.println("Buscar Estadooooo: " + txtBuscar);
+			return cON.listarSoli(cliente, txtBuscar);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -374,6 +405,10 @@ public class ClienteMB {
 		this.s =  sON.buscarSolicitud(codigo);
 	}
 	
+	public void buscarSol() throws Exception {
+		this.solicitudes = sON.buscarSol(txtBuscar);
+	}
+	
 	public List<SolicitudCredito>listarSolicitudTipo(String tipo){
 		try {
 			return cON.listarSolicitudTipos(tipo);
@@ -383,18 +418,24 @@ public class ClienteMB {
 		}
 		return null;
 	}
-
-//Realizar debito desde el cliente web
-//crear un boton en la lista de amortizacion y pagar 
- public String debitoCredito() {
-	 sON.debitoCredito(cliente,m, monto);
 	
-	 return "inicioCliente?faces-redirect=true"; 
- }
+	//Realizar debito desde el cliente web
+	//crear un boton en la lista de amortizacion y pagar 
+	 public String debitoCredito() {
+		 sON.debitoCredito(cliente,m, monto);
+		
+		 return "inicioCliente?faces-redirect=true"; 
+	 }
+	 
  
- 
-// public void getData(SolicitudCredito soli) {
-//	System.out.println("Datoooos: " + soli);	
-// }
+	 public List<CreditoAprobado> listarCA(int cliente){
+		try {
+			return cON.listarCA(cliente);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

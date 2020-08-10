@@ -29,43 +29,52 @@
 		</div>
 	</ui:define>
 
-	<ui:define name="sidebar">
-		<li><a class="waves-effect waves-dark" href="inicioCliente.xhtml"
-			aria-expanded="false"> <img style="padding-right: 10px;"
-				src="../assets/images/menu/inicio16.png" alt="" /> <span
-				class="hide-menu">Inicio </span>
-		</a></li>
-		<li><a class="waves-effect waves-dark" href="cuentaAhorro.xhtml"
-			aria-expanded="false"> <img style="padding-right: 10px;"
-				src="../assets/images/menu/ahorros16.png" alt="" /> <span
-				class="hide-menu">Cuenta de Ahorros</span>
-		</a></li>
-		<li><a class="waves-effect waves-dark" href="#"
-			aria-expanded="false"> <img style="padding-right: 10px;"
-				src="../assets/images/menu/caprob16.png" alt="" /><span
-				class="hide-menu">CreditosAprobados</span>
-		</a></li>
-		<li><a class="waves-effect waves-dark" href="#"
-			aria-expanded="false"> <img style="padding-right: 10px;"
-				src="../assets/images/menu/solicitud16.png" alt="" /> <span
-				class="hide-menu">Solicitudes</span>
-		</a></li>
-		<li class="active"><a class="waves-effect waves-dark"
-			href="accesos.xhtml" aria-expanded="false"> <img
-				style="padding-right: 10px;"
-				src="../assets/images/menu/acceso16.png" alt="" /> <span
-				class="hide-menu">Accesos</span>
-		</a></li>
-		<li><a class="has-arrow waves-effect waves-dark" href="#"
-			aria-expanded="false"> <img style="padding-right: 10px;"
-				src="../assets/images/menu/transferir16.png" alt="" /> <span
-				class="hide-menu">Transferencias</span>
-		</a>
+		<ui:define name="sidebar">
+		<li>
+			<a class="waves-effect waves-dark" href="inicioCliente.xhtml" aria-expanded="false"> 
+				<img style="padding-right: 10px;" src="../assets/images/menu/inicio16.png" alt="" /> 
+				<span class="hide-menu">Inicio </span>
+			</a>
+		</li>
+		<li>
+			<a class="waves-effect waves-dark" href="cuentaAhorro.xhtml" aria-expanded="false"> 
+				<img style="padding-right: 10px;" src="../assets/images/menu/ahorros16.png" alt="" /> 
+				<span class="hide-menu">Cuenta de Ahorros</span>
+			</a>
+		</li>
+		<li>
+			<a class="waves-effect waves-dark" href="creditosAprobados.xhtml" aria-expanded="false"> 
+				<img style="padding-right: 10px;" src="../assets/images/menu/caprob16.png" alt="" />
+				<span class="hide-menu">Creditos Aprobados</span>
+			</a>
+		</li>
+		
+		<li>
+			<a class="waves-effect waves-dark" href="solicitudCredito.xhtml" aria-expanded="false"> 
+				<img style="padding-right: 10px;" src="../assets/images/menu/solicitud16.png" alt="" />
+				<span class="hide-menu">Solicitudes</span>
+			</a>
+		</li>
+		<li class="active">
+			<a class="waves-effect waves-dark" href="accesos.xhtml" aria-expanded="false"> 
+				<img style="padding-right: 10px;" src="../assets/images/menu/acceso16.png" alt="" />
+				<span class="hide-menu">Accesos</span>
+			</a>
+		</li>
+		
+		<li>
+			<a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"> 
+				<img style="padding-right: 10px;" src="../assets/images/menu/transferir16.png" alt="" /> 
+				<span class="hide-menu">Transferencias</span>
+			</a>
+			
 			<ul aria-expanded="false" class="collapse">
-				<li><a href="#">Internas</a></li>
-				<li><a href="#">Externas</a></li>
-			</ul></li>
+				<li><a href="interna.xhtml">Internas</a></li>
+				<li><a href="externa.xhtml">Externas</a></li>
+			</ul>
+		</li>
 	</ui:define>
+	
 	<ui:define name="dashboard">
 		<div class="row page-titles">
 			<div class="col-md-5 col-12 align-self-center">
@@ -82,7 +91,6 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header col-md-12">
-
 						<h:panelGrid columns="4" class="col-lg-12">
 							<div class="d-md-flex no-block">
 								<div class="col-lg-6">
@@ -94,11 +102,12 @@
 											<div class="col-lg-10"
 												style="margin-top: 25px; text-align: right;">Buscar:</div>
 											<div class="col-lg-4">
-												<h:selectOneMenu styleClass="form-control custom-select"
-													value="#{login.estadoAcceso}">
+												<h:selectOneMenu styleClass="form-control"
+													value="#{login.estadoAcceso}" onclick="#{login.listarAcceso()}">
 													<f:selectItem itemValue="Todos" itemLabel="Todos" />
 													<f:selectItem itemValue="Correcto" itemLabel="Correcto" />
 													<f:selectItem itemValue="Fallido" itemLabel="Fallido" />
+													<f:ajax execute="tblAccesos" render="tblAccesos" />
 												</h:selectOneMenu>
 											</div>
 										</div>
@@ -111,7 +120,7 @@
 
 					<div class="card-body collapse show">
 						<div class="table-responsive no-wrap">
-							<h:dataTable class="table" value="#{login.listarAcceso()}"
+							<h:dataTable id="tblAccesos" class="table" value="#{login.listarAcceso()}"
 								var="c">
 								<h:column>
 									<f:facet name="header">Fecha</f:facet>

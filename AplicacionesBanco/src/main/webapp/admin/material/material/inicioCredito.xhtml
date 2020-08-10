@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:b="http://bootsfaces.net/ui"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
 
 
 <ui:composition template="index2.xhtml">
@@ -50,25 +51,34 @@
 				<div class="col-lg-12">
 					<div class="card">
 						<div class="card-header">
-							<div class="d-flex no-block">
-								<h4 class="card-title">Lista Solicitudes</h4>
-								<div class="ml-auto" style="width: 250px; float: right;">
-									Buscar: 
-									 <h:form>
-										<h:selectOneMenu styleClass="form-control"
-											value="#{operativo.txtBuscar}" onchange="#{operativo.buscarSol()}">
-											
-											<f:selectItem itemValue="Todos" itemLabel="Todos" />
-											<f:selectItem itemValue="Aprobado" itemLabel="Aprobado" />
-											<f:selectItem itemValue="Negado" itemLabel="Negado" />
-										</h:selectOneMenu>
-									</h:form>
+							<h:panelGrid columns="4" class="col-lg-12">
+							<div class="d-md-flex no-block">
+								<div class="col-lg-8">
+									<h4 class="card-title ">Lista de Solicitudes</h4>
 								</div>
+								<h:form class="form-material form-horizontal">
+									<h:panelGrid columns="3" class="col-lg-12">
+										<div class="ml-auto form-group">
+											<div class="col-lg-10"
+												style="margin-top: 25px; text-align: right;">Buscar:</div>
+											<div class="col-lg-4">
+												<h:selectOneMenu styleClass="form-control"
+													value="#{operativo.txtBuscar}" onclick="#{operativo.buscarSol()}">
+													<f:selectItem itemValue="Todos" itemLabel="Todos" />
+													<f:selectItem itemValue="Aprobado" itemLabel="Aprobado" />
+													<f:selectItem itemValue="Negado" itemLabel="Negado" />
+													<f:ajax execute="tblDatos" render="tblDatos" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+									</h:panelGrid>
+								</h:form>
 							</div>
+						</h:panelGrid>
 						</div>
 						<div class="card-body collapse show">
 							<div class="table-responsive no-wrap">
-								<h:dataTable id="tblDatos" class="table" value="#{operativo.solicitudes}"
+								<h:dataTable id="tblDatos" class="table" value="#{operativo.buscarSol()}"
 									var="c">
 									<h:column>
 										<f:facet name="header">Cliente</f:facet>
@@ -96,13 +106,13 @@
 										<f:facet name="header">Estado</f:facet>
 										#{c.estado}
 									</h:column>
-									
+									<!-- data-toggle="modal" data-target="#detail" -->
 									<h:column>
 									<f:facet name="header">Acciones</f:facet>
-									<a style="padding-right: 20px;"></a>
-									<a href="cuentaAhorro.xhtml"> <img
-										src="../assets/images/menu/ver16.png" />
-									</a>
+									<a style="padding-right: 20px;" ></a>
+									<h:commandLink onclick="detail.show();" type="button" action="#{operativo.buscarSolJC(c.codigo)}"> 
+										<img src="../assets/images/menu/ver16.png" />
+									</h:commandLink>
 								</h:column>
 								</h:dataTable>
 							</div>
@@ -142,6 +152,79 @@
 		</div>
 		<!-- Column -->
 
+		
+		<div id="detail" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" style="width: 600px;">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #37B0A9;">
+						<h4 class="modal-title" id="myModalLabel" style="color: #000000;">
+							Detalle Solicitud</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+					</div>
+
+
+					<h:form enctype="multipart/form-data">
+						<div class="modal-body" style="color: #000000;">
+							<div class="col-md-12">
+								<div class="form-material form-material  row">
+									<div class="form-group col-md-6">
+										<div class="example">
+											<h6 class="my-1">Fecha</h6>
+											<h:inputText id="fechaD" type="text"
+												styleClass="form-control" value="#{operativo.solicitud.fecha}"
+												a:placeholder="Relación a meses" />
+										</div>
+									</div>
+
+									<div class="form-group col-md-6">
+										<div class="example">
+											<h6 class="my-1">Tipo</h6>
+											<h:inputText id="tipoD" type="text" styleClass="form-control"
+												value="#{operativo.solicitud.tipo}" a:placeholder="Relación a meses" />
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-material form-material  row">
+									<div class="form-group col-md-6">
+										<div class="example">
+											<h6 class="my-1">Valor</h6>
+											<h:inputText id="valorD" type="text"
+												styleClass="form-control" value="#{operativo.solicitud.monto}"
+												a:placeholder="Relación a meses" />
+										</div>
+									</div>
+
+									<div class="form-group col-md-6">
+										<div class="example">
+											<h6 class="my-1">Estado</h6>
+											<h:inputText id="estadoD" type="text"
+												styleClass="form-control" value="#{operativo.solicitud.estado}"
+												a:placeholder="Relación a meses" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-material form-material  row">
+									<div class="form-group col-md-12">
+										<div class="example">
+											<h6 class="my-1">Observaciones</h6>
+											<h:inputTextarea cols="73" rows="6" value="#{operativo.solicitud.observaciones}" style="width:600" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="inicioCredito.xhtml" class="btn btn-project" >Cerrar</a>
+					</h:form>
+				</div>
+			</div>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

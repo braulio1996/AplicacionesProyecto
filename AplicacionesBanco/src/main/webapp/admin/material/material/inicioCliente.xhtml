@@ -3,171 +3,175 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
-	
+
 <ui:composition template="index2.xhtml">
 	<ui:define name="title">Cliente</ui:define>
 
 	<ui:define name="profile">
 		<div class="profile-text">
 
-			<a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown"
-				role="button" aria-haspopup="true" aria-expanded="true">
-				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.cliente.getNombre()}</p>
-				<p style="font-size: 8px; color: #474646;">Cliente</p>
-			</a>
+		<a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown"
+			role="button" aria-haspopup="true" aria-expanded="true"> <p
+			style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.cliente.getNombre()}</p>
+		<p style="font-size: 8px; color: #474646;">Cliente</p>
+		</a>
 
-			<div class="dropdown-menu animated flipInY">
-				<a href="miPerfil.xhtml" class="dropdown-item"> <img
-					src="../assets/images/menu/perfil16.png" alt="" /> Mi Perfil
-				</a> <a href="login-2.xhtml" class="dropdown-item"><i
-					class="fa fa-power-off"></i> Cerrar Sesión</a>
-			</div>
+		<div class="dropdown-menu animated flipInY">
+		<a href="miPerfil.xhtml" class="dropdown-item"> <img
+			src="../assets/images/menu/perfil16.png" alt="" /> Mi Perfil
+		</a> <a href="login-2.xhtml" class="dropdown-item"><i
+			class="fa fa-power-off"></i> Cerrar Sesión</a>
+		</div>
 		</div>
 	</ui:define>
 
 	<ui:define name="sidebar">
-		<li class="active">
-			<a class="waves-effect waves-dark" href="inicioCliente.xhtml" aria-expanded="false"> 
-				<img style="padding-right: 10px;" src="../assets/images/menu/inicio16.png" alt="" /> 
-				<span class="hide-menu">Inicio </span>
-			</a>
+		<li class="active"> <a class="waves-effect waves-dark"
+			href="inicioCliente.xhtml" aria-expanded="false"> <img
+			style="padding-right: 10px;" src="../assets/images/menu/inicio16.png"
+			alt="" /> <span class="hide-menu">Inicio </span>
+		</a>
 		</li>
-		<li>
-			<a class="waves-effect waves-dark" href="cuentaAhorro.xhtml" aria-expanded="false"> 
-				<img style="padding-right: 10px;" src="../assets/images/menu/ahorros16.png" alt="" /> 
-				<span class="hide-menu">Cuenta de Ahorros</span>
-			</a>
+		<li> <a class="waves-effect waves-dark" href="cuentaAhorro.xhtml"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+			src="../assets/images/menu/ahorros16.png" alt="" /> <span
+			class="hide-menu">Cuenta de Ahorros</span>
+		</a>
 		</li>
-		<li>
-			<a class="waves-effect waves-dark" href="#" aria-expanded="false"> 
-				<img style="padding-right: 10px;" src="../assets/images/menu/caprob16.png" alt="" />
-				<span class="hide-menu">Creditos Aprobados</span>
-			</a>
+		<li> <a class="waves-effect waves-dark"
+			href="creditosAprobados.xhtml" aria-expanded="false"> <img
+			style="padding-right: 10px;" src="../assets/images/menu/caprob16.png"
+			alt="" /> <span class="hide-menu">Creditos Aprobados</span>
+		</a>
 		</li>
-		
-		<li>
-			<a class="waves-effect waves-dark" href="solicitudCredito.xhtml" aria-expanded="false"> 
-				<img style="padding-right: 10px;" src="../assets/images/menu/solicitud16.png" alt="" />
-				<span class="hide-menu">Solicitudes</span>
-			</a>
+
+		<li> <a class="waves-effect waves-dark"
+			href="solicitudCredito.xhtml" aria-expanded="false"> <img
+			style="padding-right: 10px;"
+			src="../assets/images/menu/solicitud16.png" alt="" /> <span
+			class="hide-menu">Solicitudes</span>
+		</a>
 		</li>
-		<li>
-			<a class="waves-effect waves-dark" href="#" aria-expanded="false"> 
-				<img style="padding-right: 10px;" src="../assets/images/menu/acceso16.png" alt="" />
-				<span class="hide-menu">Accesos</span>
-			</a>
+		<li> <a class="waves-effect waves-dark" href="accesos.xhtml"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+			src="../assets/images/menu/acceso16.png" alt="" /> <span
+			class="hide-menu">Accesos</span>
+		</a>
 		</li>
-		
-		<li>
-			<a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"> 
-				<img style="padding-right: 10px;" src="../assets/images/menu/transferir16.png" alt="" /> 
-				<span class="hide-menu">Transferencias</span>
-			</a>
-			
-			<ul aria-expanded="false" class="collapse">
-				<li><a href="interna.xhtml">Internas</a></li>
-				<li><a href="externa.xhtml">Externas</a></li>
-			</ul>
+
+		<li> <a class="has-arrow waves-effect waves-dark" href="#"
+			aria-expanded="false"> <img style="padding-right: 10px;"
+			src="../assets/images/menu/transferir16.png" alt="" /> <span
+			class="hide-menu">Transferencias</span>
+		</a> <ul aria-expanded="false" class="collapse">
+		<li><a href="interna.xhtml">Internas</a></li>
+		<li><a href="externa.xhtml">Externas</a></li>
+		</ul>
 		</li>
 	</ui:define>
 
 	<ui:define name="dashboard">
 		<div class="row page-titles">
-			<div class="col-md-5 col-12 align-self-center">
-				<h3 class="text-themecolor">Dashboard</h3>
-				<ol class="breadcrumb">
-					<a>Inicio</a>
-				</ol>
-			</div>
+		<div class="col-md-5 col-12 align-self-center">
+		<h3 class="text-themecolor">Dashboard</h3>
+		<ol class="breadcrumb">
+		<a>Inicio</a>
+		</ol>
+		</div>
 		</div>
 	</ui:define>
 
 	<ui:define name="body">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="card-title mb-0">Resumen cuenta de ahorros</h4>
-					</div>
-					<div class="card-body collapse show">
-						<div class="table-responsive no-wrap">
+		<div class="col-md-12">
+		<div class="card">
+		<div class="card-header">
+		<h4 class="card-title mb-0">Resumen cuenta de ahorros</h4>
+		</div>
+		<div class="card-body collapse show">
+		<div class="table-responsive no-wrap">
 
-							<h:dataTable class="table" value="#{login.listarTrans()}" var="c">
-								<h:column>
-									<f:facet name="header">Cuenta</f:facet>
+		<h:dataTable class="table" value="#{login.listarTrans()}" var="c">
+			<h:column>
+				<f:facet name="header">Cuenta</f:facet>
 											#{c.cliente.cuenta.numero}
 										</h:column>
-								<h:column>
-									<f:facet name="header">Propietario</f:facet>
+			<h:column>
+				<f:facet name="header">Propietario</f:facet>
 											#{c.cliente.nombre}
 										</h:column>
 
-								<h:column>
-									<f:facet name="header">Fecha-Transacción</f:facet>
+			<h:column>
+				<f:facet name="header">Fecha-Transacción</f:facet>
 											#{c.fecha}
 										</h:column>
-								<h:column>
-									<f:facet name="header">Movimiento</f:facet>
+			<h:column>
+				<f:facet name="header">Movimiento</f:facet>
 									#{c.tipo}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Monto movimiento</f:facet>
+			<h:column>
+				<f:facet name="header">Monto movimiento</f:facet>
 									#{c.monto}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Saldo Cuenta</f:facet>
+			<h:column>
+				<f:facet name="header">Saldo Cuenta</f:facet>
 									#{c.saldoCuenta}
 								</h:column>
-								<h:column>
-									<f:facet name="header">Acciones</f:facet>
-									<a style="padding-right: 20px;"></a>
-									<a href="cuentaAhorro.xhtml"> <img
-										src="../assets/images/menu/ver16.png" />
-									</a>
-								</h:column>
-							</h:dataTable>
-						</div>
-					</div>
-				</div>
-			</div>
+			<h:column>
+				<f:facet name="header">Acciones</f:facet>
+				<a style="padding-right: 20px;"></a>
+				<a href="cuentaAhorro.xhtml"> <img
+					src="../assets/images/menu/ver16.png" />
+				</a>
+			</h:column>
+		</h:dataTable>
+		</div>
+		</div>
+		</div>
+		</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="card-title mb-0">Resumen créditos aprobados</h4>
-					</div>
-					<div class="card-body collapse show">
-						<div class="table-responsive no-wrap">
-							<table class="table product-overview">
-								<thead>
-									<tr>
-										<th>#Crédito</th>
-										<th>Tipo</th>
-										<th>Valor Crédito</th>
-										<th>Saldo</th>
-										<th>Fecha-Vencimiento</th>
-										<th style="text-align: center;">Acción</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>123456789</td>
-										<td>Consumo</td>
-										<td>1000.00</td>
-										<td>200</td>
-										<td>18/05/2020/</td>
-										<td align="center"><a href=""> <img
-												src="../assets/images/menu/ver16.png" />
-										</a></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="col-md-12">
+		<div class="card">
+		<div class="card-header">
+		<h4 class="card-title mb-0">Resumen créditos aprobados</h4>
+		</div>
+		<div class="card-body collapse show">
+		<div class="table-responsive no-wrap">
+		<!-- <h:dataTable class="table"
+			value="#{clienteMB.listarCA(login.cliente.codigo)}" var="ca">
+			<h:column>
+				<f:facet name="header"># Crédito</f:facet>
+											#{ca.numero}
+										</h:column>
+			<h:column>
+				<f:facet name="header">Tipo</f:facet>
+											#{ca.tipo}
+										</h:column>
+
+			<h:column>
+				<f:facet name="header">Monto</f:facet>
+											#{ca.monto}
+										</h:column>
+				<h:column>
+				<f:facet name="header">Fecha Vencimiento</f:facet>
+									#{ca.amortizacion.get(0).fechaVencimiento}
+							</h:column>
+
+			<h:column>
+				<f:facet name="header">Acciones</f:facet>
+				<a style="padding-right: 20px;"></a>
+				<a href="cuentaAhorro.xhtml"> <img
+					src="../assets/images/menu/ver16.png" />
+				</a>
+			</h:column>
+		</h:dataTable>
+ -->
+		</div>
+		</div>
+		</div>
+		</div>
 		</div>
 	</ui:define>
 </ui:composition>
