@@ -219,6 +219,7 @@ public class ClienteON {
 	 * @return  correo retorna los valores si existe
 	 */
 	public Cliente buscarCorreo(String correo) {
+		System.out.println("Entro cliente ON");
 		return pdao.buscarCorreo(correo);
 	}
 	

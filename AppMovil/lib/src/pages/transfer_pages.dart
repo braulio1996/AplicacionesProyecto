@@ -1,4 +1,7 @@
+import 'package:appdis/src/models/user_model.dart';
+import 'package:appdis/src/services/user_services.dart';
 import 'package:flutter/material.dart';
+import 'package:appdis/src/pages/utils.dart' as utils;
 
 class TransferPage extends StatefulWidget {
   const TransferPage({Key key}) : super(key: key);
@@ -8,11 +11,18 @@ class TransferPage extends StatefulWidget {
 }
 
 class _TransferPageState extends State<TransferPage> {
+  final user = UserModel();
+  final formkey = GlobalKey<FormState>();
+  final formkey2 = GlobalKey<FormState>();
+  final scaffoldkey = GlobalKey<ScaffoldState>();
+  String tipoCuenta = '';
+  String institucion = '';
   int type = 1;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      key: scaffoldkey,
       appBar: _createAppBar(),
       body: _createBody(size),
     );
@@ -38,56 +48,109 @@ class _TransferPageState extends State<TransferPage> {
     );
   }
 
-  Column _createInternTransfer() {
-    return Column(
-      children: [
-        _createField('# Cuenta', TextInputType.number, false),
-        _createField('Nombre', TextInputType.text, false),
-        _createField('Correo', TextInputType.emailAddress, false),
-        _createField(
-            'Monto', TextInputType.numberWithOptions(decimal: true), false),
-        SizedBox(
-          height: 30,
-        ),
-        RaisedButton(
-          color: Color(0xff2D6A67),
-          child: Text(
-            'Aceptar',
-            style: TextStyle(color: Colors.white),
+  Widget _createInternTransfer() {
+    return Form(
+      key: formkey2,
+      child: Column(
+        children: [
+          _createField('# Cuenta', TextInputType.number, false, user, 'cuenta'),
+          _createField('Nombre', TextInputType.text, false, user, 'nombre'),
+          _createField(
+              'Correo', TextInputType.emailAddress, false, user, 'correo'),
+          _createField('Monto', TextInputType.numberWithOptions(decimal: true),
+              false, user, ''),
+          SizedBox(
+            height: 30,
           ),
-          onPressed: () {},
-        ),
-      ],
+          RaisedButton(
+            color: Color(0xff2D6A67),
+            child: Text(
+              'Aceptar',
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: _submit2,
+          ),
+        ],
+      ),
     );
   }
 
-  Column _createExternTransfer(Size size) {
-    return Column(
-      children: [
-        _createComboBox(
-            size, 'Institución', ['Institución A', 'Institución B']),
-        _createComboBox(size, 'Tipo Cuenta', ['Ahorro', 'Corriente']),
-        _createField('# Cuenta', TextInputType.text, false),
-        _createField(
-            'Monto', TextInputType.numberWithOptions(decimal: true), false),
-        _createComboBox(size, 'Identificación', ['Cédula', 'Ruc']),
-        _createField('# Identificación', TextInputType.number, false),
-        _createField('Nombre', TextInputType.text, false),
-        _createField('Correo', TextInputType.emailAddress, false),
-        _createField('Concepto', TextInputType.text, false),
-        SizedBox(
-          height: 30,
-        ),
-        RaisedButton(
-          color: Color(0xff2D6A67),
-          child: Text(
-            'Aceptar',
-            style: TextStyle(color: Colors.white),
+  Widget _createExternTransfer(Size size) {
+    return Form(
+      key: formkey,
+      child: Column(
+        children: [
+          _createComboBox(size, 'Institución',
+              ['Institución A', 'Institución B'], 'institucion'),
+          _createComboBox(
+              size, 'Tipo Cuenta', ['Ahorro', 'Corriente'], 'tipoCuenta'),
+          _createField('# Cuenta', TextInputType.text, false, user, 'cuenta'),
+          _createField('Monto', TextInputType.numberWithOptions(decimal: true),
+              false, user, 'monto'),
+          _createComboBox(
+              size, 'Identificación', ['Cédula', 'Ruc'], 'tipoIdentificacion'),
+          _createField('# Identificación', TextInputType.number, false, user,
+              'identificacion'),
+          _createField('Nombre', TextInputType.text, false, user, 'nombre'),
+          _createField(
+              'Correo', TextInputType.emailAddress, false, user, 'correo'),
+          _createField('Concepto', TextInputType.text, false, user, 'concepto'),
+          SizedBox(
+            height: 30,
           ),
-          onPressed: () {},
-        ),
-      ],
+          RaisedButton(
+            color: Color(0xff2D6A67),
+            child: Text(
+              'Aceptar',
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: _submit,
+          ),
+        ],
+      ),
     );
+  }
+
+  _submit() async {
+    final userService = UserServices();
+    if (!formkey.currentState.validate()) return;
+    formkey.currentState.save();
+    bool ok = await userService.transfer(
+        'Externa',
+        institucion,
+        tipoCuenta,
+        user.transferTo,
+        user.monto,
+        user.identificacion,
+        user.nombre,
+        user.email,
+        user.concepto);
+    if (ok) {
+      await new Future.delayed(Duration(milliseconds: 1500));
+      await utils.mostrarSnackBar(
+          'Transferencia exitosa', Colors.green, scaffoldkey);
+      await new Future.delayed(Duration(seconds: 2));
+    } else {
+      return utils.mostrarSnackBar(
+          'Fallo transferencia', Colors.red, scaffoldkey);
+    }
+  }
+
+  _submit2() async {
+    final userService = UserServices();
+    if (!formkey2.currentState.validate()) return;
+    formkey2.currentState.save();
+    bool ok = await userService.transfer('Interna', '', '', user.transferTo,
+        user.monto, '', user.nombre, user.email, '');
+    if (ok) {
+      await new Future.delayed(Duration(milliseconds: 1500));
+      await utils.mostrarSnackBar(
+          'Transferencia exitosa', Colors.green, scaffoldkey);
+      await new Future.delayed(Duration(seconds: 2));
+    } else {
+      return utils.mostrarSnackBar(
+          'Fallo transferencia', Colors.red, scaffoldkey);
+    }
   }
 
   Widget _createType(Size size) {
@@ -128,7 +191,8 @@ class _TransferPageState extends State<TransferPage> {
     );
   }
 
-  Widget _createComboBox(Size size, String text, List<String> list) {
+  Widget _createComboBox(
+      Size size, String text, List<String> list, String type) {
     return Center(
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 5),
@@ -145,13 +209,24 @@ class _TransferPageState extends State<TransferPage> {
               value: value,
             );
           }).toList(),
-          onChanged: (value) {},
+          onChanged: (value) {
+            switch (type) {
+              case 'tipoCuenta':
+                tipoCuenta = value;
+                break;
+              case 'institucion':
+                institucion = value;
+                break;
+              default:
+            }
+          },
         ),
       ),
     );
   }
 
-  Widget _createField(String text, TextInputType type, bool obscure) {
+  Widget _createField(String text, TextInputType type, bool obscure,
+      UserModel user, String typeV) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
@@ -166,6 +241,60 @@ class _TransferPageState extends State<TransferPage> {
             ),
             focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black, width: 2))),
+        validator: (value) {
+          switch (typeV) {
+            case 'nombre':
+              if (value.length <= 3) {
+                return 'La contraseña debe tener al menos 3 digitos';
+              } else {
+                return null;
+              }
+              break;
+            case 'concepto':
+              if (value.length <= 5) {
+                return 'La contraseña debe tener al menos 3 digitos';
+              } else {
+                return null;
+              }
+              break;
+            case 'correo':
+              Pattern pattern =
+                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+              RegExp regExp = new RegExp(pattern);
+              if (regExp.hasMatch(value)) {
+                return null;
+              } else {
+                return 'El email es invalido';
+              }
+              break;
+            default:
+              return null;
+          }
+        },
+        onSaved: (value) {
+          switch (typeV) {
+            case 'nombre':
+              user.nombre = value;
+              break;
+            case 'concepto':
+              user.concepto = value;
+              break;
+            case 'correo':
+              user.email = value;
+              break;
+            case 'cuenta':
+              user.transferTo = value;
+              break;
+            case 'monto':
+              user.monto = value;
+              break;
+            case 'identificacion':
+              user.identificacion = value;
+              break;
+            default:
+              return null;
+          }
+        },
       ),
     );
   }

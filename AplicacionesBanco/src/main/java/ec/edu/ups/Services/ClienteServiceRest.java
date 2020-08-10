@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import ec.edu.ups.Modelo.Acceso;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
+import ec.edu.ups.Modelo.Transaccion;
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
@@ -108,6 +110,7 @@ public class ClienteServiceRest implements Serializable {
 	@Path("/Login")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Respuesta login(@QueryParam("correo") String correo, @QueryParam("clave") String clave) throws Exception {
+		System.out.println("Entro metodo service inicio");
 
 		boolean client = false;
 		Acceso acceso = new Acceso();
@@ -115,24 +118,8 @@ public class ClienteServiceRest implements Serializable {
 		Cliente cliente;
 		String mensaje;
 		Respuesta r = new Respuesta();
-		try {
-
-			if (caon.loginC(correo, clave).getTipo().equalsIgnoreCase("cajero")) {
-				client = true;
-				Cajero cajero = caon.loginC(correo, clave);
-				// FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",
-				// client);
-				mensaje = "Ingreso Exitoso";
-				r.setCodigo(0);
-				r.setMensaje(cajero.getCedula());
-				return r;
-			} // Fin if (caon.loginC(this.correo,
-				// this.clave).getTipo().equalsIgnoreCase("cajero"))
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
 			if (con.buscarCorreo(correo) != null) {
+				System.out.println("Entro metodo service");
 				if (con.loginC(correo, clave) != null) {
 					client = true;
 					cliente = con.loginC(correo, clave);
@@ -160,8 +147,9 @@ public class ClienteServiceRest implements Serializable {
 					mensaje = "Ingreso Exitoso";
 					r.setCodigo(1);
 					r.setMensaje(cliente.getCuenta().getNumero());
-					return r;
+//					return r;
 				} else {
+					System.out.println("contraseña incorrecta");
 					mensaje = "ERROR. Usuario Incorrecto";
 					r.setCodigo(99);
 					r.setMensaje(mensaje);
@@ -178,14 +166,13 @@ public class ClienteServiceRest implements Serializable {
 					con.editar(cliente);
 
 				} // Fin if (con.loginC(this.correo, this.clave) != null)
-			} else {
-				mensaje = "Error";
+			}else {
+				System.out.println("correo incorrecto");
+				mensaje = "ERROR. Usuario Incorrecto";
 				r.setCodigo(99);
 				r.setMensaje(mensaje);
-			} // Fin if (con.buscarCorreo(this.correo) != null)
-		} // FIn try-catch
-
-		return null;
+			}
+		return r;
 	}// Fin metodo login
 
 	@GET
@@ -237,7 +224,12 @@ public class ClienteServiceRest implements Serializable {
 		
 	}
 	
-
+//	@GET
+//	@Path("/ahorro")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public List<Transaccion> transCliente(@QueryParam("cliente") int c, @QueryParam("desde") LocalDate fechaDesde, @QueryParam("hasta") LocalDate fechaHasta, @QueryParam("tipo") String tipo) throws Exception {
+//		return con.transCli(c, fechaDesde, fechaHasta, tipo);
+//	}
 	
 	@GET
 	@Path("/{id}")

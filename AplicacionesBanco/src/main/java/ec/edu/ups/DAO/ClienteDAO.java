@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -202,12 +203,26 @@ public class ClienteDAO {
 	 * @return c retorna un objeto de tipo cliente
 	 */
 	public Cliente buscarCorreo(String correo) {
-		String jpql = "SELECT c FROM Cliente c WHERE c.correo = :correo";
+		
+		System.out.println("Entro a buscar correo");
+		String jpql = "SELECT c FROM Cliente c WHERE c.correo = '"+correo+"'";
 		Query query = em.createQuery(jpql, Cliente.class);
-		query.setParameter("correo", correo);
-		Cliente c = (Cliente) query.getSingleResult();
+//		query.setParameter("correo", correo);
 
-		return c;
+		try {
+			Cliente c = (Cliente) query.getSingleResult();
+
+			System.out.println("============");
+			System.out.println(c);
+			System.out.println("============");
+			
+			return c;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		
 	}
 
 	public long contar() {
