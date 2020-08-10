@@ -21,11 +21,16 @@ import javax.ws.rs.core.MediaType;
 import ec.edu.ups.Modelo.Acceso;
 import ec.edu.ups.Modelo.Cajero;
 import ec.edu.ups.Modelo.Cliente;
+
 import ec.edu.ups.Modelo.Transaccion;
+
+import ec.edu.ups.Modelo.SolicitudCredito;
+
 import ec.edu.ups.ON.AdministradorON;
 import ec.edu.ups.ON.CajeroON;
 import ec.edu.ups.ON.ClienteON;
 import ec.edu.ups.ON.CreditoON;
+import ec.edu.ups.ON.SolicitudON;
 
 @Path("/users")
 public class ClienteServiceRest implements Serializable {
@@ -42,6 +47,9 @@ public class ClienteServiceRest implements Serializable {
 	private CreditoON crediON;
 	@Inject
 	private AdministradorON adminON;
+	
+	@Inject
+	private SolicitudON s;
 
 	Date myDate = new Date();
 
@@ -151,8 +159,7 @@ public class ClienteServiceRest implements Serializable {
 				} else {
 					System.out.println("contraseña incorrecta");
 					mensaje = "ERROR. Usuario Incorrecto";
-					r.setCodigo(99);
-					r.setMensaje(mensaje);
+					
 					con.enviarCorreo(correo, "Acceso a la cuenta",
 							"Su intento ha sido fallido, con contraseña: " + clave);
 					cliente = con.loginC(correo, clave);
@@ -164,15 +171,24 @@ public class ClienteServiceRest implements Serializable {
 					accesos.add(acceso);
 					cliente.setAccesos(accesos);
 					con.editar(cliente);
-
+					acceso = new Acceso();
+					accesos.clear();
+					r.setCodigo(2);
+					r.setMensaje("Error intento Fallido");
+					return r;
 				} // Fin if (con.loginC(this.correo, this.clave) != null)
 			}else {
 				System.out.println("correo incorrecto");
 				mensaje = "ERROR. Usuario Incorrecto";
 				r.setCodigo(99);
 				r.setMensaje(mensaje);
-			}
-		return r;
+
+				return r;
+			} // Fin if (con.buscarCorreo(this.correo) != null)
+		 // FIn try-catch
+
+		return null;
+
 	}// Fin metodo login
 
 	@GET
@@ -240,5 +256,12 @@ public class ClienteServiceRest implements Serializable {
 		r.setCodigo(1);
 		r.setMensaje(id);
 		return r;
+	}
+	@GET
+	@Path("/BuscarCliente")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<SolicitudCredito>solicitudes() throws Exception{
+		return s.listarSoli();
+		
 	}
 }

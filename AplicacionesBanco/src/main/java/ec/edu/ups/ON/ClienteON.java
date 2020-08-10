@@ -22,8 +22,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import ec.edu.ups.DAO.ClienteDAO;
+<<<<<<< HEAD
 import ec.edu.ups.Modelo.Amortizacion;
 import ec.edu.ups.Modelo.Cajero;
+=======
+import ec.edu.ups.DAO.SolicitudDAO;
+>>>>>>> master
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.CreditoAprobado;
 import ec.edu.ups.Modelo.Cuenta;
@@ -46,6 +50,8 @@ public class ClienteON {
 
 	@Inject
 	private ClienteDAO pdao;
+	@Inject
+	private SolicitudDAO sdao;
 	Date myDate = new Date();
 	
 	private Transaccion trans;
@@ -85,7 +91,9 @@ public class ClienteON {
 	public List<Cliente> listar() throws Exception {
 		return pdao.listar();
 	}
-	
+	public List<Cliente> listar2(int codigo) throws Exception {
+		return pdao.listar2(codigo);
+	}
 	public List<SolicitudCredito> listarSoli(int cliente, String estado) throws Exception {
 		return pdao.listSolicitud(cliente, estado);
 	}
@@ -310,16 +318,19 @@ public class ClienteON {
 	
 	
 	public boolean solicitudCredito(Cliente cliente, SolicitudCredito s) throws Exception {
+		List<SolicitudCredito> solicitudes = new ArrayList<SolicitudCredito>();
 		try {
-			List<SolicitudCredito> solicitudes = new ArrayList<>();
-			s.setCliente(cliente);
+			System.out.println("------Solicitud-------"+s.getTipo());
 			s.setEstado("Pendiente");
 			solicitudes.add(s);
-			
 			cliente.setSolicitudesCredito(solicitudes);
+			s.setCliente(cliente);
+			//sdao.add(s);
 			pdao.editar(cliente);
+			s=new SolicitudCredito();
+			solicitudes.clear();
 		}catch (Exception e) {
-			System.out.println("Error Solicitud-------"+e.getMessage());
+			System.out.println("---Error Solicitud-------"+e.getMessage());
 			throw new Exception(e.toString());
 		}
 		return true;
@@ -373,4 +384,8 @@ public class ClienteON {
 		return pdao.buscarCA(cliente, codigo);
 	}
 	
+	public List<Cliente> listarCliente(int cliente) throws Exception {
+		return pdao.listar();
+	}
+
 }

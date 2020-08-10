@@ -15,15 +15,8 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class JefeCredito extends Persona {
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<SolicitudCredito> solicitudesCredito;
 
-	public List<SolicitudCredito> getSolicitudesCredito() {
-		return solicitudesCredito;
-	}
 
-	public void setSolicitudesCredito(List<SolicitudCredito> solicitudesCredito) {
-		this.solicitudesCredito = solicitudesCredito;
-	}
+
 
 }

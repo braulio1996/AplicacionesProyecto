@@ -46,7 +46,7 @@ public class ClienteMB {
 	private Cliente cliente;
 	private Transferencia t;
 	private List<Transferencia> transferencias;
-	private SolicitudCredito s;
+	private SolicitudCredito s= new SolicitudCredito();
 	private List<SolicitudCredito> solicitudes;
 	private CreditoAprobado c;
 	private Amortizacion m;
@@ -67,22 +67,30 @@ public class ClienteMB {
 	private List<Amortizacion> amorti;
 	
 	
+<<<<<<< HEAD
 	private int numeroBuscar;
+=======
+>>>>>>> master
 	
 	@PostConstruct
 	public void init() {
+		
 		cliente = new Cliente();
 		t = new Transferencia();
-		s = new SolicitudCredito();
+		
 		c = new CreditoAprobado();
 		m = new Amortizacion();
 		estadoAcceso="";
 		transferencias = new ArrayList<>();
 		tt = new TransferenciaTemporal();
 		txtBuscar="Todos";
+<<<<<<< HEAD
 		trans = new Transaccion();
 		transacciones = new ArrayList<>();
 		amorti = new ArrayList<>();
+=======
+		solicitudes = new ArrayList<SolicitudCredito>();
+>>>>>>> master
 		
 		try {
 			solicitudes = sON.buscarSol(txtBuscar);
@@ -375,8 +383,11 @@ public class ClienteMB {
 		}
 	}
 //Metodo para crear solicitudes 
-	public String solicitudCredito(Cliente cliente) throws Exception {
+	public String solicitudCredito(Cliente c) throws Exception {
+		SolicitudCredito sss;
 		try {
+			sss= new SolicitudCredito();
+			cliente =cON.buscar(c.getCedula());
 			if (file != null || file1 != null || file2 != null || file3 != null) {
 				int size = (int) file.getSize();
 				int size1 = (int) file1.getSize();
@@ -397,22 +408,43 @@ public class ClienteMB {
 					file2.getInputStream().read(plantilla);
 					file3.getInputStream().read(rol);
 					
-					s.setFotoCedulaT(cedulaT);
-					s.setFotoCedulaF(cedulaF);
-					s.setFotoPlantilla(plantilla);
-					s.setFotoRolPagos(rol);
-					s.setObservaciones("Pendiente");
-					s.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
+					sss.setFotoCedulaT(cedulaT);
+					sss.setFotoCedulaF(cedulaF);
+					sss.setFotoPlantilla(plantilla);
+					sss.setFotoRolPagos(rol);
+					sss.setObservaciones("Pendiente");
+					sss.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(myDate));
+					sss.setEstado("Pendiente");
+					sss.setCliente(cliente);
+					System.out.println("-------------------------------"+s.getMonto());
+					System.out.println("-------------------------------"+s.getMeses());
+					sss.setMonto(s.getMonto());
+					sss.setMeses(s.getMeses());
+					sss.setTipo(s.getTipo());
+					sss.setIngreso(s.getIngreso());
+					sss.setEgreso(s.getEgreso());
+					solicitudes.add(sss);
+					cliente.setSolicitudesCredito(solicitudes);
+					
+					cON.editar(cliente);
+					sss=new SolicitudCredito();
+					solicitudes.clear();
+					c = new Cliente();
+					cliente= new Cliente();
 				}
 				
-				cON.solicitudCredito(cliente, s);
-				s = null;
+
+				
+				
+			}else {
+				System.out.println("Error datos Incompleto-------------------------------");
+
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return "solicitudCredito?faces-redirect=true";
+		return null;
 	}
 	
 	public List<SolicitudCredito>listarSolicitud(int cliente){
