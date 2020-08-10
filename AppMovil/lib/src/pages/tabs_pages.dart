@@ -35,19 +35,19 @@ class _Navegacion extends StatelessWidget {
       selectedItemColor: Colors.grey,
       items: [
         BottomNavigationBarItem(
+          icon: Icon(
+            Icons.home,
+            // color: Colors.white,
+          ),
+          title: Text('Inicio'),
+        ),
+        BottomNavigationBarItem(
           backgroundColor: Color(0xff2E57A6),
           icon: Icon(
             Icons.attach_money,
             // color: Colors.white,
           ),
           title: Text('Transferencias'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.home,
-            // color: Colors.white,
-          ),
-          title: Text('Inicio'),
         ),
         BottomNavigationBarItem(
           icon: Icon(
@@ -70,8 +70,8 @@ class _Paginas extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       onPageChanged: (index) => navegacionModel.paginaActual = index,
       children: <Widget>[
-        TransferPage(),
         HomePage(),
+        TransferPage(),
         CreditPage(),
       ],
     );
@@ -79,7 +79,7 @@ class _Paginas extends StatelessWidget {
 }
 
 class NavegacionModel with ChangeNotifier {
-  int _paginaActual = 1;
+  int _paginaActual = 0;
   PageController _pageController = new PageController();
 
   int get paginaActual => this._paginaActual;

@@ -99,40 +99,6 @@
 												#{operativo.solicitud.egreso} </label>
 										</h:panelGrid>
 									</div>
-
-
-									<div class="row">
-										<h:panelGrid columns="2" class="col-lg-5">
-											<label style="width: 90px; text-align: right;">
-												Cédula: </label>
-										</h:panelGrid>
-									</div>
-
-									<div class="row">
-										<h:panelGrid columns="1" class="col-lg-5">
-											
-												<img src="data:image/png;base64, #{operativo.solicitud.fotoCedulaF}" />
-											
-										</h:panelGrid>
-										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
-										<h:panelGrid columns="2" class="col-lg-5">
-											<label> <!--  <img src="../assets/images/posterior.jpg" />  -->
-											
-											</label>
-										</h:panelGrid>
-									</div>
-
-									<div class="row">
-										<h:panelGrid columns="1" class="col-lg-5">
-											<label> <!-- <img src="../assets/images/planilla.jpg" /> -->
-											</label>
-										</h:panelGrid>
-										<h:panelGrid columns="2" class="col-lg-2"></h:panelGrid>
-										<h:panelGrid columns="2" class="col-lg-5">
-											<label> <!--<img src="../assets/images/rolPago.jpg" /> -->
-											</label>
-										</h:panelGrid>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -143,7 +109,7 @@
 								data-target="#myModal">Negar</a>
 							<a style="padding-left: 10px; padding-right: 10px;">.</a>
 							<h:commandButton class="btn btn-project"
-								action="#{operativo.aprobarCredito()}"
+								action="#{operativo.aprobarCredito(login.cliente)}"
 								value="Aceptar" />
 
 						</div>

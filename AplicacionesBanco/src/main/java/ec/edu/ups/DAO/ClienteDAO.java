@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -91,6 +92,36 @@ public class ClienteDAO {
 			}
 			for (Transaccion t : cliente.getTransacciones()) {
 				tt.add(t);
+			}
+			
+			
+			return clientes;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return null;
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Cliente> listar2(int codigo) throws SQLException {
+		try {
+			String jpql = "SELECT l FROM Cliente l a WHERE l.codigo = :codigo";
+			Query query = em.createQuery(jpql, Cliente.class);
+			query.setParameter("codigo", codigo);
+			Cliente cliente = (Cliente) query.getSingleResult();
+			List<Cliente> clientes = query.getResultList();
+			List<Acceso> accesos = new ArrayList<>();
+			List<Transaccion>tt= new ArrayList<>();
+			List<SolicitudCredito>ss= new ArrayList<>();
+			for (Acceso acceso : cliente.getAccesos()) {
+				accesos.add(acceso);
+			}
+			for (Transaccion t : cliente.getTransacciones()) {
+				tt.add(t);
+			}
+			for (SolicitudCredito s: cliente.getSolicitudesCredito()) {
+				ss.add(s);
 			}
 			
 			
@@ -202,12 +233,26 @@ public class ClienteDAO {
 	 * @return c retorna un objeto de tipo cliente
 	 */
 	public Cliente buscarCorreo(String correo) {
-		String jpql = "SELECT c FROM Cliente c WHERE c.correo = :correo";
+		
+		System.out.println("Entro a buscar correo");
+		String jpql = "SELECT c FROM Cliente c WHERE c.correo = '"+correo+"'";
 		Query query = em.createQuery(jpql, Cliente.class);
-		query.setParameter("correo", correo);
-		Cliente c = (Cliente) query.getSingleResult();
+//		query.setParameter("correo", correo);
 
-		return c;
+		try {
+			Cliente c = (Cliente) query.getSingleResult();
+
+			System.out.println("============");
+			System.out.println(c);
+			System.out.println("============");
+			
+			return c;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		
 	}
 
 	public long contar() {

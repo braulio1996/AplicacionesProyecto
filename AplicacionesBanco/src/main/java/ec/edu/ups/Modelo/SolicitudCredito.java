@@ -39,7 +39,7 @@ public class SolicitudCredito {
 	private byte[] fotoPlantilla;
 	@Lob
 	private byte[] fotoRolPagos;
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Cliente cliente;
 	public int getCodigo() {
 		return codigo;
