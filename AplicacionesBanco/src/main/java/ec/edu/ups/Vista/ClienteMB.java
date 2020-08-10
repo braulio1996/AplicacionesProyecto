@@ -352,6 +352,8 @@ public class ClienteMB {
 		return null;
 	}
 
+	
+	
 	public void buscarSolicitud(int codigo) {
 		this.s =  sON.buscarSolicitud(codigo);
 	}

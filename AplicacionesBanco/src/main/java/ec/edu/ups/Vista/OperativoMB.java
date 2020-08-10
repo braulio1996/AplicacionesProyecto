@@ -68,7 +68,10 @@ public class OperativoMB {
 	private List<Cajero> cajeros;
 	private List<Cliente> clientes;
 	private List<JefeCredito> creditos;
+	private List<SolicitudCredito> solicitudes;
+
 	Date myDate = new Date();
+	private String txtBuscar;
 	
 	private Byte[] cedulaF;
 	private Byte[] cedulaT;
@@ -83,7 +86,8 @@ public class OperativoMB {
 		cajero = new Cajero();
 		cajeros = new ArrayList<>();
 		creditos = new ArrayList<>();
-
+		txtBuscar = "Todos";
+		solicitudes = new ArrayList<>();
 	}
 
 	public List<Cliente> getClientes() {
@@ -104,11 +108,9 @@ public class OperativoMB {
 		return cliente;
 	}
 
-
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
 
 	public void setCajeros(List<Cajero> cajeros) {
 		this.cajeros = cajeros;
@@ -124,6 +126,23 @@ public class OperativoMB {
 		this.creditos = creditos;
 	}
 	
+	
+	public List<SolicitudCredito> getSolicitudes() {
+		return solicitudes;
+	}
+
+	public void setSolicitudes(List<SolicitudCredito> solicitudes) {
+		this.solicitudes = solicitudes;
+	}
+
+	public String getTxtBuscar() {
+		return txtBuscar;
+	}
+
+	public void setTxtBuscar(String txtBuscar) {
+		this.txtBuscar = txtBuscar;
+	}
+
 	public SolicitudCredito getSolicitud() {
 		return solicitud;
 	}
@@ -336,4 +355,33 @@ public class OperativoMB {
 		return "detalleSolicitud?faces-redirect=true";
 	}
 
+	public List<SolicitudCredito> solPendientes(){
+		try {
+			return sON.solPendientes();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<SolicitudCredito> solRespuesta(){
+		try {
+			return sON.solRespuesta();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<SolicitudCredito> buscarSol(){
+		try {
+			solicitudes = sON.buscarSol(txtBuscar);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

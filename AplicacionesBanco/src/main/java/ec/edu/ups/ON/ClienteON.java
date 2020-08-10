@@ -89,6 +89,7 @@ public class ClienteON {
 	}
     
 	
+	
 	public List<SolicitudCredito> listarSolicitudTipos(String tipo) throws Exception {
 		return pdao.listSolicitudTipo(tipo);
 	}

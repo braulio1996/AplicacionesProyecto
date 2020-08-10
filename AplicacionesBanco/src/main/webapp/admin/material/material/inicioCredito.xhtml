@@ -16,7 +16,7 @@
 				<p style="font-size: 16px; margin-bottom: 0px; color: #000000">#{login.credito.getNombre()}</p>
 				<p style="font-size: 8px; color: #474646;">Jefe Crédito</p>
 			</a>
-			
+
 			<div class="dropdown-menu animated flipInY">
 				<a href="login-2.xhtml" class="dropdown-item"><i
 					class="fa fa-power-off"></i> Cerrar Sesión</a>
@@ -53,31 +53,35 @@
 							<div class="d-flex no-block">
 								<h4 class="card-title">Lista Solicitudes</h4>
 								<div class="ml-auto" style="width: 250px; float: right;">
-									Buscar: <select class="custom-select " style="width: 150px;">
-										<option selected="">Todos</option>
-										<option value="1">Aprobadas</option>
-										<option value="2">Negadas</option>
-									</select>
-
+									Buscar: 
+									 <h:form>
+										<h:selectOneMenu styleClass="form-control"
+											value="#{operativo.txtBuscar}" onchange="#{operativo.buscarSol()}">
+											
+											<f:selectItem itemValue="Todos" itemLabel="Todos" />
+											<f:selectItem itemValue="Aprobado" itemLabel="Aprobado" />
+											<f:selectItem itemValue="Negado" itemLabel="Negado" />
+										</h:selectOneMenu>
+									</h:form>
 								</div>
 							</div>
 						</div>
 						<div class="card-body collapse show">
 							<div class="table-responsive no-wrap">
-								<h:dataTable class="table" value="#{clienteMB.allSolicitud()}"
+								<h:dataTable id="tblDatos" class="table" value="#{operativo.solicitudes}"
 									var="c">
 									<h:column>
+										<f:facet name="header">Cliente</f:facet>
+										#{c.cliente.nombre}
+									</h:column>
+									<h:column>
 										<f:facet name="header">Tipo</f:facet>
-									#{c.tipo}
-								</h:column>
+										#{c.tipo}
+									</h:column>
 									<h:column>
 										<f:facet name="header">Monto</f:facet>
-									#{c.monto}
-								</h:column>
-									<h:column>
-										<f:facet name="header">Meses</f:facet>
-									#{c.meses}
-								</h:column>
+										#{c.monto}
+									</h:column>
 
 									<h:column>
 										<f:facet name="header">Ingreso</f:facet>
@@ -86,15 +90,19 @@
 
 									<h:column>
 										<f:facet name="header">Egreso</f:facet>
-									#{c.egreso}
-								</h:column>
+										#{c.egreso}
+									</h:column>
 									<h:column>
 										<f:facet name="header">Estado</f:facet>
-									#{c.estado}
-								</h:column>
+										#{c.estado}
+									</h:column>
+									
 									<h:column>
-										<f:facet name="header">Cliente</f:facet>
-									#{c.cliente.nombre}
+									<f:facet name="header">Acciones</f:facet>
+									<a style="padding-right: 20px;"></a>
+									<a href="cuentaAhorro.xhtml"> <img
+										src="../assets/images/menu/ver16.png" />
+									</a>
 								</h:column>
 								</h:dataTable>
 							</div>
@@ -112,7 +120,7 @@
 					<div
 						class="card-body border-top collapse show table-responsive no-wrap">
 						<h:form>
-							<h:dataTable class="table" value="#{clienteMB.allSolicitud()}"
+							<h:dataTable class="table" value="#{operativo.solPendientes()}"
 								var="sol">
 
 								<h:column>

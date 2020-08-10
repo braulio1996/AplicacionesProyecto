@@ -261,6 +261,8 @@ public class ClienteDAO {
 		
 	}
 	
+
+	
 	public List<SolicitudCredito>listSolicitudTipo(String tipo){
 		if (tipo.equals("Todos")) {
 		String jpql="SELECT s FROM SolicitudCredito s";

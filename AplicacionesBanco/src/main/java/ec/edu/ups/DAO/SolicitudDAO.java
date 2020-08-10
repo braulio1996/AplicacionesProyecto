@@ -99,4 +99,39 @@ public class SolicitudDAO {
 		query.setParameter("codigo", codigo);
 		return (SolicitudCredito) query.getSingleResult();
 	}
+	
+	public List<SolicitudCredito> solPendientes(){
+		//String jpql="SELECT s FROM SolicitudCredito WHERE s.cliente = ";
+		String jpql="SELECT s FROM SolicitudCredito s WHERE s.estado LIKE 'Pendiente'";
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		//query.setParameter("cliente", cliente);
+		
+		return query.getResultList();
+		
+	}
+	
+	public List<SolicitudCredito> solRespuesta(){
+		//String jpql="SELECT s FROM SolicitudCredito WHERE s.cliente = ";
+		String jpql="SELECT s FROM SolicitudCredito s WHERE s.estado != 'Pendiente'";
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		//query.setParameter("cliente", cliente);
+		
+		return query.getResultList();
+		
+	}
+	
+	public List<SolicitudCredito> buscarSol(String estado){
+		System.out.println("Entro a buscar: " + estado);
+		
+		String jpql = "";
+		if(estado.equals("Todos") || estado == "Todos") {
+			jpql="SELECT s FROM SolicitudCredito s WHERE s.estado != 'Pendiente'";
+		}else {
+			jpql="SELECT s FROM SolicitudCredito s WHERE s.estado LIKE '"+estado+"'";
+		}
+		
+		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		
+		return query.getResultList();
+	}
 }

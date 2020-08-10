@@ -254,6 +254,17 @@ public class SolicitudON {
 		}
 	}
 	
+	public List<SolicitudCredito> solPendientes() throws Exception {
+		return pdao.solPendientes();
+	}
+	
+	public List<SolicitudCredito> solRespuesta() throws Exception {
+		return pdao.solRespuesta();
+	}
+	
+	public List<SolicitudCredito> buscarSol(String estado) throws Exception {
+		return pdao.buscarSol(estado);
+	}
 	
 	public SolicitudCredito verDetalle(int codigo) {
 		return pdao.verDetalle(codigo);

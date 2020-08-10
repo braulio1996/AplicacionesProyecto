@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 
 <ui:composition template="index2.xhtml">
@@ -136,9 +137,8 @@
 
 						<div class="card-footer" align="center"
 							style="background-color: #fff">
-							<h:commandButton class="btn btn-projectNeg"
-								action="#{cajeroMB.retiro(clienteMB.trasferencia())}"
-								value="Negar" />
+							<a class="btn btn-projectNeg" data-toggle="modal"
+								data-target="#myModal">Negar</a>
 							<a style="padding-left: 10px; padding-right: 10px;">.</a>
 							<h:commandButton class="btn btn-project"
 								action="#{operativo.aprobarCredito()}"
@@ -150,6 +150,49 @@
 				</div>
 			</div>
 		</div>
+		
+		<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 400px;">
+			<h:form class="form-horizontal">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #37B0A9;">
+						<h4 class="modal-title" id="myModalLabel" style="color: #000000;">Generar
+							nueva contraseña</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+					</div>
+					<div class="modal-body" style="color: #000000;">
+
+						<div class="form-group ">
+							<div class="col-xs-12">
+								<p class="text-muted">Ingrese el/los motivo(s) por el cual se está negando este crédito </p>
+							</div>
+						</div>
+						<div class="form-group ">
+							<div class="col-xs-12">
+								<h:inputText class="form-control" type="text"
+									value="#{operativo.solicitud.observaciones}" a:placeholder="Observación..." />
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+
+						<div class="form-group text-center mt-3">
+							<h:commandButton class="btn" type="submit" value="Confirmar"
+								action="#{operativo.negarSoli()}"
+								style="background-color: rgb(55, 176, 169); box-shadow: 0 2px 2px rgb(55, 176, 169); color: #000000; margin-right: 140px;" />
+						</div>
+
+					</div>
+
+				</div>
+			</h:form>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
 	</ui:define>
 </ui:composition>
 </html>
