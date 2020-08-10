@@ -95,7 +95,7 @@ public class SolicitudDAO {
 	}
 	public List<Amortizacion>listaCreditosT(){
 		String jpql="SELECT s FROM Amortizacion s";	
-		Query query = em.createQuery(jpql, SolicitudCredito.class);
+		Query query = em.createQuery(jpql, Amortizacion.class);
 		
 		return query.getResultList();
 		

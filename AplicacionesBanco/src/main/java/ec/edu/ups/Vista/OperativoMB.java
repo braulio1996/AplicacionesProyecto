@@ -390,7 +390,7 @@ public class OperativoMB {
 		cap.setTipo(solicitud.getTipo());
 		cap.setFecha(new Date());
 		cap.setMonto(solicitud.getMonto());
-		//cap.setCliente(solicitud.getCliente());
+		cap.setCliente(solicitud.getCliente());
 		
 		sON.aprobarSolicitud(c,solicitud, cap);
 		
