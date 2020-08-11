@@ -103,11 +103,11 @@ public class SolicitudDAO {
 	public List<CreditoAprobado>listaCreditosAprobado(){
 		String jpql="SELECT s FROM CreditoAprobado s";	
 		Query query = em.createQuery(jpql, CreditoAprobado.class);
-		CreditoAprobado creditoAprobado = (CreditoAprobado) query.getSingleResult();
+		//CreditoAprobado creditoAprobado = (CreditoAprobado) query.getSingleResult();
 		List<Amortizacion>ss= new ArrayList<>();
-		for (Amortizacion s: creditoAprobado.getAmortizacion()){
-			ss.add(s);
-		}
+//		for (Amortizacion s: creditoAprobado.getAmortizacion()){
+//			ss.add(s);
+//		}
 		return query.getResultList();
 		
 	}
