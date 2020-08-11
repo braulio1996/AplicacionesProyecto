@@ -4,7 +4,7 @@ import 'package:appdis/src/pages/preferences.dart';
 import 'package:http/http.dart' as http;
 
 class UserServices {
-  final _URL = "http://192.168.0.104:18080/AplicacionesBanco/services/users";
+  final _URL = "http://http://35.203.12.217//AplicacionesBanco/services/users";
 
   UserServices() {}
 

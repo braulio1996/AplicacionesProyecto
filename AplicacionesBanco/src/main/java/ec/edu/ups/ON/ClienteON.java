@@ -22,12 +22,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import ec.edu.ups.DAO.ClienteDAO;
-<<<<<<< HEAD
+
 import ec.edu.ups.Modelo.Amortizacion;
 import ec.edu.ups.Modelo.Cajero;
-=======
 import ec.edu.ups.DAO.SolicitudDAO;
->>>>>>> master
 import ec.edu.ups.Modelo.Cliente;
 import ec.edu.ups.Modelo.CreditoAprobado;
 import ec.edu.ups.Modelo.Cuenta;

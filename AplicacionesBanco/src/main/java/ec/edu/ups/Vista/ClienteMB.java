@@ -67,11 +67,8 @@ public class ClienteMB {
 	private List<Amortizacion> amorti;
 	
 	
-<<<<<<< HEAD
 	private int numeroBuscar;
-=======
->>>>>>> master
-	
+
 	@PostConstruct
 	public void init() {
 		
@@ -84,13 +81,12 @@ public class ClienteMB {
 		transferencias = new ArrayList<>();
 		tt = new TransferenciaTemporal();
 		txtBuscar="Todos";
-<<<<<<< HEAD
+
 		trans = new Transaccion();
 		transacciones = new ArrayList<>();
 		amorti = new ArrayList<>();
-=======
+
 		solicitudes = new ArrayList<SolicitudCredito>();
->>>>>>> master
 		
 		try {
 			solicitudes = sON.buscarSol(txtBuscar);
