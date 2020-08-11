@@ -57,6 +57,8 @@ public class LoginController {
 	@Inject
 	private AccesoON accesoON;
 
+	@Inject
+	private SolicitudON sON;
 	ClienteMB clienteMB = new ClienteMB();
 
 	private Administrador administrador;
@@ -309,9 +311,16 @@ public class LoginController {
 					cliente = clieOn.loginC(getCorreo(), getClave());
 					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", client);
 					setCliente(cliente);
+<<<<<<< HEAD
 
 					sON.fechavencida();
 					sON.debitoCreditoVencido();
+=======
+					
+						
+						sON.fechavencida();
+						sON.debitoCreditoVencido();
+>>>>>>> a9a28d8479809cebc7e055af4cc5d872d6bc76e7
 					
 					clieOn.enviarCorreo(this.correo, "Acceso a la cuenta", "Acceso correcto a la cuenta");
 					acceso.setClave(clave);

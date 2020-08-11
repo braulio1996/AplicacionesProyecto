@@ -171,22 +171,26 @@ public class SolicitudON {
 					Double saldoCreditoT = saldoCredito - saldo;
 					if (saldoT < 0) {
 						cuenta.setSaldo(0.0);
+						t.setSaldoCuenta(0.0);
 					} else {
 						cuenta.setSaldo(saldoT);
+						t.setSaldoCuenta(saldoT);
 					}
 					if (saldoCreditoT < 0) {
 						amortizacion.setSaldo(0);
 						amortizacion.setEstado("Pagado");
-					} else {
+						t.setMonto(0.0);
+					} else if(saldoCreditoT > 0){
 						amortizacion.setSaldo(saldoCreditoT);
+						t.setMonto(saldoCreditoT);
 					}
 
 					cliente.setCuenta(cuenta);
-					t.setSaldoCuenta(saldoT);
+					
 					t.setTipo("DebitoCredito");
 					t.setCliente(cliente);
 					t.setFecha(myDate);
-					t.setMonto(saldoCreditoT);
+					
 					t.setDepositante("NaN");
 					transacciones.add(t);
 					cliente.setTransacciones(transacciones);
